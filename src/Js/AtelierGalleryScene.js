@@ -1,5 +1,3 @@
-//avec les fragement de mirroir
-
 
 // Imports nécessaires
 import * as THREE from 'three';
@@ -9,7 +7,7 @@ import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer
 let scene, camera, renderer, controls;
 let fragments = [];
 let svgSprites = [];
-let currentFragmentIndex = 0;
+let currentFragmentIndex = 8;
 let time = 0;
 let labelRenderer;
 let texts;
@@ -72,22 +70,54 @@ async function init() {
 
 function createFragments() {
     const textureLoader = new THREE.TextureLoader();
-    const texture = textureLoader.load('/src/assets/fragment9.svg', 
-        function(texture) {
-            console.log('Texture chargée avec succès');
-        },
-        function(xhr) {
-            console.log((xhr.loaded / xhr.total * 100) + '% chargé');
-        },
-        function(error) {
-            console.error('Erreur lors du chargement de la texture:', error);
-        }
+    const mainTexture = textureLoader.load('/src/assets/fragment9.svg');
+    const texture10 = textureLoader.load('/src/assets/fragment10.svg');
+    const texture11 = textureLoader.load('/src/assets/fragment11.svg');
+
+    // Créer d'abord les fragments de détail (en arrière-plan)
+    const detailGeometry = new THREE.PlaneGeometry(10, 10, 50, 50);
+    
+    // Premier détail (fragment 10)
+    const detail1 = new THREE.Mesh(
+        detailGeometry,
+        new THREE.MeshPhysicalMaterial({
+            map: texture10,
+            metalness: 0.5,
+            roughness: 0.3,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.5
+        })
+    );
+    
+    // Second détail (fragment 11)
+    const detail2 = new THREE.Mesh(
+        detailGeometry,
+        new THREE.MeshPhysicalMaterial({
+            map: texture11,
+            metalness: 0.5,
+            roughness: 0.3,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.7
+        })
     );
 
-    Array.from({ length: 11 }).forEach((_, index) => {
+    // Position fixe en arrière-plan
+    detail1.position.set(8, 3, -18);
+    detail2.position.set(8, -3, -10);
+    
+    detail1.scale.set(0.5, 0.5, 0.5);
+    detail2.scale.set(0.5, 0.5, 0.5);
+    
+    scene.add(detail1);
+    scene.add(detail2);
+
+    // Création des fragments principaux
+    Array.from({ length: 9 }).forEach((_, i) => {
         const geometry = new THREE.PlaneGeometry(6, 6, 50, 50);
         const material = new THREE.MeshPhysicalMaterial({
-            map: texture,
+            map: mainTexture,
             metalness: 0.5,
             roughness: 0.3,
             side: THREE.DoubleSide,
@@ -96,15 +126,15 @@ function createFragments() {
         });
 
         const fragment = new THREE.Mesh(geometry, material);
-        const isEven = index % 2 === 0;
+        const isEven = i % 2 === 0;
         
         fragment.position.set(
             isEven ? -4 : 4,
             1,
-            index * -12 // Increased spacing between fragments
+            i * -22
         );
 
-        fragment.userData.id = fragmentsData[index].id;
+        fragment.userData.id = fragmentsData[i].id;
         fragments.push(fragment);
         scene.add(fragment);
     });
@@ -123,7 +153,7 @@ function createSVGSprites() {
     // Reduced number of sprites from 20 to 10
 
 
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 10; i++) {
         const sprite = new THREE.Sprite(spriteMaterial);
         positionSprite(sprite, true);
         svgSprites.push(sprite);
@@ -284,7 +314,10 @@ async function loadTexts() {
 }
 
 function addTextLabels() {
-    fragments.forEach((fragment, index) => {
+    // Ne parcourir que les fragments principaux (0-8)
+    const mainFragments = fragments.filter((_, index) => index < 9);
+    
+    mainFragments.forEach((fragment, index) => {
         const textDiv = document.createElement('div');
         textDiv.className = 'label';
         
@@ -303,7 +336,6 @@ function addTextLabels() {
             color: white;
             padding: 8px;
             text-align: center;
-
             width: 200px;
             transform: translateY(10px);
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
@@ -321,7 +353,6 @@ function addTextLabels() {
         
         const label = new CSS2DObject(textDiv);
         label.position.set(0, -3.5, 0);
-        // Set initial opacity
         textDiv.style.opacity = 0;
         textDiv.style.transition = 'opacity 0s ease-in-out';
         fragment.add(label);
