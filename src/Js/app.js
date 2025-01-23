@@ -86,22 +86,6 @@ class MirrorBreakEffect {
       "Atelier 11",
     ];
 
-    // Créer un élément pour le texte fixe à droite
-    this.textElement = document.createElement("div");
-    this.textElement.style.position = "fixed";
-    this.textElement.style.right = "50px";
-    this.textElement.style.top = "50%";
-    this.textElement.style.transform = "translateY(-50%)";
-    this.textElement.style.color = "white";
-    this.textElement.style.padding = "20px";
-    this.textElement.style.background = "rgba(0, 0, 0, 0.7)";
-    this.textElement.style.borderRadius = "10px";
-    this.textElement.style.display = "none";
-    this.textElement.style.fontSize = "24px";
-    this.textElement.style.fontFamily = "Arial, sans-serif";
-    this.textElement.style.transition = "opacity 0.3s ease";
-    document.body.appendChild(this.textElement);
-
     // Ajouter l'écouteur de mouvement de souris
     window.addEventListener("mousemove", (event) => this.onMouseMove(event));
 
@@ -404,38 +388,28 @@ class MirrorBreakEffect {
     if (intersects.length > 0) {
         let fragmentObject = intersects[0].object;
         
-        // Remonter jusqu'au parent qui a les propriétés userData
         while (fragmentObject.parent && !fragmentObject.userData.atelierName) {
             fragmentObject = fragmentObject.parent;
         }
 
-        // Vérifier si c'est un fragment valide avec un index
         if (fragmentObject.userData && fragmentObject.userData.atelierName) {
             if (this.hoveredFragment !== fragmentObject) {
-                // Réinitialiser l'ancien fragment hover
                 if (this.hoveredFragment) {
                     this.resetFragmentPosition(this.hoveredFragment);
                 }
 
-                // Mettre à jour le nouveau fragment hover
                 this.hoveredFragment = fragmentObject;
                 this.moveFragmentForward(this.hoveredFragment);
 
-                // Mettre à jour la boîte d'info
+                // Mettre à jour uniquement la boîte d'info
                 if (this.infoBox) {
                     this.infoBox.querySelector('h3').textContent = fragmentObject.userData.atelierName;
                     this.infoBox.querySelector('p').textContent = "Cliquez pour en savoir plus";
                     this.infoBox.classList.add('visible');
                 }
-
-                // Afficher aussi le texte existant à droite
-                this.textElement.textContent = fragmentObject.userData.atelierName;
-                this.textElement.style.display = "block";
-                this.textElement.style.opacity = "1";
             }
         }
     } else {
-        // Si on ne survole aucun fragment
         if (this.hoveredFragment) {
             this.resetFragmentPosition(this.hoveredFragment);
             this.hoveredFragment = null;
@@ -444,12 +418,6 @@ class MirrorBreakEffect {
             if (this.infoBox) {
                 this.infoBox.classList.remove('visible');
             }
-
-            // Cacher aussi le texte existant à droite
-            this.textElement.style.opacity = "0";
-            setTimeout(() => {
-                this.textElement.style.display = "none";
-            }, 300);
         }
     }
   }
