@@ -276,19 +276,16 @@ class MirrorBreakEffect {
             fileName,
             (gltf) => {
                 const fragment = gltf.scene;
-                const rowCount = config.row === 3 ? 2 : 3; // 2 fragments pour la dernière ligne, 3 pour les autres
+                const rowCount = config.row === 3 ? 2 : 3;
 
-                // Ajuster l'échelle
                 fragment.scale.set(1, 1, 1);
                 fragment.rotation.set(0, 0, 0);
-
-                // Positionnement selon la configuration
                 fragment.position.x = config.position - (rowCount - 1) / 2;
                 fragment.position.y = -config.row - 75;
                 fragment.position.z = -90;
 
                 fragment.visible = false;
-                fragment.userData.index = config.index - 1; // Ajuster l'index pour correspondre à l'atelier (0-10)
+                fragment.userData.index = config.index - 1;
                 fragment.userData.isClickable = true;
                 fragment.userData.atelierName = this.atelierNames[config.index - 1];
 
@@ -585,25 +582,25 @@ class MirrorBreakEffect {
         // Atelier 1
         { x: 35, y: -100, z: 5 },
         // Atelier 2
-        { x: -35, y: -100, z: 5 },
+        { x: 0, y: -145, z: 5 },
         // Atelier 3
-        { x: 0, y: -80, z: 10 },
+        { x: 35, y: -145, z: 10 },
         // Atelier 4
-        { x: 25, y: -90, z: 8 },
+        { x: -30, y: -90, z: 8 },
         // Atelier 5
-        { x: -25, y: -90, z: 8 },
+        { x: 0, y: -90, z: 8 },
         // Atelier 6 (position actuelle)
         { x: 35, y: -100, z: 5 },
         // Atelier 7
-        { x: 15, y: -110, z: 7 },
+        { x: -30, y: -40, z: 7 },
         // Atelier 8
-        { x: -15, y: -110, z: 7 },
+        { x: 0, y: -40, z: 7 },
         // Atelier 9
-        { x: 0, y: -120, z: 6 },
+        { x: 35, y: -45, z: 6 },
         // Atelier 10
-        { x: 20, y: -130, z: 4 },
+        { x: -20, y: 0, z: 4 },
         // Atelier 11
-        { x: -20, y: -130, z: 4 }
+        { x: 35, y: 0, z: 4 }
     ];
 
     const finalPosition = this.camera.position.clone();
