@@ -276,6 +276,17 @@ class MirrorBreakEffect {
             fileName,
             (gltf) => {
                 const fragment = gltf.scene;
+                
+                // Debug pour le fragment 1
+                if (config.index === 1) {
+                    console.log("Fragment 1 chargé:", {
+                        index: config.index,
+                        userData: fragment.userData,
+                        position: fragment.position,
+                        visible: fragment.visible
+                    });
+                }
+
                 const rowCount = config.row === 3 ? 2 : 3;
 
                 fragment.scale.set(1, 1, 1);
@@ -288,6 +299,15 @@ class MirrorBreakEffect {
                 fragment.userData.index = config.index - 1;
                 fragment.userData.isClickable = true;
                 fragment.userData.atelierName = this.atelierNames[config.index - 1];
+
+                // Vérifier que le fragment est bien configuré
+                if (config.index === 1) {
+                    console.log("Fragment 1 après configuration:", {
+                        index: fragment.userData.index,
+                        atelierName: fragment.userData.atelierName,
+                        isClickable: fragment.userData.isClickable
+                    });
+                }
 
                 this.fragments.push(fragment);
                 this.scene.add(fragment);
@@ -303,8 +323,8 @@ class MirrorBreakEffect {
   handleClick(event) {
     // Si le miroir n'est pas encore brisé
     if (!this.isBreaking && this.mirror) {
-      this.breakMirror();
-      return;
+        this.breakMirror();
+        return;
     }
 
     // Si une animation est déjà en cours, ignorer les clics
@@ -312,25 +332,30 @@ class MirrorBreakEffect {
 
     // Si le miroir est déjà brisé, on gère le clic sur les fragments
     if (this.isBreaking) {
-      const mouse = new THREE.Vector2();
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        const mouse = new THREE.Vector2();
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-      const raycaster = new THREE.Raycaster();
-      raycaster.setFromCamera(mouse, this.camera);
+        const raycaster = new THREE.Raycaster();
+        raycaster.setFromCamera(mouse, this.camera);
 
-      const intersects = raycaster.intersectObjects(this.fragments, true);
+        const intersects = raycaster.intersectObjects(this.fragments, true);
 
-      if (intersects.length > 0) {
-        let clickedFragment = intersects[0].object;
-        while (clickedFragment.parent && !clickedFragment.userData.index) {
-          clickedFragment = clickedFragment.parent;
+        if (intersects.length > 0) {
+            let clickedFragment = intersects[0].object;
+            
+            // Remonter jusqu'au parent qui a les propriétés userData
+            while (clickedFragment.parent && !clickedFragment.userData.atelierName) {
+                clickedFragment = clickedFragment.parent;
+            }
+
+            // Vérifier si c'est un fragment valide avec un atelierName et qu'il est cliquable
+            if (clickedFragment.userData && 
+                clickedFragment.userData.atelierName && 
+                clickedFragment.userData.isClickable !== false) {
+                this.animateFragmentFall(clickedFragment);
+            }
         }
-        // Vérifier si le fragment est cliquable
-        if (clickedFragment.userData.isClickable !== false) {
-          this.animateFragmentFall(clickedFragment);
-        }
-      }
     }
   }
 
@@ -364,52 +389,50 @@ class MirrorBreakEffect {
   }
 
   onMouseMove(event) {
-    // Si une animation est en cours, désactiver le hover
     if (!this.isBreaking || this.isAnimatingFragment) return;
 
-    // Calculer la position de la souris normalisée
     this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-    // Mettre à jour le raycaster
     this.raycaster.setFromCamera(this.mouse, this.camera);
-
-    // Vérifier l'intersection avec les fragments
     const intersects = this.raycaster.intersectObjects(this.fragments, true);
 
     if (intersects.length > 0) {
-      // Trouver le fragment parent
-      let fragmentObject = intersects[0].object;
-      while (fragmentObject.parent && !fragmentObject.userData.index) {
-        fragmentObject = fragmentObject.parent;
-      }
-
-      if (this.hoveredFragment !== fragmentObject) {
-        // Réinitialiser le fragment précédemment hover
-        if (this.hoveredFragment) {
-          this.resetFragmentPosition(this.hoveredFragment);
+        let fragmentObject = intersects[0].object;
+        
+        // Remonter jusqu'au parent qui a les propriétés userData
+        while (fragmentObject.parent && !fragmentObject.userData.atelierName) {
+            fragmentObject = fragmentObject.parent;
         }
 
-        // Définir le nouveau fragment hover
-        this.hoveredFragment = fragmentObject;
-        this.moveFragmentForward(this.hoveredFragment);
+        // Vérifier si c'est un fragment valide avec un index
+        if (fragmentObject.userData && fragmentObject.userData.atelierName) {
+            if (this.hoveredFragment !== fragmentObject) {
+                // Réinitialiser l'ancien fragment hover
+                if (this.hoveredFragment) {
+                    this.resetFragmentPosition(this.hoveredFragment);
+                }
 
-        // Afficher le texte
-        const index = fragmentObject.userData.index;
-        this.textElement.textContent = this.atelierNames[index];
-        this.textElement.style.display = "block";
-        this.textElement.style.opacity = "1";
-      }
+                // Mettre à jour le nouveau fragment hover
+                this.hoveredFragment = fragmentObject;
+                this.moveFragmentForward(this.hoveredFragment);
+
+                // Afficher le nom de l'atelier
+                this.textElement.textContent = fragmentObject.userData.atelierName;
+                this.textElement.style.display = "block";
+                this.textElement.style.opacity = "1";
+            }
+        }
     } else {
-      // Réinitialiser si aucun fragment n'est hover
-      if (this.hoveredFragment) {
-        this.resetFragmentPosition(this.hoveredFragment);
-        this.hoveredFragment = null;
-        this.textElement.style.opacity = "0";
-        setTimeout(() => {
-          this.textElement.style.display = "none";
-        }, 300);
-      }
+        // Réinitialiser si aucun fragment n'est hover
+        if (this.hoveredFragment) {
+            this.resetFragmentPosition(this.hoveredFragment);
+            this.hoveredFragment = null;
+            this.textElement.style.opacity = "0";
+            setTimeout(() => {
+                this.textElement.style.display = "none";
+            }, 300);
+        }
     }
   }
 
@@ -580,7 +603,7 @@ class MirrorBreakEffect {
     // Positions finales pour chaque fragment (atelier)
     const finalPositions = [
         // Atelier 1
-        { x: 35, y: -100, z: 5 },
+        { x: -30, y: -140, z: 5 },
         // Atelier 2
         { x: 0, y: -145, z: 5 },
         // Atelier 3
