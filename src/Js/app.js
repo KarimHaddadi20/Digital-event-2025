@@ -420,6 +420,7 @@ class MirrorBreakEffect {
         }
     };
 
+    
     moveForward();
 
     // Animation de lévitation
