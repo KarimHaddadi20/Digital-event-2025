@@ -167,7 +167,7 @@ class MirrorBreakEffect {
     const loader = new GLTFLoader();
 
     loader.load(
-      "src/models/Miror_3.4.glb",
+      "src/models/mirrorsolo.glb",
       (gltf) => {
         this.mirror = gltf.scene;
 
@@ -177,7 +177,7 @@ class MirrorBreakEffect {
         const size = box.getSize(new THREE.Vector3());
 
         const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 300 / maxDim;
+        const scale = 400 / maxDim;
         this.mirror.scale.multiplyScalar(scale);
 
         this.mirror.position.set(
@@ -307,14 +307,12 @@ class MirrorBreakEffect {
     if (this.isBreaking) return;
     this.isBreaking = true;
 
-    const audio = new Audio("brokenglass.mp3");
-    audio.play();
+    // Faire disparaître le miroir immédiatement
+    this.mirror.visible = false;
 
     // Animation de transition
-    const duration = 2000; // Durée de 2 secondes
+    const duration = 2000;
     const startTime = Date.now();
-    const startOpacity = 1;
-    const startScale = this.mirror.scale.clone();
     
     // Position initiale de la caméra
     const startCameraPos = this.camera.position.clone();
@@ -323,50 +321,18 @@ class MirrorBreakEffect {
     const animate = () => {
         const currentTime = Date.now();
         const progress = Math.min((currentTime - startTime) / duration, 1);
-        const easeProgress = 1 - Math.pow(1 - progress, 3); // Easing cubique
+        const easeProgress = 1 - Math.pow(1 - progress, 3);
 
-        // Faire disparaître progressivement le miroir
-        this.mirror.traverse((child) => {
-            if (child.isMesh) {
-                child.material.opacity = startOpacity * (1 - easeProgress);
-                child.material.transparent = true;
-            }
-        });
-
-        // Faire apparaître progressivement les fragments
-        this.fragments.forEach((fragment, index) => {
+        // Rendre les fragments visibles immédiatement
+        this.fragments.forEach((fragment) => {
             fragment.visible = true;
-            fragment.traverse((child) => {
-                if (child.isMesh) {
-                    child.material.opacity = easeProgress;
-                    child.material.transparent = true;
-                }
-            });
         });
 
         // Déplacer la caméra en douceur
         this.camera.position.lerpVectors(startCameraPos, targetCameraPos, easeProgress);
 
-        // Effet de "shatter" sur le miroir
-        this.mirror.scale.set(
-            startScale.x * (1 + easeProgress * 0.1),
-            startScale.y * (1 + easeProgress * 0.1),
-            startScale.z
-        );
-
         if (progress < 1) {
             requestAnimationFrame(animate);
-        } else {
-            // Animation terminée
-            this.mirror.visible = false;
-            this.fragments.forEach(fragment => {
-                fragment.traverse((child) => {
-                    if (child.isMesh) {
-                        child.material.opacity = 1;
-                        child.material.transparent = false;
-                    }
-                });
-            });
         }
     };
 
