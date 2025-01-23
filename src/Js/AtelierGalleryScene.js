@@ -1,12 +1,18 @@
+//avec les fragement de mirroir
+
+
 // Imports nécessaires
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 
 let scene, camera, renderer, controls;
 let fragments = [];
-let sideObjects = [];
+let svgSprites = [];
 let currentFragmentIndex = 0;
 let time = 0;
+let labelRenderer;
+let texts;
 
 const waveConfig = {
     frequency: 0.8,
@@ -16,15 +22,16 @@ const waveConfig = {
 
 const fragmentsData = Array.from({ length: 11 }, (_, i) => ({
     id: i + 1,
-    description: `Fragment ${i + 1}`
+    title: `Fragment ${i + 1}`,
+    description: `Description détaillée du fragment ${i + 1}`
 }));
 
-function init() {
+async function init() {
     const container = document.getElementById('scene-container');
 
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
-    camera.position.z = 6;
+    camera.position.z = 8;
 
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(container.offsetWidth, container.offsetHeight);
@@ -39,22 +46,33 @@ function init() {
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enabled = false;
 
+    // Ajouter le CSS2DRenderer
+    labelRenderer = new CSS2DRenderer();
+    labelRenderer.setSize(container.offsetWidth, container.offsetHeight);
+    labelRenderer.domElement.style.position = 'absolute';
+    labelRenderer.domElement.style.top = '0px';
+    labelRenderer.domElement.style.pointerEvents = 'none';
+    container.appendChild(labelRenderer.domElement);
+
     createFragments();
-    createSideObjects();
+    await loadTexts(); // Make sure texts are loaded after fragments
+    createSVGSprites();
     setupEventListeners();
     animate();
 
     // Exemple d'utilisation de GSAP
     gsap.to(camera.position, {
         duration: 2,
-        z: 5,
+        z: 7,
         ease: "power2.inOut"
     });
 }
 
+
+
 function createFragments() {
     const textureLoader = new THREE.TextureLoader();
-    const texture = textureLoader.load('/src/models/test2.jpg', 
+    const texture = textureLoader.load('/src/assets/fragment9.svg', 
         function(texture) {
             console.log('Texture chargée avec succès');
         },
@@ -82,8 +100,8 @@ function createFragments() {
         
         fragment.position.set(
             isEven ? -4 : 4,
-            (Math.random() - 0.5) * 2,
-            index * -5
+            1,
+            index * -12 // Increased spacing between fragments
         );
 
         fragment.userData.id = fragmentsData[index].id;
@@ -92,42 +110,43 @@ function createFragments() {
     });
 }
 
-function createSideObjects() {
-    const geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
-    const material = new THREE.MeshPhysicalMaterial({
-        color: 0xffffff,
-        metalness: 0.8,
-        roughness: 0.2,
+function createSVGSprites() {
+    const spriteMap = new THREE.TextureLoader().load('/src/assets/fragment.svg');
+    const spriteMaterial = new THREE.SpriteMaterial({
+        map: spriteMap,
         transparent: true,
-        opacity: 0.6
+        opacity: 2, // Reduced opacity
+        depthWrite: false,
+        blending: THREE.AdditiveBlending
     });
 
-    for (let i = 0; i < 100; i++) {
-        const mesh = new THREE.Mesh(geometry, material.clone());
-        positionSideObject(mesh, true);
-        sideObjects.push(mesh);
-        scene.add(mesh);
+    // Reduced number of sprites from 20 to 10
+
+
+    for (let i = 0; i < 15; i++) {
+        const sprite = new THREE.Sprite(spriteMaterial);
+        positionSprite(sprite, true);
+        svgSprites.push(sprite);
+        scene.add(sprite);
     }
 }
 
-function positionSideObject(object, initial = false) {
+function positionSprite(sprite, initial = false) {
     const side = Math.random() > 0.5 ? 1 : -1;
     const z = initial ? Math.random() * -50 : camera.position.z - 50;
     
-    object.position.set(
+    sprite.position.set(
         side * (8 + Math.random() * 4),
         Math.random() * 10 - 5,
         z
     );
     
-    const scale = 0.5 + Math.random() * 0.5;
-    object.scale.set(scale, scale, scale);
-    
-    object.rotation.set(
-        Math.random() * Math.PI,
-        Math.random() * Math.PI,
-        Math.random() * Math.PI
-    );
+
+        // Reduced scale from 0.5 to 0.2
+
+    const scale = 0.3 + Math.random() * 0.3;
+    sprite.scale.set(scale, scale, 1);
+    sprite.rotation.z = Math.random() * Math.PI * 2;
 }
 
 function setupEventListeners() {
@@ -163,8 +182,8 @@ function onScroll(event) {
             ease: "power3.out",
             onUpdate: () => {
                 const speed = Math.abs(delta);
-                sideObjects.forEach(object => {
-                    object.material.opacity = THREE.MathUtils.clamp(speed * 20, 0.2, 0.6);
+                svgSprites.forEach(sprite => {
+                    sprite.material.opacity = THREE.MathUtils.clamp(speed * 20, 0.2, 0.6);
                 });
             }
         });
@@ -176,17 +195,26 @@ function onResize() {
     camera.aspect = container.offsetWidth / container.offsetHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(container.offsetWidth, container.offsetHeight);
+    labelRenderer.setSize(container.offsetWidth, container.offsetHeight);
 }
 
 function animate() {
     requestAnimationFrame(animate);
     
-    time += 0.05 * waveConfig.speed;
+    // time += 0.05 * waveConfig.speed;
     
     updateFragments();
-    updateSideObjects();
+    svgSprites.forEach(sprite => {
+        sprite.position.z += 0.05;
+        sprite.rotation.z += 0.05;
+        
+        if (sprite.position.z > camera.position.z + 10) {
+            positionSprite(sprite);
+        }
+    });
     
     renderer.render(scene, camera);
+    labelRenderer.render(scene, camera);
 }
 
 function updateFragments() {
@@ -216,18 +244,87 @@ function updateFragments() {
             positions.setZ(i, z);
         }
         positions.needsUpdate = true;
+
+        // Update label opacity to match fragment
+        const label = fragment.children.find(child => child instanceof CSS2DObject);
+        if (label) {
+            label.element.style.opacity = fragment.material.opacity;
+        }
     });
 }
 
-function updateSideObjects() {
-    sideObjects.forEach(object => {
-        object.position.z += 0.1;
-        object.rotation.x += 0.01;
-        object.rotation.y += 0.01;
-        
-        if (object.position.z > camera.position.z + 10) {
-            positionSideObject(object);
+async function loadTexts() {
+    try {
+        const response = await fetch('/src/data/texts.json');
+        if (!response.ok) {
+            // Use fragmentsData as fallback immediately
+            texts = {
+                fragmentTexts: fragmentsData.map((f, index) => ({
+                    id: f.id,
+                    title: `Fragment ${index + 1}`,
+                    description: f.description
+                }))
+            };
+        } else {
+            texts = await response.json();
         }
+        addTextLabels();
+    } catch (error) {
+        console.error('Error loading texts:', error);
+        // Fallback data
+        texts = {
+            fragmentTexts: fragmentsData.map((f, index) => ({
+                id: f.id,
+                title: `Fragment ${index + 1}`,
+                description: f.description
+            }))
+        };
+        addTextLabels();
+    }
+}
+
+function addTextLabels() {
+    fragments.forEach((fragment, index) => {
+        const textDiv = document.createElement('div');
+        textDiv.className = 'label';
+        
+        const titleDiv = document.createElement('div');
+        titleDiv.className = 'label-title';
+        titleDiv.textContent = fragmentsData[index].title;
+        
+        const descDiv = document.createElement('div');
+        descDiv.className = 'label-description';
+        descDiv.textContent = fragmentsData[index].description;
+        
+        textDiv.appendChild(titleDiv);
+        textDiv.appendChild(descDiv);
+        
+        textDiv.style.cssText = `
+            color: white;
+            padding: 8px;
+            text-align: center;
+
+            width: 200px;
+            transform: translateY(10px);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        `;
+        
+        titleDiv.style.cssText = `
+            font-weight: bold;
+            margin-bottom: 5px;
+        `;
+        
+        descDiv.style.cssText = `
+            font-size: 0.9em;
+            opacity: 0.8;
+        `;
+        
+        const label = new CSS2DObject(textDiv);
+        label.position.set(0, -3.5, 0);
+        // Set initial opacity
+        textDiv.style.opacity = 0;
+        textDiv.style.transition = 'opacity 0s ease-in-out';
+        fragment.add(label);
     });
 }
 

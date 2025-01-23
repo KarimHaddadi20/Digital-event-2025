@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +7,7 @@
 body {
     margin: 0;
     overflow: hidden;
-    background: #000;
+    background: #00000078;
 }
 #scene-container {
     position: fixed;
@@ -193,3 +194,91 @@ html, body {
   transform: translateZ(0);
   filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));
 } 
+
+/* Add after existing styles */
+.fragment-legend {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: opacity 0.3s ease;
+}
+
+.fragment-legend h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.fragment-legend p {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.fragment-legend span {
+  font-style: italic;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.fragment-description {
+  position: fixed;
+  left: 48px;
+  top: 580px;
+  width: 484px;
+  padding: 20px;
+  background: linear-gradient(118.48deg, rgba(255, 255, 255, 0.16) -28.48%, rgba(255, 255, 255, 0.04) 100.43%);
+  backdrop-filter: blur(10px);
+  color: white;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.fragment-description h2 {
+  font-family: 'Aktiv Grotesk';
+  font-weight: 500;
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: #EFEFF3;
+}
+
+.fragment-description p {
+  font-family: 'Aktiv Grotesk';
+  font-size: 16px;
+  line-height: 140%;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.fragment-active .fragment-description {
+  opacity: 1;
+}
+
+.fragment-label {
+  color: white;
+  font-family: Arial, sans-serif;
+  padding: 2px;
+  background: rgba(0,0,0,0.6);
+  border-radius: 3px;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.label {
+  color: white;
+  padding: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+
