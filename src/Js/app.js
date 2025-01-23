@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { RGBELoader } from "three/addons/loaders/RGBELoader.js"; // Assurez-vous que RGBELoader est importé
+import { RGBELoader } from "three/addons/loaders/RGBELoader.js"; 
 class MirrorBreakEffect {
   constructor() {
     this.scene = new THREE.Scene();
@@ -18,7 +18,6 @@ class MirrorBreakEffect {
     this.fragments = [];
     this.isBreaking = false;
     this.isFragmentSelected = false;
-
     // Créer les conteneurs pour chaque position
     this.fragmentContainers = [];
     const positions = [
@@ -56,14 +55,6 @@ class MirrorBreakEffect {
     // Gestionnaire de clic
     this.handleClick = this.handleClick.bind(this);
     document.addEventListener("click", this.handleClick);
-
-    // Charger l'image comme texture
-    // const textureLoader = new THREE.TextureLoader();
-    // textureLoader.load('src/textures/Atelier1.png', (texture) => {
-    //     texture.mapping = THREE.EquirectangularReflectionMapping;
-    //     this.scene.environment = texture;
-    //     this.scene.background = texture;
-    // });
 
     // Ajouter le raycaster et la souris
     this.raycaster = new THREE.Raycaster();
@@ -234,12 +225,12 @@ class MirrorBreakEffect {
 
   createFragments() {
     const loader = new GLTFLoader();
-    const rows = [3, 3, 3, 2]; // Nombre d'objets par ligne
+    const rows = [3, 3, 3, 2];
     let index = 0;
 
     rows.forEach((count, rowIndex) => {
         for (let i = 0; i < count; i++) {
-            const fileName = `src/models/fragments2/monde${index + 1}.glb`;
+            const fileName = `src/models/fragments3/monde${index + 1}.glb`;
             loader.load(
                 fileName,
                 (gltf) => {
@@ -254,16 +245,12 @@ class MirrorBreakEffect {
                     // Positionnement des fragments
                     fragment.position.x = i - (count - 1) / 2;
                     fragment.position.y = -rowIndex - 75;
-                    fragment.position.z = -120; // Ajustez cette valeur pour les rapprocher de la caméra
+                    fragment.position.z = -120;
                     
-                    // Cacher initialement le fragment
                     fragment.visible = false;
                     fragment.userData.index = index;
-
-                    // Initialiser isClickable
                     fragment.userData.isClickable = true;
 
-                    // Ajouter le fragment
                     this.fragments.push(fragment);
                     this.scene.add(fragment);
                 },
@@ -320,18 +307,70 @@ class MirrorBreakEffect {
     if (this.isBreaking) return;
     this.isBreaking = true;
 
-    this.mirror.visible = false;
-
-    // Rendre tous les fragments et leurs box helpers visibles
-    this.fragments.forEach((fragment) => {
-        fragment.visible = true;
-    });
-
-    // Ajuster la position de la caméra
-    this.camera.position.z = 5;
-
     const audio = new Audio("brokenglass.mp3");
     audio.play();
+
+    // Animation de transition
+    const duration = 2000; // Durée de 2 secondes
+    const startTime = Date.now();
+    const startOpacity = 1;
+    const startScale = this.mirror.scale.clone();
+    
+    // Position initiale de la caméra
+    const startCameraPos = this.camera.position.clone();
+    const targetCameraPos = new THREE.Vector3(0, 0, 5);
+
+    const animate = () => {
+        const currentTime = Date.now();
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+        const easeProgress = 1 - Math.pow(1 - progress, 3); // Easing cubique
+
+        // Faire disparaître progressivement le miroir
+        this.mirror.traverse((child) => {
+            if (child.isMesh) {
+                child.material.opacity = startOpacity * (1 - easeProgress);
+                child.material.transparent = true;
+            }
+        });
+
+        // Faire apparaître progressivement les fragments
+        this.fragments.forEach((fragment, index) => {
+            fragment.visible = true;
+            fragment.traverse((child) => {
+                if (child.isMesh) {
+                    child.material.opacity = easeProgress;
+                    child.material.transparent = true;
+                }
+            });
+        });
+
+        // Déplacer la caméra en douceur
+        this.camera.position.lerpVectors(startCameraPos, targetCameraPos, easeProgress);
+
+        // Effet de "shatter" sur le miroir
+        this.mirror.scale.set(
+            startScale.x * (1 + easeProgress * 0.1),
+            startScale.y * (1 + easeProgress * 0.1),
+            startScale.z
+        );
+
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        } else {
+            // Animation terminée
+            this.mirror.visible = false;
+            this.fragments.forEach(fragment => {
+                fragment.traverse((child) => {
+                    if (child.isMesh) {
+                        child.material.opacity = 1;
+                        child.material.transparent = false;
+                    }
+                });
+            });
+        }
+    };
+
+    animate();
   }
 
   onWindowResize() {
@@ -495,7 +534,6 @@ class MirrorBreakEffect {
     this.fragments.forEach(f => {
         if (f !== fragment) {
             f.userData.isClickable = false;
-            // Optionnel : réduire légèrement l'opacité des autres fragments
             f.traverse(child => {
                 if (child.isMesh && child.material) {
                     child.material = child.material.clone();
@@ -507,18 +545,12 @@ class MirrorBreakEffect {
     });
 
     // Variables pour l'animation de chute
-    const fallDuration = 1500; // Un peu plus rapide
+    const fallDuration = 1500;
     const startPosition = fragment.position.clone();
     const fallTarget = new THREE.Vector3(
         startPosition.x,
-        startPosition.y - 15, // Chute plus importante
-        startPosition.z + 5 // Légèrement vers l'avant
-    );
-    const startRotation = fragment.rotation.clone();
-    const targetRotation = new THREE.Euler(
-        startRotation.x + Math.PI * 2,
-        startRotation.y + Math.PI,
-        startRotation.z + Math.PI / 2
+        startPosition.y - 15,
+        startPosition.z + 5
     );
     const startTime = Date.now();
 
@@ -526,22 +558,48 @@ class MirrorBreakEffect {
         const currentTime = Date.now();
         const elapsed = currentTime - startTime;
         const progress = Math.min(elapsed / fallDuration, 1);
-
-        // Animation non-linéaire avec easing
         const easeProgress = 1 - Math.pow(1 - progress, 3);
 
-        // Mettre à jour position et rotation
+        // Mettre à jour position
         fragment.position.lerpVectors(startPosition, fallTarget, easeProgress);
 
         if (progress < 1) {
             requestAnimationFrame(animateFall);
         } else {
-            // Commencer l'animation d'immersion
-            this.startImmersionAnimation(fragment);
+            // Commencer directement l'animation de scale
+            this.startScaleAnimation(fragment);
         }
     };
 
     animateFall();
+  }
+
+  // Nouvelle méthode pour l'animation de scale
+  startScaleAnimation(fragment) {
+    const scaleDuration = 2000;
+    const startTime = Date.now();
+    const startScale = fragment.scale.clone();
+    const targetScale = startScale.clone().multiplyScalar(3); // Scale final x3
+
+    const animate = () => {
+        const currentTime = Date.now();
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / scaleDuration, 1);
+        const easeProgress = 1 - Math.pow(1 - progress, 3);
+
+        // Interpolation entre l'échelle initiale et finale
+        const currentScale = startScale.clone().lerp(targetScale, easeProgress);
+        fragment.scale.copy(currentScale);
+
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        } else {
+            this.controls.enabled = true;
+            setTimeout(() => this.startPortalTransition(fragment), 500);
+        }
+    };
+
+    animate();
   }
 
   // Nouvelle méthode pour l'animation d'immersion
@@ -549,16 +607,15 @@ class MirrorBreakEffect {
     const immersionDuration = 2000;
     const startTime = Date.now();
     const startFragmentPos = fragment.position.clone();
+    const startScale = fragment.scale.clone();
     
-    // Calculer le centre de l'écran par rapport à la caméra
-    const centerPosition = new THREE.Vector3();
-    centerPosition.copy(this.camera.position); // Partir de la position de la caméra
-    centerPosition.z -= 10; // Se placer devant la caméra
-    centerPosition.y = -75; // Maintenir la hauteur des fragments
+    // Position centrale ajustée
+    const centerPosition = new THREE.Vector3(0, 0, -10);
+    centerPosition.add(this.camera.position);
     
-    // Position finale encore plus proche de la caméra
+    // Position finale
     const finalPosition = centerPosition.clone();
-    finalPosition.z += 15; // Rapprocher de la caméra
+    finalPosition.z += 5;
 
     const animateImmersion = () => {
         const currentTime = Date.now();
@@ -566,25 +623,29 @@ class MirrorBreakEffect {
         const progress = Math.min(elapsed / immersionDuration, 1);
 
         if (progress < 0.5) {
+            // Centrage du fragment
             const centerProgress = progress * 2;
             const easeCenter = 1 - Math.pow(1 - centerProgress, 2);
+            
             fragment.position.lerpVectors(startFragmentPos, centerPosition, easeCenter);
+            fragment.quaternion.slerp(this.camera.quaternion, easeCenter);
         } else {
+            // Approche vers la caméra avec scale
             const approachProgress = (progress - 0.5) * 2;
             const easeApproach = 1 - Math.pow(1 - approachProgress, 2);
+            
             fragment.position.lerpVectors(centerPosition, finalPosition, easeApproach);
+            
+            // Mise à l'échelle progressive
+            const scale = 1 + easeApproach * 2;
+            fragment.scale.set(scale, scale, scale);
         }
 
         if (progress < 1) {
             requestAnimationFrame(animateImmersion);
         } else {
             this.controls.enabled = true;
-            
-            console.log('Position finale du fragment:', {
-                x: fragment.position.x,
-                y: fragment.position.y,
-                z: fragment.position.z
-            });
+            setTimeout(() => this.startPortalTransition(fragment), 500);
         }
     };
 
