@@ -105,20 +105,26 @@ class Loader {
                     });
                 },
                 onComplete: async () => {
-                    // Supprimer le loader
                     document.getElementById('loading-container').remove();
                     
                     // Afficher le contenu principal
                     const mainContent = document.getElementById('main-content');
                     if (mainContent) {
                         mainContent.style.display = 'block';
-                        mainContent.style.opacity = '1';
                     }
 
+                    // S'assurer que le container de scène existe
+                    const sceneContainer = document.getElementById('scene-container');
+                    if (!sceneContainer) {
+                        const container = document.createElement('div');
+                        container.id = 'scene-container';
+                        document.body.appendChild(container);
+                    }
+
+                    // Charger la scène principale
                     try {
-                        // Charger et initialiser MirrorBreakEffect
-                        const { default: MirrorBreakEffect } = await import('./app.js');
-                        window.mirrorEffect = new MirrorBreakEffect();
+                        const MirrorEffect = (await import('./app.js')).default;
+                        window.mirrorEffect = new MirrorEffect();
                     } catch (error) {
                         console.error('Erreur lors du chargement:', error);
                     }
