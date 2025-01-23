@@ -246,49 +246,60 @@ class MirrorBreakEffect {
 
   createFragments() {
     const loader = new GLTFLoader();
-    const rows = [3, 3, 3, 2]; // Nombre d'objets par ligne
-    let index = 0;
+    
+    // Définir la configuration des ateliers
+    const atelierConfig = [
+        // Première ligne (Ateliers 1, 2, 3)
+        { index: 1, row: 0, position: 0 },  // Atelier 1 utilise monde1.glb
+        { index: 2, row: 0, position: 1 },  // Atelier 2 utilise monde2.glb
+        { index: 3, row: 0, position: 2 },  // Atelier 3 utilise monde3.glb
+        
+        // Deuxième ligne (Ateliers 4, 5, 6)
+        { index: 4, row: 1, position: 0 },  // Atelier 4 utilise monde4.glb
+        { index: 5, row: 1, position: 1 },  // Atelier 5 utilise monde5.glb
+        { index: 6, row: 1, position: 2 },  // Atelier 6 utilise monde6.glb
+        
+        // Troisième ligne (Ateliers 7, 8, 9)
+        { index: 7, row: 2, position: 0 },  // Atelier 7 utilise monde7.glb
+        { index: 8, row: 2, position: 1 },  // Atelier 8 utilise monde8.glb
+        { index: 9, row: 2, position: 2 },  // Atelier 9 utilise monde9.glb
+        
+        // Dernière ligne (Ateliers 10, 11)
+        { index: 10, row: 3, position: 0 }, // Atelier 10 utilise monde10.glb
+        { index: 11, row: 3, position: 1 }  // Atelier 11 utilise monde11.glb
+    ];
 
-    rows.forEach((count, rowIndex) => {
-      for (let i = 0; i < count; i++) {
-        const fileName = `src/models/fragments3/monde${index + 1}.glb`;
+    // Charger chaque fragment selon sa configuration
+    atelierConfig.forEach(config => {
+        const fileName = `src/models/fragments3/monde${config.index}.glb`;
         loader.load(
-          fileName,
-          (gltf) => {
-            const fragment = gltf.scene;
+            fileName,
+            (gltf) => {
+                const fragment = gltf.scene;
+                const rowCount = config.row === 3 ? 2 : 3; // 2 fragments pour la dernière ligne, 3 pour les autres
 
-            // Ajuster l'échelle
-            fragment.scale.set(1, 1, 1);
+                // Ajuster l'échelle
+                fragment.scale.set(1, 1, 1);
+                fragment.rotation.set(0, 0, 0);
 
-            // Réinitialiser la rotation
-            fragment.rotation.set(0, 0, 0);
+                // Positionnement selon la configuration
+                fragment.position.x = config.position - (rowCount - 1) / 2;
+                fragment.position.y = -config.row - 75;
+                fragment.position.z = -90;
 
-            // Positionnement des fragments
-            fragment.position.x = i - (count - 1) / 2;
-            fragment.position.y = -rowIndex - 75;
-            fragment.position.z = -90; // Ajustez cette valeur pour les rapprocher de la caméra
+                fragment.visible = false;
+                fragment.userData.index = config.index - 1; // Ajuster l'index pour correspondre à l'atelier (0-10)
+                fragment.userData.isClickable = true;
+                fragment.userData.atelierName = this.atelierNames[config.index - 1];
 
-            // Cacher initialement le fragment
-            fragment.visible = false;
-            fragment.userData.index = index;
-
-            // Initialiser isClickable
-            fragment.userData.isClickable = true;
-
-            // Ajouter le fragment
-            this.fragments.push(fragment);
-            this.scene.add(fragment);
-          },
-          undefined,
-          (error) => {
-            console.error(
-              `Erreur lors du chargement du fichier ${fileName}:`,
-              error
-            );
-          }
+                this.fragments.push(fragment);
+                this.scene.add(fragment);
+            },
+            undefined,
+            (error) => {
+                console.error(`Erreur lors du chargement du fichier ${fileName}:`, error);
+            }
         );
-        index++;
-      }
     });
   }
 
@@ -567,18 +578,39 @@ class MirrorBreakEffect {
     const immersionDuration = 1500;
     const startTime = Date.now();
     const startFragmentPos = fragment.position.clone();
+    const index = fragment.userData.index;
 
-    // Debug positions
-    console.log("Camera position:", this.camera.position);
-    console.log("Start fragment position:", startFragmentPos);
+    // Positions finales pour chaque fragment (atelier)
+    const finalPositions = [
+        // Atelier 1
+        { x: 35, y: -100, z: 5 },
+        // Atelier 2
+        { x: -35, y: -100, z: 5 },
+        // Atelier 3
+        { x: 0, y: -80, z: 10 },
+        // Atelier 4
+        { x: 25, y: -90, z: 8 },
+        // Atelier 5
+        { x: -25, y: -90, z: 8 },
+        // Atelier 6 (position actuelle)
+        { x: 35, y: -100, z: 5 },
+        // Atelier 7
+        { x: 15, y: -110, z: 7 },
+        // Atelier 8
+        { x: -15, y: -110, z: 7 },
+        // Atelier 9
+        { x: 0, y: -120, z: 6 },
+        // Atelier 10
+        { x: 20, y: -130, z: 4 },
+        // Atelier 11
+        { x: -20, y: -130, z: 4 }
+    ];
 
     const finalPosition = this.camera.position.clone();
-    // Réduire la distance pour que le fragment entre vraiment dans la caméra
-    finalPosition.z += 5;
-    finalPosition.x += 35;
-    finalPosition.y += -100;
-
-    console.log("Final position:", finalPosition);
+    // Appliquer les positions spécifiques selon l'index du fragment
+    finalPosition.x += finalPositions[index].x;
+    finalPosition.y += finalPositions[index].y;
+    finalPosition.z += finalPositions[index].z;
 
     const animateImmersion = () => {
       const currentTime = Date.now();
