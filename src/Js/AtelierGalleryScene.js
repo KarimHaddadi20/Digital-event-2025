@@ -1,4 +1,3 @@
-
 // Imports nécessaires
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -18,11 +17,69 @@ const waveConfig = {
     speed: 2
 };
 
-const fragmentsData = Array.from({ length: 11 }, (_, i) => ({
-    id: i + 1,
-    title: `Fragment ${i + 1}`,
-    description: `Description détaillée du fragment ${i + 1}`
-}));
+// const fragmentsData = Array.from({ length: 11 }, (_, i) => ({
+//     id: i + 1,
+//     title: `Fragment ${i + 1}`,
+//     description: `Description détaillée du fragment ${i + 1}`
+// }));
+
+const fragmentsData = [
+    {
+        id: 1,
+        title: "L'Horizon Perdu",
+        description: "Une œuvre abstraite évoquant les limites entre ciel et terre"
+    },
+    {
+        id: 2,
+        title: "Mélodie Fractale",
+        description: "Fragments géométriques inspirés par les motifs musicaux"
+    },
+    {
+        id: 3,
+        title: "Échos du Temps",
+        description: "Représentation de la mémoire collective à travers les âges"
+    },
+    {
+        id: 4,
+        title: "Fusion Organique",
+        description: "Mélange harmonieux entre nature et technologie"
+    },
+    {
+        id: 5,
+        title: "Résonance Cristalline",
+        description: "Structure complexe reflétant la lumière et l'espace"
+    },
+    {
+        id: 6,
+        title: "Vagues Numériques",
+        description: "Ondulations dynamiques dans l'espace virtuel"
+    },
+    {
+        id: 7,
+        title: "Symétrie Brisée",
+        description: "Exploration des patterns chaotiques et ordonnés"
+    },
+    {
+        id: 8,
+        title: "Confluence",
+        description: "Point de rencontre entre différentes dimensions"
+    },
+    {
+        id: 9,
+        title: "Nébulose Urbaine",
+        description: "Abstraction de la vie citadine moderne"
+    },
+    {
+        id: 10,
+        title: "Métamorphose",
+        description: "Transformation continue de la matière digitale"
+    },
+    {
+        id: 11,
+        title: "Équilibre Parfait",
+        description: "Harmonie entre les forces opposées"
+    }
+];
 
 async function init() {
     const container = document.getElementById('scene-container');
@@ -174,7 +231,7 @@ function positionSprite(sprite, initial = false) {
 
         // Reduced scale from 0.5 to 0.2
 
-    const scale = 0.3 + Math.random() * 0.3;
+    const scale = 0.5 + Math.random() * 0.3;
     sprite.scale.set(scale, scale, 1);
     sprite.rotation.z = Math.random() * Math.PI * 2;
 }
@@ -186,7 +243,7 @@ function setupEventListeners() {
         timeoutId = setTimeout(() => {
             onScroll(event);
             timeoutId = null;
-        }, 16);
+        }, 18);
     }, { passive: false });
     
     window.addEventListener('resize', onResize);
@@ -197,7 +254,7 @@ function onScroll(event) {
     
     const scrollSpeed = 0.02;
     const minZ = 6;
-    const maxZ = -((fragments.length - 1) * 5) + minZ;
+    const maxZ = -(fragments.length * 20) + minZ;
     const currentZ = camera.position.z;
     
     let delta = event.deltaY * scrollSpeed;
@@ -356,6 +413,26 @@ function addTextLabels() {
         textDiv.style.opacity = 0;
         textDiv.style.transition = 'opacity 0s ease-in-out';
         fragment.add(label);
+    });
+}
+
+function createFragmentLabel(fragment) {
+    const labelDiv = document.createElement('div');
+    labelDiv.className = 'fragment-label';
+    labelDiv.textContent = fragment.title;
+    
+    const label = new CSS2DObject(labelDiv);
+    label.position.set(0, 1.2, 0);
+    
+    return label;
+}
+
+function updateFragmentLabels() {
+    fragments.forEach((fragment, index) => {
+        if (fragment) {
+            const label = createFragmentLabel(fragmentsContent[index]);
+            fragment.add(label);
+        }
     });
 }
 
