@@ -19,7 +19,7 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    z-index: 2; /* Augmenter le z-index */
+    z-index: 2; 
 }
 
 #loading-container {
@@ -34,19 +34,47 @@ body {
     z-index: 9999;
 }
 
+.loading-title {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    margin-bottom: 30px;
+    background: linear-gradient(45deg, #ffffff, #a0a0a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    }
+    to {
+        text-shadow: 0 0 20px rgba(255,255,255,0.8);
+    }
+}
+
 #percentage {
     font-family: Arial, sans-serif;
     font-size: 72px;
     color: white;
     text-shadow: 0 0 10px rgba(255,255,255,0.5);
-    margin-bottom: 20px; /* Réduit l'espace entre le texte et les cubes */
+    margin-bottom: 20px;
 }
 
 /* Conteneur pour le canvas Three.js */
 #loading-container canvas {
     height: 100px !important;
     margin: 20px 0;
-    order: 2; /* Place le canvas entre le texte et le reflet */
+    order: 2; 
 }
 
 #mirror-percentage {
@@ -56,8 +84,8 @@ body {
     opacity: 0.5;
     color: white;
     text-shadow: 0 0 10px rgba(255,255,255,0.3);
-    margin-top: 20px; /* Réduit l'espace entre les cubes et le reflet */
-    order: 3; /* Place le reflet en dernier */
+    margin-top: 20px; 
+    order: 3; 
 }
 
 html, body {
@@ -224,6 +252,64 @@ html, body {
     z-index: 1;
     width: 100%;
     height: 100%;
-    opacity: 1; /* Changer l'opacité à 1 */
+    opacity: 1;
     background: #000;
+}
+
+.fragment-info-box {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.fragment-info-box.visible {
+    opacity: 1;
+}
+
+.fragment-info-box h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.fragment-info-box p {
+    font-size: 14px;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.mirror-instruction {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* Cacher l'instruction quand le miroir est cassé */
+.mirror-broken .mirror-instruction {
+    opacity: 0;
 } 

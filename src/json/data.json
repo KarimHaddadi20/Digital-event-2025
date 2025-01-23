@@ -1,0 +1,2361 @@
+{
+	"ateliers": [
+		{
+			"id": 1,
+			"card": "carte-web",
+			"name": "Interface Web",
+			"description": "Après le plan de licenciement impactant l’équipe Minitel™, la nouvelle équipe interface web est fière de vous présenter son projet sur ce réseau de communication international qu’est l’Internet.<br>Ce journal informatique a pour but de présenter, à l’international, les différents ateliers et productions du Digital Event.<br>Dans notre démarche inclusive et pour ne pas délaisser notre personnel vieillissant, une série papier de prospectus informationnels est à votre disposition au sein de l’établissement.",
+			"video": ["https://www.youtube.com/embed/zfPYp5Xg6zQ"],
+			"logiciels": "interface-web-charts.jpg",
+			"team": "interface-web.jpg",
+			"testimony": [
+				{
+					"name": "Maëva",
+					"class": "B1 DEV",
+					"description": "C’était mon premier choix, car je voulais être avec JB. Au début, j’étais un peu sceptique, mais finalement, j'aime beaucoup l’atelier. J’ai appris beaucoup de choses en termes de développement web et j’ai pu toucher un peu au design."
+				},
+
+				{
+					"name": "Kilian",
+					"class": "M1 Digital Design",
+					"description": "J’ai appris des choses pratiques, notamment en UI. Je suis content de l’atelier et de l'équipe, car je trouve qu’on travaille assez rapidement et qu’on a la capacité de fournir du contenu régulier."
+				},
+
+				{
+					"name": "Igor",
+					"class": " M2 Digital Design",
+					"description": "Ce qu’il faut savoir, c’est que je souhaitais m’améliorer en code. J’ai donc mis comme 1er choix l’atelier Interface Web et j’ai utilisé le bouton Forceur, car il n’y avait pas de place pour des M2. J’ai donc été agréablement surpris d’apprendre que j’avais été accepté et depuis je ne fais qu’apprendre. Tout le monde est sympa et avec JB comme intervenant, j'ai l’impression d’avoir toujours fait du code."
+				}
+			],
+			"projets": [
+				{
+					"id": 1,
+					"name": "UI - UX",
+					"description": "Une équipe s’est occupée de l’interface, en reprenant les codes graphiques des premières interfaces de Macintosh. Trames, typographies, composition : tout l’aspect des années 80 est analysé et reproduit dans les moindres pixels.",
+					"images": ["img-team-interface-web/ui-ux.jpg"]
+				},
+				{
+					"id": 2,
+					"name": "Développement et intégration ",
+					"description": "D’autres étudiants étaient chargés de concevoir le site pour cataloguer les productions du Digital Event. Le site est garanti 100% compatible avec les derniers téléphones cellulaires du moment !",
+					"images": [
+						"img-team-interface-web/developpement-integration.jpg"
+					]
+				},
+				{
+					"id": 3,
+					"name": "AR",
+					"description": "Le dernier pôle travaillait sur l’expérience AR (Augmented Reality). Leur travail visait à superposer l’ancien au numérique, le physique avec le moderne. Un ensemble d’informations supplémentaires apparaissent au scan des cartes à collectionner.",
+					"images": ["img-team-interface-web/ar.jpg"]
+				}
+			],
+			"students": [
+				{
+					"id": 1,
+					"lastname": "Adonon",
+					"firstname": "Chloé"
+				},
+				{
+					"id": 2,
+					"lastname": "Arrachequesne",
+					"firstname": "Cyril"
+				},
+				{
+					"id": 3,
+					"lastname": "Chemama",
+					"firstname": "Noam"
+				},
+				{
+					"id": 4,
+					"lastname": "Curis",
+					"firstname": "Hubert"
+				},
+				{
+					"id": 5,
+					"lastname": "Devo-aziza",
+					"firstname": "Igor"
+				},
+				{
+					"id": 6,
+					"lastname": "Fassier",
+					"firstname": "Kilian"
+				},
+				{
+					"id": 7,
+					"lastname": "Gandreuil",
+					"firstname": "Antoine"
+				},
+				{
+					"id": 8,
+					"lastname": "Nisus",
+					"firstname": "Océane"
+				},
+				{
+					"id": 9,
+					"lastname": "Rabaté",
+					"firstname": "Vincent"
+				},
+				{
+					"id": 10,
+					"lastname": "Saidi",
+					"firstname": "Ranim"
+				},
+				{
+					"id": 11,
+					"lastname": "Sancio",
+					"firstname": "Maëva"
+				},
+				{
+					"id": 12,
+					"lastname": "Souquiere",
+					"firstname": "Paul"
+				},
+				{
+					"id": 13,
+					"lastname": "Wannas",
+					"firstname": "Faouzi"
+				}
+			]
+		},
+		{
+			"id": 2,
+			"card": "carte-team-video",
+			"name": "Vidéo",
+			"description": "Spielberg sort de ce corps ! Grâce à l’utilisation de technologies récentes de production d’images de synthèses et d’effets spéciaux comme Après l’Effet (After Effect) et Premier Pro (Premiere Pro) et du matériel de capture vidéo dernier cri, cet atelier a tenté de nous transporter à Wakaliwood le temps de cet événement éducatif.",
+			"video": [
+				"https://www.youtube.com/embed/VzaHphxFLbw",
+				"https://www.youtube.com/embed/cJq9XWnqUbk",
+				"https://www.youtube.com/embed/7Bi6KgE80Us"
+			],
+			"logiciels": "videos-charts.jpg",
+			"team": "video.jpg",
+			"testimony": [
+				{
+					"name": "Gaëlle",
+					"class": "B3 Créa",
+					"description": " Ce que j’ai aimé dans l’atelier, c’est que les groupes sont très diversifiés. On a touché à tout ! C’est intéressant, car il y a un vrai sujet de réflexion artistique sur la manière dont on va faire ressortir chaque atelier. Certaines prods (Teaser, pubs) sont des sujets captivants qui laissent part à notre créativité."
+				},
+				{
+					"name": "Anas",
+					"class": "B2 CPD",
+					"description": "J’aime la créativité dont il faut faire preuve pour écrire un script de vidéo, les intervenants ainsi que la polyvalence. En effet, on n’est jamais au même endroit, on bouge beaucoup, on peut faire de l’acting, du montage comme du tournage. Bref, on est assez libre et on ne s’ennuie pas ! "
+				}
+			],
+			"projets": [
+				{
+					"id": 1,
+					"name": "Team Création",
+					"description": "Cette équipe s’est occupée de toutes les vidéos créatives (teaser, bandes-annonces, fausses publicités). Les prods ont toutes suivi le thème des années 80 à 2000.",
+					"images": [
+						"img-team-video/crea1.jpg",
+						"img-team-video/crea2.jpg"
+					]
+				},
+				{
+					"id": 2,
+					"name": "Team Making-Off",
+					"description": "Cette équipe a eu pour mission de créer un reportage vidéo pour montrer le déroulement de chaque atelier et montrer leurs différentes productions.<br>Elle avait également pour tâche de créer le making-off global du Digital Event, pour illustrer l’énergie qui s’en est dégagée et montrer l’évolution des différents projets durant ces deux semaines. Un bêtisier a été créé à partir des plans vidéos.",
+					"images": [
+						"img-team-video/making-off.jpg",
+						"img-team-video/reportage-video.jpg"
+					]
+				}
+			],
+			"students": [
+				{
+					"id": 1,
+					"lastname": "Abtroun",
+					"firstname": "Ranym"
+				},
+				{
+					"id": 2,
+					"lastname": "Amoussou",
+					"firstname": "Berida Kendhal Sena"
+				},
+				{
+					"id": 3,
+					"lastname": "Auzoux",
+					"firstname": "Theo"
+				},
+				{
+					"id": 4,
+					"lastname": "Bamba",
+					"firstname": "Youssouf"
+				},
+				{
+					"id": 5,
+					"lastname": "Battut",
+					"firstname": "Emeline"
+				},
+				{
+					"id": 6,
+					"lastname": "Belbrun",
+					"firstname": "Jennifer"
+				},
+				{
+					"id": 7,
+					"lastname": "Beroud",
+					"firstname": "Eowyne"
+				},
+				{
+					"id": 8,
+					"lastname": "Besson",
+					"firstname": "Louison"
+				},
+				{
+					"id": 9,
+					"lastname": "Bissaud",
+					"firstname": "Neil"
+				},
+				{
+					"id": 10,
+					"lastname": "Brun",
+					"firstname": "Nathan"
+				},
+				{
+					"id": 11,
+					"lastname": "Coquerel",
+					"firstname": "Louise"
+				},
+				{
+					"id": 12,
+					"lastname": "Darivon",
+					"firstname": "Coline"
+				},
+				{
+					"id": 13,
+					"lastname": "De sousa",
+					"firstname": "Léna"
+				},
+				{
+					"id": 14,
+					"lastname": "Deside",
+					"firstname": "Maxime"
+				},
+				{
+					"id": 15,
+					"lastname": "Fergut",
+					"firstname": "Manola"
+				},
+				{
+					"id": 16,
+					"lastname": "Figueiredo",
+					"firstname": "Ludovic"
+				},
+				{
+					"id": 17,
+					"lastname": "Fois",
+					"firstname": "Lola"
+				},
+				{
+					"id": 17,
+					"lastname": "Gérard",
+					"firstname": "Marion"
+				},
+				{
+					"id": 18,
+					"lastname": "Glaucus",
+					"firstname": "Kilian"
+				},
+				{
+					"id": 19,
+					"lastname": "Griol",
+					"firstname": "Alexandre"
+				},
+				{
+					"id": 20,
+					"lastname": "Gros",
+					"firstname": "Yaelle"
+				},
+				{
+					"id": 21,
+					"lastname": "Hernandez-delangle",
+					"firstname": "Clément"
+				},
+				{
+					"id": 22,
+					"lastname": "Ijjou",
+					"firstname": "Emmanuel"
+				},
+				{
+					"id": 23,
+					"lastname": "Jaquet",
+					"firstname": "Matteo"
+				},
+				{
+					"id": 24,
+					"lastname": "Jarry",
+					"firstname": "Paul"
+				},
+				{
+					"id": 25,
+					"lastname": "Makary",
+					"firstname": "Nadine"
+				},
+				{
+					"id": 26,
+					"lastname": "Marbaud",
+					"firstname": "Adrien"
+				},
+				{
+					"id": 27,
+					"lastname": "Mongo",
+					"firstname": "Nathan"
+				},
+				{
+					"id": 28,
+					"lastname": "Monier",
+					"firstname": "Eugénie"
+				},
+				{
+					"id": 29,
+					"lastname": "Ngo hagbe",
+					"firstname": "Alexane"
+				},
+				{
+					"id": 30,
+					"lastname": "O sullivan",
+					"firstname": "Charlotte"
+				},
+				{
+					"id": 31,
+					"lastname": "Ouedraogo",
+					"firstname": "Mohamed sharif"
+				},
+				{
+					"id": 32,
+					"lastname": "Patel",
+					"firstname": "Anas"
+				},
+				{
+					"id": 33,
+					"lastname": "Paulin",
+					"firstname": "Daric"
+				},
+				{
+					"id": 34,
+					"lastname": "Persyn",
+					"firstname": "Josephine"
+				},
+				{
+					"id": 35,
+					"lastname": "Prouveur",
+					"firstname": "Calvin"
+				},
+				{
+					"id": 36,
+					"lastname": "Raho",
+					"firstname": "Chainez"
+				},
+				{
+					"id": 37,
+					"lastname": "Servais",
+					"firstname": "Blandine"
+				},
+				{
+					"id": 38,
+					"lastname": "Simon",
+					"firstname": "Gaëlle"
+				},
+				{
+					"id": 39,
+					"lastname": "Tibharine",
+					"firstname": "Abdessamad"
+				},
+				{
+					"id": 40,
+					"lastname": "Weber",
+					"firstname": "Aurore"
+				},
+				{
+					"id": 41,
+					"lastname": "Weizmann",
+					"firstname": "Victor"
+				},
+				{
+					"id": 42,
+					"lastname": "Yessad",
+					"firstname": "Naela"
+				},
+				{
+					"id": 43,
+					"lastname": "Zellat",
+					"firstname": "Merwan"
+				}
+			]
+		},
+		{
+			"id": 3,
+			"card": "carte-escape",
+			"name": "Escape Game",
+			"description": "Grâce à un jeu d’escapade réalisé par des ingénieurs ingénieux, vivez une aventure haut en couleur ! Une salle entièrement fabriquée par des bricoleurs écologistes et responsables. <br>Attention : Ce dispositif est réservé à un usage ludique. Ne pas laisser entre toutes les mains.<br>Tout autre usage peut entraîner un désir d’évasion de sa vie professionnelle. En cas de doute, parlez à votre manager.",
+			"video": ["https://www.youtube.com/embed/YYBx2LiQvWs"],
+			"logiciels": "escapegame-charts.jpg",
+			"team": "escape-game.jpg",
+			"testimony": [
+				{
+					"name": "Marie-Lou",
+					"class": "M2 UX",
+					"description": "J’ai adoré, il y avait une très bonne ambiance au sein de l’équipe. Il y avait un grand mélange de compétences parce que chacun venait d’un horizon différent et les équipes étaient très complémentaires. Au début, je n’étais pas très inspiré par le thème, j’avais peur de ne pas savoir que faire, mais finalement les idées sont sorties, et je suis fière d’avoir pu faire partie de ce projet."
+				},
+				{
+					"name": "Laura",
+					"class": "M2 Digitale Design",
+					"description": "Je m’y sens bien malgré le fait que nous soyons nombreux, car c’est assez compliqué de gérer beaucoup de visions différentes. Les intervenants sont présents pour nous, ils gèrent très bien notre groupe, nous aident et nous accompagnent."
+				}
+			],
+			"projets": [
+				{
+					"id": 1,
+					"name": "Scénario",
+					"description": "Une team est chargée de créer les énigmes et épreuves se déroulant tout le long de l’escape game. Le scénario de cette année raconte l’histoire d’une adolescente qui va fêter son anniversaire avec ses amis. Cela se déroule dans une chambre d’ado.",
+					"images": [
+						"img-escape-game/scenario.jpg",
+						"img-escape-game/scenario3.jpg"
+					]
+				},
+				{
+					"id": 2,
+					"name": "Décoration",
+					"description": "Un autre groupe s’occupe de toute la décoration physique de l’atelier : créer des plans, organisation de l’agencement, gestion de la logistique, etc.",
+					"images": [
+						"img-escape-game/decoration.jpg",
+						"img-escape-game/decoration1.jpg"
+					]
+				},
+				{
+					"id": 3,
+					"name": "VR",
+					"description": "La partie virtuelle de l’escape game a été réfléchie pour que les énigmes soient réalisables en VR. Cela représente une partie de ce qui est disponible en physique.",
+					"images": ["img-escape-game/vr.jpg"]
+				},
+				{
+					"id": 4,
+					"name": "Arduino",
+					"description": "Enfin, la dernière équipe crée des interactions matérielles via Arduino et construit des outils pour rendre les énigmes plus dynamiques.",
+					"images": ["img-escape-game/arduino.jpg"]
+				}
+			],
+			"students": [
+				{
+					"id": 1,
+					"lastname": "Adenis",
+					"firstname": "Paul"
+				},
+				{
+					"id": 2,
+					"lastname": "Araujo",
+					"firstname": "Lucas"
+				},
+				{
+					"id": 3,
+					"lastname": "Au",
+					"firstname": "Elsa"
+				},
+				{
+					"id": 4,
+					"lastname": "Bellili",
+					"firstname": "Ines"
+				},
+				{
+					"id": 5,
+					"lastname": "Benmeziane",
+					"firstname": "Ikrame"
+				},
+				{
+					"id": 6,
+					"lastname": "Bertinetti",
+					"firstname": "Matthieu"
+				},
+				{
+					"id": 7,
+					"lastname": "Beulé",
+					"firstname": "Victor"
+				},
+				{
+					"id": 8,
+					"lastname": "Buridan",
+					"firstname": "Camille"
+				},
+				{
+					"id": 9,
+					"lastname": "Dossin",
+					"firstname": "Nicolas"
+				},
+				{
+					"id": 10,
+					"lastname": "Dupuy",
+					"firstname": "Juliette"
+				},
+				{
+					"id": 11,
+					"lastname": "Emma",
+					"firstname": "Girard"
+				},
+				{
+					"id": 12,
+					"lastname": "Fafet",
+					"firstname": "Léana"
+				},
+				{
+					"id": 13,
+					"lastname": "Fortier",
+					"firstname": "Maxence"
+				},
+				{
+					"id": 14,
+					"lastname": "Gallin",
+					"firstname": "Paul"
+				},
+				{
+					"id": 15,
+					"lastname": "Ghazi",
+					"firstname": "Cyana"
+				},
+				{
+					"id": 16,
+					"lastname": "Gomez",
+					"firstname": "Julien"
+				},
+				{
+					"id": 17,
+					"lastname": "Guelfi",
+					"firstname": "Liliane"
+				},
+				{
+					"id": 18,
+					"lastname": "Houlgatte",
+					"firstname": "Roméo"
+				},
+				{
+					"id": 19,
+					"lastname": "Le bihan",
+					"firstname": "Clarisse"
+				},
+				{
+					"id": 20,
+					"lastname": "Lee",
+					"firstname": "Eliza"
+				},
+				{
+					"id": 21,
+					"lastname": "Mehadji",
+					"firstname": "Walid"
+				},
+				{
+					"id": 22,
+					"lastname": "Mpuati",
+					"firstname": "Marie-lou"
+				},
+				{
+					"id": 23,
+					"lastname": "Poussines",
+					"firstname": "Pauline"
+				},
+				{
+					"id": 24,
+					"lastname": "Quillin-jue",
+					"firstname": "Lazinho"
+				},
+				{
+					"id": 25,
+					"lastname": "Rahou",
+					"firstname": "Mohammed"
+				},
+				{
+					"id": 26,
+					"lastname": "Renaudin",
+					"firstname": "Ludivine"
+				},
+				{
+					"id": 27,
+					"lastname": "Richard",
+					"firstname": "Luca"
+				},
+				{
+					"id": 28,
+					"lastname": "Saib",
+					"firstname": "Ashley"
+				},
+				{
+					"id": 29,
+					"lastname": "Sani",
+					"firstname": "Ibrahim"
+				},
+				{
+					"id": 30,
+					"lastname": "Savane",
+					"firstname": "Delphine"
+				},
+				{
+					"id": 31,
+					"lastname": "Tahar",
+					"firstname": "Laura"
+				},
+				{
+					"id": 32,
+					"lastname": "Tian",
+					"firstname": "Ding"
+				}
+			]
+		},
+		{
+			"id": 4,
+			"card": "carte-metavers",
+			"name": "Métaverse",
+			"description": "La 6ᵉ dimension, ce voyage surprenant dans un monde quantique où la notion du temps n’existe plus. Nos ingénieux ingénieurs ont ingénieusement donné le meilleur d’eux-mêmes pour vous offrir ce mémorable show. Ne ratez pas le train qui vous mènera à votre nouveau monde virtuel. Plus de retours possibles !",
+			"video": ["https://www.youtube.com/embed/j6MnodiVcMo"],
+			"logiciels": "metaverse-charts.jpg",
+			"team": "metaverse.jpg",
+			"testimony": [
+				{
+					"name": "Amina",
+					"class": "M1 Digital Design",
+					"description": "J’avais le rôle de coordinatrice de projet où j’ai eu pour mission d’organiser tous les plans de l’épisode sur lequel j’ai travaillé, en amont du travail sur Unreal Engine ainsi que les storyboards. J’ai beaucoup aimé cette partie du travail parce qu’il a fallu faire travailler son imagination et sa réflexion. Et j’ai bien aimé l’univers de cet épisode."
+				},
+				{
+					"name": "Sixte",
+					"class": "B1 Dev",
+					"description": "L'atelier était hyper cool puisque j'ai pu apprendre pas mal de choses avec les M2, il y a une bonne entraide et une bonne ambiance. Je suis sortie de ma zone de confort. J'ai pris un risque que j'ai fini par maîtriser. Le Digital Event m’a permis de faire des rencontres avec des gens qui ont plus d'expériences."
+				}
+			],
+			"projets": [
+				{
+					"id": 1,
+					"name": "Répartition",
+					"description": "La team Metaverse s’est divisée en six groupes qui produisent chacun une séquence en 3D sur l’Unreal Engine ensuite remonté sur Final Cut Pro, toutes les séquences assemblées formeront un petit film d’animation pas piqué des hannetons.",
+					"images": ["img-metaverse/3d.jpg", "img-metaverse/3d1.jpg"]
+				},
+				{
+					"id": 2,
+					"name": "Le format",
+					"description": "Ils présentent différents courts métrages sur le fil conducteur des années 80 tout en reprenant le format d’une série d’animation célèbre : Love Death Robot.",
+					"images": ["img-metaverse/format.jpg"]
+				}
+			],
+			"students": [
+				{
+					"id": 1,
+					"lastname": "Adouard",
+					"firstname": "Margot"
+				},
+				{
+					"id": 2,
+					"lastname": "Amavi",
+					"firstname": "Ednar"
+				},
+				{
+					"id": 3,
+					"lastname": "Attar",
+					"firstname": "Amina"
+				},
+				{
+					"id": 4,
+					"lastname": "Barès",
+					"firstname": "Paul"
+				},
+				{
+					"id": 5,
+					"lastname": "Beaupréau",
+					"firstname": "Faïz"
+				},
+				{
+					"id": 6,
+					"lastname": "Benkhemiche",
+					"firstname": "Sarah"
+				},
+				{
+					"id": 7,
+					"lastname": "Bouvrot",
+					"firstname": "Léa"
+				},
+				{
+					"id": 8,
+					"lastname": "Chung",
+					"firstname": "Bryan"
+				},
+				{
+					"id": 9,
+					"lastname": "Conta",
+					"firstname": "Charline"
+				},
+				{
+					"id": 10,
+					"lastname": "Davidas",
+					"firstname": "Jarod"
+				},
+				{
+					"id": 11,
+					"lastname": "Demoulins",
+					"firstname": "Antoine"
+				},
+				{
+					"id": 12,
+					"lastname": "Ding",
+					"firstname": "Laura"
+				},
+				{
+					"id": 13,
+					"lastname": "Dollé",
+					"firstname": "Catht"
+				},
+				{
+					"id": 14,
+					"lastname": "Gauthier",
+					"firstname": "Estelle"
+				},
+				{
+					"id": 15,
+					"lastname": "Gautier",
+					"firstname": "Antonin"
+				},
+				{
+					"id": 16,
+					"lastname": "Jacob",
+					"firstname": "Maxime"
+				},
+				{
+					"id": 17,
+					"lastname": "Jacquot",
+					"firstname": "Théophile"
+				},
+				{
+					"id": 18,
+					"lastname": "Lavotte",
+					"firstname": "Marie"
+				},
+				{
+					"id": 19,
+					"lastname": "Le guern",
+					"firstname": "Tangui"
+				},
+				{
+					"id": 20,
+					"lastname": "Leclerc",
+					"firstname": "Elouan"
+				},
+				{
+					"id": 21,
+					"lastname": "Mbala nzinga",
+					"firstname": "Anne-laure"
+				},
+				{
+					"id": 22,
+					"lastname": "Morio",
+					"firstname": "Sixte"
+				},
+				{
+					"id": 23,
+					"lastname": "Ngo",
+					"firstname": "Viviane"
+				},
+				{
+					"id": 24,
+					"lastname": "Phan van ho",
+					"firstname": "Bryan"
+				},
+				{
+					"id": 25,
+					"lastname": "Pinson",
+					"firstname": "Julien"
+				},
+				{
+					"id": 26,
+					"lastname": "Saouas",
+					"firstname": "Vincent"
+				},
+				{
+					"id": 27,
+					"lastname": "Virassamy",
+					"firstname": "Matthis"
+				}
+			]
+		},
+		{
+			"id": 5,
+			"card": "carte-com-ext-int",
+			"name": "Communication (Ext & Int)",
+			"description": "La communication autour d’un événement demande beaucoup de savoir-faire. Rien de pire qu’une mauvaise humeur entre le service comptabilité-événement et l’équipe Internet-Réseau. C’est un véritable enjeu dans la synergie interne. C'est pourquoi la team communication interne-externe organise quotidiennement un feu d'artifice avec entrain, calembour et une ribambelle d'effets audiovisuels. De plus, elle est présente sur tous les réseaux numériques tels qu’Instagram, TikTok, et Copains d'Avant. Cette stratégie permettra la cohésion de groupe et l’accroissement des rendements. ",
+			"video": ["https://www.youtube.com/embed/UGBKaX5Ox8A"],
+			"logiciels": "com-charts.jpg",
+			"team": "com-int-ext.jpg",
+			"testimony": [
+				{
+					"name": "Arthur",
+					"class": "M1 CI",
+					"description": "J’ai bien aimé l’atelier, il y avait une super ambiance et tout le monde était très motivé et positif. Nous avons travaillé de manière efficace en répartissant nos tâches de sorte que l’on puisse créer rapidement du contenu. J’ai adoré travailler sur ce thème, j’aime bien l’ambiance de ces années et particulièrement la musique."
+				}
+			],
+			"projets": [
+				{
+					"id": 1,
+					"name": "Team Community Manager",
+					"description": "Ils sont chargés de faire la promotion du digital event via des vidéos et des posts dynamiques réalisés dans le thème rétro des années 90 sur les réseaux sociaux, notamment sur TikTok et Instagram.",
+					"images": ["img-comm-ext-int/communication.jpg"]
+				},
+				{
+					"id": 2,
+					"name": "Team Animation",
+					"description": "Plusieurs séances de jeux et de moments conviviaux ont été organisées par cette équipe afin de permettre aux étudiants de se détendre et de découvrir les tendances de l’époque.",
+					"images": ["img-comm-ext-int/com-animation.jpg"]
+				}
+			],
+			"students": [
+				{
+					"id": 1,
+					"lastname": "Attia",
+					"firstname": "Chanaelle"
+				},
+				{
+					"id": 2,
+					"lastname": "Barros",
+					"firstname": "Yoana"
+				},
+				{
+					"id": 3,
+					"lastname": "Bervoet",
+					"firstname": "Angélique"
+				},
+				{
+					"id": 4,
+					"lastname": "Beydon",
+					"firstname": "Romain"
+				},
+				{
+					"id": 5,
+					"lastname": "Beyragued",
+					"firstname": "Maryam"
+				},
+				{
+					"id": 6,
+					"lastname": "Bisson",
+					"firstname": "Juliette"
+				},
+				{
+					"id": 7,
+					"lastname": "Brun",
+					"firstname": "Julie"
+				},
+				{
+					"id": 8,
+					"lastname": "Callies",
+					"firstname": "Océane"
+				},
+				{
+					"id": 9,
+					"lastname": "Cher",
+					"firstname": "Panhia-mael"
+				},
+				{
+					"id": 10,
+					"lastname": "De marcellus",
+					"firstname": "Maxime"
+				},
+				{
+					"id": 11,
+					"lastname": "De salaberry",
+					"firstname": "Artus"
+				},
+				{
+					"id": 12,
+					"lastname": "Devylder",
+					"firstname": "Baptiste"
+				},
+				{
+					"id": 13,
+					"lastname": "Diallo",
+					"firstname": "Dalla"
+				},
+				{
+					"id": 14,
+					"lastname": "Dias",
+					"firstname": "Barbara"
+				},
+				{
+					"id": 15,
+					"lastname": "Dorian",
+					"firstname": "Curron"
+				},
+				{
+					"id": 16,
+					"lastname": "Emery",
+					"firstname": "Christelle"
+				},
+				{
+					"id": 17,
+					"lastname": "Fenechv",
+					"firstname": "Mélinda"
+				},
+				{
+					"id": 18,
+					"lastname": "Foual",
+					"firstname": "Arthur"
+				},
+				{
+					"id": 19,
+					"lastname": "Houri",
+					"firstname": "Morane"
+				},
+				{
+					"id": 20,
+					"lastname": "Issa bongo",
+					"firstname": "Hapsitaï"
+				},
+				{
+					"id": 21,
+					"lastname": "Mamou",
+					"firstname": "Doriane"
+				},
+				{
+					"id": 22,
+					"lastname": "Marmion",
+					"firstname": "Clémence"
+				},
+				{
+					"id": 23,
+					"lastname": "Ranaivoson",
+					"firstname": "Telina"
+				},
+				{
+					"id": 24,
+					"lastname": "Robin",
+					"firstname": "Axelle"
+				},
+				{
+					"id": 25,
+					"lastname": "Tchoua",
+					"firstname": "Armelle"
+				},
+				{
+					"id": 26,
+					"lastname": "Zozor",
+					"firstname": "Aude"
+				}
+			]
+		},
+		{
+			"id": 6,
+			"card": "carte-crea-code",
+			"name": "Creative Coding",
+			"description": "Le code, ce n’est pas que pour les pirates et les routiers. On peut faire de l’art avec !<br>L’atelier Creative Coding (Codification imaginative) s’est donné pour mission de libérer sa créativité en mettant la technologie au service de l’art. Cette année, ils se sont même libérés du code !<br>En se réunissant dans la salle la plus mystérieuse, les plus grands virtuoses artisti-codeurs manipulent TouchDesigner pour créer des dispositifs interactifs à base d’interaction.",
+			"video": ["https://www.youtube.com/embed/ZbV9m25D9p0"],
+			"logiciels": "creative-coding-charts.jpg",
+			"team": "creative-code.jpg",
+			"testimony": [
+				{
+					"name": "Marin",
+					"class": "B3 CI ",
+					"description": "De base, j’avais choisi cet atelier pour coder, mais finalement, j'utilise une sorte de WordPress qui m’implante tout directement. Malgré ça, j’aime beaucoup ce que nous faisons. C’est cool, car je peux transformer mon code en art 3D sur un écran et c’est plutôt “satisfaisant”. Le thème est sympa et l’ambiance dans l’équipe est vraiment top. L'intervenante est cool et sait nous motiver, elle arrive à nous débloquer lorsque l’on freine sur certains points."
+				},
+				{
+					"name": "Chloé",
+					"class": "M2 DD",
+					"description": "Une expérience intéressante. Le projet de Creative Coding demande une grande réflexion, mais le sentiment de soulagement et de fierté est immense lorsque l'on réussit. Le groupe est agréable, composé de personnes talentueuses et polyvalentes."
+				},
+				{
+					"name": "Levana",
+					"class": "M2 UX",
+					"description": "J'ai dû sortir de ma zone de confort pour le projet de creative coding, mais je me suis rapidement adapté et je me suis investi pleinement. J'ai apprécié la cohésion entre les équipes. Nous sommes compatissants et nous nous entraidons beaucoup."
+				}
+			],
+			"projets": [
+				{
+					"id": 1,
+					"name": "Les projets",
+					"description": "L’atelier Creative Coding a travaillé sur différents projets autour du corps. Pour cela, ils ont utilisé le logiciel TouchDesigner et des technologies de reconnaissance de mouvements.",
+					"images": [
+						"img-creative-coding/projet-code.jpg",
+						"img-creative-coding/projet-code2.jpg"
+					]
+				},
+				{
+					"id": 2,
+					"name": "Les technologies",
+					"description": "L’atelier s’est divisé en plusieurs sous-groupes utilisant des technologies de motion capture différents : <br>- Leapmotion : Capteur infrarouge 3d spécialisé sur la captation des mouvements des mains <br>- Somi : Capteur sur le poignet pour transformer les mouvements en data pour les réutiliser ensuite.<br>- Kinect : (Caméra infrarouge 3D) qui capte les mouvements du corps dans un espace.",
+					"images": [
+						"img-creative-coding/projet-code3.jpg",
+						"img-creative-coding/projet-code4.jpg"
+					]
+				}
+			],
+			"students": [
+				{
+					"id": 1,
+					"lastname": "Arki",
+					"firstname": "Levana"
+				},
+				{
+					"id": 2,
+					"lastname": "Da cunha",
+					"firstname": "Daniel"
+				},
+				{
+					"id": 3,
+					"lastname": "Du fay",
+					"firstname": "Cyrien"
+				},
+				{
+					"id": 4,
+					"lastname": "Faria andrade",
+					"firstname": "Mathieu"
+				},
+				{
+					"id": 5,
+					"lastname": "Faucher",
+					"firstname": "Pierre louis"
+				},
+				{
+					"id": 6,
+					"lastname": "Faure",
+					"firstname": "Chloé"
+				},
+				{
+					"id": 7,
+					"lastname": "Ider",
+					"firstname": "Ayoub"
+				},
+				{
+					"id": 8,
+					"lastname": "Laminger",
+					"firstname": "Laurine"
+				},
+				{
+					"id": 9,
+					"lastname": "Martin",
+					"firstname": "Victoria"
+				},
+				{
+					"id": 10,
+					"lastname": "Maulbon",
+					"firstname": "Marin"
+				},
+				{
+					"id": 11,
+					"lastname": "Ngaburu bienza",
+					"firstname": "Keren"
+				},
+				{
+					"id": 12,
+					"lastname": "Norodom",
+					"firstname": "Viriany"
+				},
+				{
+					"id": 13,
+					"lastname": "Parent",
+					"firstname": "Benjamin"
+				},
+				{
+					"id": 14,
+					"lastname": "Portha",
+					"firstname": "Antonella"
+				},
+				{
+					"id": 15,
+					"lastname": "Renon",
+					"firstname": "Melvil"
+				},
+				{
+					"id": 16,
+					"lastname": "Ruan",
+					"firstname": "Nathalie"
+				},
+				{
+					"id": 17,
+					"lastname": "Shan",
+					"firstname": "Christophe"
+				},
+				{
+					"id": 18,
+					"lastname": "Trinh",
+					"firstname": "Cathy"
+				},
+				{
+					"id": 19,
+					"lastname": "Tyburn",
+					"firstname": "Maély"
+				},
+				{
+					"id": 20,
+					"lastname": "Vinet",
+					"firstname": "Eloi"
+				},
+				{
+					"id": 21,
+					"lastname": "Virassamy",
+					"firstname": "Maelle"
+				},
+				{
+					"id": 22,
+					"lastname": "Yoka mbongo",
+					"firstname": "Ruth Marielle"
+				},
+				{
+					"id": 23,
+					"lastname": "Zhang",
+					"firstname": "Linjuan"
+				}
+			]
+		},
+		{
+			"id": 7,
+			"card": "carte-video-map",
+			"name": "Vidéo Mapping",
+			"description": "Le papier-peint, c’est pour le 19ᵉ siècle. On ne peut plus utiliser du papier-peint et se prétendre écologiste, en accord avec la convention de Genève (ou accord de Tokyo ? je ne sais plus...).<br>Notre papier-peint numérique, appelé “Vidéo Mapping” dans la Silicon Valley, est notre proposition pour le 21ᵉ siècle. Quelle meilleure toile que les surfaces blanches de l’Atrium. <br>Nos meilleurs artistes numériques ont projeté leurs estampes animées sur l’ensemble des murs. Le temps d’un soir, l’Atrium fût la cathédrale numérique-graphique de Paris.",
+			"video": ["https://www.youtube.com/embed/HuHGycH4kyM"],
+			"logiciels": "videomapping-charts.jpg",
+			"team": "mapping.jpg",
+			"testimony": [
+				{
+					"name": "Maël",
+					"class": "M1 Digital Design",
+					"description": "J’ai été très intéressé par les productions précédentes de mapping du Digital Event. Je ne connaissais pas l’existence de cette manière de travailler dans le digital, cela m’a poussé à choisir cet atelier. Au début, c'était difficile, car je n’avais pas les compétences, mais avec des recherches et de la motivation, j’ai réussi à monter en capacités. En suivant les propositions côté direction artistique, j’ai pu “mettre les mains dans le cambouis” et j’ai produit beaucoup de prods, ce qui m’a permis d’en apprendre beaucoup et de devenir meilleur. La team est sympa, à l'écoute, on est dans le rush, mais on est motivés. On a pu intervertir nos places dans les différents pôles, ça permet de voir l’ensemble de l’atelier, c’est cool."
+				}
+			],
+			"projets": [
+				{
+					"id": 1,
+					"name": "Scénographie",
+					"description": "Le groupe scénographie s’occupe de l’habillement de l’espace. Ils regroupent l’ensemble des tâches physiques et matériels : installations physiques, bricolage, cable management, etc.",
+					"images": [
+						"img-video-mapping/scenographie.jpg",
+						"img-video-mapping/scenographie2.jpg"
+					]
+				},
+				{
+					"id": 2,
+					"name": "Direction Artistique",
+					"description": "Cette équipe a pour mission de diriger et d’homogénéiser l'esthétique. L’ensemble des visuels projetés doivent être singuliers, mais cohérents.",
+					"images": [
+						"img-video-mapping/da.jpg",
+						"img-video-mapping/da1.jpg"
+					]
+				},
+				{
+					"id": 3,
+					"name": "Animation",
+					"description": "Le groupe animation met en scène ces visuels via différents outils et s’occupe de dynamiser cette expérience immersive.",
+					"images": [
+						"img-video-mapping/atelier-mapping2.jpg",
+						"img-video-mapping/video-mapping2.jpg"
+					]
+				}
+			],
+			"students": [
+				{
+					"id": 1,
+					"lastname": "Agudelo",
+					"firstname": "Melinna"
+				},
+				{
+					"id": 2,
+					"lastname": "Buambo",
+					"firstname": "Orah"
+				},
+				{
+					"id": 3,
+					"lastname": "Carvès",
+					"firstname": "Augustin"
+				},
+				{
+					"id": 4,
+					"lastname": "Da silva",
+					"firstname": "Camille"
+				},
+				{
+					"id": 5,
+					"lastname": "Delumeau",
+					"firstname": "Julia"
+				},
+				{
+					"id": 6,
+					"lastname": "Duru",
+					"firstname": "Soraya"
+				},
+				{
+					"id": 7,
+					"lastname": "Ettis",
+					"firstname": "Sara"
+				},
+				{
+					"id": 8,
+					"lastname": "Guigue",
+					"firstname": "Anaïs"
+				},
+				{
+					"id": 9,
+					"lastname": "Inan",
+					"firstname": "Leana"
+				},
+				{
+					"id": 10,
+					"lastname": "Le van",
+					"firstname": "Emma"
+				},
+				{
+					"id": 11,
+					"lastname": "Leblanc",
+					"firstname": "Baptiste"
+				},
+				{
+					"id": 12,
+					"lastname": "Lenormand",
+					"firstname": "Victoire"
+				},
+				{
+					"id": 13,
+					"lastname": "Lusson",
+					"firstname": "Abigaïl"
+				},
+				{
+					"id": 14,
+					"lastname": "Massianga",
+					"firstname": "Lise"
+				},
+				{
+					"id": 15,
+					"lastname": "Masson",
+					"firstname": "Léa"
+				},
+				{
+					"id": 16,
+					"lastname": "Mehnana",
+					"firstname": "Sirine"
+				},
+				{
+					"id": 17,
+					"lastname": "Mira",
+					"firstname": "Inès"
+				},
+				{
+					"id": 18,
+					"lastname": "Nguyen",
+					"firstname": "Eric"
+				},
+				{
+					"id": 19,
+					"lastname": "Paillard",
+					"firstname": "Aymeric"
+				},
+				{
+					"id": 20,
+					"lastname": "Quentin",
+					"firstname": "Maël"
+				},
+				{
+					"id": 21,
+					"lastname": "Sarkis",
+					"firstname": "Cynthia"
+				},
+				{
+					"id": 22,
+					"lastname": "Toutain-grandin",
+					"firstname": "Océane"
+				}
+			]
+		},
+		{
+			"id": 8,
+			"card": "carte-design-int",
+			"name": "Design d'Interaction",
+			"description": "Êtes-vous prêts à entrer dans l'ère de l'interaction digitale ? Cette pratique innovante est la solution idéale pour donner une nouvelle dimension à votre entreprise. Nous sommes fiers de vous offrir l'opportunité d'apprendre auprès de nos experts. Alors n'hésitez plus, saisissez cette opportunité d’être un acteur important de ce XXIᵉ siècle.",
+			"video": ["https://www.youtube.com/embed/MSFdav67SFY"],
+			"logiciels": "designinteraction-charts.jpg",
+			"team": "design-inte.jpg",
+			"testimony": [
+				{
+					"name": "Alexis",
+					"class": "M1 DD",
+					"description": "J’ai bien aimé cet atelier, car il m’a permis de créer des univers virtuels à partir d’objets physiques et de faire la transition entre les deux. J’ai aussi appris à monter une borne d’arcade, c’était intéressant."
+				},
+				{
+					"name": "Chelsey",
+					"class": "M1 UX",
+					"description": "J’avais déjà de l’expérience sur Illustrator mais pouvoir travailler sur du print m’a permis de développer certaines compétences qui me manquaient. J’ai adoré travailler sur l’AR, c’est très intéressant et amusant. Travailler sur ce genre de projet m’a poussé à développer mes compétences en autodidacte et c’était très stimulant de bosser en groupe."
+				}
+			],
+			"projets": [
+				{
+					"id": 1,
+					"name": "Créations Graphiques",
+					"description": "Cette équipe a conçu des affiches et des pochettes vinyles rétro avec des icônes de la pop culture issues des années 90 en se basant sur les tendances de l’époque. Ces affiches servent de marqueurs pour révéler des animations en réalité augmentée.",
+					"images": [
+						"img-design-interaction/retro-custom.jpg",
+						"img-design-interaction/retro-custom2.jpg"
+					]
+				},
+				{
+					"id": 2,
+					"name": "Retro-Custom",
+					"description": "Plusieurs objets vintages ont été reprogrammés et détournés de leur fonction primaire grâce à une nouvelle technologie de programmation nommée Arduino. On pouvait donc retrouver des objets comme un téléphone à cadran ou un minitel avec des fonctions différentes de celles pour lesquelles ils ont été conçus.",
+					"images": [
+						"img-design-interaction/retro-custom3.jpg",
+						"img-design-interaction/retro-custom4.jpg"
+					]
+				}
+			],
+			"students": [
+				{
+					"id": 1,
+					"lastname": "Adechinan",
+					"firstname": "Zianath"
+				},
+				{
+					"id": 2,
+					"lastname": "Al-ajak",
+					"firstname": "Darèm"
+				},
+				{
+					"id": 3,
+					"lastname": "Allain",
+					"firstname": "Alexis"
+				},
+				{
+					"id": 4,
+					"lastname": "Arromaini",
+					"firstname": "Amine"
+				},
+				{
+					"id": 5,
+					"lastname": "Banckaert",
+					"firstname": "Léo"
+				},
+				{
+					"id": 6,
+					"lastname": "Benkirane",
+					"firstname": "Leïla"
+				},
+				{
+					"id": 7,
+					"lastname": "Camara",
+					"firstname": "Mathieu"
+				},
+				{
+					"id": 8,
+					"lastname": "Charel",
+					"firstname": "Axel"
+				},
+				{
+					"id": 9,
+					"lastname": "François",
+					"firstname": "Thomas"
+				},
+				{
+					"id": 10,
+					"lastname": "Jaouhari",
+					"firstname": "Soukaina"
+				},
+				{
+					"id": 11,
+					"lastname": "Kanoun",
+					"firstname": "Nour el houda"
+				},
+				{
+					"id": 12,
+					"lastname": "Languin",
+					"firstname": "Emilie"
+				},
+				{
+					"id": 13,
+					"lastname": "Lerfel",
+					"firstname": "Morane"
+				},
+				{
+					"id": 14,
+					"lastname": "Liot",
+					"firstname": "Apolline"
+				},
+				{
+					"id": 15,
+					"lastname": "Mantuila",
+					"firstname": "Gabrielle"
+				},
+				{
+					"id": 16,
+					"lastname": "Michel",
+					"firstname": "Jade"
+				},
+				{
+					"id": 17,
+					"lastname": "Niamkey",
+					"firstname": "Diane"
+				},
+				{
+					"id": 18,
+					"lastname": "Péan-uguet",
+					"firstname": "Sandra"
+				},
+				{
+					"id": 19,
+					"lastname": "Perrot-juric",
+					"firstname": "Tessa"
+				},
+				{
+					"id": 20,
+					"lastname": "Rivon",
+					"firstname": "Audrey-anne"
+				},
+				{
+					"id": 21,
+					"lastname": "Truong",
+					"firstname": "Chelsye"
+				},
+				{
+					"id": 22,
+					"lastname": "Warlot",
+					"firstname": "Dorian"
+				}
+			]
+		},
+		{
+			"id": 9,
+			"card": "carte-drones",
+			"name": "Drone",
+			"description": "Le D.R.O.N.E (Direct Rapide d’Objectif Nucléaire et Écologique) est une technologie importante dans notre monde.<br>Nos meilleurs techniciens en Arduino, Robot master, Scratch et Python conçoivent un parcours du combattant à la hauteur des ambitions du terrain.<br>Laissez-vous emporter par son parcours qui déchire la mort qui tue.",
+			"video": ["https://www.youtube.com/embed/ZTyiNPZXyB4"],
+			"logiciels": "drone-charts.jpg",
+			"team": "drone.jpg",
+			"testimony": [
+				{
+					"name": "Rayan",
+					"class": "B1 Dev",
+					"description": "J'ai eu la chance de participer au digital event et particulièrement à cet atelier. Ça m'a permis de rencontrer de nouvelles personnes et de découvrir un nouveau domaine tel que l'électronique. Ça fait un peu de changement. Malgré les difficultés rencontrées, ce projet a été incroyablement stimulant et m'a permis de développer mes compétences en matière de conception et de programmation."
+				},
+				{
+					"name": "Céline",
+					"class": "B1 Dev",
+					"description": "J'aime bien bricoler et mettre la main à la patte, c'est pour ça que j'ai choisi la partie décor de cet atelier. Pouvoir produire un parcours assez classe et cool m'a permis de mettre en pratique mon côté créatif. "
+				},
+				{
+					"name": "Roxane",
+					"class": "M1 Digital Design",
+					"description": "L'activité est géniale pour moi qui suis en M1 digital design, parce que cet atelier rassemble les compétences de la filière. C'est aussi pour ça que je l'ai choisi. Si l’on pouvait prévoir à l'avance le matériel, ç'aurait été plus simple. J'ai beaucoup touché aux parties scénario et décoration. Mais c'est quand même satisfaisant de pouvoir faire des choses qu'on n'aurait pas imaginé faire nous-mêmes."
+				}
+			],
+			"projets": [
+				{
+					"id": 1,
+					"name": "Team Scénario",
+					"description": "Une équipe s’est occupée de concevoir le script et choisir les musiques pour rendre le gameplay plus captivant.",
+					"images": ["img-drone/electronique1.jpg"]
+				},
+				{
+					"id": 2,
+					"name": "Team Électronique",
+					"description": "Une autre était chargée de programmer les drones afin de les faire interagir avec leur environnement et détecter les pièges pour les éviter. Le tout en suivant un parcours prédéfini.",
+					"images": [
+						"img-drone/electro.jpg",
+						"img-drone/electronique.jpg"
+					]
+				},
+				{
+					"id": 3,
+					"name": "Team Décoration",
+					"description": "La dernière équipe était centrée sur un parcours détaillé avec des matériaux recyclés, dans le but de réaliser une expérience plaisante.",
+					"images": [
+						"img-drone/celine.jpg",
+						"img-drone/electronique2.jpg"
+					]
+				}
+			],
+			"students": [
+				{
+					"id": 1,
+					"lastname": "Ajlil",
+					"firstname": "Narjisse"
+				},
+				{
+					"id": 2,
+					"lastname": "Ak",
+					"firstname": "Ezda"
+				},
+				{
+					"id": 3,
+					"lastname": "Benhammou",
+					"firstname": "Jawad"
+				},
+				{
+					"id": 4,
+					"lastname": "Binet",
+					"firstname": "Benjamin"
+				},
+				{
+					"id": 5,
+					"lastname": "Cane",
+					"firstname": "Joseph"
+				},
+				{
+					"id": 6,
+					"lastname": "Defontaine",
+					"firstname": "Landry"
+				},
+				{
+					"id": 7,
+					"lastname": "Ettis",
+					"firstname": "Rayan"
+				},
+				{
+					"id": 8,
+					"lastname": "Folio",
+					"firstname": "Sophie"
+				},
+				{
+					"id": 9,
+					"lastname": "Gouja",
+					"firstname": "Yanis"
+				},
+				{
+					"id": 10,
+					"lastname": "Le goff",
+					"firstname": "Roxane"
+				},
+				{
+					"id": 11,
+					"lastname": "Mache nono",
+					"firstname": "Claude"
+				},
+				{
+					"id": 12,
+					"lastname": "Mballo",
+					"firstname": "Fatou"
+				},
+				{
+					"id": 13,
+					"lastname": "Milic",
+					"firstname": "William"
+				},
+				{
+					"id": 14,
+					"lastname": "Mohamed",
+					"firstname": "Kenza"
+				},
+				{
+					"id": 15,
+					"lastname": "Mousset",
+					"firstname": "Maxence"
+				},
+				{
+					"id": 16,
+					"lastname": "Rabia",
+					"firstname": "Ines"
+				},
+				{
+					"id": 17,
+					"lastname": "Rasoamanana",
+					"firstname": "Anthony"
+				},
+				{
+					"id": 18,
+					"lastname": "Rouyer",
+					"firstname": "Baptiste"
+				},
+				{
+					"id": 19,
+					"lastname": "Soreau",
+					"firstname": "Quentin"
+				},
+				{
+					"id": 20,
+					"lastname": "Tixier",
+					"firstname": "Timothée"
+				},
+				{
+					"id": 21,
+					"lastname": "Toure",
+					"firstname": "Ketura"
+				},
+				{
+					"id": 22,
+					"lastname": "Turlot",
+					"firstname": "Celine"
+				}
+			]
+		},
+		{
+			"id": 10,
+			"card": "carte-popcorn",
+			"name": "Gaming & PopCorn",
+			"description": "Que votre petite pause soit sucrée ou salée, l’équipe de Popcorn vous a concocté une pause ludique. Les PGM (Pro Gameur Master - Maître du jeu professionnel)  reconnaîtront les FPS (Frame Per Second - Image par seconde) satisfaisants aux yeux de l’ESD (Ethernet Society Defender - La Société Amicale des Défenseurs de l’Ethernet). <br> <br> Retrouvez l'ensemble des jeux sur https://hub2023.popcorn-esd.com/.",
+			"video": ["https://www.youtube.com/embed/WJyGH9oVcBI"],
+			"logiciels": "popcorn-charts.jpg",
+			"team": "gaming-popcorn.jpg",
+			"testimony": [
+				{
+					"name": "Luca",
+					"class": "B1 Dev",
+					"description": "J'ai déjà acquis de nouvelles connaissances en lien avec ma formation en développement web. Il existe une bonne alchimie au sein de l'équipe, avec des intervenants sympathiques. Même si nous travaillons de manière autonome, nous sommes bien encadrés. Ce Digital Event m'a permis de rencontrer de nouvelles personnes, de travailler sur un projet différent et très productif qui sera utile à long terme. C'est une expérience à refaire."
+				},
+				{
+					"name": "Sacha",
+					"class": " B1 Dev",
+					"description": "J’ai appris à utiliser de nouveaux programmes tels que Bootstrap, node.js et j’ai aussi apprécié de concevoir un jeu réunissant les années 80-90. Je trouve que les intervenants étaient très présents et qu’ils ont su nous encadrer et nous aider à avancer."
+				}
+			],
+			"projets": [
+				{
+					"id": 1,
+					"name": "HUB",
+					"description": "Le pôle HUB récupère et met en valeur les différents jeux des autres groupes afin de tous les regrouper sur une plateforme.",
+					"images": ["img-popcorn/hub.jpg", "img-popcorn/hub1.jpg"]
+				},
+				{
+					"id": 2,
+					"name": "Création de jeux",
+					"description": "Le pôle création de jeux récolte des références des années 80-90 sur plusieurs thématiques comme le cinéma, la musique ou encore les jeux vidéos. Il est aussi chargé du design de plusieurs jeux (popcorn et swipe).",
+					"images": [
+						"img-popcorn/creation-de-jeux.jpg",
+						"img-popcorn/creation-de-jeux3.jpg"
+					]
+				}
+			],
+			"students": [
+				{
+					"id": 1,
+					"lastname": "Amar",
+					"firstname": "Yona"
+				},
+				{
+					"id": 2,
+					"lastname": "Carla",
+					"firstname": "Medioni"
+				},
+				{
+					"id": 3,
+					"lastname": "Cerqueira de almeida",
+					"firstname": "Patricia"
+				},
+				{
+					"id": 4,
+					"lastname": "Chelli",
+					"firstname": "Orel"
+				},
+				{
+					"id": 5,
+					"lastname": "Etheve",
+					"firstname": "Fabien"
+				},
+				{
+					"id": 6,
+					"lastname": "Gharbi",
+					"firstname": "Noa"
+				},
+				{
+					"id": 7,
+					"lastname": "Guillemot",
+					"firstname": "Luca"
+				},
+				{
+					"id": 8,
+					"lastname": "Houri",
+					"firstname": "Lital"
+				},
+				{
+					"id": 9,
+					"lastname": "Ibrahim",
+					"firstname": "Fouad"
+				},
+				{
+					"id": 10,
+					"lastname": "Izanic",
+					"firstname": "Alexandre"
+				},
+				{
+					"id": 11,
+					"lastname": "Joblot",
+					"firstname": "Enzo"
+				},
+				{
+					"id": 12,
+					"lastname": "Lefèvre",
+					"firstname": "Theo"
+				},
+				{
+					"id": 13,
+					"lastname": "Linglet",
+					"firstname": "Kenny"
+				},
+				{
+					"id": 14,
+					"lastname": "Lopez",
+					"firstname": "Nidaro"
+				},
+				{
+					"id": 15,
+					"lastname": "Martin-bricout",
+					"firstname": "Jeanne"
+				},
+				{
+					"id": 16,
+					"lastname": "Nahmani",
+					"firstname": "Sacha"
+				},
+				{
+					"id": 17,
+					"lastname": "Sibien",
+					"firstname": "Arthur"
+				},
+				{
+					"id": 18,
+					"lastname": "Sidiki",
+					"firstname": "Yann"
+				},
+				{
+					"id": 19,
+					"lastname": "Skaoui",
+					"firstname": "Nabil"
+				},
+				{
+					"id": 20,
+					"lastname": "Taieb",
+					"firstname": "Elina"
+				},
+				{
+					"id": 21,
+					"lastname": "Tormos posada",
+					"firstname": "Jean-Pierre"
+				}
+			]
+		},
+		{
+			"id": 11,
+			"card": "carte-live",
+			"name": "LiveStream",
+			"description": "C’est le flux en direct de votre vie.  L’équipe Livestream donne toute son énergie pour vous offrir un spectacle son et lumière à la hauteur des ambitions démesurées, spectaculaires et gargantuesques de notre fameuse école. On aime quand sa live. Il y aura du “quoi ?” il y aura du “feur”, et bien plus encore. Rendez-vous le jeudi 16 février 2023 sur l’adresse numérique connectée : https://www.twitch.tv/ecole_du_digital",
+			"video": ["https://www.youtube.com/embed/AEwwx0aRir8"],
+			"logiciels": "livestream-charts.jpg",
+			"team": "livestream.jpg",
+			"testimony": [
+				{
+					"name": "Antoine",
+					"class": "M2 UX",
+					"description": "J'aime bien la 3D et j'ai voulu apporter une touche de nouveauté à la production en direct en y intégrant la 3D. J'ai découvert de nouvelles facettes de la 3D en travaillant sur les scénarios, en touchant à tout et en aidant les gens. J'ai eu la liberté encadrée d'être autodidacte et de mettre mes compétences en pratique. Le fait que ce soit en direct représente un défi supplémentaire, car cela sera vu par un public important. Cela me pousse à vouloir continuer à apprendre."
+				},
+				{
+					"name": "Alexandre",
+					"class": " B2 Dev",
+					"description": "L'atelier était super cool, très sérieux et très productif. J'ai appris la 3D, ce qui m'a permis de sortir de ma routine habituelle de codage. Étant souvent sur Twitch, j'ai voulu voir ce qu'il se passait derrière le rideau lors de la réalisation d'un direct et je n'ai pas été déçu. L'ambiance en général était excellente."
+				},
+				{
+					"name": "Aïssata",
+					"class": "B3 Crea",
+					"description": "C'est beau d'imaginer, mais c'est encore plus beau de le réaliser. En travaillant ensemble, nous avons réuni plusieurs cerveaux et créativités, ce qui nous a permis de voir toutes les facettes du live stream. C'est une expérience incroyable de pouvoir mettre en œuvre nos idées et d'apprendre à maîtriser les différents domaines de la conception d'un direct. C'est un véritable défi de s'engager et de constamment écrire un scénario qui dépasse ses propres limites."
+				},
+				{
+					"name": "Rémi",
+					"class": "M1 DD",
+					"description": "J'ai adoré l'atelier puisque ayant déjà fait du stream sur Twitch en perso, j'étais déjà enclin à aimer le projet, mais en plus les intervenants et l'équipe sont tous dans le même délire ! Pour ma part, j'ai appris à faire un peu “d'acting” et j’ai aussi fait la découverte d'unreal engine 5 qui permet de faire des scènes virtuelles. S'il y a une chose à dire c'est que si vous voulez vous amuser et devenir le boss du Twitch game, c'est à l'atelier live stream que ça se passe ! Ps : ça n'enlève pas le fait qu'on bosse comme des dingues !"
+				}
+			],
+			"projets": [
+				{
+					"id": 1,
+					"name": "Team Scénario",
+					"description": "Afin d'assurer le bon déroulement du direct, ce groupe a pris en charge la création d'un script cohérent nous transportant dans l’univers des années 80 à 2000. Grâce à quelques références culturelles, les spectateurs devraient se sentir dépaysés.",
+					"images": ["img-livestream/scenario.jpg"]
+				},
+				{
+					"id": 2,
+					"name": "Team Régie",
+					"description": "La team régie s’assure du bon déroulé du live. C’est elle qui gère les différentes sources audio et vidéo pour pouvoir les passer au bon moment.",
+					"images": [
+						"img-livestream/regie.jpg",
+						"img-livestream/regie2.jpg"
+					]
+				},
+				{
+					"id": 3,
+					"name": "Team Prod",
+					"description": "Plusieurs assets graphiques et scènes 3D d’émissions télévisées de l’époque ( Friends, les Feux de l’amour, C’est pas sorcier,... ) ont été conçus pour mettre en valeur l’ambiance rétro et les acteurs du live.",
+					"images": [
+						"img-livestream/production.jpg",
+						"img-livestream/production2.jpg"
+					]
+				},
+				{
+					"id": 4,
+					"name": "Team Déco",
+					"description": "Cette team a dû réfléchir à la conception des différents décors physiques qui habilleront le direct. Ils ont dû penser à la gestion de l’espace pour créer des environnements de stream cohérents (installation du fond vert et du salon rétro) et la création du décor type “Speakerine”.",
+					"images": [
+						"img-livestream/decoration.jpg",
+						"img-livestream/decoration2.jpg"
+					]
+				}
+			],
+			"students": [
+				{
+					"id": 1,
+					"lastname": "Auriol",
+					"firstname": "Antoine"
+				},
+				{
+					"id": 2,
+					"lastname": "Ba",
+					"firstname": "Aïssata"
+				},
+				{
+					"id": 3,
+					"lastname": "Barthelemi",
+					"firstname": "Hugo"
+				},
+				{
+					"id": 4,
+					"lastname": "Brouc",
+					"firstname": "Valentin"
+				},
+				{
+					"id": 5,
+					"lastname": "Claustre",
+					"firstname": "Pablo"
+				},
+				{
+					"id": 6,
+					"lastname": "Cohen",
+					"firstname": "Samuel"
+				},
+				{
+					"id": 7,
+					"lastname": "Dias",
+					"firstname": "Mathieu"
+				},
+				{
+					"id": 8,
+					"lastname": "Karam",
+					"firstname": "Zeïna"
+				},
+				{
+					"id": 9,
+					"lastname": "Ketcham",
+					"firstname": "Ethan"
+				},
+				{
+					"id": 10,
+					"lastname": "Le carval",
+					"firstname": "Raphaël"
+				},
+				{
+					"id": 11,
+					"lastname": "Le clezio",
+					"firstname": "Kilyan"
+				},
+				{
+					"id": 12,
+					"lastname": "Lenoir",
+					"firstname": "Charles"
+				},
+				{
+					"id": 13,
+					"lastname": "Louis",
+					"firstname": "Corentin"
+				},
+				{
+					"id": 14,
+					"lastname": "Marchand",
+					"firstname": "Rémi"
+				},
+				{
+					"id": 15,
+					"lastname": "Monfroy",
+					"firstname": "Ines"
+				},
+				{
+					"id": 16,
+					"lastname": "Neirinckx",
+					"firstname": "Leo"
+				},
+				{
+					"id": 17,
+					"lastname": "Nicolas",
+					"firstname": "Alexandre"
+				},
+				{
+					"id": 18,
+					"lastname": "Panchout",
+					"firstname": "Romain"
+				},
+				{
+					"id": 19,
+					"lastname": "Paris",
+					"firstname": "Antoine"
+				},
+				{
+					"id": 20,
+					"lastname": "Priotti",
+					"firstname": "Lucas"
+				},
+				{
+					"id": 21,
+					"lastname": "Proust",
+					"firstname": "Emilien"
+				},
+				{
+					"id": 22,
+					"lastname": "Rakotoasimbola",
+					"firstname": "Fanorenantsoa"
+				},
+				{
+					"id": 23,
+					"lastname": "Secan",
+					"firstname": "Catalin"
+				}
+			]
+		},
+		{
+			"id": 12,
+			"card": "carte-photo",
+			"name": "Atelier / Reportage Photo",
+			"description": "Notre pôle “Documentaliste et Multimédia” est fier de vous présenter le fruit de deux semaines de création et de reportages en zone de guerre. Tels des paparazzis toujours à la recherche des derniers scandales à la mode, ils capturent vos folles aventures et les révèlent au grand jour.<br>Les photos sont généralement truquées à l’aide de programmes de retouche photogénique multicolore tels que Photoshop et Lightroom.",
+			"video": ["https://www.youtube.com/embed/bgdGcN8fINM"],
+			"logiciels": "photo-charts.jpg",
+			"team": "reportage-photo.jpg",
+			"testimony": [
+				{
+					"name": "Théo",
+					"class": "B3 CI",
+					"description": "Étant intéressé par la photo depuis longtemps, faire partie de l’atelier photo a été une super opportunité pour moi. J’avais déjà des connaissances techniques, mais il me manquait le côté pratique. L’intervenant était très intéressant et nous a appris quelques techniques pour appréhender la photo d’un certain angle."
+				}
+			],
+			"projets": [
+				{
+					"id": 1,
+					"name": "Édito ",
+					"description": "La team édito avait pour mission d’organiser un shooting photo professionnel avec différents mannequins. Ils étaient également chargés de récupérer les meilleures photos du tirage pour en faire une exposition en suivant les tendances artistiques des années 90 / 2000.",
+					"images": [
+						"img-reportage-photo/edito2.jpg",
+						"img-reportage-photo/edito3.jpg",
+						"img-reportage-photo/edito.jpg",
+						"img-reportage-photo/edito1.jpg"
+					]
+				},
+				{
+					"id": 2,
+					"name": "Reportage Photo",
+					"description": "L’équipe reportage photo était chargée de capturer les plus beaux moments du Digital Event.<br>Un reportage photo proche du documentaire dans le thème 80 / 2000 est mis en place ainsi qu’une exposition des meilleures photos accompagnées d’un fanzine (revue de bande dessinée).",
+					"images": [
+						"img-reportage-photo/reportage-photo2.jpg",
+						"img-reportage-photo/reportage-photo4.jpg"
+					]
+				}
+			],
+			"students": [
+				{
+					"id": 1,
+					"lastname": "Aïnama",
+					"firstname": "Rébecca"
+				},
+				{
+					"id": 2,
+					"lastname": "Boulanouar",
+					"firstname": "Ines"
+				},
+				{
+					"id": 3,
+					"lastname": "Brandely",
+					"firstname": "Killian"
+				},
+				{
+					"id": 4,
+					"lastname": "Demonin",
+					"firstname": "Clémentine"
+				},
+				{
+					"id": 5,
+					"lastname": "Desbos",
+					"firstname": "Charlène"
+				},
+				{
+					"id": 6,
+					"lastname": "Do",
+					"firstname": "Sophie"
+				},
+				{
+					"id": 7,
+					"lastname": "Fuambi",
+					"firstname": "Ruth"
+				},
+				{
+					"id": 8,
+					"lastname": "Jeammes",
+					"firstname": "Laura"
+				},
+				{
+					"id": 9,
+					"lastname": "Joblon",
+					"firstname": "Estelle"
+				},
+				{
+					"id": 10,
+					"lastname": "Julie",
+					"firstname": "Collet"
+				},
+				{
+					"id": 11,
+					"lastname": "Lartigue",
+					"firstname": "Régine"
+				},
+				{
+					"id": 12,
+					"lastname": "Lepierre",
+					"firstname": "Emmeryck"
+				},
+				{
+					"id": 13,
+					"lastname": "Liébel",
+					"firstname": "Ombeline"
+				},
+				{
+					"id": 14,
+					"lastname": "Mahé",
+					"firstname": "Lucile"
+				},
+				{
+					"id": 15,
+					"lastname": "Pham",
+					"firstname": "Théo"
+				},
+				{
+					"id": 16,
+					"lastname": "Richard",
+					"firstname": "Mathis"
+				},
+				{
+					"id": 17,
+					"lastname": "Rollin",
+					"firstname": "Nicolas"
+				},
+				{
+					"id": 18,
+					"lastname": "Rollin",
+					"firstname": "Cynthia"
+				},
+				{
+					"id": 19,
+					"lastname": "Tinpe",
+					"firstname": "Luna"
+				},
+				{
+					"id": 20,
+					"lastname": "Toure",
+					"firstname": "Diaka"
+				},
+				{
+					"id": 21,
+					"lastname": "Victoire",
+					"firstname": "Solène"
+				}
+			]
+		},
+		{
+			"id": 13,
+			"card": "carte-exp-vis",
+			"name": "Expérience Visiteurs",
+			"description": "Prenez un cookie ! Nos meilleurs scientifiques et analystes en données visiteurs de notre génération s'occupent de vous pour vous faire vivre un événement fluide comme l’eau d’une rivière. Mais je reviens sur cette histoire de cookie : Nous respectons vos droits en matière de données personnelles. Acceptez-vous le suivi des données de navigat… Non ? Ah ok. Non parce que… Non ? Ah ? Je… Ok… d’accord…",
+			"video": ["https://www.youtube.com/embed/65K8yY5dkIs"],
+			"logiciels": "exp-visiteurs-charts.jpg",
+			"team": "exp-visiteurs.jpg",
+			"testimony": [
+				{
+					"name": "Eliam",
+					"class": " B3 Market",
+					"description": "Nous avons une bonne cohésion de groupe nous permettant de créer de belles choses. J'aime cet atelier, car il nécessite d'avoir une super team, pleins d'idées originales et nous mettons tous la main à la patte en bricolant et en espérant que le résultat soit au rendez-vous en temps et en heure."
+				},
+				{
+					"name": "Dane",
+					"class": "B2 DEV",
+					"description": "On nous apprend à être autodidacte tout en faisant connaissance avec plusieurs personnes et en apprenant de leurs expériences. J'ai pu apporter mes compétences front-end et back-end tout en apprenant plein de trucs avec une bonne ambiance. C'était une très bonne expérience."
+				}
+			],
+			"projets": [
+				{
+					"id": 1,
+					"name": "Expérience",
+					"description": "L’équipe expérience a pour but d'améliorer et de fluidifier le parcours des visiteurs. Les étudiants ont été chargés de mettre en place un décor aux couleurs des années 90 .",
+					"images": [
+						"img-exp-visiteurs/exp-visiteurs.jpg",
+						"img-exp-visiteurs/exp-visiteurs1.jpg"
+					]
+				},
+				{
+					"id": 2,
+					"name": "Développement",
+					"description": "L’équipe développement s’est occupée de coder une interface pour faciliter l'organisation et la gestion des réservations de l'atelier escape game et drone.",
+					"images": ["img-exp-visiteurs/exp-visiteurs2.jpg"]
+				},
+				{
+					"id": 3,
+					"name": "Différents niveaux",
+					"description": "Chaque étage de l’école a sa propre ambiance : <br>- Au rez-de-chaussée, le street art et l’expression de soi <br>- Au premier étage, jeux vidéo et pop culture <br>- Au second étage, maison des années 1990 <br>En plus de se baser sur des affiches de films ou de magazines, de vieux CD ou des cassettes, ils reprennent les produits électroniques des années 90 pour rendre la décoration la plus fidèle possible et l'expérience immersive. ",
+					"images": [
+						"img-exp-visiteurs/exp-visiteurs3.jpg",
+						"img-exp-visiteurs/exp-visiteurs4.jpg"
+					]
+				}
+			],
+			"students": [
+				{
+					"id": 1,
+					"lastname": "Aimond",
+					"firstname": "Romain"
+				},
+				{
+					"id": 2,
+					"lastname": "Arki",
+					"firstname": "Dan"
+				},
+				{
+					"id": 3,
+					"lastname": "Azoulay",
+					"firstname": "Eliam"
+				},
+				{
+					"id": 4,
+					"lastname": "Cadoch",
+					"firstname": "Lisa"
+				},
+				{
+					"id": 5,
+					"lastname": "Caratozzolo",
+					"firstname": "Alice"
+				},
+				{
+					"id": 6,
+					"lastname": "Castanie",
+					"firstname": "Anaïs"
+				},
+				{
+					"id": 7,
+					"lastname": "Cornuet",
+					"firstname": "Théophile"
+				},
+				{
+					"id": 8,
+					"lastname": "Cramer",
+					"firstname": "Louise"
+				},
+				{
+					"id": 9,
+					"lastname": "Garbez",
+					"firstname": "Maëva"
+				},
+				{
+					"id": 10,
+					"lastname": "Giang",
+					"firstname": "Lily"
+				},
+				{
+					"id": 11,
+					"lastname": "Jacobs",
+					"firstname": "Alice"
+				},
+				{
+					"id": 12,
+					"lastname": "Kiniklis",
+					"firstname": "Maria"
+				},
+				{
+					"id": 13,
+					"lastname": "Kokila mbala",
+					"firstname": "Océanne"
+				},
+				{
+					"id": 14,
+					"lastname": "Loncle",
+					"firstname": "Mathurin"
+				},
+				{
+					"id": 15,
+					"lastname": "Maschéroni",
+					"firstname": "Clément"
+				},
+				{
+					"id": 16,
+					"lastname": "Nefoussi",
+					"firstname": "Rayan"
+				},
+				{
+					"id": 17,
+					"lastname": "Pereira",
+					"firstname": "Pauline"
+				},
+				{
+					"id": 18,
+					"lastname": "Sylvain",
+					"firstname": "Florian"
+				}
+			]
+		},
+		{
+			"id": 14,
+			"card": "carte-podcast",
+			"name": "Radio & Podcast",
+			"description": "De l'art de l'interview, ils maîtrisent les subtilités.<br>Avec tact et intelligence, ils savent écouter.<br>Leurs mots, choisis avec soin, créent des complicités et nous font découvrir des univers insoupçonnés.<br><br>Que l'on parle d'art, de science ou d’animé,<br>Les podcasters-interviewers sont de véritables passeurs. <br>Ils nous ouvrent des portes vers des horizons enchantés et nous offrent des moments de partage, d'émotions et de bonheur.",
+			"video": ["https://www.youtube.com/embed/lIrz6aPtRCQ"],
+			"logiciels": "radio-podcast-charts.jpg",
+			"team": "podcast.jpg",
+			"testimony": [
+				{
+					"name": "Karim",
+					"class": "B1 Dev",
+					"description": "C'était super. J'ai fait la connaissance de nombreuses personnes et cela m'a permis de mieux comprendre le monde de la radio et des podcasts. J'ai également dépassé mes propres limites en matière de connaissances numériques, en explorant de nouveaux horizons. La réalisation du projet de design sonore pour le podcast Thread Horror m'a offert l'opportunité d'apprendre encore plus sur un domaine autre que le développement."
+				}
+			],
+			"projets": [
+				{
+					"id": 1,
+					"name": "Radio/ Podcast",
+					"description": "La team Radio/ Podcast a créé une radio qui présente plusieurs programmes basés sur des thématiques des années 90 à travers des interviews, des témoignages et des rétrospectives, etc.",
+					"images": [
+						"img-podcast/radio-podcast2.jpg",
+						"img-podcast/radio-podcast4.jpg"
+					]
+				},
+				{
+					"id": 2,
+					"name": "Les formats",
+					"description": "Gossip : Témoignage des étudiants et de leurs secrets.<br>Jeu vidéo : Rétrospective des jeux vidéo sortis dans les années 80.<br>Thread horror : Raconter des histoires réelles à travers un podcast.<br>Musique et Mode : Tout ce qui est mode et musique des années 80.<br>Serie et Film : Toutes les séries des années 80 + Interview avec quelques étudiants sur les films qui les ont marqués de cette époque.<br>Actualité : actu des années 80, les événements marquants qui se sont déroulés.",
+					"images": [
+						"img-podcast/radio-podcast3.jpg",
+						"img-podcast/radio-podcast6.jpg"
+					]
+				}
+			],
+			"students": [
+				{
+					"id": 1,
+					"lastname": "Abdellaoui",
+					"firstname": "Mohamed"
+				},
+				{
+					"id": 2,
+					"lastname": "Babarro",
+					"firstname": "Thomas"
+				},
+				{
+					"id": 3,
+					"lastname": "Dileita",
+					"firstname": "Tayci"
+				},
+				{
+					"id": 4,
+					"lastname": "Duarte",
+					"firstname": "Fatima"
+				},
+				{
+					"id": 5,
+					"lastname": "Etten",
+					"firstname": "Léa"
+				},
+				{
+					"id": 6,
+					"lastname": "Haddadi",
+					"firstname": "Karim"
+				},
+				{
+					"id": 7,
+					"lastname": "Jeanneau",
+					"firstname": "Hugo"
+				},
+				{
+					"id": 8,
+					"lastname": "Kok",
+					"firstname": "Mélodie"
+				},
+				{
+					"id": 9,
+					"lastname": "Koumba",
+					"firstname": "Jeanice"
+				},
+				{
+					"id": 10,
+					"lastname": "Nosibor",
+					"firstname": "Jennifer"
+				},
+				{
+					"id": 11,
+					"lastname": "Pascal",
+					"firstname": "Alizée"
+				},
+				{
+					"id": 12,
+					"lastname": "Pasquier",
+					"firstname": "Jade"
+				},
+				{
+					"id": 13,
+					"lastname": "Petit",
+					"firstname": "Anais"
+				},
+				{
+					"id": 14,
+					"lastname": "Sandjon",
+					"firstname": "Broock-mégane"
+				},
+				{
+					"id": 15,
+					"lastname": "Tremblay",
+					"firstname": "Nathan"
+				},
+				{
+					"id": 16,
+					"lastname": "Umar",
+					"firstname": "Amal"
+				}
+			]
+		},
+		{
+			"id": 15,
+			"card": "carte-com-event",
+			"name": "Communication (Orga & Event)",
+			"description": "Dans l’économie actuelle, chaque dollar investi doit faire l’objet de KPI minutieusement ciblé. C’est pourquoi nous avons cette année mis en place un espace dédié à la gestion des crédits financiers alloués aux différents projets. Nos mathématiciens en herbe s’assurent que le capital investi amène à la croissance des bénéfices nets. Ils s’occupent aussi des petits-fours.",
+			"video": ["https://www.youtube.com/embed/_46oW_6cg_g"],
+			"logiciels": "com-orga-event-charts.jpg",
+			"team": "team-orga-evenement.jpg",
+			"testimony": [
+				{
+					"name": "Orelle",
+					"class": "B1 CDP",
+					"description": "J'ai l'habitude d'organiser des événements de grande ampleur et j'aime beaucoup l'organisation, c’est pour ça que j’ai adoré cet atelier. L'ambiance est chaleureuse et la synergie d'équipe qui se dégage lors de cet événement est motivante. Je trouve aussi que la possibilité de travailler avec des étudiants d'autres niveaux est enrichissante."
+				},
+				{
+					"name": "Eva",
+					"class": "M2 Digital Design",
+					"description": "J'ai beaucoup aimé l'expérience, car après avoir pratiqué la création pendant trois ans, j'avais envie de découvrir un autre domaine, celui de chef de projet. Je suis très satisfaite de l'organisation, même si c'était parfois amusant de voir les différentes équipes et leurs interactions. Il était important de bien s'entendre pour travailler ensemble efficacement."
+				}
+			],
+			"projets": [
+				{
+					"id": 1,
+					"name": "Diginight",
+					"description": "Une petite équipe est chargée de l'organisation de deux événements les plus importants du Digital Event : un live sur Twitch jeudi soir et la Diginight, vendredi soir.",
+					"images": ["img-comm-event/diginight.jpg"]
+				},
+				{
+					"id": 2,
+					"name": "Budget",
+					"description": "Pendant le digital event, leur rôle est de s’occuper du budget nécessaire pour réaliser les créations des étudiants et répondre à leurs besoins.",
+					"images": ["img-comm-event/budget.jpg"]
+				}
+			],
+			"students": [
+				{
+					"id": 1,
+					"lastname": "Azoulay",
+					"firstname": "Orelle"
+				},
+				{
+					"id": 2,
+					"lastname": "Sghir",
+					"firstname": "Amal"
+				},
+				{
+					"id": 3,
+					"lastname": "Simon",
+					"firstname": "Eva"
+				},
+				{
+					"id": 4,
+					"lastname": "Varlet",
+					"firstname": "Bastien"
+				}
+			]
+		}
+	]
+}
