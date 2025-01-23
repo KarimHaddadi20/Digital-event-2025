@@ -4,26 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal Mirror</title>
-    <style>
-        body { margin: 0; overflow: hidden; background: #000; }
-        #scene-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="src/Css/styles.css">
 </head>
 <body>
-    <div id="scene-container"></div>
-
-    <div class="scene-wrapper"></div>
-        <div id="scene-container" class="scene-container"></div>
-        <h1 class="glass-title">digital event 2025</h1>
+    <!-- Loader -->
+    <div id="loading-container">
+        <div id="percentage">0%</div>
+        <div id="mirror-percentage">0%</div>
     </div>
 
-    <div class="loading-screen">Chargement...</div>
+    <div id="main-content" style="display: none;">
+        <div class="scene-wrapper">
+            <div id="scene-container"></div>
+        </div>
+    </div>
 
     <!-- Importation de Three.js avec les bons chemins -->
     <script type="importmap">
@@ -40,6 +34,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     
     <!-- Votre script -->
-    <script type="module" src="src/Js/app.js"></script>
+    <script type="module" src="src/Js/Loader.js"></script>
 </body>
 </html> 

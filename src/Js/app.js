@@ -4,6 +4,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RGBELoader } from "three/addons/loaders/RGBELoader.js"; 
 class MirrorBreakEffect {
   constructor() {
+    // Initialisation de base
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(
       75,
@@ -11,10 +12,23 @@ class MirrorBreakEffect {
       0.1,
       1000
     );
+
+    // Initialisation du renderer avec alpha
     this.renderer = new THREE.WebGLRenderer({
       antialias: true,
-      alpha: true,
+      alpha: true
     });
+    this.renderer.setClearColor(0x000000, 1); // Fond noir opaque
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // Attacher le renderer au conteneur
+    const container = document.getElementById('scene-container');
+    if (container) {
+      container.appendChild(this.renderer.domElement);
+    }
+
+    // Initialiser les autres propriétés
     this.fragments = [];
     this.isBreaking = false;
     this.isFragmentSelected = false;
@@ -46,11 +60,24 @@ class MirrorBreakEffect {
       this.fragmentContainers.push(container);
     });
 
-    this.init();
+    this.gltfLoader = new GLTFLoader();
+    this.rgbeLoader = new RGBELoader();
+
+    // Setup initial
+    this.setupCamera();
     this.setupLights();
-    this.loadHDRI(); // Charger l'image HDR
-    this.loadMirrorModel();
-    this.animate();
+    this.setupEventListeners();
+
+    // Charger les ressources de manière asynchrone
+    Promise.all([
+      this.loadHDRI(),
+      this.loadMirrorModel()
+    ]).then(() => {
+      // Démarrer l'animation une fois tout chargé
+      this.animate();
+    }).catch(error => {
+      console.error('Erreur lors du chargement:', error);
+    });
 
     // Gestionnaire de clic
     this.handleClick = this.handleClick.bind(this);
@@ -89,15 +116,26 @@ class MirrorBreakEffect {
     window.addEventListener('mousemove', (event) => this.onMouseMove(event));
   }
 
-  init() {
+  async init() {
+    try {
+      await this.loadHDRI();
+      await this.loadMirrorModel();
+      this.animate();
+    } catch (error) {
+      console.error('Erreur lors de l\'initialisation:', error);
+    }
+  }
+
+  setupCamera() {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.renderer.setPixelRatio(window.devicePixelRatio);
-    document
-      .getElementById("scene-container")
-      .appendChild(this.renderer.domElement);
+    const container = document.getElementById('scene-container');
+    if (container) {
+      container.appendChild(this.renderer.domElement);
+    }
 
-    // Positionner la caméra plus avancée
-    this.camera.position.set(0, 0, 0);
+    // Positionner la caméra plus loin
+    this.camera.position.set(0, 0, 10);
     this.camera.lookAt(0, 0, 0);
 
     console.log('Position initiale de la caméra:', {
@@ -109,9 +147,9 @@ class MirrorBreakEffect {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.25;
-    this.controls.enableZoom = true; // Réactiver le zoom
-    this.controls.enablePan = true; // Si vous souhaitez également permettre le panoramique
-    this.controls.enableRotate = true; // Si vous souhaitez également permettre la rotation
+    this.controls.enableZoom = true;
+    this.controls.enablePan = true;
+    this.controls.enableRotate = true;
 
     // Gestionnaire de scroll pour le zoom
     window.addEventListener('wheel', (event) => {
@@ -154,9 +192,8 @@ class MirrorBreakEffect {
     this.scene.add(frontLight);
   }
 
-  loadHDRI() {
-    const rgbeLoader = new RGBELoader();
-    rgbeLoader.load("src/assets/night.hdr", (texture) => {
+  async loadHDRI() {
+    await this.rgbeLoader.load("src/assets/night.hdr", (texture) => {
       texture.mapping = THREE.EquirectangularReflectionMapping;
       this.scene.background = texture;
       this.scene.environment = texture;
@@ -167,71 +204,64 @@ class MirrorBreakEffect {
     const loader = new GLTFLoader();
 
     loader.load(
-      "src/models/mirrorsolo.glb",
-      (gltf) => {
-        this.mirror = gltf.scene;
+        "src/models/mirrorsolo.glb",
+        (gltf) => {
+            this.mirror = gltf.scene;
 
-        // Centrer et redimensionner le modèle
-        const box = new THREE.Box3().setFromObject(this.mirror);
-        const center = box.getCenter(new THREE.Vector3());
-        const size = box.getSize(new THREE.Vector3());
+            // Centrer et redimensionner le modèle
+            const box = new THREE.Box3().setFromObject(this.mirror);
+            const center = box.getCenter(new THREE.Vector3());
+            const size = box.getSize(new THREE.Vector3());
 
-        const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 400 / maxDim;
-        this.mirror.scale.multiplyScalar(scale);
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const scale = 2 / maxDim; // Réduit l'échelle
+            this.mirror.scale.multiplyScalar(scale);
 
-        this.mirror.position.set(
-          -center.x * scale,
-          -center.y * scale,
-          -300 // Placer le miroir devant la caméra
-        );
+            this.mirror.position.set(
+                -center.x * scale,
+                -center.y * scale,
+                -5 // Plus proche de la caméra
+            );
 
-        // Appliquer la transparence et les reflets
-        this.mirror.traverse((child) => {
-          if (child.isMesh) {
-            child.material = new THREE.MeshPhysicalMaterial({
-              // color: 0xffffff,
-              metalness: 1, // Effet miroir
-              roughness: 0, // Surface lisse
-              transmission: 0.1, // Transparence
-              thickness: 10, // Épaisseur du verre
-              envMap: this.scene.environment,
-              envMapIntensity: 1.5, // Intensité des reflets
-              clearcoat: 10, // Effet brillant
-              clearcoatRoughness: 0.06, // Netteté du clearcoat
-              transparent: false,
-              opacity: 0.7, // Transparence globale
-              side: THREE.DoubleSide,
-              depthWrite: false, // Important pour la transparence
-              // blending: THREE.CustomBlending,
-              // blendSrc: THREE.OneFactor,
-              // blendDst: THREE.OneMinusSrcAlphaFactor,
+            // Appliquer la transparence et les reflets
+            this.mirror.traverse((child) => {
+                if (child.isMesh) {
+                    child.material = new THREE.MeshPhysicalMaterial({
+                        metalness: 0.9,
+                        roughness: 0.1,
+                        transmission: 0.5,
+                        thickness: 5,
+                        envMapIntensity: 1,
+                        clearcoat: 1,
+                        clearcoatRoughness: 0.1,
+                        transparent: true,
+                        opacity: 0.8,
+                        side: THREE.DoubleSide
+                    });
+                    this.mirrorMesh = child;
+                }
             });
-            this.mirrorMesh = child;
-          }
-        });
 
-        this.scene.add(this.mirror);
-        this.createFragments();
-
-        document.querySelector(".loading-screen").style.display = "none";
-      },
-      undefined,
-      (error) => {
-        console.error("Erreur de chargement du modèle:", error);
-      }
+            this.scene.add(this.mirror);
+            this.createFragments();
+        },
+        (xhr) => {
+            console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+        },
+        (error) => {
+            console.error("Erreur de chargement du modèle:", error);
+        }
     );
   }
 
   createFragments() {
-    const loader = new GLTFLoader();
     const rows = [3, 3, 3, 2];
     let index = 0;
 
     rows.forEach((count, rowIndex) => {
         for (let i = 0; i < count; i++) {
             const fileName = `src/models/fragments3/monde${index + 1}.glb`;
-            loader.load(
+            this.gltfLoader.load(
                 fileName,
                 (gltf) => {
                     const fragment = gltf.scene;
@@ -471,20 +501,10 @@ class MirrorBreakEffect {
   animate() {
     requestAnimationFrame(() => this.animate());
 
-    if (this.isBreaking) {
-        const time = Date.now() * 0.001;
-
-        this.fragments.forEach((fragment, index) => {
-            const offset = index * (Math.PI / 6);
-            const levitationAmplitude = 0.002;
-            const levitationSpeed = 0.5;
-
-            // Simple mouvement vertical
-            fragment.position.y += Math.sin(time * levitationSpeed + offset) * levitationAmplitude;
-        });
+    if (this.controls) {
+        this.controls.update();
     }
 
-    this.controls.update();
     this.renderer.render(this.scene, this.camera);
   }
 
@@ -617,7 +637,79 @@ class MirrorBreakEffect {
 
     animateImmersion();
   }
+
+  setupEventListeners() {
+    // Gestionnaire de redimensionnement
+    window.addEventListener('resize', () => {
+        this.camera.aspect = window.innerWidth / window.innerHeight;
+        this.camera.updateProjectionMatrix();
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Gestionnaire de mouvement de souris
+    window.addEventListener('mousemove', (event) => {
+        // Calculer la position de la souris en coordonnées normalisées (-1 à +1)
+        this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        // Mettre à jour le raycaster
+        this.raycaster.setFromCamera(this.mouse, this.camera);
+
+        // Vérifier les intersections avec les fragments
+        const intersects = this.raycaster.intersectObjects(this.fragments, true);
+
+        // Gérer le survol des fragments
+        if (intersects.length > 0) {
+            const fragment = intersects[0].object.parent;
+            if (fragment && fragment.userData.isClickable) {
+                if (this.hoveredFragment !== fragment) {
+                    // Nouveau fragment survolé
+                    if (this.hoveredFragment) {
+                        // Réinitialiser l'ancien fragment survolé
+                        this.onFragmentHoverEnd(this.hoveredFragment);
+                    }
+                    this.hoveredFragment = fragment;
+                    this.onFragmentHoverStart(fragment);
+                }
+            }
+        } else if (this.hoveredFragment) {
+            // Plus aucun fragment survolé
+            this.onFragmentHoverEnd(this.hoveredFragment);
+            this.hoveredFragment = null;
+        }
+    });
+
+    // Gestionnaire de clic
+    window.addEventListener('click', (event) => {
+        if (this.hoveredFragment && !this.isBreaking) {
+            this.handleFragmentClick(this.hoveredFragment);
+        }
+    });
+  }
+
+  onFragmentHoverStart(fragment) {
+    // Afficher le nom de l'atelier
+    const index = fragment.userData.index;
+    if (this.atelierNames[index]) {
+        this.textElement.textContent = this.atelierNames[index];
+        this.textElement.style.display = 'block';
+        this.textElement.style.opacity = '1';
+    }
+  }
+
+  onFragmentHoverEnd(fragment) {
+    // Cacher le nom de l'atelier
+    this.textElement.style.opacity = '0';
+    setTimeout(() => {
+        if (this.textElement.style.opacity === '0') {
+            this.textElement.style.display = 'none';
+        }
+    }, 300);
+  }
 }
 
-// Initialisation
-window.mirrorEffect = new MirrorBreakEffect();
+// Exporter la classe
+export default MirrorBreakEffect;
+
+// Ne pas initialiser ici
+// window.mirrorEffect = new MirrorBreakEffect();
