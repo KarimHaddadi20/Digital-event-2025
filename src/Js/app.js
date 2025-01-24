@@ -198,13 +198,13 @@ class MirrorBreakEffect {
         const size = box.getSize(new THREE.Vector3());
 
         const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 400 / maxDim;
+        const scale = 230 / maxDim;
         this.mirror.scale.multiplyScalar(scale);
 
         this.mirror.position.set(
           -center.x * scale,
-          -center.y * scale,
-          -300 // Placer le miroir devant la caméra
+          -center.y * scale + 35,
+          -240 // Placer le miroir devant la caméra
         );
 
         // Appliquer la transparence et les reflets
@@ -292,8 +292,8 @@ class MirrorBreakEffect {
                 fragment.scale.set(1, 1, 1);
                 fragment.rotation.set(0, 0, 0);
                 fragment.position.x = config.position - (rowCount - 1) / 2;
-                fragment.position.y = -config.row - 75;
-                fragment.position.z = -90;
+                fragment.position.y = -config.row - 55;
+                fragment.position.z = -150;
 
                 fragment.visible = false;
                 fragment.userData.index = config.index - 1;
@@ -612,7 +612,7 @@ class MirrorBreakEffect {
         { x: -30, y: -90, z: 8 },
         // Atelier 5
         { x: 0, y: -90, z: 8 },
-        // Atelier 6 (position actuelle)
+        // Atelier 6
         { x: 35, y: -100, z: 5 },
         // Atelier 7
         { x: -30, y: -40, z: 7 },
