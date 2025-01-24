@@ -44,41 +44,6 @@ const fragmentsData = [
         title: "Fusion Organique",
         description: "Mélange harmonieux entre nature et technologie"
     },
-    {
-        id: 5,
-        title: "Résonance Cristalline",
-        description: "Structure complexe reflétant la lumière et l'espace"
-    },
-    {
-        id: 6,
-        title: "Vagues Numériques",
-        description: "Ondulations dynamiques dans l'espace virtuel"
-    },
-    {
-        id: 7,
-        title: "Symétrie Brisée",
-        description: "Exploration des patterns chaotiques et ordonnés"
-    },
-    {
-        id: 8,
-        title: "Confluence",
-        description: "Point de rencontre entre différentes dimensions"
-    },
-    {
-        id: 9,
-        title: "Nébulose Urbaine",
-        description: "Abstraction de la vie citadine moderne"
-    },
-    {
-        id: 10,
-        title: "Métamorphose",
-        description: "Transformation continue de la matière digitale"
-    },
-    {
-        id: 11,
-        title: "Équilibre Parfait",
-        description: "Harmonie entre les forces opposées"
-    }
 ];
 
 
@@ -147,7 +112,7 @@ function createFragments() {
     const texture11 = textureLoader.load('/src/assets/fragment11.svg');
 
     // Création des fragments principaux
-    Array.from({ length: 11 }).forEach((_, i) => {
+    Array.from({ length: 4 }).forEach((_, i) => {
         // Créer le fragment principal
         const geometry = new THREE.PlaneGeometry(6, 6, 50, 50);
         const material = new THREE.MeshPhysicalMaterial({
@@ -160,16 +125,16 @@ function createFragments() {
         });
 
         const fragment = new THREE.Mesh(geometry, material);
-        const isEven = i % 2 === 0;
+        const isEven = i % 8 === 0;
         
         fragment.position.set(
             isEven ? -4 : 4,
             1,
-            i * -22
+            i * -25
         );
 
         // Ajouter les détails pour chaque fragment principal
-        const detailGeometry = new THREE.PlaneGeometry(10, 10, 50, 50);
+        const detailGeometry = new THREE.PlaneGeometry(8, 8, 50, 50);
         
         // Détail 1 (fragment 10)
         const detail1 = new THREE.Mesh(
@@ -180,7 +145,7 @@ function createFragments() {
                 roughness: 0.3,
                 side: THREE.DoubleSide,
                 transparent: true,
-                opacity: 0.5
+                opacity: 0.7
             })
         );
         
@@ -197,6 +162,7 @@ function createFragments() {
             })
         );
 
+        
         // Positionner les détails par rapport au fragment principal
         detail1.position.set(0, 2, -30); // Légèrement derrière le fragment principal
         detail2.position.set(0, -2, -30);
@@ -227,7 +193,6 @@ function createSVGSprites() {
     });
 
     // Reduced number of sprites from 20 to 10
-
 
     for (let i = 0; i < 10; i++) {
         const sprite = new THREE.Sprite(spriteMaterial);
@@ -280,7 +245,7 @@ function setupEventListeners() {
 function onScroll(event) {
     event.preventDefault();
     
-    const scrollSpeed = 0.02;
+    const scrollSpeed =     0.1;
     const minZ = 6;
     const maxZ = -(fragments.length * 20) + minZ;
     const currentZ = camera.position.z;
