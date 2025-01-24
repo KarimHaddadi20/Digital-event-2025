@@ -118,6 +118,25 @@ class FragmentManager {
                     const fragment = gltf.scene;
                     const rowCount = config.row === 3 ? 2 : 3;
 
+                    fragment.traverse((child) => {
+                        if (child.isMesh) {
+                            child.material = new THREE.MeshPhysicalMaterial({
+                                metalness: 1,
+                                roughness: 0,
+                                transmission: 0.1,
+                                thickness: 10,
+                                envMap: this.app.scene.environment,
+                                envMapIntensity: 1.5,
+                                clearcoat: 10,
+                                clearcoatRoughness: 0.06,
+                                transparent: false,
+                                opacity: 0.7,
+                                side: THREE.DoubleSide,
+                                depthWrite: false,
+                            });
+                        }
+                    });
+
                     fragment.scale.set(1, 1, 1);
                     fragment.rotation.set(0, 0, 0);
                     fragment.position.x = config.position - (rowCount - 1) / 2;
@@ -306,18 +325,48 @@ class FragmentManager {
             if (progress < 1) {
                 requestAnimationFrame(animateImmersion);
             } else {
-                this.app.controls.enabled = true;
+                this.app.controls.enabled = false;
                 
-                while(this.app.scene.children.length > 0) { 
-                    this.app.scene.remove(this.app.scene.children[0]); 
-                }
+                this.fragments.forEach(fragment => {
+                    fragment.traverse(child => {
+                        if (child.isMesh) {
+                            if (child.material) {
+                                if (Array.isArray(child.material)) {
+                                    child.material.forEach(mat => mat.dispose());
+                                } else {
+                                    child.material.dispose();
+                                }
+                            }
+                            if (child.geometry) {
+                                child.geometry.dispose();
+                            }
+                        }
+                    });
+                    this.app.scene.remove(fragment);
+                });
                 
-                this.app.isBreaking = false;
+                this.fragments = [];
+                
                 this.isAnimatingFragment = false;
+                this.app.isBreaking = false;
+                this.hoveredFragment = null;
+
+                if (this.textElement && this.textElement.parentNode) {
+                    this.textElement.parentNode.removeChild(this.textElement);
+                }
+
+                window.removeEventListener('mousemove', this.onMouseMove);
+                window.removeEventListener('click', this.handleFragmentClick);
                 
-                const galleryScene = new AtelierGalleryScene();
-                
-                galleryScene.currentFragmentIndex = index;
+                if (typeof this.app.switchToGalleryScene === 'function') {
+                    const fragmentIndex = fragment.userData.index;
+                    
+                    setTimeout(() => {
+                        this.app.switchToGalleryScene(fragmentIndex);
+                    }, 100);
+                } else {
+                    console.warn("La méthode switchToGalleryScene n'est pas définie dans l'app");
+                }
             }
         };
 

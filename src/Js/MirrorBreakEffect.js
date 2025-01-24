@@ -4,32 +4,41 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 import { SceneSetup } from "./SceneSetup.js";
 import { FragmentManager } from "./FragmentManager.js";
+import { AtelierGalleryScene } from "./AtelierGalleryScene.js";
 
-class MirrorBreakEffect {
+class MirrorBreakEffect extends SceneSetup {
     constructor() {
-        this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        
-        // Initialisation des gestionnaires
-        this.sceneSetup = new SceneSetup(this);
-        this.fragmentManager = new FragmentManager(this);
+        // Appeler le constructeur parent avec HDRI activé
+        super(true);
         
         // État
         this.isBreaking = false;
         this.isFragmentSelected = false;
+        this.mirror = null;
         
-        this.init();
+        // Initialisation du gestionnaire de fragments
+        this.fragmentManager = new FragmentManager(this);
+        
+        // Initialiser l'environnement
+        this.setupScene();
     }
 
-    init() {
-        this.sceneSetup.init();
-        this.sceneSetup.setupLights();
-        this.sceneSetup.loadHDRI();
+    setupScene() {
+        // Charger l'environnement et les lumières
+        this.setupLights();
+        this.loadHDRI();
+        
+        // Charger le modèle du miroir
         this.fragmentManager.loadMirrorModel();
-        this.animate();
         
         // Event listeners
+        this.setupEventListeners();
+        
+        // Démarrer l'animation
+        this.animate();
+    }
+
+    setupEventListeners() {
         this.handleClick = this.handleClick.bind(this);
         document.addEventListener("click", this.handleClick);
         window.addEventListener("mousemove", (event) => this.fragmentManager.onMouseMove(event));
@@ -57,6 +66,26 @@ class MirrorBreakEffect {
         this.camera.aspect = window.innerWidth / window.innerHeight;
         this.camera.updateProjectionMatrix();
         this.renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    switchToGalleryScene(fragmentIndex) {
+        // Nettoyer la scène actuelle
+        this.clearScene();
+        
+        // Supprimer les event listeners
+        document.removeEventListener("click", this.handleClick);
+        window.removeEventListener("mousemove", this.fragmentManager.onMouseMove);
+        
+        // Créer et initialiser la nouvelle scène
+        const galleryScene = new AtelierGalleryScene(this, fragmentIndex);
+        
+        // Mettre à jour les références
+        this.currentScene = galleryScene;
+        
+        // Réinitialiser les contrôles
+        this.controls.enabled = true;
+        this.controls.target.set(0, 0, 0);
+        this.controls.update();
     }
 }
 

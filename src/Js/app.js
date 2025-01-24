@@ -650,6 +650,31 @@ class MirrorBreakEffect {
         requestAnimationFrame(animateImmersion);
       } else {
         this.controls.enabled = true;
+        
+        // Nettoyer la scène actuelle
+        while(this.scene.children.length > 0) { 
+            const child = this.scene.children[0];
+            // Disposer proprement des ressources
+            if (child.material) {
+                child.material.dispose();
+            }
+            if (child.geometry) {
+                child.geometry.dispose();
+            }
+            this.scene.remove(child);
+        }
+        
+        this.isBreaking = false;
+        this.isAnimatingFragment = false;
+        
+        // Informer l'app du changement de scène
+        if (typeof this.switchToGalleryScene === 'function') {
+            this.switchToGalleryScene(fragment.userData.index);
+        } else {
+            // Fallback si la méthode n'existe pas
+            const galleryScene = new AtelierGalleryScene();
+            galleryScene.currentFragmentIndex = fragment.userData.index;
+        }
       }
     };
 
@@ -686,6 +711,28 @@ class MirrorBreakEffect {
   // Méthode pour vérifier les collisions
   checkCollision(fragment1, fragment2) {
     return fragment1.boundingBox.intersectsBox(fragment2.boundingBox);
+  }
+
+  switchToGalleryScene(fragmentIndex) {
+    // Nettoyer les événements et les ressources de la scène actuelle
+    if (this.fragmentManager) {
+        // Supprimer les event listeners
+        window.removeEventListener('mousemove', this.fragmentManager.onMouseMove);
+        window.removeEventListener('click', this.fragmentManager.handleFragmentClick);
+    }
+
+    // Initialiser la nouvelle scène
+    const galleryScene = new AtelierGalleryScene(this);
+    galleryScene.currentFragmentIndex = fragmentIndex;
+    
+    // Mettre à jour les références
+    this.currentScene = galleryScene;
+    
+    // Réinitialiser les contrôles si nécessaire
+    if (this.controls) {
+        this.controls.target.set(0, 0, 0);
+        this.controls.update();
+    }
   }
 }
 
