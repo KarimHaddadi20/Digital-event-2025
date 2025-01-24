@@ -390,6 +390,8 @@ class FragmentManager {
     animateImmersion();
   }
 
+  //
+
   onMouseMove(event) {
     if (!this.app.isBreaking || this.isAnimatingFragment) return;
 
