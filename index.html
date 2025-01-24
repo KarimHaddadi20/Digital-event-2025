@@ -13,19 +13,41 @@
             width: 100%;
             height: 100%;
         }
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            z-index: 1000;
+        }
+        .glass-title {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2em;
+            text-transform: uppercase;
+            z-index: 100;
+        }
     </style>
 </head>
 <body>
-    <div id="scene-container"></div>
-
-    <div class="scene-wrapper"></div>
+    <div class="scene-wrapper">
         <div id="scene-container" class="scene-container"></div>
         <h1 class="glass-title">digital event 2025</h1>
     </div>
 
     <div class="loading-screen">Chargement...</div>
 
-    <!-- Importation de Three.js avec les bons chemins -->
+    <!-- Importation de Three.js -->
     <script type="importmap">
     {
         "imports": {
@@ -39,7 +61,7 @@
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     
-    <!-- Votre script -->
-    <script type="module" src="src/Js/app.js"></script>
+    <!-- Application -->
+    <script type="module" src="src/Js/main.js"></script>
 </body>
 </html> 
