@@ -81,22 +81,33 @@ const fragmentsData = [
     }
 ];
 
+
+// Fonction d'initialisation
+
 async function init() {
     const container = document.getElementById('scene-container');
+
+        // Création de la scène et de la caméra
 
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, container.offsetWidth / container.offsetHeight, 0.1, 1000);
     camera.position.z = 8;
+
+        // Création du renderer
 
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
     renderer.setSize(container.offsetWidth, container.offsetHeight);
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
 
+        // Ajout des lumières
+
     const ambient = new THREE.AmbientLight(0xffffff, 0.5);
     const directional = new THREE.DirectionalLight(0xffffff, 1);
     directional.position.set(5, 5, 5);
     scene.add(ambient, directional);
+
+        // Configuration des contrôles de la caméra
 
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enabled = false;
@@ -108,6 +119,9 @@ async function init() {
     labelRenderer.domElement.style.top = '0px';
     labelRenderer.domElement.style.pointerEvents = 'none';
     container.appendChild(labelRenderer.domElement);
+
+
+        // Création des fragments et des sprites SVG
 
     createFragments();
     await loadTexts(); // Make sure texts are loaded after fragments
@@ -124,6 +138,7 @@ async function init() {
 }
 
 
+// Fonction de création des fragments
 
 function createFragments() {
     const textureLoader = new THREE.TextureLoader();
@@ -132,7 +147,7 @@ function createFragments() {
     const texture11 = textureLoader.load('/src/assets/fragment11.svg');
 
     // Création des fragments principaux
-    Array.from({ length: 9 }).forEach((_, i) => {
+    Array.from({ length: 11 }).forEach((_, i) => {
         // Créer le fragment principal
         const geometry = new THREE.PlaneGeometry(6, 6, 50, 50);
         const material = new THREE.MeshPhysicalMaterial({
@@ -183,8 +198,8 @@ function createFragments() {
         );
 
         // Positionner les détails par rapport au fragment principal
-        detail1.position.set(0, 2, -25); // Légèrement derrière le fragment principal
-        detail2.position.set(0, -2, -25);
+        detail1.position.set(0, 2, -30); // Légèrement derrière le fragment principal
+        detail2.position.set(0, -2, -30);
         
         detail1.scale.set(0.5, 0.5, 0.5);
         detail2.scale.set(0.5, 0.5, 0.5);
@@ -198,6 +213,8 @@ function createFragments() {
         scene.add(fragment);
     });
 }
+
+// Fonction de création des sprites SVG
 
 function createSVGSprites() {
     const spriteMap = new THREE.TextureLoader().load('/src/assets/fragment.svg');
@@ -220,6 +237,8 @@ function createSVGSprites() {
     }
 }
 
+// Positionner les sprites
+
 function positionSprite(sprite, initial = false) {
     const side = Math.random() > 0.5 ? 1 : -1;
     const z = initial ? Math.random() * -50 : camera.position.z - 50;
@@ -238,6 +257,10 @@ function positionSprite(sprite, initial = false) {
     sprite.rotation.z = Math.random() * Math.PI * 2;
 }
 
+
+// Configurer les écouteurs d'événements
+
+
 function setupEventListeners() {
     let timeoutId = null;
     window.addEventListener('wheel', (event) => {
@@ -250,6 +273,9 @@ function setupEventListeners() {
     
     window.addEventListener('resize', onResize);
 }
+
+
+// Fonction de gestion du défilement
 
 function onScroll(event) {
     event.preventDefault();
@@ -274,10 +300,14 @@ function onScroll(event) {
                 svgSprites.forEach(sprite => {
                     sprite.material.opacity = THREE.MathUtils.clamp(speed * 20, 0.2, 0.6);
                 });
+                updateFragments(); // Mettre à jour les fragments lors du défilement
             }
         });
+        
     }
 }
+
+// Fonction de gestion du redimensionnement de la fenêtre
 
 function onResize() {
     const container = document.getElementById('scene-container');
@@ -286,6 +316,8 @@ function onResize() {
     renderer.setSize(container.offsetWidth, container.offsetHeight);
     labelRenderer.setSize(container.offsetWidth, container.offsetHeight);
 }
+
+// Fonction d'animation
 
 function animate() {
     requestAnimationFrame(animate);
@@ -305,6 +337,8 @@ function animate() {
     renderer.render(scene, camera);
     labelRenderer.render(scene, camera);
 }
+
+// Mettre à jour les fragments
 
 function updateFragments() {
     fragments.forEach(fragment => {
@@ -334,11 +368,18 @@ function updateFragments() {
         }
         positions.needsUpdate = true;
 
-        // Update label opacity to match fragment
+        // Mettre à jour l'opacité des labels pour correspondre aux fragments
         const label = fragment.children.find(child => child instanceof CSS2DObject);
         if (label) {
             label.element.style.opacity = fragment.material.opacity;
         }
+
+        // Mettre à jour l'opacité des détails pour correspondre aux fragments
+        fragment.children.forEach(child => {
+            if (child instanceof THREE.Mesh) {
+                child.material.opacity = fragment.material.opacity;
+            }
+        });
     });
 }
 
@@ -346,7 +387,7 @@ async function loadTexts() {
     try {
         const response = await fetch('/src/data/texts.json');
         if (!response.ok) {
-            // Use fragmentsData as fallback immediately
+            // Utiliser fragmentsData comme fallback immédiatement
             texts = {
                 fragmentTexts: fragmentsData.map((f, index) => ({
                     id: f.id,
@@ -360,7 +401,7 @@ async function loadTexts() {
         addTextLabels();
     } catch (error) {
         console.error('Error loading texts:', error);
-        // Fallback data
+        // Données de secours
         texts = {
             fragmentTexts: fragmentsData.map((f, index) => ({
                 id: f.id,
@@ -371,6 +412,8 @@ async function loadTexts() {
         addTextLabels();
     }
 }
+
+// Ajouter des labels de texte
 
 function addTextLabels() {
     // Ne parcourir que les fragments principaux (0-8)
@@ -418,6 +461,8 @@ function addTextLabels() {
     });
 }
 
+// Créer un label pour un fragment
+
 function createFragmentLabel(fragment) {
     const labelDiv = document.createElement('div');
     labelDiv.className = 'fragment-label';
@@ -429,6 +474,8 @@ function createFragmentLabel(fragment) {
     return label;
 }
 
+// Mettre à jour les labels des fragments
+
 function updateFragmentLabels() {
     fragments.forEach((fragment, index) => {
         if (fragment) {
@@ -437,5 +484,7 @@ function updateFragmentLabels() {
         }
     });
 }
+
+// Initialiser la scène lorsque le document est prêt
 
 document.addEventListener('DOMContentLoaded', init);
