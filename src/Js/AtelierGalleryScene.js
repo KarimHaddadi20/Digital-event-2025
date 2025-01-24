@@ -16,18 +16,28 @@ export class AtelierGalleryScene extends SceneSetup {
 
         // Charger le fond d'image
         const textureLoader = new THREE.TextureLoader();
-        textureLoader.load('/src/textures/Atelier1.png', (texture) => {
-            const aspectRatio = texture.image.width / texture.image.height;
-            const bgGeometry = new THREE.PlaneGeometry(50 * aspectRatio, 50);
-            const bgMaterial = new THREE.MeshBasicMaterial({ 
-                map: texture,
-                opacity: 0.5,
-                transparent: true
-            });
-            const background = new THREE.Mesh(bgGeometry, bgMaterial);
-            background.position.z = -30;
-            this.scene.add(background);
-        });
+        console.log("Début du chargement de la texture de fond");
+        textureLoader.load('src/textures/Atelier1.png', 
+            (texture) => {
+                console.log("Texture de fond chargée avec succès");
+                const aspectRatio = texture.image.width / texture.image.height;
+                const bgGeometry = new THREE.PlaneGeometry(50 * aspectRatio, 50);
+                const bgMaterial = new THREE.MeshBasicMaterial({ 
+                    map: texture,
+                    opacity: 0.5,
+                    transparent: true
+                });
+                const background = new THREE.Mesh(bgGeometry, bgMaterial);
+                background.position.z = -30;
+                this.scene.add(background);
+            },
+            (xhr) => {
+                console.log("Progression du chargement de la texture de fond:", (xhr.loaded / xhr.total * 100) + '%');
+            },
+            (error) => {
+                console.error("Erreur lors du chargement de la texture de fond:", error);
+            }
+        );
         
         this.fragments = [];
         this.svgSprites = [];
@@ -152,9 +162,34 @@ export class AtelierGalleryScene extends SceneSetup {
 
     createFragments() {
         const textureLoader = new THREE.TextureLoader();
-        const mainTexture = textureLoader.load('/src/textures/Atelier1.png');
-        const texture10 = textureLoader.load('/src/textures/Atelier1.png');
-        const texture11 = textureLoader.load('/src/textures/Atelier1.png');
+        console.log("Début du chargement des textures");
+
+        const mainTexture = textureLoader.load('/src/textures/A1-01.png', 
+            // Callback de succès
+            (texture) => {
+                console.log("Texture principale chargée avec succès:", texture);
+            },
+            // Callback de progression
+            (xhr) => {
+                console.log("Progression du chargement de la texture principale:", (xhr.loaded / xhr.total * 100) + '%');
+            },
+            // Callback d'erreur
+            (error) => {
+                console.error("Erreur lors du chargement de la texture principale:", error);
+            }
+        );
+
+        const texture10 = textureLoader.load('/src/textures/A1-02.png',
+            (texture) => console.log("Texture 10 chargée avec succès"),
+            null,
+            (error) => console.error("Erreur lors du chargement de la texture 10:", error)
+        );
+
+        const texture11 = textureLoader.load('/src/textures/A1-03.png',
+            (texture) => console.log("Texture 11 chargée avec succès"),
+            null,
+            (error) => console.error("Erreur lors du chargement de la texture 11:", error)
+        );
 
         Array.from({ length: 5 }).forEach((_, i) => {
             const geometry = new THREE.PlaneGeometry(6, 6, 50, 50);

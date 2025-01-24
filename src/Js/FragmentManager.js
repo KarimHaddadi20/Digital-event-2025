@@ -282,6 +282,9 @@ class FragmentManager {
             if (progress < 1) {
                 requestAnimationFrame(animateFall);
             } else {
+                setTimeout(() => {
+                    this.app.switchToGalleryScene(this.fragments.indexOf(fragment));
+                }, 500);
                 this.startImmersionAnimation(fragment);
             }
         };
@@ -363,7 +366,7 @@ class FragmentManager {
                     
                     setTimeout(() => {
                         this.app.switchToGalleryScene(fragmentIndex);
-                    }, 100);
+                    }, 5000);
                 } else {
                     console.warn("La méthode switchToGalleryScene n'est pas définie dans l'app");
                 }

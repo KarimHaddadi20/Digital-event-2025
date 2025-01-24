@@ -69,23 +69,76 @@ class MirrorBreakEffect extends SceneSetup {
     }
 
     switchToGalleryScene(fragmentIndex) {
-        // Nettoyer la scène actuelle
-        this.clearScene();
-        
-        // Supprimer les event listeners
-        document.removeEventListener("click", this.handleClick);
-        window.removeEventListener("mousemove", this.fragmentManager.onMouseMove);
-        
-        // Créer et initialiser la nouvelle scène
-        const galleryScene = new AtelierGalleryScene(this, fragmentIndex);
-        
-        // Mettre à jour les références
-        this.currentScene = galleryScene;
-        
-        // Réinitialiser les contrôles
-        this.controls.enabled = true;
-        this.controls.target.set(0, 0, 0);
-        this.controls.update();
+        // Créer un plan noir pour le fade
+        const fadeGeometry = new THREE.PlaneGeometry(100, 100);
+        const fadeMaterial = new THREE.MeshBasicMaterial({
+            color: 0x000000,
+            transparent: true,
+            opacity: 0,
+            side: THREE.DoubleSide,
+            depthTest: false
+        });
+        const fadePlane = new THREE.Mesh(fadeGeometry, fadeMaterial);
+        fadePlane.position.z = this.camera.position.z - 1;
+        fadePlane.renderOrder = 999;
+        this.scene.add(fadePlane);
+
+        // Animation de fade out
+        let fadeOutComplete = false;
+        const fadeOut = () => {
+            if (fadeMaterial.opacity >= 1) {
+                fadeOutComplete = true;
+                
+                // Nettoyer la scène actuelle
+                this.clearScene();
+                
+                // Supprimer les event listeners
+                document.removeEventListener("click", this.handleClick);
+                window.removeEventListener("mousemove", this.fragmentManager.onMouseMove);
+                
+                // Créer et initialiser la nouvelle scène
+                const galleryScene = new AtelierGalleryScene(this, fragmentIndex);
+                
+                // Mettre à jour les références
+                this.currentScene = galleryScene;
+                
+                // Réinitialiser les contrôles
+                this.controls.enabled = true;
+                this.controls.target.set(0, 0, 0);
+                this.controls.update();
+
+                // Créer le fade pour la nouvelle scène
+                const newFadeGeometry = new THREE.PlaneGeometry(100, 100);
+                const newFadeMaterial = new THREE.MeshBasicMaterial({
+                    color: 0x000000,
+                    transparent: true,
+                    opacity: 1,
+                    side: THREE.DoubleSide,
+                    depthTest: false
+                });
+                const newFadePlane = new THREE.Mesh(newFadeGeometry, newFadeMaterial);
+                newFadePlane.position.z = this.camera.position.z - 1;
+                newFadePlane.renderOrder = 999;
+                galleryScene.scene.add(newFadePlane);
+
+                // Animation de fade in
+                const fadeIn = () => {
+                    if (newFadeMaterial.opacity <= 0) {
+                        galleryScene.scene.remove(newFadePlane);
+                        newFadeGeometry.dispose();
+                        newFadeMaterial.dispose();
+                        return;
+                    }
+                    newFadeMaterial.opacity -= 0.02;
+                    requestAnimationFrame(fadeIn);
+                };
+                fadeIn();
+                return;
+            }
+            fadeMaterial.opacity += 0.02;
+            requestAnimationFrame(fadeOut);
+        };
+        fadeOut();
     }
 }
 
