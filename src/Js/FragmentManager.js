@@ -299,17 +299,17 @@ class FragmentManager {
         const index = fragment.userData.index;
 
         const finalPositions = [
-            { x: -30, y: -140, z: 5 },
-            { x: 0, y: -145, z: 5 },
-            { x: 35, y: -145, z: 10 },
-            { x: -30, y: -90, z: 8 },
-            { x: 0, y: -90, z: 8 },
-            { x: 35, y: -100, z: 5 },
-            { x: -30, y: -40, z: 7 },
-            { x: 0, y: -40, z: 7 },
-            { x: 35, y: -45, z: 6 },
-            { x: -20, y: 0, z: 4 },
-            { x: 35, y: 0, z: 4 }
+            { x: -30, y: -140, z: 0 },
+            { x: 0, y: -145, z: 0 },
+            { x: 35, y: -145, z: 0 },
+            { x: -30, y: -90, z: 0 },
+            { x: 0, y: -90, z: 0 },
+            { x: 35, y: -100, z: 0 },
+            { x: -30, y: -40, z: 0 },
+            { x: 0, y: -40, z: 0 },
+            { x: 35, y: -45, z: 0 },
+            { x: -20, y: 0, z: 0 },
+            { x: 35, y: 0, z: 0 }
         ];
 
         const finalPosition = this.app.camera.position.clone();
