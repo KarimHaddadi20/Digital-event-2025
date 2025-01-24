@@ -3,39 +3,51 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 import { SceneSetup } from './SceneSetup.js';
-
+import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 export class AtelierGalleryScene extends SceneSetup {
     constructor(app, fragmentIndex = 0) {
         // Appeler le constructeur parent sans HDRI
         super(false);
         
-        // Réinitialiser complètement l'environnement et l'arrière-plan
-        this.scene.environment = null;
+        // Configuration de la caméra
+        this.camera.position.set(0, 0, 10);
+        this.camera.lookAt(0, 0, 0);
+        
+        // Configuration de base de la scène
         this.scene.background = new THREE.Color(0x000000);
-        this.scene.fog = new THREE.Fog(0x000000, 10, 50);
-
+        
+        // Configurer les lumières en premier
+        this.setupGalleryLights();
+        
+        // Charger le HDRI après les lumières
+        this.loadHDRI();
+        
         // Charger le fond d'image
         const textureLoader = new THREE.TextureLoader();
         console.log("Début du chargement de la texture de fond");
-        textureLoader.load('src/textures/Atelier1.png', 
+        textureLoader.load('./src/textures/Atelier1.png', 
             (texture) => {
                 console.log("Texture de fond chargée avec succès");
                 const aspectRatio = texture.image.width / texture.image.height;
+                console.log("Aspect ratio:", aspectRatio);
                 const bgGeometry = new THREE.PlaneGeometry(50 * aspectRatio, 50);
                 const bgMaterial = new THREE.MeshBasicMaterial({ 
                     map: texture,
                     opacity: 0.5,
-                    transparent: true
+                    transparent: true,
+                    side: THREE.DoubleSide
                 });
                 const background = new THREE.Mesh(bgGeometry, bgMaterial);
                 background.position.z = -30;
                 this.scene.add(background);
+                console.log("Background ajouté à la scène");
             },
             (xhr) => {
                 console.log("Progression du chargement de la texture de fond:", (xhr.loaded / xhr.total * 100) + '%');
             },
             (error) => {
                 console.error("Erreur lors du chargement de la texture de fond:", error);
+                console.error("URL tentée:", './src/textures/Atelier1.png');
             }
         );
         
@@ -110,7 +122,6 @@ export class AtelierGalleryScene extends SceneSetup {
         ];
 
         // Configuration de la scène
-        this.setupGalleryLights();
         this.setupLabelRenderer();
         
         // Créer les éléments de la scène
@@ -130,24 +141,43 @@ export class AtelierGalleryScene extends SceneSetup {
         this.animate();
     }
 
+    loadHDRI() {
+        const rgbeLoader = new RGBELoader();
+        rgbeLoader.load("src/assets/night.hdr", (texture) => {
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            this.scene.background = texture;
+            this.scene.environment = texture;
+        });
+    }
+
     setupGalleryLights() {
-        // Lumière ambiante douce
-        const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+        // Lumière ambiante plus forte pour l'éclairage de base
+        const ambient = new THREE.AmbientLight(0xffffff, 1);
         this.scene.add(ambient);
 
-        // Lumière principale pour l'éclairage général
-        const mainLight = new THREE.DirectionalLight(0xffffff, 0.8);
-        mainLight.position.set(0, 1, 2);
+        // Lumière principale directionnelle plus intense
+        const mainLight = new THREE.DirectionalLight(0xffffff, 2);
+        mainLight.position.set(5, 5, 5);
         this.scene.add(mainLight);
 
-        // Lumière d'accentuation pour les fragments
-        const spotLight = new THREE.SpotLight(0xffffff, 1);
-        spotLight.position.set(0, 5, 0);
-        spotLight.angle = Math.PI / 4;
-        spotLight.penumbra = 0.1;
-        spotLight.decay = 2;
-        spotLight.distance = 200;
+        // Lumière de remplissage pour les ombres
+        const fillLight = new THREE.DirectionalLight(0xffffff, 1);
+        fillLight.position.set(-5, 5, 5);
+        this.scene.add(fillLight);
+
+        // Lumière d'accentuation pour les détails
+        const spotLight = new THREE.SpotLight(0xffffff, 2);
+        spotLight.position.set(0, 10, 10);
+        spotLight.angle = Math.PI / 3;
+        spotLight.penumbra = 0.2;
+        spotLight.decay = 1;
+        spotLight.distance = 100;
         this.scene.add(spotLight);
+
+        // Lumière de contre-jour pour la profondeur
+        const backLight = new THREE.DirectionalLight(0xffffff, 1);
+        backLight.position.set(0, 5, -10);
+        this.scene.add(backLight);
     }
 
     setupLabelRenderer() {
@@ -164,7 +194,7 @@ export class AtelierGalleryScene extends SceneSetup {
         const textureLoader = new THREE.TextureLoader();
         console.log("Début du chargement des textures");
 
-        const mainTexture = textureLoader.load('/src/textures/A1-01.png', 
+        const mainTexture = textureLoader.load('./src/textures/A1-01.png',     
             // Callback de succès
             (texture) => {
                 console.log("Texture principale chargée avec succès:", texture);
@@ -176,27 +206,39 @@ export class AtelierGalleryScene extends SceneSetup {
             // Callback d'erreur
             (error) => {
                 console.error("Erreur lors du chargement de la texture principale:", error);
+                console.error("URL tentée:", './src/textures/A1-01.png');
             }
         );
 
-        const texture10 = textureLoader.load('/src/textures/A1-02.png',
+        const texture10 = textureLoader.load('./src/textures/A1-02.png',
             (texture) => console.log("Texture 10 chargée avec succès"),
             null,
-            (error) => console.error("Erreur lors du chargement de la texture 10:", error)
+            (error) => {
+                console.error("Erreur lors du chargement de la texture 10:", error);
+                console.error("URL tentée:", './src/textures/A1-02.png');
+            }
         );
 
-        const texture11 = textureLoader.load('/src/textures/A1-03.png',
+        const texture11 = textureLoader.load('./src/textures/A1-03.png',
             (texture) => console.log("Texture 11 chargée avec succès"),
             null,
-            (error) => console.error("Erreur lors du chargement de la texture 11:", error)
+            (error) => {
+                console.error("Erreur lors du chargement de la texture 11:", error);
+                console.error("URL tentée:", './src/textures/A1-03.png');
+            }
         );
 
+        this.createFragmentsWithTextures(mainTexture, texture10, texture11);
+    }
+
+    createFragmentsWithTextures(mainTexture, texture10, texture11) {
+        console.log("Création des fragments avec les textures");
         Array.from({ length: 5 }).forEach((_, i) => {
             const geometry = new THREE.PlaneGeometry(6, 6, 50, 50);
-            const material = new THREE.MeshPhysicalMaterial({
+            const material = new THREE.MeshStandardMaterial({
                 map: mainTexture,
-                metalness: 0.5,
-                roughness: 0.3,
+                metalness: 0.1,  // Réduit pour mieux voir les textures
+                roughness: 0.8,  // Augmenté pour mieux réagir à la lumière
                 side: THREE.DoubleSide,
                 transparent: true,
                 opacity: 1
@@ -215,7 +257,7 @@ export class AtelierGalleryScene extends SceneSetup {
             
             const detail1 = new THREE.Mesh(
                 detailGeometry,
-                new THREE.MeshPhysicalMaterial({
+                new THREE.MeshStandardMaterial({
                     map: texture10,
                     metalness: 0.5,
                     roughness: 0.3,
@@ -227,7 +269,7 @@ export class AtelierGalleryScene extends SceneSetup {
             
             const detail2 = new THREE.Mesh(
                 detailGeometry,
-                new THREE.MeshPhysicalMaterial({
+                new THREE.MeshStandardMaterial({
                     map: texture11,
                     metalness: 0.5,
                     roughness: 0.3,
