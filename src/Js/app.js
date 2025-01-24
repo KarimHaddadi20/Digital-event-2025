@@ -91,6 +91,25 @@ class MirrorBreakEffect {
 
     // Ajouter une référence à la boîte d'info
     this.infoBox = document.querySelector('.fragment-info-box');
+
+    // Ajouter un chargeur de textures
+    this.textureLoader = new THREE.TextureLoader();
+    
+    // Charger les données JSON
+    this.loadAteliersData();
+  }
+
+  async loadAteliersData() {
+    try {
+        const response = await fetch('/src/json/data.json');
+        const data = await response.json();
+        this.ateliersData = data.ateliers;
+        
+        // Mettre à jour les noms des ateliers avec les données du JSON
+        this.atelierNames = this.ateliersData.map(atelier => atelier.name);
+    } catch (error) {
+        console.error('Erreur lors du chargement des données:', error);
+    }
   }
 
   init() {
@@ -264,6 +283,39 @@ class MirrorBreakEffect {
             (gltf) => {
                 const fragment = gltf.scene;
                 
+                // Ajouter les données de l'atelier au fragment
+                const atelierData = this.ateliersData?.[config.index - 1];
+                if (atelierData) {
+                    fragment.userData.atelierName = atelierData.name;
+                    fragment.userData.description = atelierData.description;
+                    
+                    // Charger l'image de l'atelier comme texture
+                    if (atelierData.team) {
+                        this.textureLoader.load(
+                            `src/assets/${atelierData.team}`,
+                            (texture) => {
+                                // Créer un matériau avec la texture
+                                const material = new THREE.MeshBasicMaterial({
+                                    map: texture,
+                                    transparent: true,
+                                    opacity: 0.8
+                                });
+
+                                // Créer un plan pour afficher l'image
+                                const imageGeometry = new THREE.PlaneGeometry(5, 5 * (texture.image.height / texture.image.width));
+                                const imageMesh = new THREE.Mesh(imageGeometry, material);
+                                
+                                // Positionner l'image près du fragment
+                                imageMesh.position.set(0, 2, 0);
+                                imageMesh.visible = false; // Cacher initialement
+                                
+                                fragment.userData.imageMesh = imageMesh;
+                                fragment.add(imageMesh);
+                            }
+                        );
+                    }
+                }
+
                 // Debug pour le fragment 1
                 if (config.index === 1) {
                     console.log("Fragment 1 chargé:", {
@@ -396,25 +448,36 @@ class MirrorBreakEffect {
             if (this.hoveredFragment !== fragmentObject) {
                 if (this.hoveredFragment) {
                     this.resetFragmentPosition(this.hoveredFragment);
+                    // Cacher l'image du fragment précédent
+                    if (this.hoveredFragment.userData.imageMesh) {
+                        this.hoveredFragment.userData.imageMesh.visible = false;
+                    }
                 }
 
                 this.hoveredFragment = fragmentObject;
                 this.moveFragmentForward(this.hoveredFragment);
 
-                // Mettre à jour uniquement la boîte d'info
+                // Afficher l'image du fragment survolé
+                if (this.hoveredFragment.userData.imageMesh) {
+                    this.hoveredFragment.userData.imageMesh.visible = true;
+                }
+
+                // Mettre à jour la boîte d'info
                 if (this.infoBox) {
                     this.infoBox.querySelector('h3').textContent = fragmentObject.userData.atelierName;
-                    this.infoBox.querySelector('p').textContent = "Cliquez pour en savoir plus";
+                    this.infoBox.querySelector('p').textContent = fragmentObject.userData.description;
                     this.infoBox.classList.add('visible');
                 }
             }
         }
     } else {
         if (this.hoveredFragment) {
+            // Cacher l'image quand on ne survole plus le fragment
+            if (this.hoveredFragment.userData.imageMesh) {
+                this.hoveredFragment.userData.imageMesh.visible = false;
+            }
             this.resetFragmentPosition(this.hoveredFragment);
             this.hoveredFragment = null;
-
-            // Cacher la boîte d'info
             if (this.infoBox) {
                 this.infoBox.classList.remove('visible');
             }
