@@ -131,47 +131,9 @@ function createFragments() {
     const texture10 = textureLoader.load('/src/assets/fragment10.svg');
     const texture11 = textureLoader.load('/src/assets/fragment11.svg');
 
-    // Créer d'abord les fragments de détail (en arrière-plan)
-    const detailGeometry = new THREE.PlaneGeometry(10, 10, 50, 50);
-    
-    // Premier détail (fragment 10)
-    const detail1 = new THREE.Mesh(
-        detailGeometry,
-        new THREE.MeshPhysicalMaterial({
-            map: texture10,
-            metalness: 0.5,
-            roughness: 0.3,
-            side: THREE.DoubleSide,
-            transparent: true,
-            opacity: 0.5
-        })
-    );
-    
-    // Second détail (fragment 11)
-    const detail2 = new THREE.Mesh(
-        detailGeometry,
-        new THREE.MeshPhysicalMaterial({
-            map: texture11,
-            metalness: 0.5,
-            roughness: 0.3,
-            side: THREE.DoubleSide,
-            transparent: true,
-            opacity: 0.7
-        })
-    );
-
-    // Position fixe en arrière-plan
-    detail1.position.set(8, 3, -18);
-    detail2.position.set(8, -3, -10);
-    
-    detail1.scale.set(0.5, 0.5, 0.5);
-    detail2.scale.set(0.5, 0.5, 0.5);
-    
-    scene.add(detail1);
-    scene.add(detail2);
-
     // Création des fragments principaux
     Array.from({ length: 9 }).forEach((_, i) => {
+        // Créer le fragment principal
         const geometry = new THREE.PlaneGeometry(6, 6, 50, 50);
         const material = new THREE.MeshPhysicalMaterial({
             map: mainTexture,
@@ -190,6 +152,46 @@ function createFragments() {
             1,
             i * -22
         );
+
+        // Ajouter les détails pour chaque fragment principal
+        const detailGeometry = new THREE.PlaneGeometry(10, 10, 50, 50);
+        
+        // Détail 1 (fragment 10)
+        const detail1 = new THREE.Mesh(
+            detailGeometry,
+            new THREE.MeshPhysicalMaterial({
+                map: texture10,
+                metalness: 0.5,
+                roughness: 0.3,
+                side: THREE.DoubleSide,
+                transparent: true,
+                opacity: 0.5
+            })
+        );
+        
+        // Détail 2 (fragment 11)
+        const detail2 = new THREE.Mesh(
+            detailGeometry,
+            new THREE.MeshPhysicalMaterial({
+                map: texture11,
+                metalness: 0.5,
+                roughness: 0.3,
+                side: THREE.DoubleSide,
+                transparent: true,
+                opacity: 0.7
+            })
+        );
+
+        // Positionner les détails par rapport au fragment principal
+        detail1.position.set(0, 2, -25); // Légèrement derrière le fragment principal
+        detail2.position.set(0, -2, -25);
+        
+        detail1.scale.set(0.5, 0.5, 0.5);
+        detail2.scale.set(0.5, 0.5, 0.5);
+        
+        // Ajouter les détails comme enfants du fragment principal
+        fragment.add(detail1);
+        fragment.add(detail2);
 
         fragment.userData.id = fragmentsData[i].id;
         fragments.push(fragment);
