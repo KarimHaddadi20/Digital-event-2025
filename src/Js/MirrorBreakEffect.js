@@ -31,7 +31,6 @@ class MirrorBreakEffect extends SceneSetup {
         
         // Charger l'environnement et les lumières
         this.setupLights();
-        this.setupBackground();
         // this.loadHDRI().then(() => {
         //     hdriLoaded = true;
         //     if (modelLoaded && this.onReady) {
@@ -45,6 +44,7 @@ class MirrorBreakEffect extends SceneSetup {
         //         }, 1000);
         //     }
         // });
+        this.setupBackground();
         // this.loadHDRI().then(() => {
         //     hdriLoaded = true;
         //     if (modelLoaded && this.onReady) {
