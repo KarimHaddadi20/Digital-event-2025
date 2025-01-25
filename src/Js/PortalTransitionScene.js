@@ -34,18 +34,11 @@ export class PortalTransitionScene extends SceneSetup {
         this.renderer.setClearColor(0x000000);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         
-        // Supprimer l'ancien renderer et les éléments CSS2D
+        // Supprimer l'ancien renderer s'il existe
         const container = document.getElementById("scene-container");
         while (container.firstChild) {
             container.removeChild(container.firstChild);
         }
-        
-        // Supprimer spécifiquement les éléments CSS2D
-        const css2dElements = document.querySelectorAll('.css2d-label');
-        css2dElements.forEach(element => {
-            element.remove();
-        });
-        
         container.appendChild(this.renderer.domElement);
         
         // Désactiver les contrôles pour cette scène
@@ -59,8 +52,7 @@ export class PortalTransitionScene extends SceneSetup {
         // Créer les fragments qui défilent
         this.createScrollingFragments();
 
-        // Créer le texte central
-        this.createCenterText();
+
         
         console.log('Configuration initiale terminée');
         console.log('Nombre de fragments:', this.fragments.length);
@@ -156,49 +148,8 @@ export class PortalTransitionScene extends SceneSetup {
             this.scene.add(fragment);
         }
 
-        // Ajouter un helper pour voir les axes
-        const axesHelper = new THREE.AxesHelper(5);
-        this.scene.add(axesHelper);
-
         console.log('Nombre total de fragments créés:', this.fragments.length);
         console.log('Objets dans la scène après création des fragments:', this.scene.children.length);
-    }
-
-    createCenterText() {
-        // Créer un texte HTML pour un résultat immédiat
-        const textContainer = document.createElement('div');
-        textContainer.style.position = 'fixed';
-        textContainer.style.top = '50%';
-        textContainer.style.left = '50%';
-        textContainer.style.transform = 'translate(-50%, -50%)';
-        textContainer.style.color = '#ffffff';
-        textContainer.style.fontSize = '48px';
-        textContainer.style.fontFamily = 'Arial, sans-serif';
-        textContainer.style.textAlign = 'center';
-        textContainer.style.textShadow = '0 0 10px #00ffff, 0 0 20px #0000ff';
-        textContainer.style.zIndex = '1000';
-        textContainer.style.pointerEvents = 'none';
-        textContainer.style.opacity = '0';
-        textContainer.innerHTML = 'Transition vers<br>une nouvelle dimension';
-        document.body.appendChild(textContainer);
-
-        // Animation d'apparition
-        setTimeout(() => {
-            textContainer.style.transition = 'opacity 1s ease-in-out';
-            textContainer.style.opacity = '1';
-        }, 100);
-
-        // Stocker la référence pour pouvoir le supprimer plus tard
-        this.textElement = textContainer;
-
-        // Animation du texte
-        const animate = () => {
-            const scale = 1 + Math.sin(this.time * 2) * 0.1;
-            textContainer.style.transform = `translate(-50%, -50%) scale(${scale})`;
-        };
-
-        // Ajouter l'animation à la boucle d'animation principale
-        this.textAnimation = animate;
     }
 
     // Surcharger la méthode clearScene pour nettoyer le texte

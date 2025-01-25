@@ -294,9 +294,6 @@ class FragmentManager {
       if (progress < 1) {
         requestAnimationFrame(animateFall);
       } else {
-        setTimeout(() => {
-          this.app.switchToGalleryScene(this.fragments.indexOf(fragment));
-        }, 500);
         this.startImmersionAnimation(fragment);
       }
     };
@@ -361,7 +358,6 @@ class FragmentManager {
         });
 
         this.fragments = [];
-
         this.isAnimatingFragment = false;
         this.app.isBreaking = false;
         this.hoveredFragment = null;
@@ -375,14 +371,7 @@ class FragmentManager {
 
         if (typeof this.app.switchToGalleryScene === "function") {
           const fragmentIndex = fragment.userData.index;
-
-          setTimeout(() => {
-            this.app.switchToGalleryScene(fragmentIndex);
-          }, 5000);
-        } else {
-          console.warn(
-            "La méthode switchToGalleryScene n'est pas définie dans l'app"
-          );
+          this.app.switchToGalleryScene(fragmentIndex);
         }
       }
     };
