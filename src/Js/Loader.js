@@ -80,7 +80,7 @@ class Loader {
 
             gsap.to(progress, {
                 value: 1,
-                duration: 3,
+                duration: 1.5,
                 onUpdate: () => {
                     const currentPercent = Math.round(progress.value * 100);
                     percentageElement.textContent = `${currentPercent}%`;
@@ -110,7 +110,7 @@ class Loader {
                         const { MirrorBreakEffect } = await import('./MirrorBreakEffect.js');
                         const mirrorEffect = new MirrorBreakEffect();
                         
-                        // Timeout de sécurité de 10 secondes
+                        // Timeout de sécurité de 3 secondes
                         const timeout = setTimeout(() => {
                             document.getElementById('loading-container').remove();
                             document.getElementById('main-content').style.display = 'block';
@@ -118,7 +118,7 @@ class Loader {
                             document.querySelector('.footer').style.display = 'block';
                             window.mirrorEffect = mirrorEffect;
                             resolve();
-                        }, 10000);
+                        }, 3000);
                         
                         // Une fois que la scène est prête
                         mirrorEffect.onReady = () => {

@@ -28,13 +28,13 @@ class FragmentManager {
   setupUI() {
     this.textElement = document.createElement("div");
     this.textElement.style.position = "fixed";
-    this.textElement.style.right = "50px";
-    this.textElement.style.top = "50%";
-    this.textElement.style.transform = "translateY(-50%)";
+    this.textElement.style.left = "50%";
+    this.textElement.style.bottom = "20vh";
+    this.textElement.style.transform = "translateX(-50%)";
     this.textElement.style.color = "white";
-    this.textElement.style.padding = "20px";
+    this.textElement.style.padding = "12px 20px";
     this.textElement.style.background = "rgba(0, 0, 0, 0.7)";
-    this.textElement.style.borderRadius = "10px";
+    this.textElement.style.borderRadius = "20px";
     this.textElement.style.display = "none";
     this.textElement.style.fontSize = "24px";
     this.textElement.style.fontFamily = "Arial, sans-serif";

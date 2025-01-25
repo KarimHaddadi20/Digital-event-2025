@@ -231,6 +231,21 @@ class SceneSetup {
         const loadingContainer = document.createElement('div');
         loadingContainer.id = 'loading-container';
         
+        // Ajouter le titre
+        const loadingTitle = document.createElement('div');
+        loadingTitle.className = 'loading-title';
+        const titleSpan1 = document.createElement('span');
+        titleSpan1.className = 'font-aktiv';
+        titleSpan1.textContent = 'Digital Event';
+        const titleSpan2 = document.createElement('span');
+        titleSpan2.className = 'font-fraunces';
+        titleSpan2.textContent = 'Edition 2025';
+        loadingTitle.appendChild(titleSpan1);
+        loadingTitle.appendChild(document.createTextNode(' '));
+        loadingTitle.appendChild(titleSpan2);
+        loadingContainer.appendChild(loadingTitle);
+        
+        // Ajouter les éléments de pourcentage
         const percentage = document.createElement('div');
         percentage.id = 'percentage';
         loadingContainer.appendChild(percentage);
@@ -238,6 +253,23 @@ class SceneSetup {
         const mirrorPercentage = document.createElement('div');
         mirrorPercentage.id = 'mirror-percentage';
         loadingContainer.appendChild(mirrorPercentage);
+        
+        // Ajouter le footer du loader
+        const loaderFooter = document.createElement('div');
+        loaderFooter.className = 'loader-footer';
+        
+        const footerImg = document.createElement('img');
+        footerImg.src = 'src/assets/icons/esd_logo_NoTexte_Jade 1.svg';
+        footerImg.alt = 'esd icon';
+        footerImg.width = 40;
+        footerImg.height = 40;
+        
+        const footerText = document.createElement('p');
+        footerText.textContent = 'Ecole Supérieure du Digital';
+        
+        loaderFooter.appendChild(footerImg);
+        loaderFooter.appendChild(footerText);
+        loadingContainer.appendChild(loaderFooter);
         
         document.body.appendChild(loadingContainer);
         
