@@ -14,6 +14,8 @@ export class PortalTransitionScene extends SceneSetup {
         this.fragments = [];
         this.time = 0;
         this.lastLogTime = 0;
+        this.originalFragmentPosition = null;
+        this.isReturning = false;
         
         
         // Configuration de la caméra
@@ -48,8 +50,28 @@ export class PortalTransitionScene extends SceneSetup {
         // Configurer les lumières
         this.setupCustomLights();
         
+        // Créer le plan de fade
+        const fadeGeometry = new THREE.PlaneGeometry(100, 100);
+        const fadeMaterial = new THREE.MeshBasicMaterial({
+            color: 0x000000,
+            transparent: true,
+            opacity: 1,
+            side: THREE.DoubleSide,
+            depthTest: false
+        });
+        this.fadePlane = new THREE.Mesh(fadeGeometry, fadeMaterial);
+        this.fadePlane.position.z = this.camera.position.z - 1;
+        this.fadePlane.renderOrder = 999;
+        this.scene.add(this.fadePlane);
+        
         // Créer les fragments qui défilent
         this.createScrollingFragments();
+        
+        // Ajouter l'écouteur pour le bouton retour
+        const backButton = document.getElementById('back-button');
+        if (backButton) {
+            backButton.addEventListener('click', () => this.handleReturn());
+        }
         
         // Démarrer l'animation
         this.animate();
@@ -98,52 +120,52 @@ export class PortalTransitionScene extends SceneSetup {
             mainFragment.position.set(0, 0, -10);
             this.scene.add(mainFragment);
             this.fragments.push(mainFragment);
+
+            // Créer les fragments décoratifs
+            const decorativeGeometry = new THREE.IcosahedronGeometry(1, 0);
+            const decorativeMaterial = new THREE.MeshPhongMaterial({
+                color: 0x7c4dff,
+                emissive: 0x2a0096,
+                shininess: 100,
+                transparent: true,
+                opacity: 1,
+                side: THREE.DoubleSide
+            });
+
+            // Créer plusieurs fragments avec des positions aléatoires
+            for (let i = 0; i < 50; i++) {
+                const fragment = new THREE.Mesh(decorativeGeometry, decorativeMaterial.clone());
+                
+                // Position aléatoire dans un volume cylindrique
+                const radius = Math.random() * 10 + 5;
+                const angle = Math.random() * Math.PI * 2;
+                const zPos = Math.random() * 100 - 50;
+                
+                fragment.position.set(
+                    Math.cos(angle) * radius,
+                    Math.sin(angle) * radius,
+                    zPos
+                );
+                
+                fragment.rotation.set(
+                    Math.random() * Math.PI,
+                    Math.random() * Math.PI,
+                    Math.random() * Math.PI
+                );
+                
+                fragment.scale.set(
+                    Math.random() * 0.5 + 0.5,
+                    Math.random() * 0.5 + 0.5,
+                    Math.random() * 0.5 + 0.5
+                );
+                
+                this.fragments.push(fragment);
+                this.scene.add(fragment);
+            }
+
+            // Démarrer le fade in une fois que tout est chargé
+            this.startFadeIn();
         });
-
-        // Créer les fragments décoratifs
-        const fragmentGeometry = new THREE.IcosahedronGeometry(1, 0);
-        const fragmentMaterial = new THREE.MeshPhongMaterial({
-            color: 0x7c4dff,
-            emissive: 0x2a0096,
-            shininess: 100,
-            transparent: true,
-            opacity: 1,
-            side: THREE.DoubleSide
-        });
-
-
-        // Créer plusieurs fragments avec des positions aléatoires
-        for (let i = 0; i < 50; i++) {
-            const fragment = new THREE.Mesh(fragmentGeometry, fragmentMaterial.clone());
-            
-            // Position aléatoire dans un volume cylindrique
-            const radius = Math.random() * 10 + 5;
-            const angle = Math.random() * Math.PI * 2;
-            const zPos = Math.random() * 100 - 50;
-            
-            fragment.position.set(
-                Math.cos(angle) * radius,
-                Math.sin(angle) * radius,
-                zPos
-            );
-            
-            fragment.rotation.set(
-                Math.random() * Math.PI,
-                Math.random() * Math.PI,
-                Math.random() * Math.PI
-            );
-            
-            fragment.scale.set(
-                Math.random() * 0.5 + 0.5,
-                Math.random() * 0.5 + 0.5,
-                Math.random() * 0.5 + 0.5
-            );
-            
-            this.fragments.push(fragment);
-            this.scene.add(fragment);
-        }
-
-
     }
 
     // Surcharger la méthode clearScene pour nettoyer le texte
@@ -173,37 +195,28 @@ export class PortalTransitionScene extends SceneSetup {
     animate() {
         requestAnimationFrame(() => this.animate());
         
-        this.time += 0.01;
-        
-        // Animer les fragments
-        this.fragments.forEach((fragment, index) => {
-            if (!fragment.material) {
-                console.error('Fragment sans matériau détecté:', fragment);
-                return;
-            }
+        if (!this.isReturning) {
+            this.time += 0.01;
             
-            // Mouvement en spirale
-            const speed = 0.02;
-            const radius = 5 + Math.sin(this.time + index) * 2;
-            const angle = this.time * speed + index * (Math.PI * 2 / this.fragments.length);
-            
-            fragment.position.x = Math.cos(angle) * radius;
-            fragment.position.y = Math.sin(angle) * radius;
-            fragment.position.z += 0.1;
-            
-            // Rotation continue
-            fragment.rotation.x += 0.01;
-            fragment.rotation.y += 0.01;
-            
-            // Réinitialiser la position Z quand le fragment est trop loin
-            if (fragment.position.z > 50) {
-                fragment.position.z = -50;
-            }
-        });
-
-        // Animer le texte
-        if (this.textAnimation) {
-            this.textAnimation();
+            // Animation normale des fragments
+            this.fragments.forEach((fragment, index) => {
+                if (!fragment.material) return;
+                
+                const speed = 0.02;
+                const radius = 5 + Math.sin(this.time + index) * 2;
+                const angle = this.time * speed + index * (Math.PI * 2 / this.fragments.length);
+                
+                fragment.position.x = Math.cos(angle) * radius;
+                fragment.position.y = Math.sin(angle) * radius;
+                fragment.position.z += 0.1;
+                
+                fragment.rotation.x += 0.01;
+                fragment.rotation.y += 0.01;
+                
+                if (fragment.position.z > 50) {
+                    fragment.position.z = -50;
+                }
+            });
         }
         
         // Rendu de la scène
@@ -216,5 +229,72 @@ export class PortalTransitionScene extends SceneSetup {
                 camera: !!this.camera
             });
         }
+    }
+
+    startFadeIn() {
+        const fadeIn = () => {
+            if (this.fadePlane.material.opacity <= 0) {
+                // Fade in terminé, nettoyer le plan de fade
+                this.fadePlane.geometry.dispose();
+                this.fadePlane.material.dispose();
+                this.scene.remove(this.fadePlane);
+                return;
+            }
+            
+            this.fadePlane.material.opacity -= 0.02;
+            requestAnimationFrame(fadeIn);
+        };
+        
+        fadeIn();
+    }
+
+    handleReturn() {
+        if (this.isReturning) return;
+        this.isReturning = true;
+
+        // Créer un plan noir pour le fade out
+        const fadeGeometry = new THREE.PlaneGeometry(100, 100);
+        const fadeMaterial = new THREE.MeshBasicMaterial({
+            color: 0x000000,
+            transparent: true,
+            opacity: 0,
+            side: THREE.DoubleSide,
+            depthTest: false
+        });
+        const fadePlane = new THREE.Mesh(fadeGeometry, fadeMaterial);
+        fadePlane.position.z = this.camera.position.z - 1;
+        fadePlane.renderOrder = 999;
+        this.scene.add(fadePlane);
+
+        // Animation de fade out
+        const fadeOut = () => {
+            if (fadeMaterial.opacity >= 1) {
+                // Nettoyer la scène actuelle
+                this.clearScene();
+                
+                // Supprimer tous les éléments CSS2D
+                const css2dElements = document.querySelectorAll('.css2d-label');
+                css2dElements.forEach(element => element.remove());
+                
+                // Supprimer le renderer actuel
+                const container = document.getElementById("scene-container");
+                while (container.firstChild) {
+                    container.removeChild(container.firstChild);
+                }
+                
+                // Recréer la scène initiale via l'app
+                if (this.app && typeof this.app.recreateInitialScene === 'function') {
+                    this.app.recreateInitialScene();
+                } else {
+                    console.error('Impossible de recréer la scène initiale');
+                }
+                return;
+            }
+            
+            fadeMaterial.opacity += 0.02;
+            requestAnimationFrame(fadeOut);
+        };
+
+        fadeOut();
     }
 } 

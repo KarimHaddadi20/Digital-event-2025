@@ -417,3 +417,13 @@ html, body {
     margin: 0;
     opacity: 0.6;
 } 
+
+.back-button:hover {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+    filter: brightness(2.5);
+}
+
+.back-button {
+    opacity: 0.5;
+}

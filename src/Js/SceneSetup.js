@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
+import { MirrorBreakEffect } from "./MirrorBreakEffect.js";
 
 class SceneSetup {
     constructor(useHDRI = true) {
@@ -210,6 +211,44 @@ class SceneSetup {
             fadePlane.material.dispose();
             this.scene.remove(fadePlane);
         }
+    }
+
+    recreateInitialScene() {
+        console.log('Recréation de la scène initiale...');
+        
+        // Nettoyer la scène actuelle et le container
+        this.clearScene();
+        const container = document.getElementById("scene-container");
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+        
+        // Réinitialiser le renderer
+        this.renderer = new THREE.WebGLRenderer({ antialias: true });
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        this.renderer.toneMappingExposure = 1;
+        container.appendChild(this.renderer.domElement);
+        
+        // Réinitialiser la scène et la caméra
+        this.scene = new THREE.Scene();
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        this.camera.position.set(0, 0, 5);
+        
+        // Réinitialiser les contrôles
+        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+        
+        // Réinitialiser les états si ils existent
+        if (this.isBreaking !== undefined) this.isBreaking = false;
+        if (this.isFragmentSelected !== undefined) this.isFragmentSelected = false;
+        
+        // Réinitialiser le fragment manager si il existe
+        if (typeof this.setupScene === 'function') {
+            this.setupScene();
+        }
+        
+        console.log('Position de la caméra:', this.camera.position);
     }
 }
 
