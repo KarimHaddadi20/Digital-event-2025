@@ -40,9 +40,9 @@ class SceneSetup {
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.controls.enableDamping = true;
         this.controls.dampingFactor = 0.05;
-        this.controls.enableZoom = true;
+        this.controls.enableZoom = false;
         this.controls.enablePan = true;
-        this.controls.enableRotate = true;
+        this.controls.enableRotate = false;
 
         this.controls.minDistance = 50;
         this.controls.maxDistance = 200;

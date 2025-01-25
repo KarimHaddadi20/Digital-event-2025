@@ -118,7 +118,7 @@ class Loader {
                             document.querySelector('.footer').style.display = 'block';
                             window.mirrorEffect = mirrorEffect;
                             resolve();
-                        }, 3000);
+                        }, 1000);
                         
                         // Une fois que la scène est prête
                         mirrorEffect.onReady = () => {
