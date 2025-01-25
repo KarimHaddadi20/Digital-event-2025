@@ -1,6 +1,5 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { AtelierGalleryScene } from "./AtelierGalleryScene.js";
 
 class FragmentManager {
   constructor(app) {
@@ -354,7 +353,6 @@ class FragmentManager {
               }
             }
           });
-          this.app.scene.remove(fragment);
         });
 
         this.fragments = [];

@@ -102,6 +102,24 @@ export class PortalTransitionScene extends SceneSetup {
     }
 
     createScrollingFragments() {
+        // Créer le fragment principal avec la texture A1-01
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.load('src/textures/A1-01.png', (texture) => {
+            const fragmentGeometry = new THREE.PlaneGeometry(4, 4);
+            const fragmentMaterial = new THREE.MeshPhongMaterial({
+                map: texture,
+                transparent: true,
+                opacity: 1,
+                side: THREE.DoubleSide
+            });
+
+            const mainFragment = new THREE.Mesh(fragmentGeometry, fragmentMaterial);
+            mainFragment.position.set(0, 0, -10);
+            this.scene.add(mainFragment);
+            this.fragments.push(mainFragment);
+        });
+
+        // Créer les fragments décoratifs
         const fragmentGeometry = new THREE.IcosahedronGeometry(1, 0);
         const fragmentMaterial = new THREE.MeshPhongMaterial({
             color: 0x7c4dff,
@@ -140,9 +158,6 @@ export class PortalTransitionScene extends SceneSetup {
                 Math.random() * 0.5 + 0.5,
                 Math.random() * 0.5 + 0.5
             );
-
-            console.log(`Fragment ${i} créé à la position:`, fragment.position);
-            console.log(`Fragment ${i} matériau:`, fragment.material);
             
             this.fragments.push(fragment);
             this.scene.add(fragment);

@@ -94,9 +94,6 @@ class SceneSetup {
         
         // Sauvegarder l'état actuel
         const savedState = {
-            environment: this.scene.environment,
-            background: this.scene.background,
-            fog: this.scene.fog,
             lights: [],
             preservedObjects: []
         };
@@ -117,10 +114,10 @@ class SceneSetup {
             this.scene.remove(child);
         }
 
-        // Restaurer l'état
-        this.scene.environment = savedState.environment;
-        this.scene.background = savedState.background;
-        this.scene.fog = savedState.fog;
+        // Nettoyer l'environment et le background
+        this.scene.environment = null;
+        this.scene.background = null;
+        this.scene.fog = null;
 
         // Restaurer les lumières
         savedState.lights.forEach(light => {
@@ -139,12 +136,6 @@ class SceneSetup {
     // Méthode pour gérer la transition entre les scènes
     switchToGalleryScene(createNextScene, createTransitionScene = null) {
         console.log('Début de la transition vers une nouvelle scène');
-        console.log('État actuel de la scène:', {
-            environment: this.scene.environment ? 'Présent' : 'Absent',
-            background: this.scene.background ? 'Présent' : 'Absent',
-            nombreObjets: this.scene.children.length,
-            type: this.constructor.name
-        });
         
         // Créer le plan de transition
         const fadeGeometry = new THREE.PlaneGeometry(100, 100);
@@ -161,68 +152,46 @@ class SceneSetup {
         this.scene.add(fadePlane);
 
         let transitionScene = null;
+        let fadeOutComplete = false;
 
         // Fonction pour le fade out
         const fadeOut = () => {
-            if (fadeMaterial.opacity >= 1) {
-                console.log('Fade out terminé');
-                console.log('État avant nettoyage:', {
-                    environment: this.scene.environment ? 'Présent' : 'Absent',
-                    background: this.scene.background ? 'Présent' : 'Absent',
-                    nombreObjets: this.scene.children.length
-                });
+            if (!fadeOutComplete) {
+                fadeMaterial.opacity += 0.02;
                 
-                // Nettoyer la scène actuelle en préservant le plan de transition
-                this.clearScene([fadePlane]);
-                
-                if (createTransitionScene) {
-                    console.log('Création de la scène de transition');
-                    transitionScene = createTransitionScene();
-                    console.log('État après création de la scène de transition:', {
-                        environment: this.scene.environment ? 'Présent' : 'Absent',
-                        background: this.scene.background ? 'Présent' : 'Absent',
-                        nombreObjets: this.scene.children.length,
-                        type: transitionScene.constructor.name
-                    });
+                if (fadeMaterial.opacity >= 1) {
+                    fadeOutComplete = true;
+                    console.log('Fade out terminé');
                     
-                    // Démarrer le fade in
-                    fadeIn();
+                    // Nettoyer la scène seulement après que le fade out soit terminé
+                    this.clearScene([fadePlane]);
+                    
+                    if (createTransitionScene) {
+                        console.log('Création de la scène de transition');
+                        transitionScene = createTransitionScene();
+                        fadeIn();
+                    } else {
+                        console.log('Passage direct à la scène suivante');
+                        createNextScene();
+                        this.cleanupTransition(fadePlane);
+                    }
                 } else {
-                    console.log('Passage direct à la scène suivante');
-                    createNextScene();
-                    this.cleanupTransition(fadePlane);
+                    requestAnimationFrame(fadeOut);
                 }
-                return;
             }
-            
-            fadeMaterial.opacity += 0.02;
-            requestAnimationFrame(fadeOut);
         };
 
         // Fonction pour le fade in
         const fadeIn = () => {
             if (fadeMaterial.opacity <= 0) {
                 console.log('Fade in terminé');
-                console.log('État avant passage à la scène suivante:', {
-                    environment: this.scene.environment ? 'Présent' : 'Absent',
-                    background: this.scene.background ? 'Présent' : 'Absent',
-                    nombreObjets: this.scene.children.length,
-                    type: transitionScene?.constructor.name
-                });
                 
                 // Attendre avant de passer à la scène suivante
                 setTimeout(() => {
                     console.log('Passage à la scène suivante');
                     createNextScene();
                     this.cleanupTransition(fadePlane);
-                    
-                    console.log('État final:', {
-                        environment: this.scene.environment ? 'Présent' : 'Absent',
-                        background: this.scene.background ? 'Présent' : 'Absent',
-                        nombreObjets: this.scene.children.length,
-                        type: this.constructor.name
-                    });
-                }, 3000);
+                }, 500);
                 return;
             }
             
