@@ -21,16 +21,30 @@ class MirrorBreakEffect extends SceneSetup {
         this.fragmentManager = new FragmentManager(this);
         
         // Initialiser l'environnement
+        this.onReady = null;
         this.setupScene();
     }
 
     setupScene() {
+        let hdriLoaded = false;
+        let modelLoaded = false;
+        
         // Charger l'environnement et les lumières
         this.setupLights();
-        this.loadHDRI();
+        this.loadHDRI().then(() => {
+            hdriLoaded = true;
+            if (modelLoaded && this.onReady) {
+                this.onReady();
+            }
+        });
         
         // Charger le modèle du miroir
-        this.fragmentManager.loadMirrorModel();
+        this.fragmentManager.loadMirrorModel().then(() => {
+            modelLoaded = true;
+            if (hdriLoaded && this.onReady) {
+                this.onReady();
+            }
+        });
         
         // Event listeners
         this.setupEventListeners();
@@ -123,6 +137,18 @@ class MirrorBreakEffect extends SceneSetup {
             requestAnimationFrame(fadeOut);
         };
         fadeOut();
+    }
+
+    loadHDRI() {
+        return new Promise((resolve) => {
+            const rgbeLoader = new RGBELoader();
+            rgbeLoader.load("src/assets/night.hdr", (texture) => {
+                texture.mapping = THREE.EquirectangularReflectionMapping;
+                this.scene.background = texture;
+                this.scene.environment = texture;
+                resolve();
+            });
+        });
     }
 }
 

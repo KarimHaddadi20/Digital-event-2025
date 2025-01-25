@@ -48,55 +48,58 @@ class FragmentManager {
   }
 
   loadMirrorModel() {
-    const loader = new GLTFLoader();
-    loader.load(
-      "src/models/mirrorsolo.glb",
-      (gltf) => {
-        this.app.mirror = gltf.scene;
+    return new Promise((resolve, reject) => {
+      const loader = new GLTFLoader();
+      loader.load(
+        "src/models/mirrorsolo.glb",
+        (gltf) => {
+          this.app.mirror = gltf.scene;
 
-        const box = new THREE.Box3().setFromObject(this.app.mirror);
-        const center = box.getCenter(new THREE.Vector3());
-        const size = box.getSize(new THREE.Vector3());
+          const box = new THREE.Box3().setFromObject(this.app.mirror);
+          const center = box.getCenter(new THREE.Vector3());
+          const size = box.getSize(new THREE.Vector3());
 
-        const maxDim = Math.max(size.x, size.y, size.z);
-        const scale = 230 / maxDim;
-        this.app.mirror.scale.multiplyScalar(scale);
+          const maxDim = Math.max(size.x, size.y, size.z);
+          const scale = 230 / maxDim;
+          this.app.mirror.scale.multiplyScalar(scale);
 
-        this.app.mirror.position.set(
-          -center.x * scale,
-          -center.y * scale + 35,
-          -240
-        );
+          this.app.mirror.position.set(
+            -center.x * scale,
+            -center.y * scale + 35,
+            -240
+          );
 
-        this.app.mirror.traverse((child) => {
-          if (child.isMesh) {
-            child.material = new THREE.MeshPhysicalMaterial({
-              metalness: 1,
-              roughness: 0,
-              transmission: 0.1,
-              thickness: 10,
-              envMap: this.app.scene.environment,
-              envMapIntensity: 1.5,
-              clearcoat: 10,
-              clearcoatRoughness: 0.06,
-              transparent: false,
-              opacity: 0.7,
-              side: THREE.DoubleSide,
-              depthWrite: false,
-            });
-          }
-        });
+          this.app.mirror.traverse((child) => {
+            if (child.isMesh) {
+              child.material = new THREE.MeshPhysicalMaterial({
+                metalness: 1,
+                roughness: 0,
+                transmission: 0.1,
+                thickness: 10,
+                envMap: this.app.scene.environment,
+                envMapIntensity: 1.5,
+                clearcoat: 10,
+                clearcoatRoughness: 0.06,
+                transparent: false,
+                opacity: 0.7,
+                side: THREE.DoubleSide,
+                depthWrite: false,
+              });
+            }
+          });
 
-        this.app.scene.add(this.app.mirror);
-        this.createFragments();
+          this.app.scene.add(this.app.mirror);
+          this.createFragments();
 
-        document.querySelector(".loading-screen").style.display = "none";
-      },
-      undefined,
-      (error) => {
-        console.error("Erreur de chargement du modèle:", error);
-      }
-    );
+          resolve();
+        },
+        undefined,
+        (error) => {
+          console.error("Erreur de chargement du modèle:", error);
+          reject(error);
+        }
+      );
+    });
   }
 
   createFragments() {
