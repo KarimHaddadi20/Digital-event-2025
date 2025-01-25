@@ -5,6 +5,7 @@ import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 import { SceneSetup } from "./SceneSetup.js";
 import { FragmentManager } from "./FragmentManager.js";
 import { AtelierGalleryScene } from "./AtelierGalleryScene.js";
+import { PortalTransitionScene } from './PortalTransitionScene.js';
 
 class MirrorBreakEffect extends SceneSetup {
     constructor() {
@@ -59,6 +60,7 @@ class MirrorBreakEffect extends SceneSetup {
             this.fragmentManager.breakMirror();
             return;
         }
+        
         this.fragmentManager.handleFragmentClick(event);
     }
 
@@ -69,6 +71,8 @@ class MirrorBreakEffect extends SceneSetup {
     }
 
     switchToGalleryScene(fragmentIndex) {
+        console.log('MirrorBreakEffect: Début de la transition');
+        
         // Créer un plan noir pour le fade
         const fadeGeometry = new THREE.PlaneGeometry(100, 100);
         const fadeMaterial = new THREE.MeshBasicMaterial({
@@ -88,6 +92,7 @@ class MirrorBreakEffect extends SceneSetup {
         const fadeOut = () => {
             if (fadeMaterial.opacity >= 1) {
                 fadeOutComplete = true;
+                console.log('MirrorBreakEffect: Fade out terminé');
                 
                 // Nettoyer la scène actuelle
                 this.clearScene();
@@ -96,43 +101,22 @@ class MirrorBreakEffect extends SceneSetup {
                 document.removeEventListener("click", this.handleClick);
                 window.removeEventListener("mousemove", this.fragmentManager.onMouseMove);
                 
-                // Créer et initialiser la nouvelle scène
-                const galleryScene = new AtelierGalleryScene(this, fragmentIndex);
+                // Créer la scène de transition
+                console.log('MirrorBreakEffect: Création de la scène de transition');
+                const transitionScene = new PortalTransitionScene(this);
                 
-                // Mettre à jour les références
-                this.currentScene = galleryScene;
+                // Attendre 3 secondes puis passer à la galerie
+                setTimeout(() => {
+                    console.log('MirrorBreakEffect: Passage à la galerie');
+                    transitionScene.clearScene();
+                    new AtelierGalleryScene(this, fragmentIndex);
+                }, 3000);
                 
                 // Réinitialiser les contrôles
                 this.controls.enabled = true;
                 this.controls.target.set(0, 0, 0);
                 this.controls.update();
-
-                // Créer le fade pour la nouvelle scène
-                const newFadeGeometry = new THREE.PlaneGeometry(100, 100);
-                const newFadeMaterial = new THREE.MeshBasicMaterial({
-                    color: 0x000000,
-                    transparent: true,
-                    opacity: 1,
-                    side: THREE.DoubleSide,
-                    depthTest: false
-                });
-                const newFadePlane = new THREE.Mesh(newFadeGeometry, newFadeMaterial);
-                newFadePlane.position.z = this.camera.position.z - 1;
-                newFadePlane.renderOrder = 999;
-                galleryScene.scene.add(newFadePlane);
-
-                // Animation de fade in
-                const fadeIn = () => {
-                    if (newFadeMaterial.opacity <= 0) {
-                        galleryScene.scene.remove(newFadePlane);
-                        newFadeGeometry.dispose();
-                        newFadeMaterial.dispose();
-                        return;
-                    }
-                    newFadeMaterial.opacity -= 0.02;
-                    requestAnimationFrame(fadeIn);
-                };
-                fadeIn();
+                
                 return;
             }
             fadeMaterial.opacity += 0.02;
