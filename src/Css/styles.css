@@ -427,3 +427,86 @@ html, body {
 .back-button {
     opacity: 0.5;
 }
+
+/* Instructions du miroir */
+.mirror-instructions {
+    position: fixed;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 1000;
+    pointer-events: none;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+.instruction-title {
+    font-family: "Aktiv Grotesk", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 12px;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+    animation: glow 2s ease-in-out infinite alternate;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.instruction-subtitle {
+    font-family: "Aktiv Grotesk", sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+    }
+    to {
+        text-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, 20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
+}
+
+/* Instructions pour les fragments */
+.fragment-instructions {
+    position: fixed;
+    bottom: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 1000;
+    pointer-events: none;
+    animation: fadeIn 1s ease-in-out forwards;
+}
+
+.fragment-instructions .instruction-title {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.fragment-instructions .font-aktiv {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.fragment-instructions .font-fraunces {
+    font-size: 14px;
+    font-style: italic;
+}

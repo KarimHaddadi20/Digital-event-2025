@@ -250,22 +250,22 @@ class FragmentManager {
   }
 
   animateFragmentFall(fragment) {
-    if (this.isAnimatingFragment) return;
     this.isAnimatingFragment = true;
+    const startTime = Date.now();
+    const immersionDuration = 1000;
+    const startFragmentPos = fragment.position.clone();
+    
+    // Cacher les instructions des fragments
+    const fragmentInstructions = document.querySelector('.fragment-instructions');
+    if (fragmentInstructions) {
+        fragmentInstructions.style.display = 'none';
+    }
 
-    this.app.controls.enabled = false;
-
-    this.fragments.forEach((f) => {
-      if (f !== fragment) {
-        f.userData.isClickable = false;
-        f.traverse((child) => {
-          if (child.isMesh && child.material) {
-            child.material = child.material.clone();
-            child.material.transparent = true;
-            child.material.opacity = 0.5;
-          }
-        });
-      }
+    // Désactiver les interactions avec les autres fragments
+    this.fragments.forEach(f => {
+        if (f !== fragment) {
+            f.userData.isClickable = false;
+        }
     });
 
     const fallDuration = 1500;
@@ -281,7 +281,6 @@ class FragmentManager {
       startRotation.y + Math.PI,
       startRotation.z + Math.PI / 2
     );
-    const startTime = Date.now();
 
     const animateFall = () => {
       const currentTime = Date.now();

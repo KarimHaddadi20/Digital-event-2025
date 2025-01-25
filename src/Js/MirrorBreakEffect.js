@@ -35,6 +35,13 @@ class MirrorBreakEffect extends SceneSetup {
             hdriLoaded = true;
             if (modelLoaded && this.onReady) {
                 this.onReady();
+                // Afficher l'instruction après le chargement
+                setTimeout(() => {
+                    const instruction = document.querySelector('.mirror-instruction');
+                    if (instruction) {
+                        instruction.classList.add('visible');
+                    }
+                }, 1000);
             }
         });
         
@@ -71,6 +78,17 @@ class MirrorBreakEffect extends SceneSetup {
 
     handleClick(event) {
         if (!this.isBreaking && this.mirror) {
+            // Cacher les instructions du miroir et afficher les instructions des fragments immédiatement
+            const instructions = document.querySelector('.mirror-instructions');
+            const fragmentInstructions = document.querySelector('.fragment-instructions');
+            
+            if (instructions) {
+                instructions.style.display = 'none';
+            }
+            if (fragmentInstructions) {
+                fragmentInstructions.style.display = 'block';
+            }
+            
             this.fragmentManager.breakMirror();
             return;
         }
