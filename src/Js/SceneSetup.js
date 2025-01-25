@@ -76,11 +76,88 @@ class SceneSetup {
 
     loadHDRI() {
         const rgbeLoader = new RGBELoader();
-        rgbeLoader.load("src/assets/night.hdr", (texture) => {
-            texture.mapping = THREE.EquirectangularReflectionMapping;
-            this.scene.background = texture;
-            this.scene.environment = texture;
+        rgbeLoader.load("src/assets/grey2.hdr", (texture) => {
+          texture.mapping = THREE.EquirectangularReflectionMapping;
+    
+          // Create PMREMGenerator for better reflections
+          const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+          const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+    
+          // Apply environment but keep black background
+          this.scene.environment = envMap;
+          this.scene.background = new THREE.Color(0x000000);
+    
+          // Dispose resources
+          texture.dispose();
+          pmremGenerator.dispose();
         });
+      }
+
+    setupBackground() {
+        // Créer un plan pour l'arrière-plan au lieu d'utiliser environment map
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.load("src/textures/escape.png", (texture) => {
+          const aspectRatio = texture.image.width / texture.image.height;
+    
+          // Créer un grand plan pour l'arrière-plan
+          const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
+          const bgMaterial = new THREE.MeshBasicMaterial({
+            map: texture,
+            side: THREE.FrontSide,
+          });
+    
+          const background = new THREE.Mesh(bgGeometry, bgMaterial);
+    
+          // Positionner le plan derrière le miroir
+          background.position.z = -300; // Ajustez cette valeur selon vos besoins
+          background.position.y = 0; // Ajustez si nécessaire
+    
+          this.scene.add(background);
+    
+          // Définir une couleur de fond neutre au lieu de l'environment map
+          this.scene.background = new THREE.Color(0x000000);
+        });
+    }
+    
+    setupEnvironment() {
+        // Clear any existing environment
+        if (this.scene.environment) {
+          this.scene.environment.dispose();
+        }
+    
+        const textureLoader = new THREE.TextureLoader();
+        console.log("Loading texture from: src/textures/espace.game.png");
+    
+        textureLoader.load(
+          "src/textures/espace.game.png",
+          (texture) => {
+            console.log("Texture loaded successfully");
+    
+            // Configure texture
+            texture.encoding = THREE.sRGBEncoding;
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            texture.needsUpdate = true;
+    
+            // Generate environment map
+            const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+            pmremGenerator.compileEquirectangularShader();
+    
+            const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+    
+            // Apply to scene - both as environment and background
+            this.scene.environment = envMap;
+            this.scene.background = envMap;
+    
+            console.log("Environment set up complete");
+    
+            // Cleanup
+            pmremGenerator.dispose();
+          },
+          undefined, // onProgress callback
+          (error) => {
+            console.error("Error loading texture:", error);
+          }
+        );
     }
 
     onResize() {

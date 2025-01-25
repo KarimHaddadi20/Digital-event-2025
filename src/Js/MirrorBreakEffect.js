@@ -31,19 +31,26 @@ class MirrorBreakEffect extends SceneSetup {
         
         // Charger l'environnement et les lumières
         this.setupLights();
-        this.loadHDRI().then(() => {
-            hdriLoaded = true;
-            if (modelLoaded && this.onReady) {
-                this.onReady();
-                // Afficher l'instruction après le chargement
-                setTimeout(() => {
-                    const instruction = document.querySelector('.mirror-instruction');
-                    if (instruction) {
-                        instruction.classList.add('visible');
-                    }
-                }, 1000);
-            }
-        });
+        this.setupBackground();
+        // this.loadHDRI().then(() => {
+        //     hdriLoaded = true;
+        //     if (modelLoaded && this.onReady) {
+        //         this.onReady();
+        //         // Afficher l'instruction après le chargement
+        //         setTimeout(() => {
+        //             const instruction = document.querySelector('.mirror-instruction');
+        //             if (instruction) {
+        //                 instruction.classList.add('visible');
+        //             }
+        //         }, 1000);
+        //     }
+        // });
+        // this.loadHDRI().then(() => {
+        //     hdriLoaded = true;
+        //     if (modelLoaded && this.onReady) {
+        //         this.onReady();
+        //     }
+        // });
         
         // Charger le modèle du miroir
         this.fragmentManager.loadMirrorModel().then(() => {
@@ -135,9 +142,8 @@ class MirrorBreakEffect extends SceneSetup {
                 
                 // Créer la scène de transition
                 console.log('MirrorBreakEffect: Création de la scène de transition');
-                const transitionScene = new PortalTransitionScene(this);
+                const transitionScene = new PortalTransitionScene(this, fragmentIndex);
                 
-                // Attendre 500ms puis passer à la galerie
                 setTimeout(() => {
                     console.log('MirrorBreakEffect: Passage à la galerie');
                     transitionScene.clearScene();
@@ -157,17 +163,17 @@ class MirrorBreakEffect extends SceneSetup {
         fadeOut();
     }
 
-    loadHDRI() {
-        return new Promise((resolve) => {
-            const rgbeLoader = new RGBELoader();
-            rgbeLoader.load("src/assets/night.hdr", (texture) => {
-                texture.mapping = THREE.EquirectangularReflectionMapping;
-                this.scene.background = texture;
-                this.scene.environment = texture;
-                resolve();
-            });
-        });
-    }
+    // loadHDRI() {
+    //     return new Promise((resolve) => {
+    //         const rgbeLoader = new RGBELoader();
+    //         rgbeLoader.load("src/assets/night.hdr", (texture) => {
+    //             texture.mapping = THREE.EquirectangularReflectionMapping;
+    //             this.scene.background = texture;
+    //             this.scene.environment = texture;
+    //             resolve();
+    //         });
+    //     });
+    // }
 }
 
 export { MirrorBreakEffect }; 

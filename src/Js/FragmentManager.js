@@ -88,6 +88,32 @@ class FragmentManager {
             }
           });
 
+          this.app.mirror.traverse((child) => {
+            if (child.isMesh) {
+              child.material = new THREE.MeshPhysicalMaterial({
+                // Propriétés métalliques
+                metalness: 1, // 1 = totalement métallique, 0 = non métallique
+                roughness: 0.06, // 0 = surface parfaitement lisse (miroir), 1 = surface rugueuse
+                // Propriétés de transparence
+                transmission: 1, // 0 = opaque, 1 = totalement transparent
+                thickness: 1, // Épaisseur du matériau pour les effets de réfraction
+                reflectivity: 0, // Intensité des reflets
+                iridescence: 0, // Intensité de l'iridescence
+                // Propriétés de réflexion
+                envMap: this.app.scene.environment, // Texture d'environnement pour les reflets
+                envMapIntensity: 0.25, // Intensité des reflets de l'environnement
+                // Propriétés de revêtement
+                clearcoat: 0, // Couche de vernis (0 = aucune, 1 = maximum)
+                clearcoatRoughness: 0, // Rugosité de la couche de vernis
+                // Propriétés de rendu
+                transparent: true, // Active/désactive la transparence
+                opacity: 1, // 1 = totalement opaque, 0 = invisible
+                side: THREE.DoubleSide, // Rendre les deux côtés du matériau
+                depthWrite: true, // Écriture dans le buffer de profondeur
+              });
+            }
+          });
+
           this.app.scene.add(this.app.mirror);
           this.createFragments();
 
@@ -130,18 +156,24 @@ class FragmentManager {
           fragment.traverse((child) => {
             if (child.isMesh) {
               child.material = new THREE.MeshPhysicalMaterial({
-                metalness: 1,
-                roughness: 0,
-                transmission: 0.1,
-                thickness: 10,
-                envMap: this.app.scene.environment,
-                envMapIntensity: 1.5,
-                clearcoat: 10,
-                clearcoatRoughness: 0.06,
-                transparent: false,
-                opacity: 0.7,
-                side: THREE.DoubleSide,
-                depthWrite: false,
+                metalness: 1, // 1 = totalement métallique, 0 = non métallique
+                roughness: 0.06, // 0 = surface parfaitement lisse (miroir), 1 = surface rugueuse
+                // Propriétés de transparence
+                transmission: 1, // 0 = opaque, 1 = totalement transparent
+                thickness: 1, // Épaisseur du matériau pour les effets de réfraction
+                reflectivity: 0, // Intensité des reflets
+                iridescence: 0, // Intensité de l'iridescence
+                // Propriétés de réflexion
+                envMap: this.app.scene.environment, // Texture d'environnement pour les reflets
+                envMapIntensity: 0.25, // Intensité des reflets de l'environnement
+                // Propriétés de revêtement
+                clearcoat: 0, // Couche de vernis (0 = aucune, 1 = maximum)
+                clearcoatRoughness: 0, // Rugosité de la couche de vernis
+                // Propriétés de rendu
+                transparent: true, // Active/désactive la transparence
+                opacity: 1, // 1 = totalement opaque, 0 = invisible
+                side: THREE.DoubleSide, // Rendre les deux côtés du matériau
+                depthWrite: true, // Écriture dans le buffer de profondeur
               });
             }
           });
@@ -315,8 +347,8 @@ class FragmentManager {
       { x: -30, y: -40, z: 0 },
       { x: 0, y: -40, z: 0 },
       { x: 35, y: -45, z: 0 },
-      { x: -20, y: 0, z: 0 },
-      { x: 35, y: 0, z: 0 },
+      { x: -20, y: -10, z: 0 },
+      { x: 35, y: -10, z: 0 },
     ];
 
     const finalPosition = this.app.camera.position.clone();
