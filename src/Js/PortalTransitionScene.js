@@ -15,7 +15,6 @@ export class PortalTransitionScene extends SceneSetup {
         this.time = 0;
         this.lastLogTime = 0;
         
-        console.log('Initialisation de PortalTransitionScene');
         
         // Configuration de la caméra
         this.camera.position.set(0, 0, 20);
@@ -51,26 +50,9 @@ export class PortalTransitionScene extends SceneSetup {
         
         // Créer les fragments qui défilent
         this.createScrollingFragments();
-
-
-        
-        console.log('Configuration initiale terminée');
-        console.log('Nombre de fragments:', this.fragments.length);
-        console.log('Objets dans la scène:', this.scene.children.length);
         
         // Démarrer l'animation
         this.animate();
-    }
-
-    logSceneStatus() {
-        const currentTime = Date.now();
-        if (currentTime - this.lastLogTime >= 1000) { // Log toutes les secondes
-            console.log('Scene active: PortalTransitionScene');
-            console.log('Nombre de fragments:', this.fragments.length);
-            console.log('Position caméra:', this.camera.position);
-            console.log('Objets dans la scène:', this.scene.children.length);
-            this.lastLogTime = currentTime;
-        }
     }
 
     setupCustomLights() {
@@ -98,7 +80,6 @@ export class PortalTransitionScene extends SceneSetup {
         backLight.position.set(0, -5, -5);
         this.scene.add(backLight);
 
-        console.log('Lumières configurées:', this.scene.children.filter(child => child.isLight).length);
     }
 
     createScrollingFragments() {
@@ -130,7 +111,6 @@ export class PortalTransitionScene extends SceneSetup {
             side: THREE.DoubleSide
         });
 
-        console.log('Création des fragments de transition');
 
         // Créer plusieurs fragments avec des positions aléatoires
         for (let i = 0; i < 50; i++) {
@@ -163,8 +143,7 @@ export class PortalTransitionScene extends SceneSetup {
             this.scene.add(fragment);
         }
 
-        console.log('Nombre total de fragments créés:', this.fragments.length);
-        console.log('Objets dans la scène après création des fragments:', this.scene.children.length);
+
     }
 
     // Surcharger la méthode clearScene pour nettoyer le texte
@@ -189,18 +168,12 @@ export class PortalTransitionScene extends SceneSetup {
         // Mettre à jour la liste des fragments
         this.fragments = savedFragments;
         
-        console.log('Nettoyage de la scène terminé');
-        console.log('Fragments conservés:', this.fragments.length);
-        console.log('Objets dans la scène après nettoyage:', this.scene.children.length);
     }
 
     animate() {
         requestAnimationFrame(() => this.animate());
         
         this.time += 0.01;
-        
-        // Log du statut
-        this.logSceneStatus();
         
         // Animer les fragments
         this.fragments.forEach((fragment, index) => {
