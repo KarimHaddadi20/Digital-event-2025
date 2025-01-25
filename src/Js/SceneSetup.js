@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
-import { MirrorBreakEffect } from "./MirrorBreakEffect.js";
+import { Loader } from "./Loader.js";
 
 class SceneSetup {
     constructor(useHDRI = true) {
@@ -216,15 +216,33 @@ class SceneSetup {
     recreateInitialScene() {
         console.log('Recréation de la scène initiale...');
         
-        // Nettoyer la scène actuelle et le container
+        // Nettoyer la scène actuelle
         this.clearScene();
-        const container = document.getElementById("scene-container");
-        while (container.firstChild) {
-            container.removeChild(container.firstChild);
-        }
         
-        // Créer une nouvelle instance de MirrorBreakEffect
-        new MirrorBreakEffect();
+        // Masquer le contenu principal
+        const mainContent = document.getElementById('main-content');
+        mainContent.style.display = 'none';
+        
+        // Masquer la navbar et le footer pendant le chargement
+        document.querySelector('.navbar').style.display = 'none';
+        document.querySelector('.footer').style.display = 'none';
+        
+        // Recréer la structure HTML nécessaire pour le loader
+        const loadingContainer = document.createElement('div');
+        loadingContainer.id = 'loading-container';
+        
+        const percentage = document.createElement('div');
+        percentage.id = 'percentage';
+        loadingContainer.appendChild(percentage);
+        
+        const mirrorPercentage = document.createElement('div');
+        mirrorPercentage.id = 'mirror-percentage';
+        loadingContainer.appendChild(mirrorPercentage);
+        
+        document.body.appendChild(loadingContainer);
+        
+        // Lancer le loader qui gère tout le processus de chargement
+        new Loader();
     }
 }
 
