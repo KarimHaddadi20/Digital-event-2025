@@ -10,7 +10,7 @@ export class AtelierGalleryScene extends SceneSetup {
         super(false);
         
         // Configuration de la caméra
-        this.camera.position.set(0, 0, 10);
+        this.camera.position.set(0, 0, 0);
         this.camera.lookAt(0, 0, 0);
         
         // Configuration de base de la scène
@@ -69,56 +69,6 @@ export class AtelierGalleryScene extends SceneSetup {
                 title: "L'Horizon Perdu",
                 description: "Une œuvre abstraite évoquant les limites entre ciel et terre"
             },
-            {
-                id: 2,
-                title: "Mélodie Fractale",
-                description: "Fragments géométriques inspirés par les motifs musicaux"
-            },
-            {
-                id: 3,
-                title: "Échos du Temps",
-                description: "Représentation de la mémoire collective à travers les âges"
-            },
-            {
-                id: 4,
-                title: "Fusion Organique",
-                description: "Mélange harmonieux entre nature et technologie"
-            },
-            {
-                id: 5,
-                title: "Résonance Cristalline",
-                description: "Structure complexe reflétant la lumière et l'espace"
-            },
-            {
-                id: 6,
-                title: "Vagues Numériques",
-                description: "Ondulations dynamiques dans l'espace virtuel"
-            },
-            {
-                id: 7,
-                title: "Symétrie Brisée",
-                description: "Exploration des patterns chaotiques et ordonnés"
-            },
-            {
-                id: 8,
-                title: "Confluence",
-                description: "Point de rencontre entre différentes dimensions"
-            },
-            {
-                id: 9,
-                title: "Nébulose Urbaine",
-                description: "Abstraction de la vie citadine moderne"
-            },
-            {
-                id: 10,
-                title: "Métamorphose",
-                description: "Transformation continue de la matière digitale"
-            },
-            {
-                id: 11,
-                title: "Équilibre Parfait",
-                description: "Harmonie entre les forces opposées"
-            }
         ];
 
         // Configuration de la scène
@@ -137,6 +87,13 @@ export class AtelierGalleryScene extends SceneSetup {
             ease: "power2.inOut"
         });
 
+        // Ajouter des helpers pour debug
+        const axesHelper = new THREE.AxesHelper(10);
+        this.scene.add(axesHelper);
+        
+        const gridHelper = new THREE.GridHelper(20, 20);
+        this.scene.add(gridHelper);
+
         // Démarrer l'animation
         this.animate();
     }
@@ -151,14 +108,17 @@ export class AtelierGalleryScene extends SceneSetup {
     }
 
     setupGalleryLights() {
-        // Lumière ambiante plus forte pour l'éclairage de base
-        const ambient = new THREE.AmbientLight(0xffffff, 1);
+        // Augmenter l'intensité des lumières
+        const ambient = new THREE.AmbientLight(0xffffff, 2);
         this.scene.add(ambient);
 
-        // Lumière principale directionnelle plus intense
-        const mainLight = new THREE.DirectionalLight(0xffffff, 2);
+        const mainLight = new THREE.DirectionalLight(0xffffff, 3);
         mainLight.position.set(5, 5, 5);
         this.scene.add(mainLight);
+
+        // Ajouter un helper pour voir la direction de la lumière
+        const lightHelper = new THREE.DirectionalLightHelper(mainLight, 5);
+        this.scene.add(lightHelper);
 
         // Lumière de remplissage pour les ombres
         const fillLight = new THREE.DirectionalLight(0xffffff, 1);
@@ -237,8 +197,8 @@ export class AtelierGalleryScene extends SceneSetup {
             const geometry = new THREE.PlaneGeometry(6, 6, 50, 50);
             const material = new THREE.MeshStandardMaterial({
                 map: mainTexture,
-                metalness: 0.1,  // Réduit pour mieux voir les textures
-                roughness: 0.8,  // Augmenté pour mieux réagir à la lumière
+                metalness: 0.1,
+                roughness: 0.8,
                 side: THREE.DoubleSide,
                 transparent: true,
                 opacity: 1
@@ -250,8 +210,10 @@ export class AtelierGalleryScene extends SceneSetup {
             fragment.position.set(
                 isEven ? -4 : 4,
                 1,
-                i * -22
+                -5 - (i * 10)
             );
+
+            console.log(`Fragment ${i} position:`, fragment.position);
 
             const detailGeometry = new THREE.PlaneGeometry(10, 10, 50, 50);
             
@@ -484,6 +446,7 @@ export class AtelierGalleryScene extends SceneSetup {
     animate() {
         requestAnimationFrame(() => this.animate());
         
+        
         this.updateFragments();
         this.svgSprites.forEach(sprite => {
             sprite.position.z += 0.05;
@@ -494,6 +457,7 @@ export class AtelierGalleryScene extends SceneSetup {
             }
         });
         
+        // Vérifier que le rendu se fait bien
         this.renderer.render(this.scene, this.camera);
         this.labelRenderer.render(this.scene, this.camera);
     }

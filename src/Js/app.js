@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RGBELoader } from "three/addons/loaders/RGBELoader.js"; 
+import { AtelierGalleryScene } from "./AtelierGalleryScene.js";
 
 class MirrorBreakEffect {
   constructor() {
@@ -19,6 +20,7 @@ class MirrorBreakEffect {
     this.fragments = [];
     this.isBreaking = false;
     this.isFragmentSelected = false;
+    this.galleryScene = null;
 
     // Créer les conteneurs pour chaque position
     this.fragmentContainers = [];
@@ -713,26 +715,27 @@ class MirrorBreakEffect {
     return fragment1.boundingBox.intersectsBox(fragment2.boundingBox);
   }
 
-  switchToGalleryScene(fragmentIndex) {
-    // Nettoyer les événements et les ressources de la scène actuelle
-    if (this.fragmentManager) {
-        // Supprimer les event listeners
-        window.removeEventListener('mousemove', this.fragmentManager.onMouseMove);
-        window.removeEventListener('click', this.fragmentManager.handleFragmentClick);
+  switchToGalleryScene() {
+    if (!this.galleryScene) {
+        this.galleryScene = new AtelierGalleryScene();
     }
+    
+    // Clean up current scene
+    this.fragments.forEach(fragment => {
+        this.scene.remove(fragment);
+    });
+    
+    // Initialize gallery scene
+    document.getElementById('scene-container').appendChild(this.galleryScene.renderer.domElement);
+    this.galleryScene.init();
+  }
 
-    // Initialiser la nouvelle scène
-    const galleryScene = new AtelierGalleryScene(this);
-    galleryScene.currentFragmentIndex = fragmentIndex;
-    
-    // Mettre à jour les références
-    this.currentScene = galleryScene;
-    
-    // Réinitialiser les contrôles si nécessaire
-    if (this.controls) {
-        this.controls.target.set(0, 0, 0);
-        this.controls.update();
+  animateImmersion() {
+    // ...existing code...
+    if (this.isBreaking && !this.galleryScene) {
+        this.switchToGalleryScene();
     }
+    // ...existing code...
   }
 }
 
