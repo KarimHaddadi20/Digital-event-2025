@@ -27,29 +27,30 @@ export class PortalTransitionScene extends SceneSetup {
         // Clear scene background
         this.scene.background = null;
         
-        // Add background sphere with adjusted properties
-        const textureLoader = new THREE.TextureLoader();
-        textureLoader.load(
-            '/src/textures/monde/monde2.png',
-            (texture) => {
-                const geometry = new THREE.SphereGeometry(2000, 64, 64); // Increased size
-                const material = new THREE.MeshBasicMaterial({ 
-                    map: texture,
-                    side: THREE.BackSide,
-                    transparent: true,
-                    opacity: 0.6,
-                    color: 0x404040,  // Add dark tint
+        // Adjust texture loader and sphere creation
+const textureLoader = new THREE.TextureLoader();
+textureLoader.load(
+    '/src/textures/monde/escape.png',
+    (texture) => {
+        texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set(1, 1); // Adjust these values if needed
 
-                    depthTest: false,  // Disable depth testing
-                    depthWrite: false, // Disable depth writing
-                    renderOrder: -1    // Render first (background)
-                });
-                
-                const backgroundSphere = new THREE.Mesh(geometry, material);
-                backgroundSphere.renderOrder = -1; // Ensure background renders first
-                this.scene.add(backgroundSphere);
-            }
-        );
+        const geometry = new THREE.SphereGeometry(2000, 128, 128); // Increased segments for better mapping
+        const material = new THREE.MeshBasicMaterial({ 
+            map: texture,
+            side: THREE.BackSide,
+            transparent: true,
+            opacity: 0.8,
+            color: 0x404040,
+            depthTest: false,
+            depthWrite: false,
+        });
+        
+        const sphere = new THREE.Mesh(geometry, material);
+        this.scene.add(sphere);
+    }
+);
 
         // Adjust camera
         this.camera.position.set(0, 0, 8); // Rapprocher la caméra de 15 à 10
@@ -82,6 +83,7 @@ export class PortalTransitionScene extends SceneSetup {
                 title: "Virtual Echo",
                 description: "Resonance of code",
                 initialOpacity: 0
+                
             }
         ];
         
@@ -197,14 +199,25 @@ export class PortalTransitionScene extends SceneSetup {
 
                 const labelDiv = document.createElement('div');
                 labelDiv.className = 'fragment-label';
+
+                // Apply modern glassmorphism styles
+                labelDiv.style.cssText = `
+                    box-sizing: border-box;
+                    padding: 15px;
+                    width: 276px;
+                    color: white;
+                    text-align: center;
+                    opacity: ${data.initialOpacity};
+                    transition: opacity 0.5s ease;
+                    background: linear-gradient(118.48deg, rgba(255, 255, 255, 0.16) -28.48%, rgba(255, 255, 255, 0.04) 100.43%);
+                    backdrop-filter: blur(10px);
+                    border-radius: 8px;
+                `;
+
                 labelDiv.innerHTML = `
                     <h3 style="margin: 0; font-size: 1.2em;">${data.title}</h3>
                     <p style="margin: 5px 0 0 0; font-size: 0.9em;">${data.description}</p>
                 `;
-                labelDiv.style.color = 'white';
-                labelDiv.style.textAlign = 'center';
-                labelDiv.style.opacity = data.initialOpacity; // Use initial opacity from data
-                labelDiv.style.transition = 'opacity 0.5s ease';
 
                 const label = new CSS2DObject(labelDiv);
                 label.position.set(0, -3, 0);
