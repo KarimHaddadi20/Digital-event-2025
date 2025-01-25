@@ -1,0 +1,895 @@
+{
+  "ateliers": [
+    {
+      "id": 1,
+      "titre": "Design d'Interface",
+      "sections": {
+        "intro": {
+          "titre": "Introduction à l'Atelier Digital",
+          "description": "Une expérience immersive dans l'univers du design numérique. Les étudiants explorent les frontières entre créativité et technologie.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/1/intro/main.jpg",
+              "alt": "Vue principale du projet"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/1/intro/second1.jpg",
+                "alt": "Détail du processus créatif"
+              },
+              {
+                "url": "src/assets/ateliers/1/intro/second2.jpg",
+                "alt": "Résultat final"
+              }
+            ]
+          }
+        },
+        "objectif": {
+          "description": "Maîtriser les fondamentaux du design d'interface tout en développant une approche créative unique. Créer des expériences utilisateur innovantes et intuitives.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/1/objectif/tools.jpg",
+              "alt": "Outils principaux utilisés"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/1/objectif/student1.jpg",
+                "alt": "Étudiant au travail"
+              },
+              {
+                "url": "src/assets/ateliers/1/objectif/student2.jpg",
+                "alt": "Collaboration en équipe"
+              }
+            ]
+          }
+        },
+        "outils": {
+          "description": "Utilisation approfondie de la suite Adobe Creative Cloud et des outils de prototypage modernes.",
+          "photos": [
+            {
+              "url": "src/assets/ateliers/1/outils/tool1.jpg",
+              "alt": "Adobe XD interface"
+            },
+            {
+              "url": "src/assets/ateliers/1/outils/tool2.jpg",
+              "alt": "Figma en action"
+            },
+            {
+              "url": "src/assets/ateliers/1/outils/tool3.jpg",
+              "alt": "Prototype final"
+            }
+          ]
+        },
+        "temoignages": {
+          "liste": [
+            {
+              "texte": "Cet atelier m'a permis de découvrir ma passion pour l'UX design.",
+              "auteur": "Marie L.",
+              "photo": "src/assets/ateliers/1/temoignages/student1.jpg"
+            },
+            {
+              "texte": "Une expérience enrichissante qui m'a ouvert de nouvelles perspectives.",
+              "auteur": "Thomas B.",
+              "photo": "src/assets/ateliers/1/temoignages/student2.jpg"
+            },
+            {
+              "texte": "J'ai acquis des compétences précieuses pour mon futur professionnel.",
+              "auteur": "Sophie M.",
+              "photo": "src/assets/ateliers/1/temoignages/student3.jpg"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 2,
+      "titre": "Motion Design",
+      "sections": {
+        "intro": {
+          "titre": "L'Art du Mouvement Digital",
+          "description": "Plongez dans l'animation et le motion design. Donnez vie à vos créations à travers le mouvement et les transitions dynamiques.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/2/intro/main.jpg",
+              "alt": "Animation en cours"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/2/intro/second1.jpg",
+                "alt": "Storyboard du projet"
+              },
+              {
+                "url": "src/assets/ateliers/2/intro/second2.jpg",
+                "alt": "Animation finale"
+              }
+            ]
+          }
+        },
+        "objectif": {
+          "description": "Maîtriser les fondamentaux du design d'interface tout en développant une approche créative unique. Créer des expériences utilisateur innovantes et intuitives.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/2/objectif/tools.jpg",
+              "alt": "Outils principaux utilisés"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/2/objectif/student1.jpg",
+                "alt": "Étudiant au travail"
+              },
+              {
+                "url": "src/assets/ateliers/2/objectif/student2.jpg",
+                "alt": "Collaboration en équipe"
+              }
+            ]
+          }
+        },
+        "outils": {
+          "description": "Utilisation approfondie de la suite Adobe Creative Cloud et des outils de prototypage modernes.",
+          "photos": [
+            {
+              "url": "src/assets/ateliers/2/outils/tool1.jpg",
+              "alt": "Adobe XD interface"
+            },
+            {
+              "url": "src/assets/ateliers/2/outils/tool2.jpg",
+              "alt": "Figma en action"
+            },
+            {
+              "url": "src/assets/ateliers/2/outils/tool3.jpg",
+              "alt": "Prototype final"
+            }
+          ]
+        },
+        "temoignages": {
+          "liste": [
+            {
+              "texte": "Cet atelier m'a permis de découvrir ma passion pour l'UX design.",
+              "auteur": "Marie L.",
+              "photo": "src/assets/ateliers/2/temoignages/student1.jpg"
+            },
+            {
+              "texte": "Une expérience enrichissante qui m'a ouvert de nouvelles perspectives.",
+              "auteur": "Thomas B.",
+              "photo": "src/assets/ateliers/2/temoignages/student2.jpg"
+            },
+            {
+              "texte": "J'ai acquis des compétences précieuses pour mon futur professionnel.",
+              "auteur": "Sophie M.",
+              "photo": "src/assets/ateliers/2/temoignages/student3.jpg"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 3,
+      "titre": "Atelier 3",
+      "sections": {
+        "intro": {
+          "titre": "Introduction à l'Atelier Digital",
+          "description": "Une expérience immersive dans l'univers du design numérique. Les étudiants explorent les frontières entre créativité et technologie.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/3/intro/main.jpg",
+              "alt": "Vue principale du projet"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/3/intro/second1.jpg",
+                "alt": "Détail du processus créatif"
+              },
+              {
+                "url": "src/assets/ateliers/3/intro/second2.jpg",
+                "alt": "Résultat final"
+              }
+            ]
+          }
+        },
+        "objectif": {
+          "description": "Maîtriser les fondamentaux du design d'interface tout en développant une approche créative unique. Créer des expériences utilisateur innovantes et intuitives.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/3/objectif/tools.jpg",
+              "alt": "Outils principaux utilisés"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/3/objectif/student1.jpg",
+                "alt": "Étudiant au travail"
+              },
+              {
+                "url": "src/assets/ateliers/3/objectif/student2.jpg",
+                "alt": "Collaboration en équipe"
+              }
+            ]
+          }
+        },
+        "outils": {
+          "description": "Utilisation approfondie de la suite Adobe Creative Cloud et des outils de prototypage modernes.",
+          "photos": [
+            {
+              "url": "src/assets/ateliers/3/outils/tool1.jpg",
+              "alt": "Adobe XD interface"
+            },
+            {
+              "url": "src/assets/ateliers/3/outils/tool2.jpg",
+              "alt": "Figma en action"
+            },
+            {
+              "url": "src/assets/ateliers/3/outils/tool3.jpg",
+              "alt": "Prototype final"
+            }
+          ]
+        },
+        "temoignages": {
+          "liste": [
+            {
+              "texte": "Cet atelier m'a permis de découvrir ma passion pour l'UX design.",
+              "auteur": "Marie L.",
+              "photo": "src/assets/ateliers/3/temoignages/student1.jpg"
+            },
+            {
+              "texte": "Une expérience enrichissante qui m'a ouvert de nouvelles perspectives.",
+              "auteur": "Thomas B.",
+              "photo": "src/assets/ateliers/3/temoignages/student2.jpg"
+            },
+            {
+              "texte": "J'ai acquis des compétences précieuses pour mon futur professionnel.",
+              "auteur": "Sophie M.",
+              "photo": "src/assets/ateliers/3/temoignages/student3.jpg"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 4,
+      "titre": "Atelier 4",
+      "sections": {
+        "intro": {
+          "titre": "Introduction à l'Atelier Digital",
+          "description": "Une expérience immersive dans l'univers du design numérique. Les étudiants explorent les frontières entre créativité et technologie.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/4/intro/main.jpg",
+              "alt": "Vue principale du projet"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/4/intro/second1.jpg",
+                "alt": "Détail du processus créatif"
+              },
+              {
+                "url": "src/assets/ateliers/4/intro/second2.jpg",
+                "alt": "Résultat final"
+              }
+            ]
+          }
+        },
+        "objectif": {
+          "description": "Maîtriser les fondamentaux du design d'interface tout en développant une approche créative unique. Créer des expériences utilisateur innovantes et intuitives.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/4/objectif/tools.jpg",
+              "alt": "Outils principaux utilisés"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/4/objectif/student1.jpg",
+                "alt": "Étudiant au travail"
+              },
+              {
+                "url": "src/assets/ateliers/4/objectif/student2.jpg",
+                "alt": "Collaboration en équipe"
+              }
+            ]
+          }
+        },
+        "outils": {
+          "description": "Utilisation approfondie de la suite Adobe Creative Cloud et des outils de prototypage modernes.",
+          "photos": [
+            {
+              "url": "src/assets/ateliers/4/outils/tool1.jpg",
+              "alt": "Adobe XD interface"
+            },
+            {
+              "url": "src/assets/ateliers/4/outils/tool2.jpg",
+              "alt": "Figma en action"
+            },
+            {
+              "url": "src/assets/ateliers/4/outils/tool3.jpg",
+              "alt": "Prototype final"
+            }
+          ]
+        },
+        "temoignages": {
+          "liste": [
+            {
+              "texte": "Cet atelier m'a permis de découvrir ma passion pour l'UX design.",
+              "auteur": "Marie L.",
+              "photo": "src/assets/ateliers/4/temoignages/student1.jpg"
+            },
+            {
+              "texte": "Une expérience enrichissante qui m'a ouvert de nouvelles perspectives.",
+              "auteur": "Thomas B.",
+              "photo": "src/assets/ateliers/4/temoignages/student2.jpg"
+            },
+            {
+              "texte": "J'ai acquis des compétences précieuses pour mon futur professionnel.",
+              "auteur": "Sophie M.",
+              "photo": "src/assets/ateliers/4/temoignages/student3.jpg"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 5,
+      "titre": "Atelier 5",
+      "sections": {
+        "intro": {
+          "titre": "Introduction à l'Atelier Digital",
+          "description": "Une expérience immersive dans l'univers du design numérique. Les étudiants explorent les frontières entre créativité et technologie.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/5/intro/main.jpg",
+              "alt": "Vue principale du projet"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/5/intro/second1.jpg",
+                "alt": "Détail du processus créatif"
+              },
+              {
+                "url": "src/assets/ateliers/5/intro/second2.jpg",
+                "alt": "Résultat final"
+              }
+            ]
+          }
+        },
+        "objectif": {
+          "description": "Maîtriser les fondamentaux du design d'interface tout en développant une approche créative unique. Créer des expériences utilisateur innovantes et intuitives.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/5/objectif/tools.jpg",
+              "alt": "Outils principaux utilisés"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/5/objectif/student1.jpg",
+                "alt": "Étudiant au travail"
+              },
+              {
+                "url": "src/assets/ateliers/5/objectif/student2.jpg",
+                "alt": "Collaboration en équipe"
+              }
+            ]
+          }
+        },
+        "outils": {
+          "description": "Utilisation approfondie de la suite Adobe Creative Cloud et des outils de prototypage modernes.",
+          "photos": [
+            {
+              "url": "src/assets/ateliers/5/outils/tool1.jpg",
+              "alt": "Adobe XD interface"
+            },
+            {
+              "url": "src/assets/ateliers/5/outils/tool2.jpg",
+              "alt": "Figma en action"
+            },
+            {
+              "url": "src/assets/ateliers/5/outils/tool3.jpg",
+              "alt": "Prototype final"
+            }
+          ]
+        },
+        "temoignages": {
+          "liste": [
+            {
+              "texte": "Cet atelier m'a permis de découvrir ma passion pour l'UX design.",
+              "auteur": "Marie L.",
+              "photo": "src/assets/ateliers/5/temoignages/student1.jpg"
+            },
+            {
+              "texte": "Une expérience enrichissante qui m'a ouvert de nouvelles perspectives.",
+              "auteur": "Thomas B.",
+              "photo": "src/assets/ateliers/5/temoignages/student2.jpg"
+            },
+            {
+              "texte": "J'ai acquis des compétences précieuses pour mon futur professionnel.",
+              "auteur": "Sophie M.",
+              "photo": "src/assets/ateliers/5/temoignages/student3.jpg"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 6,
+      "titre": "Atelier 6",
+      "sections": {
+        "intro": {
+          "titre": "Introduction à l'Atelier Digital",
+          "description": "Une expérience immersive dans l'univers du design numérique. Les étudiants explorent les frontières entre créativité et technologie.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/6/intro/main.jpg",
+              "alt": "Vue principale du projet"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/6/intro/second1.jpg",
+                "alt": "Détail du processus créatif"
+              },
+              {
+                "url": "src/assets/ateliers/6/intro/second2.jpg",
+                "alt": "Résultat final"
+              }
+            ]
+          }
+        },
+        "objectif": {
+          "description": "Maîtriser les fondamentaux du design d'interface tout en développant une approche créative unique. Créer des expériences utilisateur innovantes et intuitives.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/6/objectif/tools.jpg",
+              "alt": "Outils principaux utilisés"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/6/objectif/student1.jpg",
+                "alt": "Étudiant au travail"
+              },
+              {
+                "url": "src/assets/ateliers/6/objectif/student2.jpg",
+                "alt": "Collaboration en équipe"
+              }
+            ]
+          }
+        },
+        "outils": {
+          "description": "Utilisation approfondie de la suite Adobe Creative Cloud et des outils de prototypage modernes.",
+          "photos": [
+            {
+              "url": "src/assets/ateliers/6/outils/tool1.jpg",
+              "alt": "Adobe XD interface"
+            },
+            {
+              "url": "src/assets/ateliers/6/outils/tool2.jpg",
+              "alt": "Figma en action"
+            },
+            {
+              "url": "src/assets/ateliers/6/outils/tool3.jpg",
+              "alt": "Prototype final"
+            }
+          ]
+        },
+        "temoignages": {
+          "liste": [
+            {
+              "texte": "Cet atelier m'a permis de découvrir ma passion pour l'UX design.",
+              "auteur": "Marie L.",
+              "photo": "src/assets/ateliers/6/temoignages/student1.jpg"
+            },
+            {
+              "texte": "Une expérience enrichissante qui m'a ouvert de nouvelles perspectives.",
+              "auteur": "Thomas B.",
+              "photo": "src/assets/ateliers/6/temoignages/student2.jpg"
+            },
+            {
+              "texte": "J'ai acquis des compétences précieuses pour mon futur professionnel.",
+              "auteur": "Sophie M.",
+              "photo": "src/assets/ateliers/6/temoignages/student3.jpg"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 7,
+      "titre": "Atelier 7",
+      "sections": {
+        "intro": {
+          "titre": "Introduction à l'Atelier Digital",
+          "description": "Une expérience immersive dans l'univers du design numérique. Les étudiants explorent les frontières entre créativité et technologie.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/7/intro/main.jpg",
+              "alt": "Vue principale du projet"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/7/intro/second1.jpg",
+                "alt": "Détail du processus créatif"
+              },
+              {
+                "url": "src/assets/ateliers/7/intro/second2.jpg",
+                "alt": "Résultat final"
+              }
+            ]
+          }
+        },
+        "objectif": {
+          "description": "Maîtriser les fondamentaux du design d'interface tout en développant une approche créative unique. Créer des expériences utilisateur innovantes et intuitives.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/7/objectif/tools.jpg",
+              "alt": "Outils principaux utilisés"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/7/objectif/student1.jpg",
+                "alt": "Étudiant au travail"
+              },
+              {
+                "url": "src/assets/ateliers/7/objectif/student2.jpg",
+                "alt": "Collaboration en équipe"
+              }
+            ]
+          }
+        },
+        "outils": {
+          "description": "Utilisation approfondie de la suite Adobe Creative Cloud et des outils de prototypage modernes.",
+          "photos": [
+            {
+              "url": "src/assets/ateliers/7/outils/tool1.jpg",
+              "alt": "Adobe XD interface"
+            },
+            {
+              "url": "src/assets/ateliers/7/outils/tool2.jpg",
+              "alt": "Figma en action"
+            },
+            {
+              "url": "src/assets/ateliers/7/outils/tool3.jpg",
+              "alt": "Prototype final"
+            }
+          ]
+        },
+        "temoignages": {
+          "liste": [
+            {
+              "texte": "Cet atelier m'a permis de découvrir ma passion pour l'UX design.",
+              "auteur": "Marie L.",
+              "photo": "src/assets/ateliers/7/temoignages/student1.jpg"
+            },
+            {
+              "texte": "Une expérience enrichissante qui m'a ouvert de nouvelles perspectives.",
+              "auteur": "Thomas B.",
+              "photo": "src/assets/ateliers/7/temoignages/student2.jpg"
+            },
+            {
+              "texte": "J'ai acquis des compétences précieuses pour mon futur professionnel.",
+              "auteur": "Sophie M.",
+              "photo": "src/assets/ateliers/7/temoignages/student3.jpg"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 8,
+      "titre": "Atelier 8",
+      "sections": {
+        "intro": {
+          "titre": "Introduction à l'Atelier Digital",
+          "description": "Une expérience immersive dans l'univers du design numérique. Les étudiants explorent les frontières entre créativité et technologie.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/8/intro/main.jpg",
+              "alt": "Vue principale du projet"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/8/intro/second1.jpg",
+                "alt": "Détail du processus créatif"
+              },
+              {
+                "url": "src/assets/ateliers/8/intro/second2.jpg",
+                "alt": "Résultat final"
+              }
+            ]
+          }
+        },
+        "objectif": {
+          "description": "Maîtriser les fondamentaux du design d'interface tout en développant une approche créative unique. Créer des expériences utilisateur innovantes et intuitives.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/8/objectif/tools.jpg",
+              "alt": "Outils principaux utilisés"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/8/objectif/student1.jpg",
+                "alt": "Étudiant au travail"
+              },
+              {
+                "url": "src/assets/ateliers/8/objectif/student2.jpg",
+                "alt": "Collaboration en équipe"
+              }
+            ]
+          }
+        },
+        "outils": {
+          "description": "Utilisation approfondie de la suite Adobe Creative Cloud et des outils de prototypage modernes.",
+          "photos": [
+            {
+              "url": "src/assets/ateliers/8/outils/tool1.jpg",
+              "alt": "Adobe XD interface"
+            },
+            {
+              "url": "src/assets/ateliers/8/outils/tool2.jpg",
+              "alt": "Figma en action"
+            },
+            {
+              "url": "src/assets/ateliers/8/outils/tool3.jpg",
+              "alt": "Prototype final"
+            }
+          ]
+        },
+        "temoignages": {
+          "liste": [
+            {
+              "texte": "Cet atelier m'a permis de découvrir ma passion pour l'UX design.",
+              "auteur": "Marie L.",
+              "photo": "src/assets/ateliers/8/temoignages/student1.jpg"
+            },
+            {
+              "texte": "Une expérience enrichissante qui m'a ouvert de nouvelles perspectives.",
+              "auteur": "Thomas B.",
+              "photo": "src/assets/ateliers/8/temoignages/student2.jpg"
+            },
+            {
+              "texte": "J'ai acquis des compétences précieuses pour mon futur professionnel.",
+              "auteur": "Sophie M.",
+              "photo": "src/assets/ateliers/8/temoignages/student3.jpg"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 9,
+      "titre": "Atelier 9",
+      "sections": {
+        "intro": {
+          "titre": "Introduction à l'Atelier Digital",
+          "description": "Une expérience immersive dans l'univers du design numérique. Les étudiants explorent les frontières entre créativité et technologie.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/9/intro/main.jpg",
+              "alt": "Vue principale du projet"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/9/intro/second1.jpg",
+                "alt": "Détail du processus créatif"
+              },
+              {
+                "url": "src/assets/ateliers/9/intro/second2.jpg",
+                "alt": "Résultat final"
+              }
+            ]
+          }
+        },
+        "objectif": {
+          "description": "Maîtriser les fondamentaux du design d'interface tout en développant une approche créative unique. Créer des expériences utilisateur innovantes et intuitives.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/9/objectif/tools.jpg",
+              "alt": "Outils principaux utilisés"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/9/objectif/student1.jpg",
+                "alt": "Étudiant au travail"
+              },
+              {
+                "url": "src/assets/ateliers/9/objectif/student2.jpg",
+                "alt": "Collaboration en équipe"
+              }
+            ]
+          }
+        },
+        "outils": {
+          "description": "Utilisation approfondie de la suite Adobe Creative Cloud et des outils de prototypage modernes.",
+          "photos": [
+            {
+              "url": "src/assets/ateliers/9/outils/tool1.jpg",
+              "alt": "Adobe XD interface"
+            },
+            {
+              "url": "src/assets/ateliers/9/outils/tool2.jpg",
+              "alt": "Figma en action"
+            },
+            {
+              "url": "src/assets/ateliers/9/outils/tool3.jpg",
+              "alt": "Prototype final"
+            }
+          ]
+        },
+        "temoignages": {
+          "liste": [
+            {
+              "texte": "Cet atelier m'a permis de découvrir ma passion pour l'UX design.",
+              "auteur": "Marie L.",
+              "photo": "src/assets/ateliers/9/temoignages/student1.jpg"
+            },
+            {
+              "texte": "Une expérience enrichissante qui m'a ouvert de nouvelles perspectives.",
+              "auteur": "Thomas B.",
+              "photo": "src/assets/ateliers/9/temoignages/student2.jpg"
+            },
+            {
+              "texte": "J'ai acquis des compétences précieuses pour mon futur professionnel.",
+              "auteur": "Sophie M.",
+              "photo": "src/assets/ateliers/9/temoignages/student3.jpg"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 10,
+      "titre": "Atelier 10",
+      "sections": {
+        "intro": {
+          "titre": "Introduction à l'Atelier Digital",
+          "description": "Une expérience immersive dans l'univers du design numérique. Les étudiants explorent les frontières entre créativité et technologie.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/10/intro/main.jpg",
+              "alt": "Vue principale du projet"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/10/intro/second1.jpg",
+                "alt": "Détail du processus créatif"
+              },
+              {
+                "url": "src/assets/ateliers/10/intro/second2.jpg",
+                "alt": "Résultat final"
+              }
+            ]
+          }
+        },
+        "objectif": {
+          "description": "Maîtriser les fondamentaux du design d'interface tout en développant une approche créative unique. Créer des expériences utilisateur innovantes et intuitives.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/10/objectif/tools.jpg",
+              "alt": "Outils principaux utilisés"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/10/objectif/student1.jpg",
+                "alt": "Étudiant au travail"
+              },
+              {
+                "url": "src/assets/ateliers/10/objectif/student2.jpg",
+                "alt": "Collaboration en équipe"
+              }
+            ]
+          }
+        },
+        "outils": {
+          "description": "Utilisation approfondie de la suite Adobe Creative Cloud et des outils de prototypage modernes.",
+          "photos": [
+            {
+              "url": "src/assets/ateliers/10/outils/tool1.jpg",
+              "alt": "Adobe XD interface"
+            },
+            {
+              "url": "src/assets/ateliers/10/outils/tool2.jpg",
+              "alt": "Figma en action"
+            },
+            {
+              "url": "src/assets/ateliers/10/outils/tool3.jpg",
+              "alt": "Prototype final"
+            }
+          ]
+        },
+        "temoignages": {
+          "liste": [
+            {
+              "texte": "Cet atelier m'a permis de découvrir ma passion pour l'UX design.",
+              "auteur": "Marie L.",
+              "photo": "src/assets/ateliers/10/temoignages/student1.jpg"
+            },
+            {
+              "texte": "Une expérience enrichissante qui m'a ouvert de nouvelles perspectives.",
+              "auteur": "Thomas B.",
+              "photo": "src/assets/ateliers/10/temoignages/student2.jpg"
+            },
+            {
+              "texte": "J'ai acquis des compétences précieuses pour mon futur professionnel.",
+              "auteur": "Sophie M.",
+              "photo": "src/assets/ateliers/10/temoignages/student3.jpg"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": 11,
+      "titre": "Atelier 11",
+      "sections": {
+        "intro": {
+          "titre": "Introduction à l'Atelier Digital",
+          "description": "Une expérience immersive dans l'univers du design numérique. Les étudiants explorent les frontières entre créativité et technologie.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/11/intro/main.jpg",
+              "alt": "Vue principale du projet"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/11/intro/second1.jpg",
+                "alt": "Détail du processus créatif"
+              },
+              {
+                "url": "src/assets/ateliers/11/intro/second2.jpg",
+                "alt": "Résultat final"
+              }
+            ]
+          }
+        },
+        "objectif": {
+          "description": "Maîtriser les fondamentaux du design d'interface tout en développant une approche créative unique. Créer des expériences utilisateur innovantes et intuitives.",
+          "photos": {
+            "principale": {
+              "url": "src/assets/ateliers/11/objectif/tools.jpg",
+              "alt": "Outils principaux utilisés"
+            },
+            "secondaires": [
+              {
+                "url": "src/assets/ateliers/11/objectif/student1.jpg",
+                "alt": "Étudiant au travail"
+              },
+              {
+                "url": "src/assets/ateliers/11/objectif/student2.jpg",
+                "alt": "Collaboration en équipe"
+              }
+            ]
+          }
+        },
+        "outils": {
+          "description": "Utilisation approfondie de la suite Adobe Creative Cloud et des outils de prototypage modernes.",
+          "photos": [
+            {
+              "url": "src/assets/ateliers/11/outils/tool1.jpg",
+              "alt": "Adobe XD interface"
+            },
+            {
+              "url": "src/assets/ateliers/11/outils/tool2.jpg",
+              "alt": "Figma en action"
+            },
+            {
+              "url": "src/assets/ateliers/11/outils/tool3.jpg",
+              "alt": "Prototype final"
+            }
+          ]
+        },
+        "temoignages": {
+          "liste": [
+            {
+              "texte": "Cet atelier m'a permis de découvrir ma passion pour l'UX design.",
+              "auteur": "Marie L.",
+              "photo": "src/assets/ateliers/11/temoignages/student1.jpg"
+            },
+            {
+              "texte": "Une expérience enrichissante qui m'a ouvert de nouvelles perspectives.",
+              "auteur": "Thomas B.",
+              "photo": "src/assets/ateliers/11/temoignages/student2.jpg"
+            },
+            {
+              "texte": "J'ai acquis des compétences précieuses pour mon futur professionnel.",
+              "auteur": "Sophie M.",
+              "photo": "src/assets/ateliers/11/temoignages/student3.jpg"
+            }
+          ]
+        }
+      }
+    }
+  ]
+} 
