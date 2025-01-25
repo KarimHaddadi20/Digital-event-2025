@@ -13,7 +13,9 @@ export class PortalTransitionScene extends SceneSetup {
         this.app = app;
         this.fragments = [];
         this.currentFragmentIndex = 0;
-        this.scrollThreshold = window.innerHeight * 0.5;
+        this.scrollThreshold = window.innerHeight * 0.2;
+            this.scrollSpeed = 0.5; // Add scroll speed control
+
 
         // Initialize scroll tracking
         this.lastScrollPosition = 0;
@@ -35,7 +37,9 @@ export class PortalTransitionScene extends SceneSetup {
                     map: texture,
                     side: THREE.BackSide,
                     transparent: true,
-                    opacity: 1,
+                    opacity: 0.6,
+                    color: 0x404040,  // Add dark tint
+
                     depthTest: false,  // Disable depth testing
                     depthWrite: false, // Disable depth writing
                     renderOrder: -1    // Render first (background)
@@ -137,7 +141,7 @@ export class PortalTransitionScene extends SceneSetup {
         this.animate();
 
         // Ajuster la position initiale de la caméra dans setupScene aussi
-        this.camera.position.set(0, 0, 15);
+        this.camera.position.set(0, 0, 10);
         this.camera.lookAt(0, 0, 5); // Faire regarder la caméra vers le premier fragment
         
         // Définir les limites de zoom pour les contrôles
