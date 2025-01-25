@@ -1,0 +1,60 @@
+{
+    "atelier1": {
+        "sets": [
+            {
+                "title": "L'Horizon Perdu",
+                "subtitle": "Une œuvre abstraite évoquant les limites entre ciel et terre",
+                "image": "src/textures/A1-01.png"
+            },
+            {
+                "title": "Frontières Invisibles",
+                "subtitle": "Exploration des limites de la perception",
+                "image": "src/textures/A1-02.png"
+            },
+            {
+                "title": "Passage Éthéré",
+                "subtitle": "La transition entre deux mondes",
+                "image": "src/textures/A1-03.png"
+            },
+            {
+                "title": "Résonance Spatiale",
+                "subtitle": "L'écho des dimensions parallèles",
+                "image": "src/textures/A1-04.png"
+            },
+            {
+                "title": "Convergence",
+                "subtitle": "Le point de rencontre des réalités",
+                "image": "src/textures/A1-05.png"
+            }
+        ]
+    },
+    "atelier2": {
+        "sets": [
+            {
+                "title": "Mélodie Fractale",
+                "subtitle": "Une composition visuelle inspirée par la musique",
+                "image": "src/textures/A2-01.png"
+            },
+            {
+                "title": "Rythme Numérique",
+                "subtitle": "La danse des pixels dans l'espace",
+                "image": "src/textures/A2-02.png"
+            },
+            {
+                "title": "Harmonie Digitale",
+                "subtitle": "La fusion parfaite entre son et image",
+                "image": "src/textures/A2-03.png"
+            },
+            {
+                "title": "Onde Sonore",
+                "subtitle": "Visualisation du son dans l'espace",
+                "image": "src/textures/A2-04.png"
+            },
+            {
+                "title": "Symphonie Visuelle",
+                "subtitle": "L'orchestration des éléments visuels",
+                "image": "src/textures/A2-05.png"
+            }
+        ]
+    }
+} 

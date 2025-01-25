@@ -1,80 +1,250 @@
 import * as THREE from 'three';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
-import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
-import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 import { SceneSetup } from './SceneSetup.js';
 
 export class PortalTransitionScene extends SceneSetup {
     constructor(app) {
-        // Appeler le constructeur parent sans HDRI
         super(false);
         
         this.app = app;
         this.fragments = [];
-        this.time = 0;
-        this.lastLogTime = 0;
-        this.originalFragmentPosition = null;
-        this.isReturning = false;
-        
-        
-        // Configuration de la caméra
-        this.camera.position.set(0, 0, 20);
+        this.time = 0; // Initialisation du temps
+        this.camera.position.set(0, 0, 7); // Position initiale de la caméra
         this.camera.lookAt(0, 0, 0);
         
-        // Forcer la réinitialisation complète de la scène
         this.scene = new THREE.Scene();
-        
-        // Configuration spécifique pour cette scène
         this.scene.background = new THREE.Color(0x000000);
-        this.scene.fog = new THREE.FogExp2(0x000000, 0.02);
         
         // Configuration du renderer
+        this.setupRenderers();
+        
+        // Configuration des lumières
+        this.setupCustomLights();
+        
+        // Ajouter le background
+        this.setupBackground();
+        
+        // Ajouter les fragments de manière asynchrone
+        this.setupFragments();
+        
+        // Configurer le scroll
+        this.setupScrollHandler();
+        
+        // Démarrer l'animation
+        this.animate();
+    }
+
+    setupRenderers() {
+        // WebGL Renderer
         this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setClearColor(0x000000);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         
-        // Supprimer l'ancien renderer s'il existe
+        // CSS2D Renderer
+        this.labelRenderer = new CSS2DRenderer();
+        this.labelRenderer.setSize(window.innerWidth, window.innerHeight);
+        this.labelRenderer.domElement.style.position = 'absolute';
+        this.labelRenderer.domElement.style.top = '0px';
+        this.labelRenderer.domElement.style.pointerEvents = 'none';
+        
+        // Nettoyer et ajouter les renderers
         const container = document.getElementById("scene-container");
         while (container.firstChild) {
             container.removeChild(container.firstChild);
         }
         container.appendChild(this.renderer.domElement);
+        container.appendChild(this.labelRenderer.domElement);
+    }
+
+    setupScrollHandler() {
+        let timeoutId = null;
+        window.addEventListener('wheel', (event) => {
+            if (timeoutId) return;
+            timeoutId = setTimeout(() => {
+                this.onScroll(event);
+                timeoutId = null;
+            }, 18);
+        }, { passive: false });
+    }
+
+    onScroll(event) {
+        event.preventDefault();
         
-        // Désactiver les contrôles pour cette scène
-        if (this.controls) {
-            this.controls.enabled = false;
+        const scrollSpeed = 0.1;
+        const minZ = 6;
+        const maxZ = -(this.fragments.length * 20) + minZ;
+        const currentZ = this.camera.position.z;
+        
+        let delta = event.deltaY * scrollSpeed;
+        
+        if (currentZ - delta > minZ) delta = currentZ - minZ;
+        if (currentZ - delta < maxZ) delta = currentZ - maxZ;
+        
+        if (currentZ - delta >= maxZ && currentZ - delta <= minZ) {
+            gsap.to(this.camera.position, {
+                z: currentZ - delta,
+                duration: 1.2,
+                ease: "power3.out",
+                onUpdate: () => {
+                    this.updateFragments();
+                }
+            });
         }
-        
-        // Configurer les lumières
-        this.setupCustomLights();
-        
-        // Créer le plan de fade
-        const fadeGeometry = new THREE.PlaneGeometry(100, 100);
-        const fadeMaterial = new THREE.MeshBasicMaterial({
-            color: 0x000000,
-            transparent: true,
-            opacity: 1,
-            side: THREE.DoubleSide,
-            depthTest: false
+    }
+
+    updateFragments() {
+        this.fragments.forEach(fragment => {
+            const mesh = fragment.mesh;
+            if (!mesh) return;
+
+            const distance = mesh.position.z - this.camera.position.z;
+            
+            let opacity = 1;
+            if (distance < -5 && distance > -15) {
+                opacity = (distance + 15) / 10;
+            } else if (distance > 5 && distance < 15) {
+                opacity = 1 - ((distance - 5) / 10);
+            } else if (distance <= -15 || distance >= 15) {
+                opacity = 0;
+            }
+            
+            if (mesh.material) {
+                mesh.material.opacity = THREE.MathUtils.clamp(opacity, 0, 1);
+            }
+
+            const positions = mesh.geometry.attributes.position;
+            for (let i = 0; i < positions.count; i++) {
+                const x = positions.getX(i);
+                const y = positions.getY(i);
+                
+                const z = 0.2 *
+                    Math.sin(x * 0.8 + this.time) *
+                    Math.cos(y * 0.8 + this.time);
+                
+                positions.setZ(i, z);
+            }
+            positions.needsUpdate = true;
+
+            const xOffset = fragment.exitDirection === 'left' ? -20 : 20;
+            const xPosition = (distance / 30) * xOffset;
+            mesh.position.x = fragment.exitDirection === 'left' ? 
+                Math.min(xPosition, -4) :
+                Math.max(xPosition, 4);
+
+            const label = mesh.children.find(child => child instanceof CSS2DObject);
+            if (label) {
+                label.element.style.opacity = mesh.material.opacity;
+            }
         });
-        this.fadePlane = new THREE.Mesh(fadeGeometry, fadeMaterial);
-        this.fadePlane.position.z = this.camera.position.z - 1;
-        this.fadePlane.renderOrder = 999;
-        this.scene.add(this.fadePlane);
-        
-        // Créer les fragments qui défilent
-        this.createScrollingFragments();
-        
-        // Ajouter l'écouteur pour le bouton retour
-        const backButton = document.getElementById('back-button');
-        if (backButton) {
-            backButton.addEventListener('click', () => this.handleReturn());
+    }
+
+    async setupFragments() {
+        try {
+            const response = await fetch('/src/data/portalData.json');
+            const data = await response.json();
+            
+            // Récupérer les données de l'atelier correspondant
+            const atelierData = data.atelier1; // À adapter selon l'atelier
+            
+            const fragmentsData = atelierData.sets.map((set, index) => ({
+                texture: set.image,
+                title: set.title,
+                subtitle: set.subtitle,
+                position: { 
+                    x: index % 2 === 0 ? -4 : 4, 
+                    y: 1, 
+                    z: -5 - (index * 10) 
+                },
+                exitDirection: index % 2 === 0 ? 'left' : 'right'
+            }));
+
+            fragmentsData.forEach(data => this.createFragment(data));
+        } catch (error) {
+            console.error('Erreur lors du chargement des données:', error);
         }
+    }
+
+    createFragment(data) {
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.load(data.texture, (texture) => {
+            const geometry = new THREE.PlaneGeometry(6, 6, 50, 50);
+            const material = new THREE.MeshStandardMaterial({
+                map: texture,
+                metalness: 0.1,
+                roughness: 0.8,
+                side: THREE.DoubleSide,
+                transparent: true,
+                opacity: 1
+            });
+            const imageMesh = new THREE.Mesh(geometry, material);
+            imageMesh.position.set(data.position.x, data.position.y, data.position.z);
+            this.scene.add(imageMesh);
+            
+            const textContainer = document.createElement('div');
+            textContainer.className = 'portal-text';
+            
+            const title = document.createElement('h2');
+            title.textContent = data.title;
+            title.style.cssText = `
+                font-family: 'Fraunces, serif';
+                font-size: 1.2em;
+                color: white;
+                margin: 0 0 0.5em 0;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            `;
+            
+            const subtitle = document.createElement('p');
+            subtitle.textContent = data.subtitle;
+            subtitle.style.cssText = `
+                font-family: 'Aktiv Grotesk, sans-serif';
+                font-size: 0.9em;
+                color: rgba(255, 255, 255, 0.8);
+                margin: 0;
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            `;
+            
+            textContainer.appendChild(title);
+            textContainer.appendChild(subtitle);
+            
+            const label = new CSS2DObject(textContainer);
+            label.position.set(0, -3.5, 0);
+            imageMesh.add(label);
+            
+            this.fragments.push({
+                mesh: imageMesh,
+                exitDirection: data.exitDirection
+            });
+        });
+    }
+
+    animate() {
+        requestAnimationFrame(() => this.animate());
         
-        // Démarrer l'animation
-        this.animate();
+        this.time += 0.01; // Mise à jour du temps
+        this.updateFragments(); // Mise à jour des fragments à chaque frame
+        
+        // Rendu de la scène
+        if (this.renderer && this.scene && this.camera) {
+            this.renderer.render(this.scene, this.camera);
+            this.labelRenderer.render(this.scene, this.camera);
+        }
+    }
+
+    setupBackground() {
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.load('src/textures/escape.png', (texture) => {
+            const aspectRatio = window.innerWidth / window.innerHeight;
+            const bgGeometry = new THREE.PlaneGeometry(40 * aspectRatio, 40);
+            const bgMaterial = new THREE.MeshBasicMaterial({
+                map: texture,
+                side: THREE.DoubleSide
+            });
+            const bgMesh = new THREE.Mesh(bgGeometry, bgMaterial);
+            bgMesh.position.z = -30;
+            bgMesh.renderOrder = -1;
+            this.scene.add(bgMesh);
+        });
     }
 
     setupCustomLights() {
@@ -101,200 +271,5 @@ export class PortalTransitionScene extends SceneSetup {
         const backLight = new THREE.DirectionalLight(0xe91e63, 3);
         backLight.position.set(0, -5, -5);
         this.scene.add(backLight);
-
-    }
-
-    createScrollingFragments() {
-        // Créer le fragment principal avec la texture A1-01
-        const textureLoader = new THREE.TextureLoader();
-        textureLoader.load('src/textures/A1-01.png', (texture) => {
-            const fragmentGeometry = new THREE.PlaneGeometry(4, 4);
-            const fragmentMaterial = new THREE.MeshPhongMaterial({
-                map: texture,
-                transparent: true,
-                opacity: 1,
-                side: THREE.DoubleSide
-            });
-
-            const mainFragment = new THREE.Mesh(fragmentGeometry, fragmentMaterial);
-            mainFragment.position.set(0, 0, -10);
-            this.scene.add(mainFragment);
-            this.fragments.push(mainFragment);
-
-            // Créer les fragments décoratifs
-            const decorativeGeometry = new THREE.IcosahedronGeometry(1, 0);
-            const decorativeMaterial = new THREE.MeshPhongMaterial({
-                color: 0x7c4dff,
-                emissive: 0x2a0096,
-                shininess: 100,
-                transparent: true,
-                opacity: 1,
-                side: THREE.DoubleSide
-            });
-
-            // Créer plusieurs fragments avec des positions aléatoires
-            for (let i = 0; i < 50; i++) {
-                const fragment = new THREE.Mesh(decorativeGeometry, decorativeMaterial.clone());
-                
-                // Position aléatoire dans un volume cylindrique
-                const radius = Math.random() * 10 + 5;
-                const angle = Math.random() * Math.PI * 2;
-                const zPos = Math.random() * 100 - 50;
-                
-                fragment.position.set(
-                    Math.cos(angle) * radius,
-                    Math.sin(angle) * radius,
-                    zPos
-                );
-                
-                fragment.rotation.set(
-                    Math.random() * Math.PI,
-                    Math.random() * Math.PI,
-                    Math.random() * Math.PI
-                );
-                
-                fragment.scale.set(
-                    Math.random() * 0.5 + 0.5,
-                    Math.random() * 0.5 + 0.5,
-                    Math.random() * 0.5 + 0.5
-                );
-                
-                this.fragments.push(fragment);
-                this.scene.add(fragment);
-            }
-
-            // Démarrer le fade in une fois que tout est chargé
-            this.startFadeIn();
-        });
-    }
-
-    // Surcharger la méthode clearScene pour nettoyer le texte
-    clearScene() {
-        if (this.textElement) {
-            this.textElement.remove();
-        }
-        
-        // Sauvegarder les fragments avant de nettoyer
-        const savedFragments = [...this.fragments];
-        
-        // Nettoyer la scène en appelant la méthode parent
-        super.clearScene();
-        
-        // Réajouter les fragments à la scène
-        savedFragments.forEach(fragment => {
-            if (fragment.material && fragment.geometry) {
-                this.scene.add(fragment);
-            }
-        });
-        
-        // Mettre à jour la liste des fragments
-        this.fragments = savedFragments;
-        
-    }
-
-    animate() {
-        requestAnimationFrame(() => this.animate());
-        
-        if (!this.isReturning) {
-            this.time += 0.01;
-            
-            // Animation normale des fragments
-            this.fragments.forEach((fragment, index) => {
-                if (!fragment.material) return;
-                
-                const speed = 0.02;
-                const radius = 5 + Math.sin(this.time + index) * 2;
-                const angle = this.time * speed + index * (Math.PI * 2 / this.fragments.length);
-                
-                fragment.position.x = Math.cos(angle) * radius;
-                fragment.position.y = Math.sin(angle) * radius;
-                fragment.position.z += 0.1;
-                
-                fragment.rotation.x += 0.01;
-                fragment.rotation.y += 0.01;
-                
-                if (fragment.position.z > 50) {
-                    fragment.position.z = -50;
-                }
-            });
-        }
-        
-        // Rendu de la scène
-        if (this.renderer && this.scene && this.camera) {
-            this.renderer.render(this.scene, this.camera);
-        } else {
-            console.error('Renderer, scene ou camera manquant:', {
-                renderer: !!this.renderer,
-                scene: !!this.scene,
-                camera: !!this.camera
-            });
-        }
-    }
-
-    startFadeIn() {
-        const fadeIn = () => {
-            if (this.fadePlane.material.opacity <= 0) {
-                // Fade in terminé, nettoyer le plan de fade
-                this.fadePlane.geometry.dispose();
-                this.fadePlane.material.dispose();
-                this.scene.remove(this.fadePlane);
-                return;
-            }
-            
-            this.fadePlane.material.opacity -= 0.02;
-            requestAnimationFrame(fadeIn);
-        };
-        
-        fadeIn();
-    }
-
-    handleReturn() {
-        if (this.isReturning) return;
-        this.isReturning = true;
-
-        // Créer un plan noir pour le fade out
-        const fadeGeometry = new THREE.PlaneGeometry(100, 100);
-        const fadeMaterial = new THREE.MeshBasicMaterial({
-            color: 0x000000,
-            transparent: true,
-            opacity: 0,
-            side: THREE.DoubleSide,
-            depthTest: false
-        });
-        const fadePlane = new THREE.Mesh(fadeGeometry, fadeMaterial);
-        fadePlane.position.z = this.camera.position.z - 1;
-        fadePlane.renderOrder = 999;
-        this.scene.add(fadePlane);
-
-        // Animation de fade out
-        const fadeOut = () => {
-            if (fadeMaterial.opacity >= 1) {
-                // Nettoyer la scène actuelle
-                this.clearScene();
-                
-                // Supprimer tous les éléments CSS2D
-                const css2dElements = document.querySelectorAll('.css2d-label');
-                css2dElements.forEach(element => element.remove());
-                
-                // Supprimer le renderer actuel
-                const container = document.getElementById("scene-container");
-                while (container.firstChild) {
-                    container.removeChild(container.firstChild);
-                }
-                
-                // Recréer la scène initiale via l'app
-                if (this.app && typeof this.app.recreateInitialScene === 'function') {
-                    this.app.recreateInitialScene();
-                } else {
-                    console.error('Impossible de recréer la scène initiale');
-                }
-                return;
-            }
-            
-            fadeMaterial.opacity += 0.02;
-            requestAnimationFrame(fadeOut);
-        };
-
-        fadeOut();
     }
 } 

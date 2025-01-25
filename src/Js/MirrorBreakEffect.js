@@ -4,7 +4,7 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 import { SceneSetup } from "./SceneSetup.js";
 import { FragmentManager } from "./FragmentManager.js";
-import { AtelierGalleryScene } from "./AtelierGalleryScene.js";
+// import { AtelierGalleryScene } from "./AtelierGalleryScene.js";
 import { PortalTransitionScene } from "./PortalTransitionScene.js";
 
 class MirrorBreakEffect extends SceneSetup {
