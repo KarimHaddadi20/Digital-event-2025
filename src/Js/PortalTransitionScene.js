@@ -12,33 +12,69 @@ export class PortalTransitionScene extends SceneSetup {
         
         this.app = app;
         this.fragments = [];
+        this.currentFragmentIndex = 0;
+        this.scrollThreshold = window.innerHeight * 0.5;
+
+        // Initialize scroll tracking
+        this.lastScrollPosition = 0;
+        this.currentScrollPosition = 0;
+
+        // Bind scroll handler
+        window.addEventListener('scroll', this.handleScroll.bind(this));
+
+        // Clear scene background
+        this.scene.background = null;
         
-        // Initial camera setup to see first fragment
-        this.camera.position.set(0, 0, 8); // Moved closer
-        this.camera.lookAt(0, 0, 0);
+        // Add background sphere with adjusted properties
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.load(
+            '/src/textures/monde/monde2.png',
+            (texture) => {
+                const geometry = new THREE.SphereGeometry(2000, 64, 64); // Increased size
+                const material = new THREE.MeshBasicMaterial({ 
+                    map: texture,
+                    side: THREE.BackSide,
+                    transparent: true,
+                    opacity: 1,
+                    depthTest: false,  // Disable depth testing
+                    depthWrite: false, // Disable depth writing
+                    renderOrder: -1    // Render first (background)
+                });
+                
+                const backgroundSphere = new THREE.Mesh(geometry, material);
+                backgroundSphere.renderOrder = -1; // Ensure background renders first
+                this.scene.add(backgroundSphere);
+            }
+        );
+
+        // Adjust camera
+        this.camera.position.set(0, 0, 8); // Rapprocher la caméra de 15 à 10
+        this.camera.near = 0.1;
+        this.camera.far = 3000;
+        this.camera.updateProjectionMatrix();
         
         // Fragment data with first one visible
         this.fragmentsData = [
             {
-                position: { x: -4, y: 0, z: 2 }, // Closer position
+                position: { x: -4, y: 0, z: 0 },  // Premier fragment plus proche (de 5 à 2)
                 title: "Portal Gateway",
                 description: "Enter the digital realm",
-                initialOpacity: 1 // Force first fragment visible
+                initialOpacity: 1
             },
             {
-                position: { x: 4, y: 0, z: -15 }, // Closer spacing
+                position: { x: 4, y: 0, z: -8 },  // Ajusté proportionnellement
                 title: "Digital Nexus",
                 description: "Connection point of realities",
                 initialOpacity: 0
             },
             {
-                position: { x: -4, y: 0, z: -30 }, // Closer spacing
+                position: { x: -4, y: 0, z: -18 }, // Ajusté proportionnellement
                 title: "Data Stream",
                 description: "Flow of information",
                 initialOpacity: 0
             },
             {
-                position: { x: 4, y: 0, z: -45 }, // Closer spacing
+                position: { x: 4, y: 0, z: -28 },  // Ajusté proportionnellement
                 title: "Virtual Echo",
                 description: "Resonance of code",
                 initialOpacity: 0
@@ -47,6 +83,14 @@ export class PortalTransitionScene extends SceneSetup {
         
         this.setupScene();
         this.createScrollingFragments();
+
+        this.currentScrollPosition = 0;
+        this.scrollThreshold = 300; // Pixels per transition
+        
+        // Add scroll listener
+        window.addEventListener('scroll', () => {
+            this.handleScroll();
+        });
     }
 
     setupScene() {
@@ -91,6 +135,17 @@ export class PortalTransitionScene extends SceneSetup {
         
         // Démarrer l'animation
         this.animate();
+
+        // Ajuster la position initiale de la caméra dans setupScene aussi
+        this.camera.position.set(0, 0, 15);
+        this.camera.lookAt(0, 0, 5); // Faire regarder la caméra vers le premier fragment
+        
+        // Définir les limites de zoom pour les contrôles
+        if (this.controls) {
+            this.controls.minDistance = 10;
+            this.controls.maxDistance = 50;
+            this.controls.target.set(0, 0, 5); // Point de focus sur le premier fragment
+        }
     }
 
     setupCustomLights() {
@@ -153,7 +208,20 @@ export class PortalTransitionScene extends SceneSetup {
 
                 this.fragments.push(fragment);
                 this.scene.add(fragment);
+
+                // Assurer que le premier fragment est bien visible
+                if (index === 0) {
+                    fragment.position.z = 5; // Position plus proche de la caméra
+                    fragmentMaterial.opacity = 1;
+                    if (labelDiv) {
+                        labelDiv.style.opacity = 1;
+                    }
+                }
             });
+
+            // Force le rendu initial
+            this.renderer.render(this.scene, this.camera);
+            this.labelRenderer.render(this.scene, this.camera);
         });
     }
 
@@ -186,7 +254,9 @@ export class PortalTransitionScene extends SceneSetup {
         
         // Update fragments opacity based on camera distance
         this.fragments.forEach((fragment, index) => {
-            // Update main fragment opacity
+            // Skip opacity transition for first fragment
+            if (index === 0) return;
+            
             const distance = fragment.position.z - this.camera.position.z;
             
             let opacity = 1;
@@ -200,13 +270,6 @@ export class PortalTransitionScene extends SceneSetup {
             
             fragment.material.opacity = THREE.MathUtils.clamp(opacity, 0, 1);
             
-            // Update child fragments opacity
-            fragment.children.forEach(child => {
-                if (child instanceof THREE.Mesh) {
-                    child.material.opacity = fragment.material.opacity;
-                }
-            });
-
             // Update label opacity
             const label = fragment.children.find(child => child instanceof CSS2DObject);
             if (label) {
@@ -216,6 +279,8 @@ export class PortalTransitionScene extends SceneSetup {
 
         this.renderer.render(this.scene, this.camera);
         this.labelRenderer.render(this.scene, this.camera);
+
+        this.handleScroll(); // Ensure fragments update each frame
     }
 
     // Ajouter le contrôle de défilement pour la caméra
@@ -223,14 +288,13 @@ export class PortalTransitionScene extends SceneSetup {
         window.addEventListener('wheel', (event) => {
             event.preventDefault();
             
-            // Slower scroll speed for better control
-            const scrollSpeed = 0.03;
-            const minZ = 8;
+            const scrollSpeed = 0.05;  // Augmenté de 0.03 à 0.05 pour un défilement plus rapide
+            const minZ = 15;
             
-            // Adjust fragment spacing
-            const fragmentSpacing = 20; // Reduced from default
+            // Réduire l'espacement entre les fragments
+            const fragmentSpacing = 10; // Réduit de 20 à 10
             const lastFragment = this.fragments[this.fragments.length - 1];
-            const maxZ = lastFragment ? lastFragment.position.z + 5 : -45;
+            const maxZ = lastFragment ? lastFragment.position.z + 5 : -30; // Ajusté pour le nouvel espacement
             
             const delta = event.deltaY * scrollSpeed;
             const currentZ = this.camera.position.z;
@@ -244,7 +308,7 @@ export class PortalTransitionScene extends SceneSetup {
             
             gsap.to(this.camera.position, {
                 z: THREE.MathUtils.clamp(targetZ, maxZ, minZ),
-                duration: 1, // Longer duration for smoother movement
+                duration: 1., // Longer duration for smoother movement
                 ease: "power2.inOut", // Smoother easing
                 onUpdate: () => {
                     this.fragments.forEach((fragment, index) => {
@@ -268,35 +332,36 @@ export class PortalTransitionScene extends SceneSetup {
         }, { passive: false });
     }
 
-    createFragments() {
-        const fragmentCount = 5; // Number of main fragments
-        const spacing = 10; // Space between main fragments
-    
-        for (let i = 0; i < fragmentCount; i++) {
-            // Create main fragment
-            const mainFragment = this.createFragment();
-            mainFragment.position.z = i * spacing;
+    handleScroll = () => {
+        this.currentScrollPosition = window.scrollY;
+        
+        this.fragmentsData.forEach((fragment, index) => {
+            const distance = Math.abs(this.currentScrollPosition - (index * this.scrollThreshold));
+            const opacity = index === 0 && this.currentScrollPosition < this.scrollThreshold ? 
+                          1 : // Keep first fragment fully visible initially
+                          Math.max(0, 1 - (distance / this.scrollThreshold));
             
-            // Position main fragments alternating left and right
-            mainFragment.position.x = (i % 2 === 0) ? -5 : 5;
-            
-            this.fragments.push(mainFragment);
-            this.scene.add(mainFragment);
-    
-            // Create two child fragments for each main fragment
-            const childSpacing = 3; // Space between children
-            const childOffset = 2; // How far children are from parent
-    
-            for (let j = 0; j < 2; j++) {
-                const childFragment = this.createFragment(0.7); // Smaller scale
-                
-                // Position children on opposite side of parent
-                childFragment.position.z = mainFragment.position.z + (j - 0.5) * childSpacing;
-                childFragment.position.x = mainFragment.position.x > 0 ? 
-                                         -childOffset : // If parent is right, children go left
-                                         childOffset;  // If parent is left, children go right
-                
-                mainFragment.add(childFragment);
+            if (fragment.mesh) {
+                fragment.mesh.material.opacity = opacity;
+                fragment.mesh.visible = opacity > 0;
+            }
+        });
+
+        this.lastScrollPosition = this.currentScrollPosition;
+    }
+
+    initializeFragments() {
+        // Force first fragment to be visible
+        if (this.fragmentsData[0].mesh) {
+            this.fragmentsData[0].mesh.material.opacity = 1;
+            this.fragmentsData[0].mesh.visible = true;
+        }
+
+        // Initialize others as invisible
+        for (let i = 1; i < this.fragmentsData.length; i++) {
+            if (this.fragmentsData[i].mesh) {
+                this.fragmentsData[i].mesh.material.opacity = 0;
+                this.fragmentsData[i].mesh.visible = false;
             }
         }
     }
