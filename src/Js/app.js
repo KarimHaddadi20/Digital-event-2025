@@ -380,8 +380,6 @@ class MirrorBreakEffect {
     // Ajuster la position de la caméra
     this.camera.position.z = 5;
 
-    const audio = new Audio("brokenglass.mp3");
-    audio.play();
   }
 
   onWindowResize() {

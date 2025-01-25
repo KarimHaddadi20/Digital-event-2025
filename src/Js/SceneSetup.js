@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
+import { Loader } from "./Loader.js";
 
 class SceneSetup {
     constructor(useHDRI = true) {
@@ -39,9 +40,9 @@ class SceneSetup {
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
         this.controls.enableDamping = true;
         this.controls.dampingFactor = 0.05;
-        this.controls.enableZoom = true;
+        this.controls.enableZoom = false;
         this.controls.enablePan = true;
-        this.controls.enableRotate = true;
+        this.controls.enableRotate = false;
 
         this.controls.minDistance = 50;
         this.controls.maxDistance = 200;
@@ -75,11 +76,88 @@ class SceneSetup {
 
     loadHDRI() {
         const rgbeLoader = new RGBELoader();
-        rgbeLoader.load("src/assets/night.hdr", (texture) => {
-            texture.mapping = THREE.EquirectangularReflectionMapping;
-            this.scene.background = texture;
-            this.scene.environment = texture;
+        rgbeLoader.load("src/assets/grey2.hdr", (texture) => {
+          texture.mapping = THREE.EquirectangularReflectionMapping;
+    
+          // Create PMREMGenerator for better reflections
+          const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+          const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+    
+          // Apply environment but keep black background
+          this.scene.environment = envMap;
+          this.scene.background = new THREE.Color(0x000000);
+    
+          // Dispose resources
+          texture.dispose();
+          pmremGenerator.dispose();
         });
+      }
+
+    setupBackground() {
+        // Créer un plan pour l'arrière-plan au lieu d'utiliser environment map
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.load("src/textures/escape.png", (texture) => {
+          const aspectRatio = texture.image.width / texture.image.height;
+    
+          // Créer un grand plan pour l'arrière-plan
+          const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
+          const bgMaterial = new THREE.MeshBasicMaterial({
+            map: texture,
+            side: THREE.FrontSide,
+          });
+    
+          const background = new THREE.Mesh(bgGeometry, bgMaterial);
+    
+          // Positionner le plan derrière le miroir
+          background.position.z = -300; // Ajustez cette valeur selon vos besoins
+          background.position.y = 0; // Ajustez si nécessaire
+    
+          this.scene.add(background);
+    
+          // Définir une couleur de fond neutre au lieu de l'environment map
+          this.scene.background = new THREE.Color(0x000000);
+        });
+    }
+    
+    setupEnvironment() {
+        // Clear any existing environment
+        if (this.scene.environment) {
+          this.scene.environment.dispose();
+        }
+    
+        const textureLoader = new THREE.TextureLoader();
+        console.log("Loading texture from: src/textures/espace.game.png");
+    
+        textureLoader.load(
+          "src/textures/espace.game.png",
+          (texture) => {
+            console.log("Texture loaded successfully");
+    
+            // Configure texture
+            texture.encoding = THREE.sRGBEncoding;
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            texture.needsUpdate = true;
+    
+            // Generate environment map
+            const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+            pmremGenerator.compileEquirectangularShader();
+    
+            const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+    
+            // Apply to scene - both as environment and background
+            this.scene.environment = envMap;
+            this.scene.background = envMap;
+    
+            console.log("Environment set up complete");
+    
+            // Cleanup
+            pmremGenerator.dispose();
+          },
+          undefined, // onProgress callback
+          (error) => {
+            console.error("Error loading texture:", error);
+          }
+        );
     }
 
     onResize() {
@@ -210,6 +288,70 @@ class SceneSetup {
             fadePlane.material.dispose();
             this.scene.remove(fadePlane);
         }
+    }
+
+    recreateInitialScene() {
+        console.log('Recréation de la scène initiale...');
+        
+        // Nettoyer la scène actuelle
+        this.clearScene();
+        
+        // Masquer le contenu principal
+        const mainContent = document.getElementById('main-content');
+        mainContent.style.display = 'none';
+        
+        // Masquer la navbar et le footer pendant le chargement
+        document.querySelector('.navbar').style.display = 'none';
+        document.querySelector('.footer').style.display = 'none';
+        
+        // Recréer la structure HTML nécessaire pour le loader
+        const loadingContainer = document.createElement('div');
+        loadingContainer.id = 'loading-container';
+        
+        // Ajouter le titre
+        const loadingTitle = document.createElement('div');
+        loadingTitle.className = 'loading-title';
+        const titleSpan1 = document.createElement('span');
+        titleSpan1.className = 'font-aktiv';
+        titleSpan1.textContent = 'Digital Event';
+        const titleSpan2 = document.createElement('span');
+        titleSpan2.className = 'font-fraunces';
+        titleSpan2.textContent = 'Edition 2025';
+        loadingTitle.appendChild(titleSpan1);
+        loadingTitle.appendChild(document.createTextNode(' '));
+        loadingTitle.appendChild(titleSpan2);
+        loadingContainer.appendChild(loadingTitle);
+        
+        // Ajouter les éléments de pourcentage
+        const percentage = document.createElement('div');
+        percentage.id = 'percentage';
+        loadingContainer.appendChild(percentage);
+        
+        const mirrorPercentage = document.createElement('div');
+        mirrorPercentage.id = 'mirror-percentage';
+        loadingContainer.appendChild(mirrorPercentage);
+        
+        // Ajouter le footer du loader
+        const loaderFooter = document.createElement('div');
+        loaderFooter.className = 'loader-footer';
+        
+        const footerImg = document.createElement('img');
+        footerImg.src = 'src/assets/icons/esd_logo_NoTexte_Jade 1.svg';
+        footerImg.alt = 'esd icon';
+        footerImg.width = 40;
+        footerImg.height = 40;
+        
+        const footerText = document.createElement('p');
+        footerText.textContent = 'Ecole Supérieure du Digital';
+        
+        loaderFooter.appendChild(footerImg);
+        loaderFooter.appendChild(footerText);
+        loadingContainer.appendChild(loaderFooter);
+        
+        document.body.appendChild(loadingContainer);
+        
+        // Lancer le loader qui gère tout le processus de chargement
+        new Loader();
     }
 }
 
