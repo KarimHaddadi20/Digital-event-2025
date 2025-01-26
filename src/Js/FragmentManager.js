@@ -41,6 +41,51 @@ class FragmentManager {
     this.textElement.style.fontFamily = "Arial, sans-serif";
     this.textElement.style.transition = "opacity 0.3s ease";
     document.body.appendChild(this.textElement);
+
+    // Création du bouton Voyager
+    this.voyagerButton = document.createElement("button");
+    this.voyagerButton.textContent = "Voyager";
+    this.voyagerButton.style.position = "fixed";
+    this.voyagerButton.style.left = "50%";
+    this.voyagerButton.style.bottom = "4vh";
+    this.voyagerButton.style.transform = "translateX(-50%)";
+    this.voyagerButton.style.display = "none";
+    this.voyagerButton.style.opacity = "0";
+    this.voyagerButton.style.padding = "18px 52px";
+    this.voyagerButton.style.justifyContent = "center";
+    this.voyagerButton.style.alignItems = "center";
+    this.voyagerButton.style.gap = "4px";
+    this.voyagerButton.style.borderRadius = "4px";
+    this.voyagerButton.style.border = "1px solid #FFF";
+    this.voyagerButton.style.background = "linear-gradient(344deg, rgba(21, 21, 27, 0.20) -1.4%, rgba(79, 79, 86, 0.20) 104.72%)";
+    this.voyagerButton.style.backdropFilter = "blur(2px)";
+    this.voyagerButton.style.color = "white";
+    this.voyagerButton.style.fontSize = "20px";
+    this.voyagerButton.style.fontFamily = "Arial, sans-serif";
+    this.voyagerButton.style.cursor = "pointer";
+    this.voyagerButton.style.transition = "all 0.3s ease";
+
+    // Effets de hover
+    this.voyagerButton.addEventListener("mouseenter", () => {
+      this.voyagerButton.style.background = "linear-gradient(344deg, rgba(21, 21, 27, 0.40) -1.4%, rgba(79, 79, 86, 0.40) 104.72%)";
+      this.voyagerButton.style.transform = "translateX(-50%) scale(1.05)";
+    });
+
+    this.voyagerButton.addEventListener("mouseleave", () => {
+      this.voyagerButton.style.background = "linear-gradient(344deg, rgba(21, 21, 27, 0.20) -1.4%, rgba(79, 79, 86, 0.20) 104.72%)";
+      this.voyagerButton.style.transform = "translateX(-50%) scale(1)";
+    });
+
+    // Gestion du clic
+    this.voyagerButton.addEventListener("click", () => {
+      if (this.selectedFragment) {
+        this.animateFragmentFall(this.selectedFragment);
+        this.selectedFragment = null;
+        this.hideVoyagerButton();
+      }
+    });
+
+    document.body.appendChild(this.voyagerButton);
   }
 
   initRaycaster() {
@@ -469,6 +514,7 @@ class FragmentManager {
     if (intersects.length === 0 && this.selectedFragment) {
       this.resetFragmentPosition(this.selectedFragment);
       this.selectedFragment = null;
+      this.hideVoyagerButton();
       return;
     }
 
@@ -487,15 +533,18 @@ class FragmentManager {
         if (this.selectedFragment === clickedFragment) {
           this.animateFragmentFall(clickedFragment);
           this.selectedFragment = null;
+          this.hideVoyagerButton();
           return;
         }
 
         if (this.selectedFragment && this.selectedFragment !== clickedFragment) {
           this.resetFragmentPosition(this.selectedFragment);
+          this.hideVoyagerButton();
         }
 
         this.selectedFragment = clickedFragment;
         this.moveFragmentForward(clickedFragment);
+        this.showVoyagerButton();
       }
     }
   }
@@ -511,6 +560,20 @@ class FragmentManager {
       fragment.position.y +=
         Math.sin(time * levitationSpeed + offset) * levitationAmplitude;
     });
+  }
+
+  showVoyagerButton() {
+    this.voyagerButton.style.display = "block";
+    setTimeout(() => {
+      this.voyagerButton.style.opacity = "1";
+    }, 0);
+  }
+
+  hideVoyagerButton() {
+    this.voyagerButton.style.opacity = "0";
+    setTimeout(() => {
+      this.voyagerButton.style.display = "none";
+    }, 300);
   }
 }
 
