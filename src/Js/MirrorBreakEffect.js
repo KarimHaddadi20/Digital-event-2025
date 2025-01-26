@@ -105,24 +105,34 @@ class MirrorBreakEffect extends SceneSetup {
 
   handleClick(event) {
     if (!this.isBreaking && this.mirror) {
-      // Cacher les instructions du miroir et afficher les instructions des fragments immédiatement
-      const instructions = document.querySelector(".mirror-instructions");
-      const fragmentInstructions = document.querySelector(
-        ".fragment-instructions"
-      );
+      // Créer un raycaster pour détecter le clic sur le miroir
+      const mouse = new THREE.Vector2();
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-      if (instructions) {
-        instructions.style.display = "none";
-      }
-      if (fragmentInstructions) {
-        fragmentInstructions.style.display = "block";
-      }
+      const raycaster = new THREE.Raycaster();
+      raycaster.setFromCamera(mouse, this.camera);
 
-      this.fragmentManager.breakMirror();
-      return;
+      // Vérifier si le clic touche le miroir
+      const intersects = raycaster.intersectObject(this.mirror, true);
+
+      if (intersects.length > 0) {
+        // Cacher les instructions du miroir et afficher les instructions des fragments
+        const instructions = document.querySelector(".mirror-instructions");
+        const fragmentInstructions = document.querySelector(
+          ".fragment-instructions"
+        );
+
+        if (instructions) {
+          instructions.style.display = "none";
+        }
+        if (fragmentInstructions) {
+          fragmentInstructions.style.display = "block";
+        }
+
+        this.fragmentManager.breakMirror();
+      }
     }
-
-    this.fragmentManager.handleFragmentClick(event);
   }
 
   onWindowResize() {
