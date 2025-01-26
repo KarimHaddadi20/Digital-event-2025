@@ -58,24 +58,42 @@ export class PortalTransitionScene extends SceneSetup {
 
     setupScrollHandler() {
         let timeoutId = null;
+        let touchStartY = 0;
+        
+        // Gestion du scroll desktop
         window.addEventListener('wheel', (event) => {
             if (timeoutId) return;
             timeoutId = setTimeout(() => {
-                this.onScroll(event);
+                this.onScroll(event.deltaY);
                 timeoutId = null;
             }, 18);
         }, { passive: false });
+
+        // Gestion du scroll mobile (touch events)
+        window.addEventListener('touchstart', (event) => {
+            touchStartY = event.touches[0].clientY;
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (event) => {
+            if (timeoutId) return;
+            const touchEndY = event.touches[0].clientY;
+            const deltaY = touchEndY - touchStartY;
+            touchStartY = touchEndY;
+
+            timeoutId = setTimeout(() => {
+                this.onScroll(-deltaY * 1);
+                timeoutId = null;
+            }, 18);
+        }, { passive: true });
     }
 
-    onScroll(event) {
-        event.preventDefault();
-        
+    onScroll(deltaY) {
         const scrollSpeed = 0.1;
         const minZ = 6;
         const maxZ = -(this.fragments.length * 20) + minZ;
         const currentZ = this.camera.position.z;
         
-        let delta = event.deltaY * scrollSpeed;
+        let delta = deltaY * scrollSpeed;
         
         if (currentZ - delta > minZ) delta = currentZ - minZ;
         if (currentZ - delta < maxZ) delta = currentZ - maxZ;
@@ -99,6 +117,7 @@ export class PortalTransitionScene extends SceneSetup {
 
             const distance = mesh.position.z - this.camera.position.z;
             
+            // Calcul de l'opacité pour le fragment principal
             let opacity = 1;
             if (distance < -5 && distance > -15) {
                 opacity = (distance + 15) / 10;
@@ -108,10 +127,23 @@ export class PortalTransitionScene extends SceneSetup {
                 opacity = 0;
             }
             
+            // Appliquer l'opacité au fragment principal
             if (mesh.material) {
                 mesh.material.opacity = THREE.MathUtils.clamp(opacity, 0, 1);
             }
 
+            // Appliquer l'opacité aux fragments détaillés en préservant leur opacité relative
+            mesh.children.forEach(child => {
+                if (child instanceof THREE.Mesh) {
+                    const baseOpacity = child.material._baseOpacity || child.material.opacity;
+                    if (!child.material._baseOpacity) {
+                        child.material._baseOpacity = child.material.opacity;
+                    }
+                    child.material.opacity = THREE.MathUtils.clamp(opacity * baseOpacity, 0, baseOpacity);
+                }
+            });
+
+            // Mise à jour des positions pour l'effet ondulant
             const positions = mesh.geometry.attributes.position;
             for (let i = 0; i < positions.count; i++) {
                 const x = positions.getX(i);
@@ -167,6 +199,7 @@ export class PortalTransitionScene extends SceneSetup {
     createFragment(data) {
         const textureLoader = new THREE.TextureLoader();
         textureLoader.load(data.texture, (texture) => {
+            // Fragment principal
             const geometry = new THREE.PlaneGeometry(6, 6, 50, 50);
             const material = new THREE.MeshBasicMaterial({
                 map: texture,
@@ -177,7 +210,45 @@ export class PortalTransitionScene extends SceneSetup {
             const imageMesh = new THREE.Mesh(geometry, material);
             imageMesh.position.set(data.position.x, data.position.y, data.position.z);
             this.scene.add(imageMesh);
+
+            // Fragments de détail
+            const detailGeometry = new THREE.PlaneGeometry(4, 4, 50, 50);
             
+            // Premier détail
+            const detail1 = new THREE.Mesh(
+                detailGeometry,
+                new THREE.MeshBasicMaterial({
+                    map: texture,
+                    transparent: true,
+                    opacity: 0.7,
+                    side: THREE.DoubleSide
+                })
+            );
+            
+            // Deuxième détail
+            const detail2 = new THREE.Mesh(
+                detailGeometry,
+                new THREE.MeshBasicMaterial({
+                    map: texture,
+                    transparent: true,
+                    opacity: 0.5,
+                    side: THREE.DoubleSide
+                })
+            );
+
+            // Positionner les détails en fonction de la direction du fragment principal
+            const detailOffset = data.exitDirection === 'left' ? 8 : -8;
+            detail1.position.set(detailOffset, 2, -5);
+            detail2.position.set(detailOffset * 1.2, -2, -8);
+            
+            // Ajouter une légère rotation aux détails
+            detail1.rotation.z = data.exitDirection === 'left' ? 0.2 : -0.2;
+            detail2.rotation.z = data.exitDirection === 'left' ? -0.3 : 0.3;
+
+            imageMesh.add(detail1);
+            imageMesh.add(detail2);
+            
+            // Création du conteneur de texte
             const textContainer = document.createElement('div');
             textContainer.className = 'portal-text';
             
@@ -294,4 +365,4 @@ export class PortalTransitionScene extends SceneSetup {
         backLight.position.set(0, -5, -5);
         this.scene.add(backLight);
     }
-} 
+}
