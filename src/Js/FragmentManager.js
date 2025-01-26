@@ -13,30 +13,30 @@ class FragmentManager {
     this.initialBackground = null;
     this.activeBackground = null;
     this.backgroundTextures = {
-      "Atelier 1": "./src/textures/Atelier1.png",
-      "Atelier 2": "src/textures/Atelier2.png",
-      "Atelier 3": "src/textures/Atelier3.png",
-      "Atelier 4": "src/textures/Atelier4.png",
-      "Atelier 5": "src/textures/Atelier5.png",
-      "Atelier 6": "src/textures/Atelier6.png",
-      "Atelier 7": "src/textures/Atelier7.png",
-      "Atelier 8": "src/textures/Atelier8.png",
-      "Atelier 9": "src/textures/Atelier9.png",
-      "Atelier 10": "src/textures/Atelier10.png",
-      "Atelier 11": "src/textures/Atelier11.png"
+      "AI Driven visual stories": "src/textures/ai_driven_visual_stories.jpg",
+      "Creative Coding": "src/textures/creative_coding.jpg",
+      "Escape game": "src/textures/escape.png",
+      "Game design": "src/textures/game_design.jpg",
+      "Gaming & Pop-corn": "src/textures/gaming_popcorn.png",
+      "Organisation": "src/textures/parcours_organisation.jpg",
+      "Photo reportage": "src/textures/photo_reportage.jpg",
+      "Podcast": "src/textures/podcast.jpg",
+      "Site web": "src/textures/site_web.jpg",
+      "Video": "src/textures/video_studio.jpg",
+      "Video Mapping": "src/textures/video_mapping.jpg"
     };
     this.atelierNames = [
-      "Atelier 1",
-      "Atelier 2",
-      "Atelier 3",
-      "Atelier 4",
-      "Atelier 5",
-      "Atelier 6",
-      "Atelier 7",
-      "Atelier 8",
-      "Atelier 9",
-      "Atelier 10",
-      "Atelier 11",
+      "AI Driven visual stories",
+      "Creative Coding",
+      "Escape game",
+      "Game design",
+      "Gaming & Pop-corn",
+      "Organisation",
+      "Photo reportage",
+      "Podcast",
+      "Site web",
+      "Video",
+      "Video Mapping"
     ];
 
     this.autoSelectTimer = null;
@@ -46,20 +46,6 @@ class FragmentManager {
   }
 
   setupUI() {
-    this.textElement = document.createElement("div");
-    this.textElement.style.position = "fixed";
-    this.textElement.style.color = "white";
-    this.textElement.style.padding = "12px 20px";
-    this.textElement.style.background = "rgba(0, 0, 0, 0.7)";
-    this.textElement.style.borderRadius = "20px";
-    this.textElement.style.display = "none";
-    this.textElement.style.fontSize = "24px";
-    this.textElement.style.fontFamily = "Arial, sans-serif";
-    this.textElement.style.transition = "opacity 0.3s ease";
-    this.textElement.style.pointerEvents = "none";
-    this.textElement.style.zIndex = "1000";
-    document.body.appendChild(this.textElement);
-
     // Création du bouton Voyager
     this.voyagerButton = document.createElement("button");
     this.voyagerButton.textContent = "Voyager";
