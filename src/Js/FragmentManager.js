@@ -8,6 +8,7 @@ class FragmentManager {
     this.hoveredFragment = null;
     this.isAnimatingFragment = false;
     this.selectedFragment = null;
+    this.fragmentInstructions = document.querySelector('.fragment-instructions');
     this.atelierNames = [
       "Atelier 1",
       "Atelier 2",
@@ -29,9 +30,6 @@ class FragmentManager {
   setupUI() {
     this.textElement = document.createElement("div");
     this.textElement.style.position = "fixed";
-    this.textElement.style.left = "50%";
-    this.textElement.style.bottom = "20vh";
-    this.textElement.style.transform = "translateX(-50%)";
     this.textElement.style.color = "white";
     this.textElement.style.padding = "12px 20px";
     this.textElement.style.background = "rgba(0, 0, 0, 0.7)";
@@ -40,6 +38,8 @@ class FragmentManager {
     this.textElement.style.fontSize = "24px";
     this.textElement.style.fontFamily = "Arial, sans-serif";
     this.textElement.style.transition = "opacity 0.3s ease";
+    this.textElement.style.pointerEvents = "none";
+    this.textElement.style.zIndex = "1000";
     document.body.appendChild(this.textElement);
 
     // Création du bouton Voyager
@@ -64,6 +64,7 @@ class FragmentManager {
     this.voyagerButton.style.fontFamily = "Arial, sans-serif";
     this.voyagerButton.style.cursor = "pointer";
     this.voyagerButton.style.transition = "all 0.3s ease";
+    this.voyagerButton.style.zIndex = "1000";
 
     // Effets de hover
     this.voyagerButton.addEventListener("mouseenter", () => {
@@ -79,9 +80,8 @@ class FragmentManager {
     // Gestion du clic
     this.voyagerButton.addEventListener("click", () => {
       if (this.selectedFragment) {
-        this.animateFragmentFall(this.selectedFragment);
-        this.selectedFragment = null;
         this.hideVoyagerButton();
+        this.animateFragmentFall(this.selectedFragment);
       }
     });
 
@@ -462,6 +462,12 @@ class FragmentManager {
     this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
+    // Mettre à jour la position du texte pour suivre la souris
+    if (this.textElement) {
+      this.textElement.style.left = `${event.clientX + 20}px`;
+      this.textElement.style.top = `${event.clientY - 10}px`;
+    }
+
     this.raycaster.setFromCamera(this.mouse, this.app.camera);
     const intersects = this.raycaster.intersectObjects(this.fragments, true);
 
@@ -510,11 +516,21 @@ class FragmentManager {
     this.raycaster.setFromCamera(mouse, this.app.camera);
     const intersects = this.raycaster.intersectObjects(this.fragments, true);
 
-    // Si on clique en dehors des fragments et qu'un fragment est sélectionné
-    if (intersects.length === 0 && this.selectedFragment) {
-      this.resetFragmentPosition(this.selectedFragment);
-      this.selectedFragment = null;
-      this.hideVoyagerButton();
+    if (intersects.length === 0) {
+      if (this.selectedFragment) {
+        this.resetFragmentPosition(this.selectedFragment);
+        this.selectedFragment = null;
+        this.hideVoyagerButton();
+        if (this.fragmentInstructions) {
+          const titleElement = this.fragmentInstructions.querySelector('.instruction-title');
+          if (titleElement) {
+            titleElement.innerHTML = `
+              <span class="font-aktiv">Sélectionnez un</span>
+              <span class="font-fraunces">fragment</span>
+            `;
+          }
+        }
+      }
       return;
     }
 
@@ -531,20 +547,25 @@ class FragmentManager {
         clickedFragment.userData.isClickable !== false
       ) {
         if (this.selectedFragment === clickedFragment) {
-          this.animateFragmentFall(clickedFragment);
-          this.selectedFragment = null;
-          this.hideVoyagerButton();
           return;
         }
 
         if (this.selectedFragment && this.selectedFragment !== clickedFragment) {
           this.resetFragmentPosition(this.selectedFragment);
-          this.hideVoyagerButton();
         }
 
         this.selectedFragment = clickedFragment;
         this.moveFragmentForward(clickedFragment);
         this.showVoyagerButton();
+        if (this.fragmentInstructions) {
+          const titleElement = this.fragmentInstructions.querySelector('.instruction-title');
+          if (titleElement) {
+            titleElement.innerHTML = `
+              <span class="font-aktiv">${clickedFragment.userData.atelierName}</span>
+              <span class="font-fraunces">fragment</span>
+            `;
+          }
+        }
       }
     }
   }
