@@ -104,6 +104,8 @@ class MirrorBreakEffect extends SceneSetup {
   }
 
   handleClick(event) {
+    if (this.isBroken) return;
+    
     if (!this.isBreaking && this.mirror) {
       // Créer un raycaster pour détecter le clic sur le miroir
       const mouse = new THREE.Vector2();
@@ -131,6 +133,12 @@ class MirrorBreakEffect extends SceneSetup {
         }
 
         this.fragmentManager.breakMirror();
+        this.isBroken = true;
+        
+        // Déclencher l'événement mirrorBroken
+        const mirrorBrokenEvent = new Event('mirrorBroken');
+        document.dispatchEvent(mirrorBrokenEvent);
+        
         return;
       }
     }

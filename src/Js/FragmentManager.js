@@ -271,9 +271,65 @@ class FragmentManager {
     this.app.mirror.visible = false;
     this.fragments.forEach((fragment) => {
       fragment.visible = true;
+      fragment.userData.isClickable = false;
     });
 
+    // Ajouter les event listeners pour l'interaction
+    this.onMouseMove = this.onMouseMove.bind(this);
+    this.handleFragmentClick = this.handleFragmentClick.bind(this);
+    window.addEventListener("mousemove", this.onMouseMove);
+    window.addEventListener("click", this.handleFragmentClick);
+
     this.app.camera.position.z = 5;
+
+    // Activer les clics sur les fragments après un court délai
+    setTimeout(() => {
+      this.fragments.forEach((fragment) => {
+        fragment.userData.isClickable = true;
+      });
+    }, 100);
+
+    // Sélection automatique du premier fragment après 10 secondes
+    setTimeout(() => {
+      if (this.fragments.length > 0) {
+        const firstFragment = this.fragments[0];
+        this.selectedFragment = firstFragment;
+        this.moveFragmentForward(firstFragment);
+        this.showVoyagerButton();
+        this.updateBackground(firstFragment.userData.atelierName);
+        
+        // S'assurer que tous les fragments restent cliquables
+        this.fragments.forEach(fragment => {
+          fragment.userData.isClickable = true;
+        });
+        
+        if (this.fragmentInstructions) {
+          const titleElement = this.fragmentInstructions.querySelector('.instruction-title');
+          if (titleElement) {
+            titleElement.innerHTML = `
+              <span class="font-aktiv">${firstFragment.userData.atelierName}</span>
+              <span class="font-fraunces">fragment</span>
+            `;
+          }
+        }
+
+        // Sélection d'un fragment aléatoire après 10 secondes supplémentaires
+        setTimeout(() => {
+          this.selectRandomFragment();
+        }, 10000);
+      }
+    }, 10000);
+  }
+
+  selectFragment(fragment) {
+    if (!fragment || !fragment.mesh) return;
+    
+    // Simuler la sélection du fragment
+    const distance = fragment.mesh.position.z - this.app.camera.position.z;
+    if (Math.abs(distance) <= 15) {
+      this.selectedFragment = fragment;
+      this.animateFragmentFall(fragment);
+    }
   }
 
   moveFragmentForward(fragment) {
@@ -746,6 +802,37 @@ class FragmentManager {
     setTimeout(() => {
       this.voyagerButton.style.display = "none";
     }, 300);
+  }
+
+  selectRandomFragment() {
+    // Exclure le fragment actuellement sélectionné
+    const availableFragments = this.fragments.filter(f => f !== this.selectedFragment);
+    if (availableFragments.length === 0) return;
+
+    // Sélectionner un fragment aléatoire
+    const randomIndex = Math.floor(Math.random() * availableFragments.length);
+    const randomFragment = availableFragments[randomIndex];
+
+    // Réinitialiser le fragment actuellement sélectionné
+    if (this.selectedFragment) {
+      this.resetFragmentPosition(this.selectedFragment);
+    }
+
+    // Sélectionner le nouveau fragment
+    this.selectedFragment = randomFragment;
+    this.moveFragmentForward(randomFragment);
+    this.showVoyagerButton();
+    this.updateBackground(randomFragment.userData.atelierName);
+    
+    if (this.fragmentInstructions) {
+      const titleElement = this.fragmentInstructions.querySelector('.instruction-title');
+      if (titleElement) {
+        titleElement.innerHTML = `
+          <span class="font-aktiv">${randomFragment.userData.atelierName}</span>
+          <span class="font-fraunces">fragment</span>
+        `;
+      }
+    }
   }
 }
 
