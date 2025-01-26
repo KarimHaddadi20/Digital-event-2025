@@ -2,28 +2,28 @@
     "atelier1": {
         "sets": [
             {
-                "title": "L'Horizon Perdu",
-                "subtitle": "Une œuvre abstraite évoquant les limites entre ciel et terre",
+                "title": "Intelligence Artificielle",
+                "subtitle": "Création d'images avec l'IA",
                 "image": "src/textures/A1-01.png"
             },
             {
-                "title": "Frontières Invisibles",
-                "subtitle": "Exploration des limites de la perception",
+                "title": "Prompt Design",
+                "subtitle": "L'art de guider l'IA",
                 "image": "src/textures/A1-02.png"
             },
             {
-                "title": "Passage Éthéré",
-                "subtitle": "La transition entre deux mondes",
+                "title": "Visual Stories",
+                "subtitle": "Narration visuelle augmentée",
                 "image": "src/textures/A1-03.png"
             },
             {
-                "title": "Résonance Spatiale",
-                "subtitle": "L'écho des dimensions parallèles",
+                "title": "IA Générative",
+                "subtitle": "Exploration des possibilités créatives",
                 "image": "src/textures/A1-04.png"
             },
             {
-                "title": "Convergence",
-                "subtitle": "Le point de rencontre des réalités",
+                "title": "Digital Art",
+                "subtitle": "Art numérique assisté par IA",
                 "image": "src/textures/A1-05.png"
             }
         ]
@@ -31,291 +31,290 @@
     "atelier2": {
         "sets": [
             {
-                "title": "Mélodie Fractale",
-                "subtitle": "Une composition visuelle inspirée par la musique",
+                "title": "Gestion de Projet",
+                "subtitle": "Méthodologies agiles",
                 "image": "src/textures/A2-01.png"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
+                "title": "Leadership Digital",
+                "subtitle": "Management d'équipe créative",
                 "image": "src/textures/A2-02.png"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
+                "title": "Planification",
+                "subtitle": "Organisation et coordination",
                 "image": "src/textures/A2-03.png"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
+                "title": "Communication",
+                "subtitle": "Stratégies collaboratives",
                 "image": "src/textures/A2-04.png"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
+                "title": "Innovation",
+                "subtitle": "Gestion du changement",
                 "image": "src/textures/A2-05.png"
             }
         ]
     },
-
     "atelier3": {
         "sets": [
             {
-                "title": "Mélodie Fractale",
-                "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/A2-01.png"
+                "title": "Art Génératif",
+                "subtitle": "Programmation créative",
+                "image": "src/textures/A3-01.png"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A2-02.png"
+                "title": "Algorithmes",
+                "subtitle": "Création de motifs dynamiques",
+                "image": "src/textures/A3-02.png"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A2-03.png"
+                "title": "Interactivité",
+                "subtitle": "Expériences utilisateur",
+                "image": "src/textures/A3-03.png"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A2-04.png"
+                "title": "Data Art",
+                "subtitle": "Visualisation créative",
+                "image": "src/textures/A3-04.png"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A2-05.png"
+                "title": "Processing",
+                "subtitle": "Animation procédurale",
+                "image": "src/textures/A3-05.png"
             }
         ]
     },
     "atelier4": {
         "sets": [
             {
-                "title": "Mélodie Fractale",
-                "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/A2-01.png"
+                "title": "Énigmes",
+                "subtitle": "Conception de puzzles",
+                "image": "src/textures/A4-01.png"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A2-02.png"
+                "title": "Narration",
+                "subtitle": "Scénarios immersifs",
+                "image": "src/textures/A4-02.png"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A2-03.png"
+                "title": "Game Design",
+                "subtitle": "Mécaniques d'escape",
+                "image": "src/textures/A4-03.png"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A2-04.png"
+                "title": "Immersion",
+                "subtitle": "Atmosphères captivantes",
+                "image": "src/textures/A4-04.png"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A2-05.png"
+                "title": "Expérience",
+                "subtitle": "Parcours utilisateur",
+                "image": "src/textures/A4-05.png"
             }
         ]
     },
     "atelier5": {
         "sets": [
             {
-                "title": "Mélodie Fractale",
-                "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/A2-01.png"
+                "title": "Level Design",
+                "subtitle": "Architecture de jeu",
+                "image": "src/textures/A5-01.png"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A2-02.png"
+                "title": "Game Art",
+                "subtitle": "Direction artistique",
+                "image": "src/textures/A5-02.png"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A2-03.png"
+                "title": "Gameplay",
+                "subtitle": "Mécaniques ludiques",
+                "image": "src/textures/A5-03.png"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A2-04.png"
+                "title": "Prototypage",
+                "subtitle": "Itération rapide",
+                "image": "src/textures/A5-04.png"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A2-05.png"
+                "title": "User Testing",
+                "subtitle": "Retours joueurs",
+                "image": "src/textures/A5-05.png"
             }
         ]
     },
     "atelier6": {
         "sets": [
             {
-                "title": "Mélodie Fractale",
-                "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/A2-01.png"
+                "title": "Gaming Culture",
+                "subtitle": "Histoire du jeu vidéo",
+                "image": "src/textures/A6-01.png"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A2-02.png"
+                "title": "E-sport",
+                "subtitle": "Compétition gaming",
+                "image": "src/textures/A6-02.png"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A2-03.png"
+                "title": "Streaming",
+                "subtitle": "Diffusion en direct",
+                "image": "src/textures/A6-03.png"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A2-04.png"
+                "title": "Community",
+                "subtitle": "Animation sociale",
+                "image": "src/textures/A6-04.png"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A2-05.png"
+                "title": "Events",
+                "subtitle": "Organisation gaming",
+                "image": "src/textures/A6-05.png"
             }
         ]
     },
     "atelier7": {
         "sets": [
             {
-                "title": "Mélodie Fractale",
-                "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/A2-01.png"
+                "title": "Reportage",
+                "subtitle": "Documentation visuelle",
+                "image": "src/textures/A7-01.png"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A2-02.png"
+                "title": "Storytelling",
+                "subtitle": "Narration photo",
+                "image": "src/textures/A7-02.png"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A2-03.png"
+                "title": "Technique",
+                "subtitle": "Maîtrise photo",
+                "image": "src/textures/A7-03.png"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A2-04.png"
+                "title": "Édition",
+                "subtitle": "Post-production",
+                "image": "src/textures/A7-04.png"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A2-05.png"
+                "title": "Publication",
+                "subtitle": "Diffusion média",
+                "image": "src/textures/A7-05.png"
             }
         ]
     },
     "atelier8": {
         "sets": [
             {
-                "title": "Mélodie Fractale",
-                "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/A2-01.png"
+                "title": "Audio Design",
+                "subtitle": "Production sonore",
+                "image": "src/textures/A8-01.png"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A2-02.png"
+                "title": "Narration",
+                "subtitle": "Storytelling audio",
+                "image": "src/textures/A8-02.png"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A2-03.png"
+                "title": "Interview",
+                "subtitle": "Technique radio",
+                "image": "src/textures/A8-03.png"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A2-04.png"
+                "title": "Montage",
+                "subtitle": "Post-production",
+                "image": "src/textures/A8-04.png"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A2-05.png"
+                "title": "Diffusion",
+                "subtitle": "Distribution podcast",
+                "image": "src/textures/A8-05.png"
             }
         ]
     },
     "atelier9": {
         "sets": [
             {
-                "title": "Mélodie Fractale",
-                "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/A2-01.png"
+                "title": "Réalisation",
+                "subtitle": "Direction vidéo",
+                "image": "src/textures/A9-01.png"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A2-02.png"
+                "title": "Tournage",
+                "subtitle": "Production film",
+                "image": "src/textures/A9-02.png"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A2-03.png"
+                "title": "Montage",
+                "subtitle": "Post-production",
+                "image": "src/textures/A9-03.png"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A2-04.png"
+                "title": "Motion",
+                "subtitle": "Animation vidéo",
+                "image": "src/textures/A9-04.png"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A2-05.png"
+                "title": "VFX",
+                "subtitle": "Effets spéciaux",
+                "image": "src/textures/A9-05.png"
             }
         ]
     },
     "atelier10": {
         "sets": [
             {
-                "title": "Mélodie Fractale",
-                "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/A2-01.png"
+                "title": "Projection",
+                "subtitle": "Mapping architectural",
+                "image": "src/textures/A10-01.png"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A2-02.png"
+                "title": "Animation",
+                "subtitle": "Motion design",
+                "image": "src/textures/A10-02.png"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A2-03.png"
+                "title": "Installation",
+                "subtitle": "Scénographie",
+                "image": "src/textures/A10-03.png"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A2-04.png"
+                "title": "Technique",
+                "subtitle": "Setup projection",
+                "image": "src/textures/A10-04.png"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A2-05.png"
+                "title": "Performance",
+                "subtitle": "Live mapping",
+                "image": "src/textures/A10-05.png"
             }
         ]
     },
     "atelier11": {
         "sets": [
             {
-                "title": "Mélodie Fractale",
-                "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/A2-01.png"
+                "title": "Web Design",
+                "subtitle": "Interface utilisateur",
+                "image": "src/textures/A11-01.png"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A2-02.png"
+                "title": "UX Design",
+                "subtitle": "Expérience utilisateur",
+                "image": "src/textures/A11-02.png"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A2-03.png"
+                "title": "Frontend",
+                "subtitle": "Développement web",
+                "image": "src/textures/A11-03.png"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A2-04.png"
+                "title": "Responsive",
+                "subtitle": "Adaptation mobile",
+                "image": "src/textures/A11-04.png"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A2-05.png"
+                "title": "Performance",
+                "subtitle": "Optimisation web",
+                "image": "src/textures/A11-05.png"
             }
         ]
     }
