@@ -1,93 +1,160 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portal Mirror</title>
-    <link rel="stylesheet" href="src/Css/styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="src/Css/styles.css" />
+  </head>
+  <body>
     <!-- Navbar -->
-    <nav class="navbar" style="display: none;">
-        <div class="nav-content">
-            <div class="nav-title">
-                <span class="font-aktiv">Digital Event</span>
-                <span class="font-fraunces">Edition 2025</span>
-            </div>
-            <button id="back-button" class="back-button">
-                <img src="src/assets/icons/icn.back.svg" alt="Retour">
-            </button>
+    <nav class="navbar" style="display: none">
+      <div class="nav-content">
+        <div class="nav-title">
+          <span class="font-aktiv">Digital Event</span>
+          <span class="font-fraunces">Edition 2025</span>
         </div>
+        <button id="back-button" class="back-button">
+          <img src="src/assets/icons/icn.back.svg" alt="Retour" />
+        </button>
+        <button id="burger-menu" class="burger-button">
+          <img src="src/assets/icons/obsolete.svg" alt="Menu" />
+        </button>
+      </div>
     </nav>
 
     <!-- Loader -->
     <div id="loading-container">
-        <div class="loading-title">
-            <span class="font-aktiv">Digital Event</span>
-            <span class="font-fraunces">Edition 2025</span>
-        </div>
-        <div id="percentage">0%</div>
-        <div id="mirror-percentage">0%</div>
+      <div class="loading-title">
+        <span class="font-aktiv">Digital Event</span>
+        <span class="font-fraunces">Edition 2025</span>
+      </div>
+      <div id="percentage">0%</div>
+      <div id="mirror-percentage">0%</div>
 
-        <div class="loader-footer">
-            <img src="src/assets/icons/esd_logo_NoTexte_Jade 1.svg" alt="esd icon" width="40" height="40">
-            <p>Ecole Supérieure du Digital</p>
-        </div>
+      <div class="loader-footer">
+        <img
+          src="src/assets/icons/esd_logo_NoTexte_Jade 1.svg"
+          alt="esd icon"
+          width="40"
+          height="40"
+        />
+        <p>Ecole Supérieure du Digital</p>
+      </div>
     </div>
 
     <!-- Scene -->
 
-    <div id="main-content" style="display: none;">
-        <div class="scene-wrapper">
-            <div id="scene-container"></div>
-            <div class="scroll-progress-container">
-                <div class="scroll-progress-bar">
-                    <div class="scroll-progress-fill"></div>
-                </div>
-            </div>
-            <div class="mirror-instructions">
-                <p class="instruction-title">Cassez le miroir</p>
-                <p class="instruction-subtitle">Cliquez pour découvrir les ateliers</p>
-            </div>
-            <div class="fragment-instructions" style="display: none;">
-                <p class="instruction-title">
-                    <span class="font-aktiv">Sélectionnez un</span>
-                    <span class="font-fraunces">fragment</span>
-                </p>
-                <p class="instruction-subtitle">Découvrez les ateliers en détail</p>
-            </div>
+    <div id="main-content" style="display: none">
+      <div class="scene-wrapper">
+        <div id="scene-container"></div>
+        <div class="scroll-progress-container">
+          <div class="scroll-progress-bar">
+            <div class="scroll-progress-fill"></div>
+          </div>
         </div>
+        <div class="mirror-instructions">
+          <p class="instruction-title">Cassez le miroir</p>
+          <p class="instruction-subtitle">
+            Cliquez pour découvrir les ateliers
+          </p>
+        </div>
+        <div class="fragment-instructions" style="display: none">
+          <p class="instruction-title">
+            <span class="font-aktiv">Sélectionnez un</span>
+            <span class="font-fraunces">fragment</span>
+          </p>
+          <p class="instruction-subtitle">Découvrez les ateliers en détail</p>
+        </div>
+      </div>
     </div>
 
     <!-- Footer  -->
-    <footer class="footer" style="display: none;">
-        <div class="footer-content">
-            <div class="footer-left">
-                <img src="src/assets/icons/icn_sound.svg" alt="Sound icon" width="40" height="40">
-            </div>
-            <div class="footer-right">
-                <p>Mentions légales</p>
-                <p>Politique de confidentialité</p>
-            </div>
+    <footer class="footer" style="display: none">
+      <div class="footer-content">
+        <div class="footer-left">
+          <img
+            src="src/assets/icons/icn_sound.svg"
+            alt="Sound icon"
+            width="40"
+            height="40"
+          />
         </div>
+        <div class="footer-right">
+          <p>Mentions légales</p>
+          <p>Politique de confidentialité</p>
+        </div>
+      </div>
     </footer>
+
+    <!-- Ajoutez le menu latéral -->
+    <div id="side-menu" class="side-menu">
+      <div class="menu-content">
+        <div class="menu-header">
+            <p>Ateliers</p>
+            <button id="close-menu" class="close-button">
+          <svg width="24" height="24" viewBox="0 0 24 24">
+            <path
+              d="M18 6L6 18"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <path
+              d="M6 6L18 18"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+    </div>
+        
+        <ul class="menu-list">
+          <li><a href="#" data-atelier="1">AI Driven visual stories</a></li>
+          <li><a href="#" data-atelier="2">Organisation</a></li>
+          <li><a href="#" data-atelier="3">Creative Coding</a></li>
+          <li><a href="#" data-atelier="4">Escape game</a></li>
+          <li><a href="#" data-atelier="5">Game design</a></li>
+          <li><a href="#" data-atelier="6">Gaming & Pop-corn</a></li>
+          <li><a href="#" data-atelier="7">Photo reportage</a></li>
+          <li><a href="#" data-atelier="8">Podcast</a></li>
+          <li><a href="#" data-atelier="9">Video</a></li>
+          <li><a href="#" data-atelier="10">Video Mapping</a></li>
+          <li><a href="#" data-atelier="11">Site web</a></li>
+          <button class="btn-main-CTA">Néo-miroir</button>
+        </ul>
+        
+      </div>
+      <div class="loader-footer">
+        <img
+          src="src/assets/icons/esd_logo_NoTexte_Jade 1.svg"
+          alt="esd icon"
+          width="40"
+          height="40"
+        />
+        <p>Ecole Supérieure du Digital</p>
+      </div>
+    </div>
+    </div>
 
     <!-- Importation de Three.js -->
     <script type="importmap">
-    {
+      {
         "imports": {
-            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
-            "three/examples/jsm/controls/OrbitControls.js": "https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js"
+          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+          "three/examples/jsm/controls/OrbitControls.js": "https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js"
         }
-    }
+      }
     </script>
-    
+
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    
+
     <!-- Application -->
     <script type="module" src="src/Js/Loader.js"></script>
+    <script src="./src/Js/menu.js"></script>
     <!-- <script type="module" src="src/Js/AtelierGallerySceneNew.js"></script> -->
-</body>
-</html> 
+  </body>
+</html>
