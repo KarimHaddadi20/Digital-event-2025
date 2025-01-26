@@ -185,7 +185,7 @@ export class PortalTransitionScene extends SceneSetup {
                 position: { 
                     x: index % 2 === 0 ? -4 : 4, 
                     y: 1, 
-                    z: -5 - (index * 10) 
+                    z: -5 - (index * 20) 
                 },
                 exitDirection: index % 2 === 0 ? 'left' : 'right'
             }));
