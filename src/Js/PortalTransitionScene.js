@@ -179,17 +179,63 @@ export class PortalTransitionScene extends SceneSetup {
             }
             positions.needsUpdate = true;
 
+            const responsive = this.getResponsivePositions();
             const xOffset = fragment.exitDirection === 'left' ? -20 : 20;
             const xPosition = (distance / 30) * xOffset;
-            mesh.position.x = fragment.exitDirection === 'left' ? 
-                Math.min(xPosition, -4) :
-                Math.max(xPosition, 4);
+            
+            if (responsive.verticalLayout) {
+                // En mobile, permettre un décalage plus important
+                mesh.position.x = fragment.exitDirection === 'left' ? 
+                    Math.min(xPosition, 0) : // Réduit la limite à gauche
+                    Math.max(xPosition, 0);   // Réduit la limite à droite
+            } else {
+                // En desktop, garder les limites originales
+                mesh.position.x = fragment.exitDirection === 'left' ? 
+                    Math.min(xPosition, -4) :
+                    Math.max(xPosition, 4);
+            }
 
             const label = mesh.children.find(child => child instanceof CSS2DObject);
             if (label) {
                 label.element.style.opacity = mesh.material.opacity;
             }
         });
+    }
+
+    // Nouvelle méthode pour obtenir les positions responsives
+    getResponsivePositions() {
+        const width = window.innerWidth;
+        if (width <= 768) { // Mobile
+            return {
+                xOffset: 1.5, // Réduit l'espacement horizontal
+                yOffset: -2, // Déplace les fragments vers le bas
+                zSpacing: 8, // Réduit l'espacement en profondeur
+                scale: 0.8, // Ajuste la taille des fragments
+                verticalLayout: true, // Nouveau paramètre pour la disposition verticale
+                detailsScale: 0.5, // Échelle pour les fragments de détail
+                mainFragmentY: 0.7 // Position Y du fragment principal
+            };
+        } else if (width <= 1024) { // Tablet
+            return {
+                xOffset: 3,
+                yOffset: 0.8,
+                zSpacing: 17,
+                scale: 0.85,
+                verticalLayout: false,
+                detailsScale: 0.6,
+                mainFragmentY: 0
+            };
+        } else { // Desktop
+            return {
+                xOffset: 4,
+                yOffset: 0,
+                zSpacing: 20,
+                scale: 1,
+                verticalLayout: false,
+                detailsScale: 0.6,
+                mainFragmentY: 0
+            };
+        }
     }
 
     async setupFragments() {
@@ -200,15 +246,18 @@ export class PortalTransitionScene extends SceneSetup {
             // Récupérer les données de l'atelier correspondant
             const atelierData = data.atelier1; // À adapter selon l'atelier
             
+            const responsive = this.getResponsivePositions();
+            
             const fragmentsData = atelierData.sets.map((set, index) => ({
                 texture: set.image,
                 title: set.title,
                 subtitle: set.subtitle,
                 position: { 
-                    x: index % 2 === 0 ? -4 : 4, 
-                    y: 1, 
-                    z: -5 - (index * 20) 
+                    x: index % 2 === 0 ? -responsive.xOffset : responsive.xOffset, 
+                    y: responsive.yOffset, 
+                    z: -5 - (index * responsive.zSpacing) 
                 },
+                scale: responsive.scale,
                 exitDirection: index % 2 === 0 ? 'left' : 'right'
             }));
 
@@ -221,8 +270,10 @@ export class PortalTransitionScene extends SceneSetup {
     createFragment(data) {
         const textureLoader = new THREE.TextureLoader();
         textureLoader.load(data.texture, (texture) => {
-            // Fragment principal
-            const geometry = new THREE.PlaneGeometry(6, 6, 50, 50);
+            const responsive = this.getResponsivePositions();
+            
+            // Fragment principal avec échelle responsive
+            const geometry = new THREE.PlaneGeometry(6 * data.scale, 6 * data.scale, 50, 50);
             const material = new THREE.MeshBasicMaterial({
                 map: texture,
                 side: THREE.DoubleSide,
@@ -230,11 +281,33 @@ export class PortalTransitionScene extends SceneSetup {
                 opacity: 1
             });
             const imageMesh = new THREE.Mesh(geometry, material);
-            imageMesh.position.set(data.position.x, data.position.y, data.position.z);
+
+            // Ajuster la position en fonction du layout
+            if (responsive.verticalLayout) {
+                // En mobile, le fragment principal va en bas
+                imageMesh.position.set(
+                    0, // Centré horizontalement
+                    responsive.mainFragmentY, // Plus bas
+                    data.position.z
+                );
+            } else {
+                // En desktop, garder la disposition horizontale originale
+                imageMesh.position.set(
+                    data.position.x,
+                    data.position.y,
+                    data.position.z
+                );
+            }
+
             this.scene.add(imageMesh);
 
-            // Fragments de détail
-            const detailGeometry = new THREE.PlaneGeometry(4, 4, 50, 50);
+            // Fragments de détail avec échelle responsive
+            const detailGeometry = new THREE.PlaneGeometry(
+                4 * data.scale * responsive.detailsScale,
+                4 * data.scale * responsive.detailsScale,
+                50,
+                50
+            );
             
             // Premier détail
             const detail1 = new THREE.Mesh(
@@ -258,14 +331,21 @@ export class PortalTransitionScene extends SceneSetup {
                 })
             );
 
-            // Positionner les détails en fonction de la direction du fragment principal
-            const detailOffset = data.exitDirection === 'left' ? 8 : -8;
-            detail1.position.set(detailOffset, 2, -5);
-            detail2.position.set(detailOffset * 1.2, -2, -8);
-            
+            // Positionner les détails en fonction du layout
+            if (responsive.verticalLayout) {
+                // En mobile, les détails vont en haut, plus centrés
+                detail1.position.set(-2, 4, -3); // Premier fragment à gauche
+                detail2.position.set(2, 4, -5);  // Second fragment à droite et légèrement plus loin
+            } else {
+                // En desktop, garder la disposition originale
+                const detailOffset = data.exitDirection === 'left' ? 8 * data.scale : -8 * data.scale;
+                detail1.position.set(detailOffset, 2 * data.scale, -5);
+                detail2.position.set(detailOffset * 1.2, -2 * data.scale, -8);
+            }
+
             // Ajouter une légère rotation aux détails
-            detail1.rotation.z = data.exitDirection === 'left' ? 0.2 : -0.2;
-            detail2.rotation.z = data.exitDirection === 'left' ? -0.3 : 0.3;
+            detail1.rotation.z = responsive.verticalLayout ? 0.1 : (data.exitDirection === 'left' ? 0.2 : -0.2);
+            detail2.rotation.z = responsive.verticalLayout ? -0.1 : (data.exitDirection === 'left' ? -0.3 : 0.3);
 
             imageMesh.add(detail1);
             imageMesh.add(detail2);
