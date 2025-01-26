@@ -78,21 +78,29 @@ export class PortalTransitionScene extends SceneSetup {
 
         // Gestion améliorée du scroll mobile
         window.addEventListener('touchstart', (event) => {
+            // Ne pas empêcher le comportement par défaut si on clique sur le menu burger ou le menu latéral
+            if (event.target.closest('#burger-menu') || event.target.closest('#side-menu')) {
+                return;
+            }
             event.preventDefault();
             touchStartY = event.touches[0].clientY;
         }, { passive: false });
 
         window.addEventListener('touchmove', (event) => {
+            // Ne pas empêcher le comportement par défaut si on interagit avec le menu
+            if (event.target.closest('#burger-menu') || event.target.closest('#side-menu')) {
+                return;
+            }
             event.preventDefault();
             const touchY = event.touches[0].clientY;
-            const delta = (touchStartY - touchY) * (isMobile ? 0.2 : 0.1); // Sensibilité augmentée sur mobile
+            const delta = (touchStartY - touchY) * (isMobile ? 0.2 : 0.1);
             touchStartY = touchY;
 
             // Mise à jour immédiate pour mobile
             if (isMobile) {
                 this.camera.position.z -= delta;
                 this.camera.position.z = Math.max(
-                    -((this.fragments.length) * 8) - 15, // Utiliser l'espacement mobile
+                    -((this.fragments.length) * 8) - 15,
                     Math.min(7, this.camera.position.z)
                 );
                 this.updateFragments();
