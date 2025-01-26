@@ -8,6 +8,7 @@ class FragmentManager {
     this.hoveredFragment = null;
     this.isAnimatingFragment = false;
     this.selectedFragment = null;
+    this.userHasInteracted = false;
     this.fragmentInstructions = document.querySelector('.fragment-instructions');
     this.initialBackground = null;
     this.activeBackground = null;
@@ -723,6 +724,7 @@ class FragmentManager {
         this.resetFragmentPosition(this.selectedFragment);
         this.selectedFragment = null;
         this.hideVoyagerButton();
+        this.userHasInteracted = false;
         if (this.fragmentInstructions) {
           const titleElement = this.fragmentInstructions.querySelector('.instruction-title');
           if (titleElement) {
@@ -732,8 +734,11 @@ class FragmentManager {
             `;
           }
         }
-        // Redémarrer le timer quand aucun fragment n'est sélectionné
-        this.startAutoSelectTimer();
+        setTimeout(() => {
+          if (!this.selectedFragment) {
+            this.selectRandomFragment();
+          }
+        }, 10000);
       }
       return;
     }
@@ -750,11 +755,7 @@ class FragmentManager {
         clickedFragment.userData.atelierName &&
         clickedFragment.userData.isClickable !== false
       ) {
-        // Annuler le timer existant car l'utilisateur a interagi
-        if (this.autoSelectTimer) {
-          clearTimeout(this.autoSelectTimer);
-          this.autoSelectTimer = null;
-        }
+        this.userHasInteracted = true;
 
         if (this.selectedFragment === clickedFragment) {
           return;
@@ -810,6 +811,9 @@ class FragmentManager {
   }
 
   selectRandomFragment() {
+    // Si l'utilisateur a interagi, on arrête la sélection automatique
+    if (this.userHasInteracted) return;
+
     // Exclure le fragment actuellement sélectionné
     const availableFragments = this.fragments.filter(f => f !== this.selectedFragment);
     if (availableFragments.length === 0) return;
@@ -839,31 +843,19 @@ class FragmentManager {
       }
     }
 
-    // Redémarrer le timer pour la prochaine sélection automatique
-    setTimeout(() => {
-      this.selectedFragment = null;
-      this.resetFragmentPosition(randomFragment);
-      this.hideVoyagerButton();
-      if (this.fragmentInstructions) {
-        const titleElement = this.fragmentInstructions.querySelector('.instruction-title');
-        if (titleElement) {
-          titleElement.innerHTML = `
-            <span class="font-aktiv">Sélectionnez un</span>
-            <span class="font-fraunces">fragment</span>
-          `;
-        }
-      }
-      this.startAutoSelectTimer();
-    }, 10000);
+    // Programmer la prochaine sélection automatique si l'utilisateur n'a pas interagi
+    if (!this.userHasInteracted) {
+      setTimeout(() => {
+        this.selectRandomFragment();
+      }, 10000);
+    }
   }
 
   startAutoSelectTimer() {
-    // Annuler le timer existant s'il y en a un
     if (this.autoSelectTimer) {
       clearTimeout(this.autoSelectTimer);
     }
     
-    // Démarrer un nouveau timer si aucun fragment n'est sélectionné
     if (!this.selectedFragment) {
       this.autoSelectTimer = setTimeout(() => {
         this.selectRandomFragment();
