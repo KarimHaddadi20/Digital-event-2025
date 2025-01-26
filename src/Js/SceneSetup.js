@@ -97,29 +97,32 @@ class SceneSetup {
       }
 
     setupBackground() {
-        // Créer un plan pour l'arrière-plan au lieu d'utiliser environment map
         const textureLoader = new THREE.TextureLoader();
-        textureLoader.load("src/textures/escape.png", (texture) => {
+        console.log("Loading initial background texture");
+        textureLoader.load("src/textures/escape.png", 
+          (texture) => {
+            console.log("Initial background texture loaded");
             const aspectRatio = texture.image.width / texture.image.height;
             
-            // Créer un grand plan pour l'arrière-plan
             const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
             const bgMaterial = new THREE.MeshBasicMaterial({
-                map: texture,
-                side: THREE.FrontSide,
+              map: texture,
+              side: THREE.FrontSide,
+              transparent: true,
             });
             
             const background = new THREE.Mesh(bgGeometry, bgMaterial);
-            
-            // Positionner le plan derrière le miroir
             background.position.z = -300;
             background.position.y = 0;
             
             this.scene.add(background);
-            
-            // Définir une couleur de fond neutre au lieu de l'environment map
             this.scene.background = new THREE.Color(0x000000);
-        });
+          },
+          undefined,
+          (error) => {
+            console.error("Error loading initial background:", error);
+          }
+        );
     }
     
     setupEnvironment() {

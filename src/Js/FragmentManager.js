@@ -9,6 +9,21 @@ class FragmentManager {
     this.isAnimatingFragment = false;
     this.selectedFragment = null;
     this.fragmentInstructions = document.querySelector('.fragment-instructions');
+    this.initialBackground = null;
+    this.activeBackground = null;
+    this.backgroundTextures = {
+      "Atelier 1": "./src/textures/Atelier1.png",
+      "Atelier 2": "src/textures/Atelier2.png",
+      "Atelier 3": "src/textures/Atelier3.png",
+      "Atelier 4": "src/textures/Atelier4.png",
+      "Atelier 5": "src/textures/Atelier5.png",
+      "Atelier 6": "src/textures/Atelier6.png",
+      "Atelier 7": "src/textures/Atelier7.png",
+      "Atelier 8": "src/textures/Atelier8.png",
+      "Atelier 9": "src/textures/Atelier9.png",
+      "Atelier 10": "src/textures/Atelier10.png",
+      "Atelier 11": "src/textures/Atelier11.png"
+    };
     this.atelierNames = [
       "Atelier 1",
       "Atelier 2",
@@ -454,19 +469,146 @@ class FragmentManager {
     animateImmersion();
   }
 
-  //
+  // Sauvegarder le background initial
+  saveInitialBackground() {
+    const background = this.app.scene.children.find(child => 
+      child.material && child.material.map && child.position.z === -300
+    );
+    if (background) {
+      this.initialBackground = background;
+      this.initialBackground.material.transparent = true;
+    }
+  }
+
+  // Changer le background
+  updateBackground(atelierName) {
+    console.log("Updating background with:", atelierName);
+    if (!this.initialBackground) {
+      console.log("Saving initial background");
+      this.saveInitialBackground();
+    }
+    
+    if (!atelierName) {
+      console.log("No atelier name, reverting to initial background");
+      if (this.activeBackground) {
+        window.gsap.to(this.activeBackground.material, {
+          opacity: 0,
+          duration: 0.5,
+          onComplete: () => {
+            this.activeBackground.visible = false;
+            if (this.initialBackground && this.initialBackground.parent) {
+              this.initialBackground.visible = true;
+              window.gsap.to(this.initialBackground.material, {
+                opacity: 1,
+                duration: 0.5
+              });
+            } else {
+              this.setupInitialBackground();
+            }
+          }
+        });
+      }
+      return;
+    }
+    
+    const texturePath = this.backgroundTextures[atelierName];
+    console.log("Loading texture from:", texturePath);
+    if (!texturePath) {
+      console.log("No texture path found for:", atelierName);
+      return;
+    }
+    
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load(texturePath, 
+      (texture) => {
+        console.log("Texture loaded successfully");
+        if (this.activeBackground) {
+          const previousBackground = this.activeBackground;
+          window.gsap.to(this.activeBackground.material, {
+            opacity: 0,
+            duration: 0.3,
+            onComplete: () => {
+              const aspectRatio = texture.image.width / texture.image.height;
+              const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
+              const bgMaterial = new THREE.MeshBasicMaterial({
+                map: texture,
+                side: THREE.FrontSide,
+                transparent: true,
+                opacity: 0
+              });
+              this.activeBackground = new THREE.Mesh(bgGeometry, bgMaterial);
+              this.activeBackground.position.z = -300;
+              this.activeBackground.position.y = 0;
+              this.app.scene.add(this.activeBackground);
+              
+              this.app.scene.remove(previousBackground);
+              previousBackground.geometry.dispose();
+              previousBackground.material.dispose();
+              
+              window.gsap.to(this.activeBackground.material, {
+                opacity: 1,
+                duration: 0.3
+              });
+            }
+          });
+        } else {
+          const aspectRatio = texture.image.width / texture.image.height;
+          const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
+          const bgMaterial = new THREE.MeshBasicMaterial({
+            map: texture,
+            side: THREE.FrontSide,
+            transparent: true,
+            opacity: 0
+          });
+          this.activeBackground = new THREE.Mesh(bgGeometry, bgMaterial);
+          this.activeBackground.position.z = -300;
+          this.activeBackground.position.y = 0;
+          this.app.scene.add(this.activeBackground);
+          window.gsap.to(this.activeBackground.material, {
+            opacity: 1,
+            duration: 0.5
+          });
+        }
+        
+        if (this.initialBackground) {
+          window.gsap.to(this.initialBackground.material, {
+            opacity: 0,
+            duration: 0.5,
+            onComplete: () => {
+              this.initialBackground.visible = false;
+            }
+          });
+        }
+      },
+      undefined,
+      (error) => {
+        console.error("Error loading texture:", error);
+      }
+    );
+  }
+
+  setupInitialBackground() {
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load("src/textures/escape.png", (texture) => {
+      const aspectRatio = texture.image.width / texture.image.height;
+      const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
+      const bgMaterial = new THREE.MeshBasicMaterial({
+        map: texture,
+        side: THREE.FrontSide,
+        transparent: true,
+      });
+      this.initialBackground = new THREE.Mesh(bgGeometry, bgMaterial);
+      this.initialBackground.position.z = -300;
+      this.initialBackground.position.y = 0;
+      this.app.scene.add(this.initialBackground);
+    });
+  }
 
   onMouseMove(event) {
     if (!this.app.isBreaking || this.isAnimatingFragment) return;
 
     this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-    // Mettre à jour la position du texte pour suivre la souris
-    if (this.textElement) {
-      this.textElement.style.left = `${event.clientX + 20}px`;
-      this.textElement.style.top = `${event.clientY - 10}px`;
-    }
 
     this.raycaster.setFromCamera(this.mouse, this.app.camera);
     const intersects = this.raycaster.intersectObjects(this.fragments, true);
@@ -492,6 +634,10 @@ class FragmentManager {
           this.textElement.textContent = fragmentObject.userData.atelierName;
           this.textElement.style.display = "block";
           this.textElement.style.opacity = "1";
+          
+          if (!this.selectedFragment) {
+            this.updateBackground(fragmentObject.userData.atelierName);
+          }
         }
       }
     } else {
@@ -502,6 +648,9 @@ class FragmentManager {
         setTimeout(() => {
           this.textElement.style.display = "none";
         }, 300);
+        if (!this.selectedFragment) {
+          this.updateBackground(null);
+        }
       }
     }
   }
@@ -557,6 +706,8 @@ class FragmentManager {
         this.selectedFragment = clickedFragment;
         this.moveFragmentForward(clickedFragment);
         this.showVoyagerButton();
+        this.updateBackground(clickedFragment.userData.atelierName);
+        
         if (this.fragmentInstructions) {
           const titleElement = this.fragmentInstructions.querySelector('.instruction-title');
           if (titleElement) {
