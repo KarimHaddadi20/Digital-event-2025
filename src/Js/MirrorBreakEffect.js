@@ -138,12 +138,6 @@ class MirrorBreakEffect extends SceneSetup {
         console.log("MirrorBreakEffect: Création de la scène de transition");
         const transitionScene = new PortalTransitionScene(this, fragmentIndex);
 
-        setTimeout(() => {
-          console.log("MirrorBreakEffect: Passage à la galerie");
-          transitionScene.clearScene();
-          new AtelierGalleryScene(this, fragmentIndex);
-        });
-
         // Réinitialiser les contrôles
         this.controls.enabled = true;
         this.controls.target.set(0, 0, 0);

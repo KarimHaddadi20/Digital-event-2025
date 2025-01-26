@@ -37,9 +37,8 @@ export class PortalTransitionScene extends SceneSetup {
     setupRenderers() {
         // WebGL Renderer
         this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.setClearColor(0x000000);
         this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
         
         // CSS2D Renderer
         this.labelRenderer = new CSS2DRenderer();
@@ -169,10 +168,8 @@ export class PortalTransitionScene extends SceneSetup {
         const textureLoader = new THREE.TextureLoader();
         textureLoader.load(data.texture, (texture) => {
             const geometry = new THREE.PlaneGeometry(6, 6, 50, 50);
-            const material = new THREE.MeshStandardMaterial({
+            const material = new THREE.MeshBasicMaterial({
                 map: texture,
-                metalness: 0.1,
-                roughness: 0.8,
                 side: THREE.DoubleSide,
                 transparent: true,
                 opacity: 1
@@ -221,8 +218,8 @@ export class PortalTransitionScene extends SceneSetup {
     animate() {
         requestAnimationFrame(() => this.animate());
         
-        this.time += 0.01; // Mise à jour du temps
-        this.updateFragments(); // Mise à jour des fragments à chaque frame
+        this.time += 0.01;
+        this.updateFragments();
         
         // Rendu de la scène
         if (this.renderer && this.scene && this.camera) {
@@ -233,17 +230,42 @@ export class PortalTransitionScene extends SceneSetup {
 
     setupBackground() {
         const textureLoader = new THREE.TextureLoader();
-        textureLoader.load('src/textures/escape.png', (texture) => {
-            const aspectRatio = window.innerWidth / window.innerHeight;
-            const bgGeometry = new THREE.PlaneGeometry(40 * aspectRatio, 40);
+        textureLoader.load('src/textures/gaming_popcorn.png', (texture) => {
+            // Calculer le ratio d'aspect de la texture
+            const imageRatio = texture.image.width / texture.image.height;
+            const screenRatio = window.innerWidth / window.innerHeight;
+            texture.encoding = THREE.sRGBEncoding;
+            
+            // Déterminer la taille du plan en fonction des ratios
+            let planeWidth, planeHeight;
+            if (screenRatio > imageRatio) {
+                planeWidth = 20 * screenRatio;
+                planeHeight = planeWidth / imageRatio;
+            } else {
+                planeHeight = 20;
+                planeWidth = planeHeight * imageRatio;
+            }
+            
+            const bgGeometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
             const bgMaterial = new THREE.MeshBasicMaterial({
                 map: texture,
-                side: THREE.DoubleSide
+                side: THREE.DoubleSide,
+                depthWrite: false,
+                depthTest: false
             });
             const bgMesh = new THREE.Mesh(bgGeometry, bgMaterial);
-            bgMesh.position.z = -30;
+            
+            // Positionner le plan derrière la caméra
+            bgMesh.position.z = -13;
             bgMesh.renderOrder = -1;
-            this.scene.add(bgMesh);
+            
+            // Attacher le background à la caméra pour qu'il reste fixe
+            this.camera.add(bgMesh);
+            
+            // S'assurer que la scène contient la caméra
+            if (!this.scene.children.includes(this.camera)) {
+                this.scene.add(this.camera);
+            }
         });
     }
 

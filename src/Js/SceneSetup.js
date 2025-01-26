@@ -22,6 +22,11 @@ class SceneSetup {
         
         // Event listeners de base
         window.addEventListener('resize', () => this.onResize());
+
+        const backButton = document.getElementById('back-button');
+        if (backButton) {
+            backButton.addEventListener('click', () => this.recreateInitialScene());
+        }
     }
 
     setupRenderer() {
@@ -98,6 +103,8 @@ class SceneSetup {
         const textureLoader = new THREE.TextureLoader();
         textureLoader.load("src/textures/escape.png", (texture) => {
           const aspectRatio = texture.image.width / texture.image.height;
+
+        // texture.encoding = THREE.sRGBEncoding;
     
           // Créer un grand plan pour l'arrière-plan
           const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
