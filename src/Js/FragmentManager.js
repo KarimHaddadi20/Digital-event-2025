@@ -7,6 +7,7 @@ class FragmentManager {
     this.fragments = [];
     this.hoveredFragment = null;
     this.isAnimatingFragment = false;
+    this.selectedFragment = null;
     this.atelierNames = [
       "Atelier 1",
       "Atelier 2",
@@ -427,8 +428,10 @@ class FragmentManager {
       }
 
       if (fragmentObject.userData && fragmentObject.userData.atelierName) {
+        if (fragmentObject === this.selectedFragment) return;
+
         if (this.hoveredFragment !== fragmentObject) {
-          if (this.hoveredFragment) {
+          if (this.hoveredFragment && this.hoveredFragment !== this.selectedFragment) {
             this.resetFragmentPosition(this.hoveredFragment);
           }
 
@@ -441,7 +444,7 @@ class FragmentManager {
         }
       }
     } else {
-      if (this.hoveredFragment) {
+      if (this.hoveredFragment && this.hoveredFragment !== this.selectedFragment) {
         this.resetFragmentPosition(this.hoveredFragment);
         this.hoveredFragment = null;
         this.textElement.style.opacity = "0";
@@ -462,6 +465,13 @@ class FragmentManager {
     this.raycaster.setFromCamera(mouse, this.app.camera);
     const intersects = this.raycaster.intersectObjects(this.fragments, true);
 
+    // Si on clique en dehors des fragments et qu'un fragment est sélectionné
+    if (intersects.length === 0 && this.selectedFragment) {
+      this.resetFragmentPosition(this.selectedFragment);
+      this.selectedFragment = null;
+      return;
+    }
+
     if (intersects.length > 0) {
       let clickedFragment = intersects[0].object;
 
@@ -474,7 +484,18 @@ class FragmentManager {
         clickedFragment.userData.atelierName &&
         clickedFragment.userData.isClickable !== false
       ) {
-        this.animateFragmentFall(clickedFragment);
+        if (this.selectedFragment === clickedFragment) {
+          this.animateFragmentFall(clickedFragment);
+          this.selectedFragment = null;
+          return;
+        }
+
+        if (this.selectedFragment && this.selectedFragment !== clickedFragment) {
+          this.resetFragmentPosition(this.selectedFragment);
+        }
+
+        this.selectedFragment = clickedFragment;
+        this.moveFragmentForward(clickedFragment);
       }
     }
   }

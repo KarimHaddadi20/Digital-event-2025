@@ -8,7 +8,7 @@ import { FragmentManager } from "./FragmentManager.js";
 import { PortalTransitionScene } from "./PortalTransitionScene.js";
 
 class MirrorBreakEffect extends SceneSetup {
-  constructor() {
+  constructor(startBroken = false) {
     // Appeler le constructeur parent avec HDRI activé
     super(true);
 
@@ -16,12 +16,39 @@ class MirrorBreakEffect extends SceneSetup {
     this.isBreaking = false;
     this.isFragmentSelected = false;
     this.mirror = null;
+    this.startBroken = startBroken;
+    this.isAnimating = true;
 
     // Initialisation du gestionnaire de fragments
     this.fragmentManager = new FragmentManager(this);
 
     // Initialiser l'environnement
-    this.onReady = null;
+    this.onReady = () => {
+      // Ajouter les instructions
+      const container = document.createElement('div');
+      container.className = 'mirror-instructions';
+      container.textContent = 'Cassez le miroir';
+      document.body.appendChild(container);
+
+      const fragmentInstructions = document.createElement('div');
+      fragmentInstructions.className = 'fragment-instructions';
+      fragmentInstructions.textContent = 'Cliquez sur un fragment pour découvrir son atelier';
+      fragmentInstructions.style.display = 'none';
+      document.body.appendChild(fragmentInstructions);
+
+      if (this.startBroken) {
+        console.log("Cassure automatique du miroir...");
+        // Cacher les instructions du miroir et afficher les instructions des fragments
+        container.style.display = 'none';
+        fragmentInstructions.style.display = 'block';
+        
+        // Casser le miroir
+        this.mirror.visible = false;
+        this.isBreaking = true;
+        this.fragmentManager.breakMirror();
+      }
+    };
+    
     this.setupScene();
   }
 
@@ -42,7 +69,8 @@ class MirrorBreakEffect extends SceneSetup {
     // Charger le modèle du miroir
     this.fragmentManager.loadMirrorModel().then(() => {
       modelLoaded = true;
-      if (hdriLoaded && this.onReady) {
+      
+      if (this.onReady) {
         this.onReady();
       }
     });
@@ -64,11 +92,14 @@ class MirrorBreakEffect extends SceneSetup {
   }
 
   animate() {
+    if (!this.isAnimating) return;
     requestAnimationFrame(() => this.animate());
     if (this.isBreaking) {
       this.fragmentManager.animateFragments();
     }
-    this.controls.update();
+    if (this.controls) {
+      this.controls.update();
+    }
     this.renderer.render(this.scene, this.camera);
   }
 
@@ -123,6 +154,9 @@ class MirrorBreakEffect extends SceneSetup {
       if (fadeMaterial.opacity >= 1) {
         fadeOutComplete = true;
         console.log("MirrorBreakEffect: Fade out terminé");
+
+        // Arrêter l'animation de cette scène
+        this.isAnimating = false;
 
         // Nettoyer la scène actuelle
         this.clearScene();

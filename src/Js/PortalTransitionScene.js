@@ -9,6 +9,7 @@ export class PortalTransitionScene extends SceneSetup {
         this.app = app;
         this.fragments = [];
         this.time = 0; // Initialisation du temps
+        this.isAnimating = true; // Nouvelle propriété
         this.camera.position.set(0, 0, 7); // Position initiale de la caméra
         this.camera.lookAt(0, 0, 0);
         
@@ -112,8 +113,9 @@ export class PortalTransitionScene extends SceneSetup {
 
     updateFragments() {
         this.fragments.forEach(fragment => {
+            if (!fragment) return;
             const mesh = fragment.mesh;
-            if (!mesh) return;
+            if (!mesh || !mesh.position || !mesh.material || !mesh.geometry) return;
 
             const distance = mesh.position.z - this.camera.position.z;
             
@@ -126,11 +128,11 @@ export class PortalTransitionScene extends SceneSetup {
                 opacity = 0;
             }
             
-            if (mesh.material) {
-                mesh.material.opacity = THREE.MathUtils.clamp(opacity, 0, 1);
-            }
+            mesh.material.opacity = THREE.MathUtils.clamp(opacity, 0, 1);
 
             const positions = mesh.geometry.attributes.position;
+            if (!positions) return;
+
             for (let i = 0; i < positions.count; i++) {
                 const x = positions.getX(i);
                 const y = positions.getY(i);
@@ -149,9 +151,11 @@ export class PortalTransitionScene extends SceneSetup {
                 Math.min(xPosition, -4) :
                 Math.max(xPosition, 4);
 
-            const label = mesh.children.find(child => child instanceof CSS2DObject);
-            if (label) {
-                label.element.style.opacity = mesh.material.opacity;
+            if (mesh.children) {
+                const label = mesh.children.find(child => child instanceof CSS2DObject);
+                if (label && label.element) {
+                    label.element.style.opacity = mesh.material.opacity;
+                }
             }
         });
     }
@@ -234,6 +238,7 @@ export class PortalTransitionScene extends SceneSetup {
     }
 
     animate() {
+        if (!this.isAnimating) return; // Arrêter l'animation si false
         requestAnimationFrame(() => this.animate());
         
         this.time += 0.01;

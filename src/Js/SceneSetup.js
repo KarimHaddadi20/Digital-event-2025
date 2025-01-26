@@ -4,7 +4,7 @@ import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 import { Loader } from "./Loader.js";
 
 class SceneSetup {
-    constructor(useHDRI = true) {
+    constructor(useHDRI = true, setupControls = true) {
         // Initialisation de base
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -22,22 +22,16 @@ class SceneSetup {
         
         // Event listeners de base
         window.addEventListener('resize', () => this.onResize());
-
-        // Configuration du bouton retour
-        const backButton = document.getElementById('back-button');
-        if (backButton) {
-            backButton.addEventListener('click', () => {
-                console.log('Bouton retour cliqué');
-                this.recreateInitialScene();
-            });
-        }
     }
 
     setupRenderer() {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setClearColor(0x000000, 0);
-        document.getElementById("scene-container").appendChild(this.renderer.domElement);
+        const container = document.getElementById('scene-container');
+        if (container) {
+            container.appendChild(this.renderer.domElement);
+        }
     }
 
     setupCamera() {
@@ -178,48 +172,65 @@ class SceneSetup {
     }
 
     // Méthode pour nettoyer la scène en préservant les éléments importants
-    clearScene(preserveItems = []) {
+    clearScene() {
         console.log('Début du nettoyage de la scène');
         
-        // Sauvegarder l'état actuel
-        const savedState = {
-            lights: [],
-            preservedObjects: []
-        };
-
-        // Sauvegarder les lumières et les éléments à préserver
-        this.scene.traverse((child) => {
-            if (child.isLight) {
-                savedState.lights.push(child);
-            }
-            if (preserveItems.includes(child)) {
-                savedState.preservedObjects.push(child);
-            }
-        });
-
-        // Nettoyer tous les objets de la scène
-        while(this.scene.children.length > 0) { 
-            const child = this.scene.children[0];
-            this.scene.remove(child);
+        // Arrêter les animations en cours
+        if (this.animationFrameId) {
+            cancelAnimationFrame(this.animationFrameId);
+            this.animationFrameId = null;
         }
 
-        // Nettoyer l'environment et le background
-        this.scene.environment = null;
-        this.scene.background = null;
-        this.scene.fog = null;
+        // Nettoyer la scène
+        if (this.scene) {
+            while (this.scene.children.length > 0) {
+                const object = this.scene.children[0];
+                if (object.geometry) {
+                    object.geometry.dispose();
+                }
+                if (object.material) {
+                    if (Array.isArray(object.material)) {
+                        object.material.forEach(material => material.dispose());
+                    } else {
+                        object.material.dispose();
+                    }
+                }
+                this.scene.remove(object);
+            }
+        }
 
-        // Restaurer les lumières
-        savedState.lights.forEach(light => {
-            this.scene.add(light);
-        });
+        // Nettoyer le renderer
+        if (this.renderer) {
+            this.renderer.dispose();
+            this.renderer = null;
+        }
 
-        // Restaurer les objets préservés
-        savedState.preservedObjects.forEach(obj => {
-            this.scene.add(obj);
-        });
+        // Nettoyer les contrôles
+        if (this.controls) {
+            this.controls.dispose();
+            this.controls = null;
+        }
+
+        // Nettoyer la caméra
+        if (this.camera) {
+            this.camera = null;
+        }
+
+        // Nettoyer les textures
+        if (this.scene && this.scene.background) {
+            if (this.scene.background.dispose) {
+                this.scene.background.dispose();
+            }
+            this.scene.background = null;
+        }
+
+        // Nettoyer la scène elle-même
+        if (this.scene) {
+            this.scene = null;
+        }
 
         console.log('Fin du nettoyage de la scène');
-        console.log('Objets restants:', this.scene.children.length);
+        console.log('Objets restants:', this.scene ? this.scene.children.length : 0);
     }
 
     // Méthode pour gérer la transition entre les scènes
@@ -301,84 +312,6 @@ class SceneSetup {
         }
     }
 
-    recreateInitialScene() {
-        console.log('Recréation de la scène initiale...');
-        
-        // Nettoyer la scène actuelle
-        this.clearScene();
-        
-        // Masquer le contenu principal
-        const mainContent = document.getElementById('main-content');
-        if (mainContent) {
-            mainContent.style.display = 'none';
-        }
-        
-        // Masquer la navbar et le footer pendant le chargement
-        const navbar = document.querySelector('.navbar');
-        const footer = document.querySelector('.footer');
-        if (navbar) navbar.style.display = 'none';
-        if (footer) footer.style.display = 'none';
-        
-        // Supprimer l'ancien container de chargement s'il existe
-        const oldContainer = document.getElementById('loading-container');
-        if (oldContainer) {
-            oldContainer.remove();
-        }
-        
-        // Recréer la structure HTML nécessaire pour le loader
-        const loadingContainer = document.createElement('div');
-        loadingContainer.id = 'loading-container';
-        
-        // Ajouter le titre
-        const loadingTitle = document.createElement('div');
-        loadingTitle.className = 'loading-title';
-        const titleSpan1 = document.createElement('span');
-        titleSpan1.className = 'font-aktiv';
-        titleSpan1.textContent = 'Digital Event';
-        const titleSpan2 = document.createElement('span');
-        titleSpan2.className = 'font-fraunces';
-        titleSpan2.textContent = 'Edition 2025';
-        loadingTitle.appendChild(titleSpan1);
-        loadingTitle.appendChild(document.createTextNode(' '));
-        loadingTitle.appendChild(titleSpan2);
-        loadingContainer.appendChild(loadingTitle);
-        
-        // Ajouter les éléments de pourcentage
-        const percentage = document.createElement('div');
-        percentage.id = 'percentage';
-        percentage.textContent = '0%';
-        loadingContainer.appendChild(percentage);
-        
-        const mirrorPercentage = document.createElement('div');
-        mirrorPercentage.id = 'mirror-percentage';
-        mirrorPercentage.textContent = '0%';
-        loadingContainer.appendChild(mirrorPercentage);
-        
-        // Ajouter le footer du loader
-        const loaderFooter = document.createElement('div');
-        loaderFooter.className = 'loader-footer';
-        
-        const footerImg = document.createElement('img');
-        footerImg.src = 'src/assets/icons/esd_logo_NoTexte_Jade 1.svg';
-        footerImg.alt = 'esd icon';
-        footerImg.width = 40;
-        footerImg.height = 40;
-        
-        const footerText = document.createElement('p');
-        footerText.textContent = 'Ecole Supérieure du Digital';
-        
-        loaderFooter.appendChild(footerImg);
-        loaderFooter.appendChild(footerText);
-        loadingContainer.appendChild(loaderFooter);
-        
-        // Ajouter le container au body
-        document.body.appendChild(loadingContainer);
-        
-        // Créer et démarrer une nouvelle instance du Loader
-        const loader = new Loader();
-        
-        return true;
-    }
 }
 
 export { SceneSetup }; 
