@@ -250,6 +250,7 @@ class FragmentManager {
           fragment.visible = false;
           fragment.userData.index = config.index - 1;
           fragment.userData.isClickable = true;
+          fragment.userData.isHoverable = true;
           fragment.userData.atelierName = this.atelierNames[config.index - 1];
 
           this.fragments.push(fragment);
@@ -288,6 +289,7 @@ class FragmentManager {
     setTimeout(() => {
       this.fragments.forEach((fragment) => {
         fragment.userData.isClickable = true;
+        fragment.userData.isHoverable = true;
       });
     }, 100);
 
