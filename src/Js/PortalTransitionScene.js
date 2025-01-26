@@ -591,4 +591,47 @@ export class PortalTransitionScene extends SceneSetup {
             this.progressContainer.style.opacity = '0';
         }
     }
+
+    onMouseMove(event) {
+        if (!this.app.isBreaking || this.isAnimatingFragment) return;
+
+        this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+        this.raycaster.setFromCamera(this.mouse, this.app.camera);
+        const intersects = this.raycaster.intersectObjects(this.fragments, true);
+
+        if (intersects.length > 0) {
+            let fragmentObject = intersects[0].object;
+
+            while (fragmentObject.parent && !fragmentObject.userData.atelierName) {
+                fragmentObject = fragmentObject.parent;
+            }
+
+            if (fragmentObject.userData && fragmentObject.userData.atelierName) {
+                if (fragmentObject === this.selectedFragment) return;
+
+                if (this.hoveredFragment !== fragmentObject) {
+                    if (this.hoveredFragment && this.hoveredFragment !== this.selectedFragment) {
+                        this.resetFragmentPosition(this.hoveredFragment);
+                    }
+
+                    this.hoveredFragment = fragmentObject;
+                    this.moveFragmentForward(this.hoveredFragment);
+                    
+                    if (!this.selectedFragment) {
+                        this.updateBackground(fragmentObject.userData.atelierName);
+                    }
+                }
+            }
+        } else {
+            if (this.hoveredFragment && this.hoveredFragment !== this.selectedFragment) {
+                this.resetFragmentPosition(this.hoveredFragment);
+                this.hoveredFragment = null;
+                if (!this.selectedFragment) {
+                    this.updateBackground(null);
+                }
+            }
+        }
+    }
 }

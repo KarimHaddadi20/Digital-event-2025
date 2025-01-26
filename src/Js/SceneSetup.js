@@ -14,7 +14,6 @@ class SceneSetup {
         this.setupRenderer();
         this.setupCamera();
         this.setupControls();
-        
         // Charger l'HDRI seulement si demandé
         if (useHDRI) {
             this.loadHDRI();
@@ -28,6 +27,7 @@ class SceneSetup {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(window.devicePixelRatio);
         this.renderer.setClearColor(0x000000, 0);
+        this.renderer.outputColorSpace = THREE.SRGBColorSpace;
         const container = document.getElementById('scene-container');
         if (container) {
             container.appendChild(this.renderer.domElement);
@@ -80,21 +80,22 @@ class SceneSetup {
     loadHDRI() {
         const rgbeLoader = new RGBELoader();
         rgbeLoader.load("src/assets/grey2.hdr", (texture) => {
-          texture.mapping = THREE.EquirectangularReflectionMapping;
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            texture.colorSpace = THREE.SRGBColorSpace;
     
-          // Create PMREMGenerator for better reflections
-          const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
-          const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+            // Create PMREMGenerator for better reflections
+            const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+            const envMap = pmremGenerator.fromEquirectangular(texture).texture;
     
-          // Apply environment but keep black background
-          this.scene.environment = envMap;
-          this.scene.background = new THREE.Color(0x000000);
+            // Apply environment but keep black background
+            this.scene.environment = envMap;
+            this.scene.background = new THREE.Color(0x000000);
     
-          // Dispose resources
-          texture.dispose();
-          pmremGenerator.dispose();
+            // Dispose resources
+            texture.dispose();
+            pmremGenerator.dispose();
         });
-      }
+    }
 
     setupBackground() {
         const textureLoader = new THREE.TextureLoader();
@@ -323,6 +324,24 @@ class SceneSetup {
         if (this.labelRenderer) {
             this.labelRenderer.setSize(window.innerWidth, window.innerHeight);
         }
+    }
+
+    setBackground(texturePath) {
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.load(texturePath, (texture) => {
+            texture.colorSpace = THREE.SRGBColorSpace;
+            const material = new THREE.MeshBasicMaterial({
+                map: texture,
+                side: THREE.BackSide
+            });
+            if (!this.backgroundMesh) {
+                const geometry = new THREE.SphereGeometry(500, 60, 40);
+                this.backgroundMesh = new THREE.Mesh(geometry, material);
+                this.scene.add(this.backgroundMesh);
+            } else {
+                this.backgroundMesh.material = material;
+            }
+        });
     }
 }
 
