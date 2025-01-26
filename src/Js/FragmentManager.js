@@ -15,14 +15,14 @@ class FragmentManager {
     this.backgroundTextures = {
       "AI Driven visual stories": "src/textures/ai_driven_visual_stories.jpg",
       "Creative Coding": "src/textures/creative_coding.jpg",
-      "Escape game": "src/textures/escape_game.jpg",
+      "Escape game": "src/textures/escape.png",
       "Game design": "src/textures/game_design.jpg",
-      "Gaming & Pop-corn": "src/textures/gaming_pop_corn.jpg",
-      "Organisation": "src/textures/organisation.jpg",
+      "Gaming & Pop-corn": "src/textures/gaming_popcorn.png",
+      "Organisation": "src/textures/parcours_organisation.jpg",
       "Photo reportage": "src/textures/photo_reportage.jpg",
       "Podcast": "src/textures/podcast.jpg",
       "Site web": "src/textures/site_web.jpg",
-      "Video": "src/textures/video.jpg",
+      "Video": "src/textures/video_studio.jpg",
       "Video Mapping": "src/textures/video_mapping.jpg"
     };
     this.atelierNames = [
