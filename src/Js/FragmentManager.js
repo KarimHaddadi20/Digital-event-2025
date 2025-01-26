@@ -838,6 +838,23 @@ class FragmentManager {
         `;
       }
     }
+
+    // Redémarrer le timer pour la prochaine sélection automatique
+    setTimeout(() => {
+      this.selectedFragment = null;
+      this.resetFragmentPosition(randomFragment);
+      this.hideVoyagerButton();
+      if (this.fragmentInstructions) {
+        const titleElement = this.fragmentInstructions.querySelector('.instruction-title');
+        if (titleElement) {
+          titleElement.innerHTML = `
+            <span class="font-aktiv">Sélectionnez un</span>
+            <span class="font-fraunces">fragment</span>
+          `;
+        }
+      }
+      this.startAutoSelectTimer();
+    }, 10000);
   }
 
   startAutoSelectTimer() {
