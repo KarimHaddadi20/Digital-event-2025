@@ -3,10 +3,11 @@ import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer
 import { SceneSetup } from './SceneSetup.js';
 
 export class PortalTransitionScene extends SceneSetup {
-    constructor(app) {
+    constructor(app, selectedFragmentIndex) {
         super(false);
         
         this.app = app;
+        this.selectedFragmentIndex = selectedFragmentIndex;
         this.fragments = [];
         this.time = 0; // Initialisation du temps
         this.camera.position.set(0, 0, 7); // Position initiale de la caméra
@@ -268,16 +269,23 @@ export class PortalTransitionScene extends SceneSetup {
             const response = await fetch('/src/data/portalData.json');
             const data = await response.json();
             
-            // Vérifier que les chemins des textures sont corrects
-            const atelierData = data.atelier1;
+            // Déterminer quel atelier a été sélectionné (1-11)
+            const atelierIndex = this.selectedFragmentIndex + 1;
+            const atelierKey = `atelier${atelierIndex}`;
+            
+            // Récupérer les données de l'atelier spécifique
+            const atelierData = data[atelierKey];
+            if (!atelierData) {
+                console.error(`Pas de données pour ${atelierKey}`);
+                return;
+            }
             
             const responsive = this.getResponsivePositions();
             
+            // Créer les fragments pour chaque set de l'atelier
             const fragmentsData = atelierData.sets.map((set, index) => {
-                // Vérifier que le chemin de l'image existe
-                const imagePath = set.image.startsWith('./') ? set.image.slice(2) : set.image;
                 return {
-                    texture: imagePath, // Utiliser le chemin corrigé
+                    texture: set.image,
                     title: set.title,
                     subtitle: set.subtitle,
                     position: { 
@@ -290,7 +298,7 @@ export class PortalTransitionScene extends SceneSetup {
                 };
             });
 
-            // Créer les fragments seulement après avoir chargé toutes les textures
+            // Créer les fragments
             for (const data of fragmentsData) {
                 await this.createFragment(data);
             }
@@ -444,16 +452,84 @@ export class PortalTransitionScene extends SceneSetup {
         }
     }
 
-    setupBackground() {
+    async setupBackground() {
+        try {
+            // Charger les données du JSON
+            const response = await fetch('/src/data/portalData.json');
+            const data = await response.json();
+            
+            // Récupérer l'atelier actuel
+            const atelierIndex = this.selectedFragmentIndex + 1;
+            const atelierKey = `atelier${atelierIndex}`;
+            const atelierData = data[atelierKey];
+            
+            if (!atelierData || !atelierData.backgroundImage) {
+                console.log("Pas d'image de fond spécifiée, utilisation de l'image par défaut");
+                this.setupDefaultBackground();
+                return;
+            }
+
+            const textureLoader = new THREE.TextureLoader();
+            textureLoader.load(
+                atelierData.backgroundImage,
+                (texture) => {
+                    const imageRatio = texture.image.width / texture.image.height;
+                    const screenRatio = window.innerWidth / window.innerHeight;
+                    
+                    // Utiliser colorSpace au lieu de encoding
+                    texture.colorSpace = THREE.SRGBColorSpace;
+                    
+                    // Déterminer la taille du plan en fonction des ratios
+                    let planeWidth, planeHeight;
+                    if (screenRatio > imageRatio) {
+                        planeWidth = 20 * screenRatio;
+                        planeHeight = planeWidth / imageRatio;
+                    } else {
+                        planeHeight = 20;
+                        planeWidth = planeHeight * imageRatio;
+                    }
+                    
+                    const bgGeometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
+                    const bgMaterial = new THREE.MeshBasicMaterial({
+                        map: texture,
+                        side: THREE.DoubleSide,
+                        depthWrite: false,
+                        depthTest: false
+                    });
+                    const bgMesh = new THREE.Mesh(bgGeometry, bgMaterial);
+                    
+                    // Positionner le plan derrière la caméra
+                    bgMesh.position.z = -13;
+                    bgMesh.renderOrder = -1;
+                    
+                    // Attacher le background à la caméra pour qu'il reste fixe
+                    this.camera.add(bgMesh);
+                    
+                    // S'assurer que la scène contient la caméra
+                    if (!this.scene.children.includes(this.camera)) {
+                        this.scene.add(this.camera);
+                    }
+                },
+                undefined,
+                (error) => {
+                    console.error("Erreur lors du chargement de l'image de fond:", error);
+                    this.setupDefaultBackground();
+                }
+            );
+        } catch (error) {
+            console.error("Erreur lors du chargement des données:", error);
+            this.setupDefaultBackground();
+        }
+    }
+
+    setupDefaultBackground() {
         const textureLoader = new THREE.TextureLoader();
         textureLoader.load('src/textures/gaming_popcorn.png', (texture) => {
             const imageRatio = texture.image.width / texture.image.height;
             const screenRatio = window.innerWidth / window.innerHeight;
             
-            // Utiliser colorSpace au lieu de encoding
             texture.colorSpace = THREE.SRGBColorSpace;
             
-            // Déterminer la taille du plan en fonction des ratios
             let planeWidth, planeHeight;
             if (screenRatio > imageRatio) {
                 planeWidth = 20 * screenRatio;
@@ -472,14 +548,11 @@ export class PortalTransitionScene extends SceneSetup {
             });
             const bgMesh = new THREE.Mesh(bgGeometry, bgMaterial);
             
-            // Positionner le plan derrière la caméra
             bgMesh.position.z = -13;
             bgMesh.renderOrder = -1;
             
-            // Attacher le background à la caméra pour qu'il reste fixe
             this.camera.add(bgMesh);
             
-            // S'assurer que la scène contient la caméra
             if (!this.scene.children.includes(this.camera)) {
                 this.scene.add(this.camera);
             }

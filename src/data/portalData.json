@@ -1,5 +1,6 @@
 {
     "atelier1": {
+        "backgroundImage": "src/textures/Atelier1.png",
         "sets": [
             {
                 "title": "Intelligence Artificielle",
@@ -29,6 +30,7 @@
         ]
     },
     "atelier2": {
+        "backgroundImage": "src/textures/Atelier2.png",
         "sets": [
             {
                 "title": "Gestion de Projet",
