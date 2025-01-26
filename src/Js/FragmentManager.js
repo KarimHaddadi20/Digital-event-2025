@@ -9,7 +9,9 @@ class FragmentManager {
     this.isAnimatingFragment = false;
     this.selectedFragment = null;
     this.userHasInteracted = false;
-    this.fragmentInstructions = document.querySelector('.fragment-instructions');
+    this.fragmentInstructions = document.querySelector(
+      ".fragment-instructions"
+    );
     this.initialBackground = null;
     this.activeBackground = null;
     this.backgroundTextures = {
@@ -18,12 +20,12 @@ class FragmentManager {
       "Escape game": "src/textures/escape.png",
       "Game design": "src/textures/game_design.jpg",
       "Gaming & Pop-corn": "src/textures/gaming_popcorn.png",
-      "Organisation": "src/textures/parcours_organisation.jpg",
+      Organisation: "src/textures/parcours_organisation.jpg",
       "Photo reportage": "src/textures/photo_reportage.jpg",
-      "Podcast": "src/textures/podcast.jpg",
+      Podcast: "src/textures/podcast.jpg",
       "Site web": "src/textures/site_web.jpg",
-      "Video": "src/textures/video_studio.jpg",
-      "Video Mapping": "src/textures/video_mapping.jpg"
+      Video: "src/textures/video_studio.jpg",
+      "Video Mapping": "src/textures/video_mapping.jpg",
     };
     this.atelierNames = [
       "AI Driven visual stories",
@@ -36,7 +38,7 @@ class FragmentManager {
       "Podcast",
       "Site web",
       "Video",
-      "Video Mapping"
+      "Video Mapping",
     ];
 
     this.autoSelectTimer = null;
@@ -61,7 +63,8 @@ class FragmentManager {
     this.voyagerButton.style.gap = "4px";
     this.voyagerButton.style.borderRadius = "4px";
     this.voyagerButton.style.border = "1px solid #FFF";
-    this.voyagerButton.style.background = "linear-gradient(344deg, rgba(21, 21, 27, 0.20) -1.4%, rgba(79, 79, 86, 0.20) 104.72%)";
+    this.voyagerButton.style.background =
+      "linear-gradient(344deg, rgba(21, 21, 27, 0.20) -1.4%, rgba(79, 79, 86, 0.20) 104.72%)";
     this.voyagerButton.style.backdropFilter = "blur(2px)";
     this.voyagerButton.style.color = "white";
     this.voyagerButton.style.fontSize = "20px";
@@ -72,12 +75,14 @@ class FragmentManager {
 
     // Effets de hover
     this.voyagerButton.addEventListener("mouseenter", () => {
-      this.voyagerButton.style.background = "linear-gradient(344deg, rgba(21, 21, 27, 0.40) -1.4%, rgba(79, 79, 86, 0.40) 104.72%)";
+      this.voyagerButton.style.background =
+        "linear-gradient(344deg, rgba(21, 21, 27, 0.40) -1.4%, rgba(79, 79, 86, 0.40) 104.72%)";
       this.voyagerButton.style.transform = "translateX(-50%) scale(1.05)";
     });
 
     this.voyagerButton.addEventListener("mouseleave", () => {
-      this.voyagerButton.style.background = "linear-gradient(344deg, rgba(21, 21, 27, 0.20) -1.4%, rgba(79, 79, 86, 0.20) 104.72%)";
+      this.voyagerButton.style.background =
+        "linear-gradient(344deg, rgba(21, 21, 27, 0.20) -1.4%, rgba(79, 79, 86, 0.20) 104.72%)";
       this.voyagerButton.style.transform = "translateX(-50%) scale(1)";
     });
 
@@ -288,9 +293,10 @@ class FragmentManager {
         this.moveFragmentForward(firstFragment);
         this.showVoyagerButton();
         this.updateBackground(firstFragment.userData.atelierName);
-        
+
         if (this.fragmentInstructions) {
-          const titleElement = this.fragmentInstructions.querySelector('.instruction-title');
+          const titleElement =
+            this.fragmentInstructions.querySelector(".instruction-title");
           if (titleElement) {
             titleElement.innerHTML = `
               <span class="font-aktiv">${firstFragment.userData.atelierName}</span>
@@ -307,7 +313,7 @@ class FragmentManager {
 
   selectFragment(fragment) {
     if (!fragment || !fragment.mesh) return;
-    
+
     // Simuler la sélection du fragment
     const distance = fragment.mesh.position.z - this.app.camera.position.z;
     if (Math.abs(distance) <= 15) {
@@ -387,18 +393,20 @@ class FragmentManager {
     const startTime = Date.now();
     const immersionDuration = 1000;
     const startFragmentPos = fragment.position.clone();
-    
+
     // Cacher les instructions des fragments
-    const fragmentInstructions = document.querySelector('.fragment-instructions');
+    const fragmentInstructions = document.querySelector(
+      ".fragment-instructions"
+    );
     if (fragmentInstructions) {
-        fragmentInstructions.style.display = 'none';
+      fragmentInstructions.style.display = "none";
     }
 
     // Désactiver les interactions avec les autres fragments
-    this.fragments.forEach(f => {
-        if (f !== fragment) {
-            f.userData.isClickable = false;
-        }
+    this.fragments.forEach((f) => {
+      if (f !== fragment) {
+        f.userData.isClickable = false;
+      }
     });
 
     const fallDuration = 1500;
@@ -511,8 +519,9 @@ class FragmentManager {
 
   // Sauvegarder le background initial
   saveInitialBackground() {
-    const background = this.app.scene.children.find(child => 
-      child.material && child.material.map && child.position.z === -300
+    const background = this.app.scene.children.find(
+      (child) =>
+        child.material && child.material.map && child.position.z === -300
     );
     if (background) {
       this.initialBackground = background;
@@ -527,7 +536,7 @@ class FragmentManager {
       console.log("Saving initial background");
       this.saveInitialBackground();
     }
-    
+
     if (!atelierName) {
       console.log("No atelier name, reverting to initial background");
       if (this.activeBackground) {
@@ -540,26 +549,27 @@ class FragmentManager {
               this.initialBackground.visible = true;
               window.gsap.to(this.initialBackground.material, {
                 opacity: 1,
-                duration: 0.5
+                duration: 0.5,
               });
             } else {
               this.setupInitialBackground();
             }
-          }
+          },
         });
       }
       return;
     }
-    
+
     const texturePath = this.backgroundTextures[atelierName];
     console.log("Loading texture from:", texturePath);
     if (!texturePath) {
       console.log("No texture path found for:", atelierName);
       return;
     }
-    
+
     const textureLoader = new THREE.TextureLoader();
-    textureLoader.load(texturePath, 
+    textureLoader.load(
+      texturePath,
       (texture) => {
         console.log("Texture loaded successfully");
         if (this.activeBackground) {
@@ -569,27 +579,32 @@ class FragmentManager {
             duration: 0.3,
             onComplete: () => {
               const aspectRatio = texture.image.width / texture.image.height;
-              const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
+              const bgGeometry = new THREE.PlaneGeometry(
+                600 * aspectRatio,
+                550
+              );
               const bgMaterial = new THREE.MeshBasicMaterial({
                 map: texture,
                 side: THREE.FrontSide,
                 transparent: true,
-                opacity: 0
+                opacity: 0,
               });
+              texture.encoding = THREE.sRGBEncoding;
+
               this.activeBackground = new THREE.Mesh(bgGeometry, bgMaterial);
               this.activeBackground.position.z = -300;
               this.activeBackground.position.y = 0;
               this.app.scene.add(this.activeBackground);
-              
+
               this.app.scene.remove(previousBackground);
               previousBackground.geometry.dispose();
               previousBackground.material.dispose();
-              
+
               window.gsap.to(this.activeBackground.material, {
                 opacity: 1,
-                duration: 0.3
+                duration: 0.3,
               });
-            }
+            },
           });
         } else {
           const aspectRatio = texture.image.width / texture.image.height;
@@ -598,7 +613,7 @@ class FragmentManager {
             map: texture,
             side: THREE.FrontSide,
             transparent: true,
-            opacity: 0
+            opacity: 0,
           });
           this.activeBackground = new THREE.Mesh(bgGeometry, bgMaterial);
           this.activeBackground.position.z = -300;
@@ -606,17 +621,17 @@ class FragmentManager {
           this.app.scene.add(this.activeBackground);
           window.gsap.to(this.activeBackground.material, {
             opacity: 1,
-            duration: 0.5
+            duration: 0.5,
           });
         }
-        
+
         if (this.initialBackground) {
           window.gsap.to(this.initialBackground.material, {
             opacity: 0,
             duration: 0.5,
             onComplete: () => {
               this.initialBackground.visible = false;
-            }
+            },
           });
         }
       },
@@ -637,6 +652,8 @@ class FragmentManager {
         side: THREE.FrontSide,
         transparent: true,
       });
+      texture.encoding = THREE.sRGBEncoding;
+
       this.initialBackground = new THREE.Mesh(bgGeometry, bgMaterial);
       this.initialBackground.position.z = -300;
       this.initialBackground.position.y = 0;
@@ -664,7 +681,10 @@ class FragmentManager {
         if (fragmentObject === this.selectedFragment) return;
 
         if (this.hoveredFragment !== fragmentObject) {
-          if (this.hoveredFragment && this.hoveredFragment !== this.selectedFragment) {
+          if (
+            this.hoveredFragment &&
+            this.hoveredFragment !== this.selectedFragment
+          ) {
             this.resetFragmentPosition(this.hoveredFragment);
           }
 
@@ -674,14 +694,17 @@ class FragmentManager {
           this.textElement.textContent = fragmentObject.userData.atelierName;
           this.textElement.style.display = "block";
           this.textElement.style.opacity = "1";
-          
+
           if (!this.selectedFragment) {
             this.updateBackground(fragmentObject.userData.atelierName);
           }
         }
       }
     } else {
-      if (this.hoveredFragment && this.hoveredFragment !== this.selectedFragment) {
+      if (
+        this.hoveredFragment &&
+        this.hoveredFragment !== this.selectedFragment
+      ) {
         this.resetFragmentPosition(this.hoveredFragment);
         this.hoveredFragment = null;
         this.textElement.style.opacity = "0";
@@ -712,7 +735,8 @@ class FragmentManager {
         this.hideVoyagerButton();
         this.userHasInteracted = false;
         if (this.fragmentInstructions) {
-          const titleElement = this.fragmentInstructions.querySelector('.instruction-title');
+          const titleElement =
+            this.fragmentInstructions.querySelector(".instruction-title");
           if (titleElement) {
             titleElement.innerHTML = `
               <span class="font-aktiv">Sélectionnez un</span>
@@ -747,7 +771,10 @@ class FragmentManager {
           return;
         }
 
-        if (this.selectedFragment && this.selectedFragment !== clickedFragment) {
+        if (
+          this.selectedFragment &&
+          this.selectedFragment !== clickedFragment
+        ) {
           this.resetFragmentPosition(this.selectedFragment);
         }
 
@@ -755,9 +782,10 @@ class FragmentManager {
         this.moveFragmentForward(clickedFragment);
         this.showVoyagerButton();
         this.updateBackground(clickedFragment.userData.atelierName);
-        
+
         if (this.fragmentInstructions) {
-          const titleElement = this.fragmentInstructions.querySelector('.instruction-title');
+          const titleElement =
+            this.fragmentInstructions.querySelector(".instruction-title");
           if (titleElement) {
             titleElement.innerHTML = `
               <span class="font-aktiv">${clickedFragment.userData.atelierName}</span>
@@ -801,7 +829,9 @@ class FragmentManager {
     if (this.userHasInteracted) return;
 
     // Exclure le fragment actuellement sélectionné
-    const availableFragments = this.fragments.filter(f => f !== this.selectedFragment);
+    const availableFragments = this.fragments.filter(
+      (f) => f !== this.selectedFragment
+    );
     if (availableFragments.length === 0) return;
 
     // Sélectionner un fragment aléatoire
@@ -818,9 +848,10 @@ class FragmentManager {
     this.moveFragmentForward(randomFragment);
     this.showVoyagerButton();
     this.updateBackground(randomFragment.userData.atelierName);
-    
+
     if (this.fragmentInstructions) {
-      const titleElement = this.fragmentInstructions.querySelector('.instruction-title');
+      const titleElement =
+        this.fragmentInstructions.querySelector(".instruction-title");
       if (titleElement) {
         titleElement.innerHTML = `
           <span class="font-aktiv">${randomFragment.userData.atelierName}</span>
@@ -841,7 +872,7 @@ class FragmentManager {
     if (this.autoSelectTimer) {
       clearTimeout(this.autoSelectTimer);
     }
-    
+
     if (!this.selectedFragment) {
       this.autoSelectTimer = setTimeout(() => {
         this.selectRandomFragment();
