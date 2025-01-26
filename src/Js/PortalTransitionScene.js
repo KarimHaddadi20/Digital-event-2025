@@ -66,84 +66,87 @@ export class PortalTransitionScene extends SceneSetup {
     }
 
     setupScrollHandler() {
-        let timeoutId = null;
         let touchStartY = 0;
+        let isMobile = 'ontouchstart' in window;
         
         // Gestion du scroll desktop
         window.addEventListener('wheel', (event) => {
-            if (timeoutId) return;
-            timeoutId = setTimeout(() => {
-                this.onScroll(event.deltaY);
-                timeoutId = null;
-            }, 18);
+            event.preventDefault();
+            const delta = event.deltaY * 0.05;
+            this.updateCameraPosition(delta);
         }, { passive: false });
 
-        // Gestion du scroll mobile (touch events)
+        // Gestion améliorée du scroll mobile
         window.addEventListener('touchstart', (event) => {
+            event.preventDefault();
             touchStartY = event.touches[0].clientY;
-        }, { passive: true });
+        }, { passive: false });
 
         window.addEventListener('touchmove', (event) => {
-            if (timeoutId) return;
-            const touchEndY = event.touches[0].clientY;
-            const deltaY = touchEndY - touchStartY;
-            touchStartY = touchEndY;
+            event.preventDefault();
+            const touchY = event.touches[0].clientY;
+            const delta = (touchStartY - touchY) * (isMobile ? 0.2 : 0.1); // Sensibilité augmentée sur mobile
+            touchStartY = touchY;
 
-            timeoutId = setTimeout(() => {
-                this.onScroll(-deltaY * 1);
-                timeoutId = null;
-            }, 18);
-        }, { passive: true });
+            // Mise à jour immédiate pour mobile
+            if (isMobile) {
+                this.camera.position.z -= delta;
+                this.camera.position.z = Math.max(
+                    -((this.fragments.length) * 8) - 15, // Utiliser l'espacement mobile
+                    Math.min(7, this.camera.position.z)
+                );
+                this.updateFragments();
+                this.updateProgressBar(7, -((this.fragments.length) * 8) - 15);
+            } else {
+                this.updateCameraPosition(delta);
+            }
+        }, { passive: false });
+
+        // Empêcher le scroll par défaut
+        document.body.style.overflow = 'hidden';
     }
 
-    onScroll(deltaY) {
-        const scrollSpeed = 0.1;
+    updateCameraPosition(delta) {
         const currentZ = this.camera.position.z;
-        
-        // Calculer la distance totale basée sur le nombre de fragments
-        const fragmentSpacing = 20; // Espacement entre les fragments
-        const totalDistance = (this.fragments.length) * fragmentSpacing;
-        
-        // Définir les limites du scroll avec une marge supplémentaire
         const maxZ = 7;  // Position de départ
-        const minZ = maxZ - totalDistance - 20; // Position finale avec marge supplémentaire
         
-        let delta = deltaY * scrollSpeed;
+        // Calculer la position finale en fonction du nombre de fragments et ajouter une marge
+        const fragmentSpacing = 20;
+        const lastFragmentPosition = -5 - ((this.fragments.length - 1) * fragmentSpacing);
+        const minZ = lastFragmentPosition - 15; // Ajouter une marge après le dernier fragment
         
-        // Limiter le scroll aux bornes définies
-        if (currentZ - delta > maxZ) delta = currentZ - maxZ;
-        if (currentZ - delta < minZ) delta = currentZ - minZ;
+        // Calculer la nouvelle position
+        let newZ = currentZ - delta;
         
-        if (currentZ - delta >= minZ && currentZ - delta <= maxZ) {
-            gsap.to(this.camera.position, {
-                z: currentZ - delta,
-                duration: 1.2,
-                ease: "power3.out",
-                onUpdate: () => {
-                    this.updateFragments();
-                    this.updateProgressBar(minZ, maxZ);
-                }
-            });
-        }
+        // Limiter aux bornes
+        newZ = Math.max(minZ, Math.min(maxZ, newZ));
+        
+        // Mettre à jour la position de la caméra avec une animation légère
+        window.gsap.to(this.camera.position, {
+            z: newZ,
+            duration: 0.5,
+            ease: "power2.out",
+            onUpdate: () => {
+                this.updateProgressBar(maxZ, minZ);
+                this.updateFragments();
+            }
+        });
     }
 
-    updateProgressBar(minZ, maxZ) {
+    updateProgressBar(maxZ, minZ) {
         if (!this.progressFill) return;
         
-        // Calculer le pourcentage de progression basé sur la position actuelle de la caméra
-        const startZ = maxZ;  // Position de départ (7)
-        const endZ = minZ;    // Position finale calculée
-        
-        // Calculer la progression actuelle
         const currentZ = this.camera.position.z;
-        const totalDistance = Math.abs(endZ - startZ);
-        const distanceParcourue = Math.abs(startZ - currentZ);
+        const totalDistance = Math.abs(maxZ - minZ);
+        const currentDistance = Math.abs(maxZ - currentZ);
         
-        // Calculer le pourcentage avec une règle de trois
-        const progressPercent = Math.min((distanceParcourue / totalDistance) * 100, 100);
+        // Calculer la progression avec une limite à 100%
+        const progress = Math.min(currentDistance / totalDistance, 1);
         
         // Mettre à jour la barre de progression
-        this.progressFill.style.setProperty('--progress', progressPercent / 100);
+        requestAnimationFrame(() => {
+            this.progressFill.style.setProperty('--progress', progress);
+        });
     }
 
     updateFragments() {
