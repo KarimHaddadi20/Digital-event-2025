@@ -58,24 +58,42 @@ export class PortalTransitionScene extends SceneSetup {
 
     setupScrollHandler() {
         let timeoutId = null;
+        let touchStartY = 0;
+        
+        // Gestion du scroll desktop
         window.addEventListener('wheel', (event) => {
             if (timeoutId) return;
             timeoutId = setTimeout(() => {
-                this.onScroll(event);
+                this.onScroll(event.deltaY);
                 timeoutId = null;
             }, 18);
         }, { passive: false });
+
+        // Gestion du scroll mobile (touch events)
+        window.addEventListener('touchstart', (event) => {
+            touchStartY = event.touches[0].clientY;
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (event) => {
+            if (timeoutId) return;
+            const touchEndY = event.touches[0].clientY;
+            const deltaY = touchEndY - touchStartY;
+            touchStartY = touchEndY;
+
+            timeoutId = setTimeout(() => {
+                this.onScroll(-deltaY * 1);
+                timeoutId = null;
+            }, 18);
+        }, { passive: true });
     }
 
-    onScroll(event) {
-        event.preventDefault();
-        
+    onScroll(deltaY) {
         const scrollSpeed = 0.1;
         const minZ = 6;
         const maxZ = -(this.fragments.length * 20) + minZ;
         const currentZ = this.camera.position.z;
         
-        let delta = event.deltaY * scrollSpeed;
+        let delta = deltaY * scrollSpeed;
         
         if (currentZ - delta > minZ) delta = currentZ - minZ;
         if (currentZ - delta < maxZ) delta = currentZ - maxZ;

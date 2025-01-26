@@ -23,9 +23,13 @@ class SceneSetup {
         // Event listeners de base
         window.addEventListener('resize', () => this.onResize());
 
+        // Configuration du bouton retour
         const backButton = document.getElementById('back-button');
         if (backButton) {
-            backButton.addEventListener('click', () => this.recreateInitialScene());
+            backButton.addEventListener('click', () => {
+                console.log('Bouton retour cliqué');
+                this.recreateInitialScene();
+            });
         }
     }
 
@@ -305,11 +309,21 @@ class SceneSetup {
         
         // Masquer le contenu principal
         const mainContent = document.getElementById('main-content');
-        mainContent.style.display = 'none';
+        if (mainContent) {
+            mainContent.style.display = 'none';
+        }
         
         // Masquer la navbar et le footer pendant le chargement
-        document.querySelector('.navbar').style.display = 'none';
-        document.querySelector('.footer').style.display = 'none';
+        const navbar = document.querySelector('.navbar');
+        const footer = document.querySelector('.footer');
+        if (navbar) navbar.style.display = 'none';
+        if (footer) footer.style.display = 'none';
+        
+        // Supprimer l'ancien container de chargement s'il existe
+        const oldContainer = document.getElementById('loading-container');
+        if (oldContainer) {
+            oldContainer.remove();
+        }
         
         // Recréer la structure HTML nécessaire pour le loader
         const loadingContainer = document.createElement('div');
@@ -332,10 +346,12 @@ class SceneSetup {
         // Ajouter les éléments de pourcentage
         const percentage = document.createElement('div');
         percentage.id = 'percentage';
+        percentage.textContent = '0%';
         loadingContainer.appendChild(percentage);
         
         const mirrorPercentage = document.createElement('div');
         mirrorPercentage.id = 'mirror-percentage';
+        mirrorPercentage.textContent = '0%';
         loadingContainer.appendChild(mirrorPercentage);
         
         // Ajouter le footer du loader
@@ -355,10 +371,13 @@ class SceneSetup {
         loaderFooter.appendChild(footerText);
         loadingContainer.appendChild(loaderFooter);
         
+        // Ajouter le container au body
         document.body.appendChild(loadingContainer);
         
-        // Lancer le loader qui gère tout le processus de chargement
-        new Loader();
+        // Créer et démarrer une nouvelle instance du Loader
+        const loader = new Loader();
+        
+        return true;
     }
 }
 
