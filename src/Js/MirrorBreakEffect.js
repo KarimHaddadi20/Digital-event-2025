@@ -172,6 +172,11 @@ class MirrorBreakEffect extends SceneSetup {
         // Arrêter l'animation de cette scène
         this.isAnimating = false;
 
+        // Désactiver les contrôles avant de les nettoyer
+        if (this.controls && this.controls.enabled) {
+          this.controls.enabled = false;
+        }
+
         // Nettoyer la scène actuelle
         this.clearScene();
 
@@ -185,11 +190,6 @@ class MirrorBreakEffect extends SceneSetup {
         // Créer la scène de transition
         console.log("MirrorBreakEffect: Création de la scène de transition");
         const transitionScene = new PortalTransitionScene(this, fragmentIndex);
-
-        // Réinitialiser les contrôles
-        this.controls.enabled = true;
-        this.controls.target.set(0, 0, 0);
-        this.controls.update();
 
         return;
       }
