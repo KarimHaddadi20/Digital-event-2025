@@ -12,6 +12,15 @@ export class PortalTransitionScene extends SceneSetup {
         this.camera.position.set(0, 0, 7); // Position initiale de la caméra
         this.camera.lookAt(0, 0, 0);
         
+        // Référence à la barre de progression
+        this.progressContainer = document.querySelector('.scroll-progress-container');
+        this.progressFill = document.querySelector('.scroll-progress-fill');
+        
+        // Afficher la barre de progression
+        if (this.progressContainer) {
+            this.progressContainer.style.opacity = '1';
+        }
+        
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(0x000000);
         
@@ -105,9 +114,22 @@ export class PortalTransitionScene extends SceneSetup {
                 ease: "power3.out",
                 onUpdate: () => {
                     this.updateFragments();
+                    this.updateProgressBar(minZ, maxZ);
                 }
             });
         }
+    }
+
+    updateProgressBar(minZ, maxZ) {
+        if (!this.progressFill) return;
+        
+        // Calculer le pourcentage de progression
+        const totalDistance = Math.abs(maxZ - minZ);
+        const currentProgress = Math.abs(this.camera.position.z - minZ);
+        const progressPercent = (currentProgress / totalDistance) * 100;
+        
+        // Mettre à jour la barre de progression
+        this.progressFill.style.setProperty('--progress', progressPercent / 100);
     }
 
     updateFragments() {
@@ -364,5 +386,12 @@ export class PortalTransitionScene extends SceneSetup {
         const backLight = new THREE.DirectionalLight(0xe91e63, 3);
         backLight.position.set(0, -5, -5);
         this.scene.add(backLight);
+    }
+
+    cleanup() {
+        // Cacher la barre de progression lors du nettoyage de la scène
+        if (this.progressContainer) {
+            this.progressContainer.style.opacity = '0';
+        }
     }
 }

@@ -482,6 +482,8 @@ html, body {
 }
 
 /* Instructions pour les fragments */
+
+
 .fragment-instructions {
     position: fixed;
     bottom: 15%;
@@ -509,4 +511,79 @@ html, body {
 .fragment-instructions .font-fraunces {
     font-size: 14px;
     font-style: italic;
+}
+
+
+/* Barre de progression */
+
+.scroll-progress-container {
+  position: fixed;
+  left: 50%;
+  bottom: 120px;
+  transform: translateX(-50%);
+  width: 342px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.scroll-progress-bar {
+  width: 100%;
+  height: 4px;
+  background: transparent;
+  position: relative;
+  perspective: 400px;
+  transform-style: preserve-3d;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-self: stretch;
+}
+
+.scroll-progress-bar::before,
+.scroll-progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 4px;
+  width: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform-origin: center;
+}
+
+.scroll-progress-bar::before {
+  left: 0;
+  transform: rotateY(5deg);
+}
+
+.scroll-progress-bar::after {
+  right: 0;
+  transform: rotateY(-5deg);
+}
+
+.scroll-progress-fill::before,
+.scroll-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  height: 4px;
+  width: 50.1%;
+  background: white;
+  transition: transform 0.3s ease;
+}
+
+.scroll-progress-fill::before {
+  left: 0;
+  transform-origin: left center;
+  transform: rotateY(5deg) scaleX(calc(var(--progress, 0) * 2)) translateX(-0.5px);
+}
+
+.scroll-progress-fill::after {
+  right: 0;
+  transform-origin: right center;
+  transform: rotateY(-5deg) scaleX(calc(var(--progress, 0) * 2)) translateX(0.5px);
 }
