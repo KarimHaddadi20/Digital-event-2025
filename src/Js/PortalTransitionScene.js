@@ -98,16 +98,23 @@ export class PortalTransitionScene extends SceneSetup {
 
     onScroll(deltaY) {
         const scrollSpeed = 0.1;
-        const minZ = 6;
-        const maxZ = -(this.fragments.length * 20) + minZ;
         const currentZ = this.camera.position.z;
+        
+        // Calculer la distance totale basée sur le nombre de fragments
+        const fragmentSpacing = 20; // Espacement entre les fragments
+        const totalDistance = (this.fragments.length) * fragmentSpacing;
+        
+        // Définir les limites du scroll avec une marge supplémentaire
+        const maxZ = 7;  // Position de départ
+        const minZ = maxZ - totalDistance - 20; // Position finale avec marge supplémentaire
         
         let delta = deltaY * scrollSpeed;
         
-        if (currentZ - delta > minZ) delta = currentZ - minZ;
-        if (currentZ - delta < maxZ) delta = currentZ - maxZ;
+        // Limiter le scroll aux bornes définies
+        if (currentZ - delta > maxZ) delta = currentZ - maxZ;
+        if (currentZ - delta < minZ) delta = currentZ - minZ;
         
-        if (currentZ - delta >= maxZ && currentZ - delta <= minZ) {
+        if (currentZ - delta >= minZ && currentZ - delta <= maxZ) {
             gsap.to(this.camera.position, {
                 z: currentZ - delta,
                 duration: 1.2,
@@ -123,10 +130,17 @@ export class PortalTransitionScene extends SceneSetup {
     updateProgressBar(minZ, maxZ) {
         if (!this.progressFill) return;
         
-        // Calculer le pourcentage de progression
-        const totalDistance = Math.abs(maxZ - minZ);
-        const currentProgress = Math.abs(this.camera.position.z - minZ);
-        const progressPercent = (currentProgress / totalDistance) * 100;
+        // Calculer le pourcentage de progression basé sur la position actuelle de la caméra
+        const startZ = maxZ;  // Position de départ (7)
+        const endZ = minZ;    // Position finale calculée
+        
+        // Calculer la progression actuelle
+        const currentZ = this.camera.position.z;
+        const totalDistance = Math.abs(endZ - startZ);
+        const distanceParcourue = Math.abs(startZ - currentZ);
+        
+        // Calculer le pourcentage avec une règle de trois
+        const progressPercent = Math.min((distanceParcourue / totalDistance) * 100, 100);
         
         // Mettre à jour la barre de progression
         this.progressFill.style.setProperty('--progress', progressPercent / 100);
@@ -243,148 +257,166 @@ export class PortalTransitionScene extends SceneSetup {
             const response = await fetch('/src/data/portalData.json');
             const data = await response.json();
             
-            // Récupérer les données de l'atelier correspondant
-            const atelierData = data.atelier1; // À adapter selon l'atelier
+            // Vérifier que les chemins des textures sont corrects
+            const atelierData = data.atelier1;
             
             const responsive = this.getResponsivePositions();
             
-            const fragmentsData = atelierData.sets.map((set, index) => ({
-                texture: set.image,
-                title: set.title,
-                subtitle: set.subtitle,
-                position: { 
-                    x: index % 2 === 0 ? -responsive.xOffset : responsive.xOffset, 
-                    y: responsive.yOffset, 
-                    z: -5 - (index * responsive.zSpacing) 
-                },
-                scale: responsive.scale,
-                exitDirection: index % 2 === 0 ? 'left' : 'right'
-            }));
+            const fragmentsData = atelierData.sets.map((set, index) => {
+                // Vérifier que le chemin de l'image existe
+                const imagePath = set.image.startsWith('./') ? set.image.slice(2) : set.image;
+                return {
+                    texture: imagePath, // Utiliser le chemin corrigé
+                    title: set.title,
+                    subtitle: set.subtitle,
+                    position: { 
+                        x: index % 2 === 0 ? -responsive.xOffset : responsive.xOffset, 
+                        y: responsive.yOffset, 
+                        z: -5 - (index * responsive.zSpacing) 
+                    },
+                    scale: responsive.scale,
+                    exitDirection: index % 2 === 0 ? 'left' : 'right'
+                };
+            });
 
-            fragmentsData.forEach(data => this.createFragment(data));
+            // Créer les fragments seulement après avoir chargé toutes les textures
+            for (const data of fragmentsData) {
+                await this.createFragment(data);
+            }
         } catch (error) {
             console.error('Erreur lors du chargement des données:', error);
         }
     }
 
-    createFragment(data) {
-        const textureLoader = new THREE.TextureLoader();
-        textureLoader.load(data.texture, (texture) => {
-            const responsive = this.getResponsivePositions();
-            
-            // Fragment principal avec échelle responsive
-            const geometry = new THREE.PlaneGeometry(6 * data.scale, 6 * data.scale, 50, 50);
-            const material = new THREE.MeshBasicMaterial({
-                map: texture,
-                side: THREE.DoubleSide,
-                transparent: true,
-                opacity: 1
-            });
-            const imageMesh = new THREE.Mesh(geometry, material);
+    async createFragment(data) {
+        return new Promise((resolve, reject) => {
+            const textureLoader = new THREE.TextureLoader();
+            textureLoader.load(
+                data.texture,
+                (texture) => {
+                    const responsive = this.getResponsivePositions();
+                    
+                    // Fragment principal avec échelle responsive
+                    const geometry = new THREE.PlaneGeometry(6 * data.scale, 6 * data.scale, 50, 50);
+                    const material = new THREE.MeshBasicMaterial({
+                        map: texture,
+                        side: THREE.DoubleSide,
+                        transparent: true,
+                        opacity: 1
+                    });
+                    const imageMesh = new THREE.Mesh(geometry, material);
 
-            // Ajuster la position en fonction du layout
-            if (responsive.verticalLayout) {
-                // En mobile, le fragment principal va en bas
-                imageMesh.position.set(
-                    0, // Centré horizontalement
-                    responsive.mainFragmentY, // Plus bas
-                    data.position.z
-                );
-            } else {
-                // En desktop, garder la disposition horizontale originale
-                imageMesh.position.set(
-                    data.position.x,
-                    data.position.y,
-                    data.position.z
-                );
-            }
+                    // Ajuster la position en fonction du layout
+                    if (responsive.verticalLayout) {
+                        // En mobile, le fragment principal va en bas
+                        imageMesh.position.set(
+                            0, // Centré horizontalement
+                            responsive.mainFragmentY, // Plus bas
+                            data.position.z
+                        );
+                    } else {
+                        // En desktop, garder la disposition horizontale originale
+                        imageMesh.position.set(
+                            data.position.x,
+                            data.position.y,
+                            data.position.z
+                        );
+                    }
 
-            this.scene.add(imageMesh);
+                    this.scene.add(imageMesh);
 
-            // Fragments de détail avec échelle responsive
-            const detailGeometry = new THREE.PlaneGeometry(
-                4 * data.scale * responsive.detailsScale,
-                4 * data.scale * responsive.detailsScale,
-                50,
-                50
+                    // Fragments de détail avec échelle responsive
+                    const detailGeometry = new THREE.PlaneGeometry(
+                        4 * data.scale * responsive.detailsScale,
+                        4 * data.scale * responsive.detailsScale,
+                        50,
+                        50
+                    );
+                    
+                    // Premier détail
+                    const detail1 = new THREE.Mesh(
+                        detailGeometry,
+                        new THREE.MeshBasicMaterial({
+                            map: texture,
+                            transparent: true,
+                            opacity: 0.7,
+                            side: THREE.DoubleSide
+                        })
+                    );
+                    
+                    // Deuxième détail
+                    const detail2 = new THREE.Mesh(
+                        detailGeometry,
+                        new THREE.MeshBasicMaterial({
+                            map: texture,
+                            transparent: true,
+                            opacity: 0.5,
+                            side: THREE.DoubleSide
+                        })
+                    );
+
+                    // Positionner les détails en fonction du layout
+                    if (responsive.verticalLayout) {
+                        // En mobile, les détails vont en haut, plus centrés
+                        detail1.position.set(-2, 4, -3); // Premier fragment à gauche
+                        detail2.position.set(2, 4, -5);  // Second fragment à droite et légèrement plus loin
+                    } else {
+                        // En desktop, garder la disposition originale
+                        const detailOffset = data.exitDirection === 'left' ? 8 * data.scale : -8 * data.scale;
+                        detail1.position.set(detailOffset, 2 * data.scale, -5);
+                        detail2.position.set(detailOffset * 1.2, -2 * data.scale, -8);
+                    }
+
+                    // Ajouter une légère rotation aux détails
+                    detail1.rotation.z = responsive.verticalLayout ? 0.1 : (data.exitDirection === 'left' ? 0.2 : -0.2);
+                    detail2.rotation.z = responsive.verticalLayout ? -0.1 : (data.exitDirection === 'left' ? -0.3 : 0.3);
+
+                    imageMesh.add(detail1);
+                    imageMesh.add(detail2);
+                    
+                    // Création du conteneur de texte
+                    const textContainer = document.createElement('div');
+                    textContainer.className = 'portal-text';
+                    
+                    const title = document.createElement('h2');
+                    title.textContent = data.title;
+                    title.style.cssText = `
+                        font-family: 'Fraunces, serif';
+                        font-size: 1.2em;
+                        color: white;
+                        margin: 0 0 0.5em 0;
+                        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+                    `;
+                    
+                    const subtitle = document.createElement('p');
+                    subtitle.textContent = data.subtitle;
+                    subtitle.style.cssText = `
+                        font-family: 'Aktiv Grotesk, sans-serif';
+                        font-size: 0.9em;
+                        color: rgba(255, 255, 255, 0.8);
+                        margin: 0;
+                        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+                    `;
+                    
+                    textContainer.appendChild(title);
+                    textContainer.appendChild(subtitle);
+                    
+                    const label = new CSS2DObject(textContainer);
+                    label.position.set(0, -3.5, 0);
+                    imageMesh.add(label);
+                    
+                    this.fragments.push({
+                        mesh: imageMesh,
+                        exitDirection: data.exitDirection
+                    });
+                    resolve();
+                },
+                undefined,
+                (error) => {
+                    console.error(`Erreur de chargement de la texture ${data.texture}:`, error);
+                    reject(error);
+                }
             );
-            
-            // Premier détail
-            const detail1 = new THREE.Mesh(
-                detailGeometry,
-                new THREE.MeshBasicMaterial({
-                    map: texture,
-                    transparent: true,
-                    opacity: 0.7,
-                    side: THREE.DoubleSide
-                })
-            );
-            
-            // Deuxième détail
-            const detail2 = new THREE.Mesh(
-                detailGeometry,
-                new THREE.MeshBasicMaterial({
-                    map: texture,
-                    transparent: true,
-                    opacity: 0.5,
-                    side: THREE.DoubleSide
-                })
-            );
-
-            // Positionner les détails en fonction du layout
-            if (responsive.verticalLayout) {
-                // En mobile, les détails vont en haut, plus centrés
-                detail1.position.set(-2, 4, -3); // Premier fragment à gauche
-                detail2.position.set(2, 4, -5);  // Second fragment à droite et légèrement plus loin
-            } else {
-                // En desktop, garder la disposition originale
-                const detailOffset = data.exitDirection === 'left' ? 8 * data.scale : -8 * data.scale;
-                detail1.position.set(detailOffset, 2 * data.scale, -5);
-                detail2.position.set(detailOffset * 1.2, -2 * data.scale, -8);
-            }
-
-            // Ajouter une légère rotation aux détails
-            detail1.rotation.z = responsive.verticalLayout ? 0.1 : (data.exitDirection === 'left' ? 0.2 : -0.2);
-            detail2.rotation.z = responsive.verticalLayout ? -0.1 : (data.exitDirection === 'left' ? -0.3 : 0.3);
-
-            imageMesh.add(detail1);
-            imageMesh.add(detail2);
-            
-            // Création du conteneur de texte
-            const textContainer = document.createElement('div');
-            textContainer.className = 'portal-text';
-            
-            const title = document.createElement('h2');
-            title.textContent = data.title;
-            title.style.cssText = `
-                font-family: 'Fraunces, serif';
-                font-size: 1.2em;
-                color: white;
-                margin: 0 0 0.5em 0;
-                text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            `;
-            
-            const subtitle = document.createElement('p');
-            subtitle.textContent = data.subtitle;
-            subtitle.style.cssText = `
-                font-family: 'Aktiv Grotesk, sans-serif';
-                font-size: 0.9em;
-                color: rgba(255, 255, 255, 0.8);
-                margin: 0;
-                text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            `;
-            
-            textContainer.appendChild(title);
-            textContainer.appendChild(subtitle);
-            
-            const label = new CSS2DObject(textContainer);
-            label.position.set(0, -3.5, 0);
-            imageMesh.add(label);
-            
-            this.fragments.push({
-                mesh: imageMesh,
-                exitDirection: data.exitDirection
-            });
         });
     }
 
@@ -404,10 +436,11 @@ export class PortalTransitionScene extends SceneSetup {
     setupBackground() {
         const textureLoader = new THREE.TextureLoader();
         textureLoader.load('src/textures/gaming_popcorn.png', (texture) => {
-            // Calculer le ratio d'aspect de la texture
             const imageRatio = texture.image.width / texture.image.height;
             const screenRatio = window.innerWidth / window.innerHeight;
-            texture.encoding = THREE.sRGBEncoding;
+            
+            // Utiliser colorSpace au lieu de encoding
+            texture.colorSpace = THREE.SRGBColorSpace;
             
             // Déterminer la taille du plan en fonction des ratios
             let planeWidth, planeHeight;
