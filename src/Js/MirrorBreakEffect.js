@@ -131,8 +131,12 @@ class MirrorBreakEffect extends SceneSetup {
         }
 
         this.fragmentManager.breakMirror();
+        return;
       }
     }
+
+    // Gérer les clics sur les fragments si le miroir est déjà cassé
+    this.fragmentManager.handleFragmentClick(event);
   }
 
   onWindowResize() {
