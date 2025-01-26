@@ -38,6 +38,8 @@ class FragmentManager {
       "Atelier 11",
     ];
 
+    this.autoSelectTimer = null;
+
     this.setupUI();
     this.initRaycaster();
   }
@@ -298,11 +300,6 @@ class FragmentManager {
         this.showVoyagerButton();
         this.updateBackground(firstFragment.userData.atelierName);
         
-        // S'assurer que tous les fragments restent cliquables
-        this.fragments.forEach(fragment => {
-          fragment.userData.isClickable = true;
-        });
-        
         if (this.fragmentInstructions) {
           const titleElement = this.fragmentInstructions.querySelector('.instruction-title');
           if (titleElement) {
@@ -313,10 +310,8 @@ class FragmentManager {
           }
         }
 
-        // Sélection d'un fragment aléatoire après 10 secondes supplémentaires
-        setTimeout(() => {
-          this.selectRandomFragment();
-        }, 10000);
+        // Démarrer le timer pour la sélection aléatoire
+        this.startAutoSelectTimer();
       }
     }, 10000);
   }
@@ -735,6 +730,8 @@ class FragmentManager {
             `;
           }
         }
+        // Redémarrer le timer quand aucun fragment n'est sélectionné
+        this.startAutoSelectTimer();
       }
       return;
     }
@@ -751,6 +748,12 @@ class FragmentManager {
         clickedFragment.userData.atelierName &&
         clickedFragment.userData.isClickable !== false
       ) {
+        // Annuler le timer existant car l'utilisateur a interagi
+        if (this.autoSelectTimer) {
+          clearTimeout(this.autoSelectTimer);
+          this.autoSelectTimer = null;
+        }
+
         if (this.selectedFragment === clickedFragment) {
           return;
         }
@@ -832,6 +835,20 @@ class FragmentManager {
           <span class="font-fraunces">fragment</span>
         `;
       }
+    }
+  }
+
+  startAutoSelectTimer() {
+    // Annuler le timer existant s'il y en a un
+    if (this.autoSelectTimer) {
+      clearTimeout(this.autoSelectTimer);
+    }
+    
+    // Démarrer un nouveau timer si aucun fragment n'est sélectionné
+    if (!this.selectedFragment) {
+      this.autoSelectTimer = setTimeout(() => {
+        this.selectRandomFragment();
+      }, 10000);
     }
   }
 }
