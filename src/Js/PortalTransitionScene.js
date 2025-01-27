@@ -285,7 +285,9 @@ export class PortalTransitionScene extends SceneSetup {
             // Créer les fragments pour chaque set de l'atelier
             const fragmentsData = atelierData.sets.map((set, index) => {
                 return {
-                    texture: set.image,
+                    texture: set.image1,
+                    image2: set.image2,
+                    image3: set.image3,
                     title: set.title,
                     subtitle: set.subtitle,
                     position: { 
