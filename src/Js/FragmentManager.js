@@ -120,11 +120,15 @@ class FragmentManager {
     document.body.appendChild(this.textElement);
 
     // Ajouter l'événement click sur le bouton Voyager
+    // Gestion du clic
     this.voyagerButton.addEventListener("click", () => {
       if (this.selectedFragment) {
-        this.startImmersionAnimation(this.selectedFragment);
+        this.hideVoyagerButton();
+        this.animateFragmentFall(this.selectedFragment);
       }
     });
+
+    document.body.appendChild(this.voyagerButton);
   }
 
   initRaycaster() {
