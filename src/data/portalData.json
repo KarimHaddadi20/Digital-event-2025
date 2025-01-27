@@ -5,27 +5,38 @@
             {
                 "title": "AI Driven visual stories",
                 "subtitle": "Une œuvre abstraite évoquant les limites entre ciel et terre",
-                "image": "src/textures/Atelier1.png"
+                "image1": "src/textures/Atelier1.png",
+                "image2": "src/textures/A1-02.png",
+                "image3": "src/textures/A1-03.png"
             },
             {
                 "title": "Frontières Invisibles",
                 "subtitle": "Exploration des limites de la perception",
-                "image": "src/textures/A1-02.png"
+                "image1": "src/textures/A1-02.png",
+                "image2": "src/textures/A1-03.png",
+                "image3": "src/textures/A1-04.png"
             },
             {
                 "title": "Passage Éthéré",
                 "subtitle": "La transition entre deux mondes",
-                "image": "src/textures/A1-03.png"
+                "image1": "src/textures/A1-03.png",
+                "image2": "src/textures/A1-04.png",
+                "image3": "src/textures/A1-05.png"
             },
             {
                 "title": "Résonance Spatiale",
                 "subtitle": "L'écho des dimensions parallèles",
-                "image": "src/textures/A1-04.png"
+                "image1": "src/textures/A1-04.png",
+                "image2": "src/textures/A1-05.png",
+                "image3": "src/textures/A1-06.png",
+                "quote": "L'écho des dimensions parallèles"
             },
             {
                 "title": "Convergence",
                 "subtitle": "Le point de rencontre des réalités",
-                "image": "src/textures/A1-05.png"
+                "image1": "src/textures/A1-05.png",
+                "image2": "src/textures/A1-06.png",
+                "image3": "src/textures/A1-07.png"
             }
         ]
     },
@@ -35,27 +46,38 @@
             {
                 "title": "Creative Coding",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/Atelier3.png"
+                "image1": "src/textures/Atelier3.png",
+                "image2": "src/textures/A3-02.png",
+                "image3": "src/textures/A3-03.png"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A3-02.png"
+                "image1": "src/textures/A3-02.png",
+                "image2": "src/textures/A3-03.png",
+                "image3": "src/textures/A3-04.png"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A3-03.png"
+                "image1": "src/textures/A3-03.png",
+                "image2": "src/textures/A3-04.png",
+                "image3": "src/textures/A3-05.png"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A3-04.png"
+                "image1": "src/textures/A3-04.png",
+                "image2": "src/textures/A3-05.png",
+                "image3": "src/textures/A3-06.png",
+                "quote": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A3-05.png"
+                "image1": "src/textures/A3-05.png",
+                "image2": "src/textures/A3-06.png",
+                "image3": "src/textures/A3-07.png"
             }
         ]
     },
@@ -65,27 +87,38 @@
             {
                 "title": "Escape game",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/Atelier4.png"
+                "image1": "src/textures/Atelier4.png",
+                "image2": "src/textures/A4-02.png",
+                "image3": "src/textures/A4-03.png"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A4-02.png"
+                "image1": "src/textures/A4-02.png",
+                "image2": "src/textures/A4-03.png",
+                "image3": "src/textures/A4-04.png"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A4-03.png"
+                "image1": "src/textures/A4-03.png",
+                "image2": "src/textures/A4-04.png",
+                "image3": "src/textures/A4-05.png"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A4-04.png"
+                "image1": "src/textures/A4-04.png",
+                "image2": "src/textures/A4-05.png",
+                "image3": "src/textures/A4-06.png",
+                "quote": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A4-05.png"
+                "image1": "src/textures/A4-05.png",
+                "image2": "src/textures/A4-06.png",
+                "image3": "src/textures/A4-07.png"
             }
         ]
     },
@@ -95,27 +128,38 @@
             {
                 "title": "Game design",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/Atelier5.png"
+                "image1": "src/textures/Atelier5.png",
+                "image2": "src/textures/A5-02.png",
+                "image3": "src/textures/A5-03.png"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A5-02.png"
+                "image1": "src/textures/A5-02.png",
+                "image2": "src/textures/A5-03.png",
+                "image3": "src/textures/A5-04.png"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A5-03.png"
+                "image1": "src/textures/A5-03.png",
+                "image2": "src/textures/A5-04.png",
+                "image3": "src/textures/A5-05.png"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A5-04.png"
+                "image1": "src/textures/A5-04.png",
+                "image2": "src/textures/A5-05.png",
+                "image3": "src/textures/A5-06.png",
+                "quote": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A5-05.png"
+                "image1": "src/textures/A5-05.png",
+                "image2": "src/textures/A5-06.png",
+                "image3": "src/textures/A5-07.png"
             }
         ]
     },
@@ -125,27 +169,38 @@
             {
                 "title": "Gaming & Pop-corn",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/Atelier6.png"
+                "image1": "src/textures/Atelier6.png",
+                "image2": "src/textures/A6-02.png",
+                "image3": "src/textures/A6-03.png"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A6-02.png"
+                "image1": "src/textures/A6-02.png",
+                "image2": "src/textures/A6-03.png",
+                "image3": "src/textures/A6-04.png"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A6-03.png"
+                "image1": "src/textures/A6-03.png",
+                "image2": "src/textures/A6-04.png",
+                "image3": "src/textures/A6-05.png"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A6-04.png"
+                "image1": "src/textures/A6-04.png",
+                "image2": "src/textures/A6-05.png",
+                "image3": "src/textures/A6-06.png",
+                "quote": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A6-05.png"
+                "image1": "src/textures/A6-05.png",
+                "image2": "src/textures/A6-06.png",
+                "image3": "src/textures/A6-07.png"
             }
         ]
     },
@@ -155,27 +210,38 @@
             {
                 "title": "Organisation",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/Atelier2.png"
+                "image1": "src/textures/Atelier2.png",
+                "image2": "src/textures/A2-02.png",
+                "image3": "src/textures/A2-03.png"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A2-02.png"
+                "image1": "src/textures/A2-02.png",
+                "image2": "src/textures/A2-03.png",
+                "image3": "src/textures/A2-04.png"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A2-03.png"
+                "image1": "src/textures/A2-03.png",
+                "image2": "src/textures/A2-04.png",
+                "image3": "src/textures/A2-05.png"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A2-04.png"
+                "image1": "src/textures/A2-04.png",
+                "image2": "src/textures/A2-05.png",
+                "image3": "src/textures/A2-06.png",
+                "quote": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A2-05.png"
+                "image1": "src/textures/A2-05.png",
+                "image2": "src/textures/A2-06.png",
+                "image3": "src/textures/A2-07.png"
             }
         ]
     },
@@ -185,27 +251,38 @@
             {
                 "title": "Photo reportage",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/Atelier7.png"
+                "image1": "src/textures/Atelier7.png",
+                "image2": "src/textures/A7-02.png",
+                "image3": "src/textures/A7-03.png"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A7-02.png"
+                "image1": "src/textures/A7-02.png",
+                "image2": "src/textures/A7-03.png",
+                "image3": "src/textures/A7-04.png"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A7-03.png"
+                "image1": "src/textures/A7-03.png",
+                "image2": "src/textures/A7-04.png",
+                "image3": "src/textures/A7-05.png"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A7-04.png"
+                "image1": "src/textures/A7-04.png",
+                "image2": "src/textures/A7-05.png",
+                "image3": "src/textures/A7-06.png",
+                "quote": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A7-05.png"
+                "image1": "src/textures/A7-05.png",
+                "image2": "src/textures/A7-06.png",
+                "image3": "src/textures/A7-07.png"
             }
         ]
     },
@@ -215,27 +292,38 @@
             {
                 "title": "Podcast",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/Atelier8.png"
+                "image1": "src/textures/Atelier8.png",
+                "image2": "src/textures/A8-02.png",
+                "image3": "src/textures/A8-03.png"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A8-02.png"
+                "image1": "src/textures/A8-02.png",
+                "image2": "src/textures/A8-03.png",
+                "image3": "src/textures/A8-04.png"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A8-03.png"
+                "image1": "src/textures/A8-03.png",
+                "image2": "src/textures/A8-04.png",
+                "image3": "src/textures/A8-05.png"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A8-04.png"
+                "image1": "src/textures/A8-04.png",
+                "image2": "src/textures/A8-05.png",
+                "image3": "src/textures/A8-06.png",
+                "quote": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A8-05.png"
+                "image1": "src/textures/A8-05.png",
+                "image2": "src/textures/A8-06.png",
+                "image3": "src/textures/A8-07.png"
             }
         ]
     },
@@ -245,27 +333,38 @@
             {
                 "title": "Site web",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/Atelier11.png"
+                "image1": "src/textures/Atelier11.png",
+                "image2": "src/textures/A11-02.png",
+                "image3": "src/textures/A11-03.png"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A11-02.png"
+                "image1": "src/textures/A11-02.png",
+                "image2": "src/textures/A11-03.png",
+                "image3": "src/textures/A11-04.png"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A11-03.png"
+                "image1": "src/textures/A11-03.png",
+                "image2": "src/textures/A11-04.png",
+                "image3": "src/textures/A11-05.png"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A11-04.png"
+                "image1": "src/textures/A11-04.png",
+                "image2": "src/textures/A11-05.png",
+                "image3": "src/textures/A11-06.png",
+                "quote": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A11-05.png"
+                "image1": "src/textures/A11-05.png",
+                "image2": "src/textures/A11-06.png",
+                "image3": "src/textures/A11-07.png"
             }
         ]
     },
@@ -275,27 +374,38 @@
             {
                 "title": "Video",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/Atelier9.png"
+                "image1": "src/textures/Atelier9.png",
+                "image2": "src/textures/A9-02.png",
+                "image3": "src/textures/A9-03.png"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A9-02.png"
+                "image1": "src/textures/A9-02.png",
+                "image2": "src/textures/A9-03.png",
+                "image3": "src/textures/A9-04.png"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A9-03.png"
+                "image1": "src/textures/A9-03.png",
+                "image2": "src/textures/A9-04.png",
+                "image3": "src/textures/A9-05.png"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A9-04.png"
+                "image1": "src/textures/A9-04.png",
+                "image2": "src/textures/A9-05.png",
+                "image3": "src/textures/A9-06.png",
+                "quote": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A9-05.png"
+                "image1": "src/textures/A9-05.png",
+                "image2": "src/textures/A9-06.png",
+                "image3": "src/textures/A9-07.png"
             }
         ]
     },
@@ -305,27 +415,38 @@
             {
                 "title": "Video Mapping",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image": "src/textures/Atelier10.png"
+                "image1": "src/textures/Atelier10.png",
+                "image2": "src/textures/A10-02.png",
+                "image3": "src/textures/A10-03.png"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image": "src/textures/A10-02.png"
+                "image1": "src/textures/A10-02.png",
+                "image2": "src/textures/A10-03.png",
+                "image3": "src/textures/A10-04.png"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image": "src/textures/A10-03.png"
+                "image1": "src/textures/A10-03.png",
+                "image2": "src/textures/A10-04.png",
+                "image3": "src/textures/A10-05.png"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image": "src/textures/A10-04.png"
+                "image1": "src/textures/A10-04.png",
+                "image2": "src/textures/A10-05.png",
+                "image3": "src/textures/A10-06.png",
+                "quote": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image": "src/textures/A10-05.png"
+                "image1": "src/textures/A10-05.png",
+                "image2": "src/textures/A10-06.png",
+                "image3": "src/textures/A10-07.png"
             }
         ]
     }
