@@ -312,132 +312,123 @@ export class PortalTransitionScene extends SceneSetup {
     async createFragment(data) {
         return new Promise((resolve, reject) => {
             const textureLoader = new THREE.TextureLoader();
-            textureLoader.load(
-                data.texture,
-                (texture) => {
-                    const responsive = this.getResponsivePositions();
-                    
-                    // Fragment principal avec échelle responsive
-                    const geometry = new THREE.PlaneGeometry(6 * data.scale, 6 * data.scale, 50, 50);
-                    const material = new THREE.MeshBasicMaterial({
-                        map: texture,
-                        side: THREE.DoubleSide,
-                        transparent: true,
-                        opacity: 1
-                    });
-                    const imageMesh = new THREE.Mesh(geometry, material);
+            
+            // Charger les trois textures en parallèle
+            Promise.all([
+                new Promise((res, rej) => textureLoader.load(data.texture, res, undefined, rej)),
+                new Promise((res, rej) => textureLoader.load(data.image2, res, undefined, rej)),
+                new Promise((res, rej) => textureLoader.load(data.image3, res, undefined, rej))
+            ]).then(([texture1, texture2, texture3]) => {
+                const responsive = this.getResponsivePositions();
+                
+                // Fragment principal avec échelle responsive
+                const geometry = new THREE.PlaneGeometry(6 * data.scale, 6 * data.scale, 50, 50);
+                const material = new THREE.MeshBasicMaterial({
+                    map: texture1,
+                    side: THREE.DoubleSide,
+                    transparent: true,
+                    opacity: 1
+                });
+                const imageMesh = new THREE.Mesh(geometry, material);
 
-                    // Ajuster la position en fonction du layout
-                    if (responsive.verticalLayout) {
-                        // En mobile, le fragment principal va en bas
-                        imageMesh.position.set(
-                            0, // Centré horizontalement
-                            responsive.mainFragmentY, // Plus bas
-                            data.position.z
-                        );
-                    } else {
-                        // En desktop, garder la disposition horizontale originale
-                        imageMesh.position.set(
-                            data.position.x,
-                            data.position.y,
-                            data.position.z
-                        );
-                    }
-
-                    this.scene.add(imageMesh);
-
-                    // Fragments de détail avec échelle responsive
-                    const detailGeometry = new THREE.PlaneGeometry(
-                        4 * data.scale * responsive.detailsScale,
-                        4 * data.scale * responsive.detailsScale,
-                        50,
-                        50
-                    );
-                    
-                    // Premier détail
-                    const detail1 = new THREE.Mesh(
-                        detailGeometry,
-                        new THREE.MeshBasicMaterial({
-                            map: texture,
-                            transparent: true,
-                            opacity: 0.7,
-                            side: THREE.DoubleSide
-                        })
-                    );
-                    
-                    // Deuxième détail
-                    const detail2 = new THREE.Mesh(
-                        detailGeometry,
-                        new THREE.MeshBasicMaterial({
-                            map: texture,
-                            transparent: true,
-                            opacity: 0.5,
-                            side: THREE.DoubleSide
-                        })
-                    );
-
-                    // Positionner les détails en fonction du layout
-                    if (responsive.verticalLayout) {
-                        // En mobile, les détails vont en haut, plus centrés
-                        detail1.position.set(-2, 4, -3); // Premier fragment à gauche
-                        detail2.position.set(2, 4, -5);  // Second fragment à droite et légèrement plus loin
-                    } else {
-                        // En desktop, garder la disposition originale
-                        const detailOffset = data.exitDirection === 'left' ? 8 * data.scale : -8 * data.scale;
-                        detail1.position.set(detailOffset, 2 * data.scale, -5);
-                        detail2.position.set(detailOffset * 1.2, -2 * data.scale, -8);
-                    }
-
-                    // Ajouter une légère rotation aux détails
-                    detail1.rotation.z = responsive.verticalLayout ? 0.1 : (data.exitDirection === 'left' ? 0.2 : -0.2);
-                    detail2.rotation.z = responsive.verticalLayout ? -0.1 : (data.exitDirection === 'left' ? -0.3 : 0.3);
-
-                    imageMesh.add(detail1);
-                    imageMesh.add(detail2);
-                    
-                    // Création du conteneur de texte
-                    const textContainer = document.createElement('div');
-                    textContainer.className = 'portal-text';
-                    
-                    const title = document.createElement('h2');
-                    title.textContent = data.title;
-                    title.style.cssText = `
-                        font-family: 'Fraunces, serif';
-                        font-size: 1.2em;
-                        color: white;
-                        margin: 0 0 0.5em 0;
-                        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-                    `;
-                    
-                    const subtitle = document.createElement('p');
-                    subtitle.textContent = data.subtitle;
-                    subtitle.style.cssText = `
-                        font-family: 'Aktiv Grotesk, sans-serif';
-                        font-size: 0.9em;
-                        color: rgba(255, 255, 255, 0.8);
-                        margin: 0;
-                        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-                    `;
-                    
-                    textContainer.appendChild(title);
-                    textContainer.appendChild(subtitle);
-                    
-                    const label = new CSS2DObject(textContainer);
-                    label.position.set(0, -3.5, 0);
-                    imageMesh.add(label);
-                    
-                    this.fragments.push({
-                        mesh: imageMesh,
-                        exitDirection: data.exitDirection
-                    });
-                    resolve();
-                },
-                undefined,
-                (error) => {
-                    console.error(`Erreur de chargement de la texture ${data.texture}:`, error);
-                    reject(error);
+                // Ajuster la position en fonction du layout
+                if (responsive.verticalLayout) {
+                    imageMesh.position.set(0, responsive.mainFragmentY, data.position.z);
+                } else {
+                    imageMesh.position.set(data.position.x, data.position.y, data.position.z);
                 }
-            );
+
+                this.scene.add(imageMesh);
+
+                // Fragments de détail avec échelle responsive
+                const detailGeometry = new THREE.PlaneGeometry(
+                    4 * data.scale * responsive.detailsScale,
+                    4 * data.scale * responsive.detailsScale,
+                    50,
+                    50
+                );
+                
+                // Premier détail avec image2
+                const detail1 = new THREE.Mesh(
+                    detailGeometry,
+                    new THREE.MeshBasicMaterial({
+                        map: texture2,
+                        transparent: true,
+                        opacity: 0.7,
+                        side: THREE.DoubleSide
+                    })
+                );
+                
+                // Deuxième détail avec image3
+                const detail2 = new THREE.Mesh(
+                    detailGeometry,
+                    new THREE.MeshBasicMaterial({
+                        map: texture3,
+                        transparent: true,
+                        opacity: 0.7,
+                        side: THREE.DoubleSide
+                    })
+                );
+
+                // Positionner les détails en fonction du layout
+                if (responsive.verticalLayout) {
+                    // En mobile, les détails vont en haut, plus centrés
+                    detail1.position.set(-2, 4, -3); // Premier fragment à gauche
+                    detail2.position.set(2, 4, -5);  // Second fragment à droite et légèrement plus loin
+                } else {
+                    // En desktop, garder la disposition originale
+                    const detailOffset = data.exitDirection === 'left' ? 8 * data.scale : -8 * data.scale;
+                    detail1.position.set(detailOffset, 2 * data.scale, -5);
+                    detail2.position.set(detailOffset * 1.2, -2 * data.scale, -8);
+                }
+
+                // Ajouter une légère rotation aux détails
+                detail1.rotation.z = responsive.verticalLayout ? 0.1 : (data.exitDirection === 'left' ? 0.2 : -0.2);
+                detail2.rotation.z = responsive.verticalLayout ? -0.1 : (data.exitDirection === 'left' ? -0.3 : 0.3);
+
+                imageMesh.add(detail1);
+                imageMesh.add(detail2);
+                
+                // Création du conteneur de texte
+                const textContainer = document.createElement('div');
+                textContainer.className = 'portal-text';
+                
+                const title = document.createElement('h2');
+                title.textContent = data.title;
+                title.style.cssText = `
+                    font-family: 'Fraunces, serif';
+                    font-size: 1.2em;
+                    color: white;
+                    margin: 0 0 0.5em 0;
+                    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+                `;
+                
+                const subtitle = document.createElement('p');
+                subtitle.textContent = data.subtitle;
+                subtitle.style.cssText = `
+                    font-family: 'Aktiv Grotesk, sans-serif';
+                    font-size: 0.9em;
+                    color: rgba(255, 255, 255, 0.8);
+                    margin: 0;
+                    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+                `;
+                
+                textContainer.appendChild(title);
+                textContainer.appendChild(subtitle);
+                
+                const label = new CSS2DObject(textContainer);
+                label.position.set(0, -3.5, 0);
+                imageMesh.add(label);
+                
+                this.fragments.push({
+                    mesh: imageMesh,
+                    exitDirection: data.exitDirection
+                });
+                resolve();
+            }).catch(error => {
+                console.error('Erreur lors du chargement des textures:', error);
+                reject(error);
+            });
         });
     }
 
