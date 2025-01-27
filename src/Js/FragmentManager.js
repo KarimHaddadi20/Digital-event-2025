@@ -15,30 +15,30 @@ class FragmentManager {
     this.initialBackground = null;
     this.activeBackground = null;
     this.backgroundTextures = {
-      "AI Driven visual stories": "src/textures/ai_driven_visual_stories.jpg",
-      "Creative Coding": "src/textures/creative_coding.jpg",
-      "Escape game": "src/textures/escape.png",
-      "Game design": "src/textures/game_design.jpg",
-      "Gaming & Pop-corn": "src/textures/gaming_popcorn.png",
-      Organisation: "src/textures/parcours_organisation.jpg",
-      "Photo reportage": "src/textures/photo_reportage.jpg",
-      Podcast: "src/textures/podcast.jpg",
       "Site web": "src/textures/site_web.jpg",
-      Video: "src/textures/video_studio.jpg",
       "Video Mapping": "src/textures/video_mapping.jpg",
+      "Creative Coding": "src/textures/creative_coding.jpg",
+      "Gaming & Pop-corn": "src/textures/gaming_popcorn.png",
+      "Video": "src/textures/video_studio.jpg",
+      "Escape game": "src/textures/escape.png",
+      "Podcast": "src/textures/podcast.jpg",
+      "Photo reportage": "src/textures/photo_reportage.jpg",
+      "AI Driven visual stories": "src/textures/ai_driven_visual_stories.jpg",
+      "Game design": "src/textures/game_design.jpg",
+      "Organisation": "src/textures/parcours_organisation.jpg"
     };
     this.atelierNames = [
-      "AI Driven visual stories",
-      "Creative Coding",
-      "Escape game",
-      "Game design",
-      "Gaming & Pop-corn",
-      "Organisation",
-      "Photo reportage",
-      "Podcast",
       "Site web",
-      "Video",
       "Video Mapping",
+      "Creative Coding",
+      "Gaming & Pop-corn",
+      "Video",
+      "Escape game",
+      "Podcast",
+      "Photo reportage",
+      "AI Driven visual stories",
+      "Game design",
+      "Organisation"
     ];
 
     this.autoSelectTimer = null;
