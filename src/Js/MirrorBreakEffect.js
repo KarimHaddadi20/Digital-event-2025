@@ -58,7 +58,7 @@ class MirrorBreakEffect extends SceneSetup {
 
     // Charger l'environnement et les lumières
     this.setupLights();
-    this.setupBackground();
+    // this.setupBackground();
     // this.loadHDRI().then(() => {
     //     hdriLoaded = true;
     //     if (modelLoaded && this.onReady) {

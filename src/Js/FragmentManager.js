@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 
 class FragmentManager {
   constructor(app) {
@@ -12,9 +13,9 @@ class FragmentManager {
     this.fragmentInstructions = document.querySelector(
       ".fragment-instructions"
     );
-    this.initialBackground = null;
-    this.activeBackground = null;
-    this.backgroundTextures = {
+    this.initialEnvironment = null;
+    this.activeEnvironment = null;
+    this.environmentTextures = {
       "Site web": "src/textures/site_web.jpg",
       "Video Mapping": "src/textures/video_mapping.jpg",
       "Creative Coding": "src/textures/creative_coding.jpg",
@@ -48,53 +49,60 @@ class FragmentManager {
   }
 
   setupUI() {
-    // Création du bouton Voyager
+    // Créer le bouton Voyager
     this.voyagerButton = document.createElement("button");
     this.voyagerButton.textContent = "Voyager";
-    this.voyagerButton.style.position = "fixed";
-    this.voyagerButton.style.left = "50%";
-    this.voyagerButton.style.bottom = "4vh";
-    this.voyagerButton.style.transform = "translateX(-50%)";
-    this.voyagerButton.style.display = "none";
-    this.voyagerButton.style.opacity = "0";
-    this.voyagerButton.style.padding = "18px 52px";
-    this.voyagerButton.style.justifyContent = "center";
-    this.voyagerButton.style.alignItems = "center";
-    this.voyagerButton.style.gap = "4px";
-    this.voyagerButton.style.borderRadius = "4px";
-    this.voyagerButton.style.border = "1px solid #FFF";
-    this.voyagerButton.style.background =
-      "linear-gradient(344deg, rgba(21, 21, 27, 0.20) -1.4%, rgba(79, 79, 86, 0.20) 104.72%)";
-    this.voyagerButton.style.backdropFilter = "blur(2px)";
-    this.voyagerButton.style.color = "white";
-    this.voyagerButton.style.fontSize = "20px";
-    this.voyagerButton.style.fontFamily = "Arial, sans-serif";
-    this.voyagerButton.style.cursor = "pointer";
-    this.voyagerButton.style.transition = "all 0.3s ease";
-    this.voyagerButton.style.zIndex = "1000";
+    this.voyagerButton.className = "voyager-button";
+    this.voyagerButton.style.cssText = `
+      display: none;
+      opacity: 0;
+      position: fixed;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 18px 52px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+      border-radius: 4px;
+      border: 1px solid #FFF;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.03) 100%);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      z-index: 1000;
+      font-family: 'Aktiv Grotesk', sans-serif;
+      color: white;
+      font-size: 16px;
+    `;
+    document.body.appendChild(this.voyagerButton);
 
-    // Effets de hover
-    this.voyagerButton.addEventListener("mouseenter", () => {
-      this.voyagerButton.style.background =
-        "linear-gradient(344deg, rgba(21, 21, 27, 0.40) -1.4%, rgba(79, 79, 86, 0.40) 104.72%)";
-      this.voyagerButton.style.transform = "translateX(-50%) scale(1.05)";
-    });
+    // Créer l'élément de texte pour le nom de l'atelier
+    this.textElement = document.createElement("div");
+    this.textElement.style.cssText = `
+      display: none;
+      opacity: 0;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-family: 'Aktiv Grotesk', sans-serif;
+      font-size: 24px;
+      text-align: center;
+      pointer-events: none;
+      z-index: 1000;
+      transition: opacity 0.3s ease;
+    `;
+    document.body.appendChild(this.textElement);
 
-    this.voyagerButton.addEventListener("mouseleave", () => {
-      this.voyagerButton.style.background =
-        "linear-gradient(344deg, rgba(21, 21, 27, 0.20) -1.4%, rgba(79, 79, 86, 0.20) 104.72%)";
-      this.voyagerButton.style.transform = "translateX(-50%) scale(1)";
-    });
-
-    // Gestion du clic
+    // Ajouter l'événement click sur le bouton Voyager
     this.voyagerButton.addEventListener("click", () => {
       if (this.selectedFragment) {
-        this.hideVoyagerButton();
-        this.animateFragmentFall(this.selectedFragment);
+        this.startImmersionAnimation(this.selectedFragment);
       }
     });
-
-    document.body.appendChild(this.voyagerButton);
   }
 
   initRaycaster() {
@@ -292,7 +300,7 @@ class FragmentManager {
         this.selectedFragment = firstFragment;
         this.moveFragmentForward(firstFragment);
         this.showVoyagerButton();
-        this.updateBackground(firstFragment.userData.atelierName);
+        this.updateEnvironment(firstFragment.userData.atelierName);
 
         if (this.fragmentInstructions) {
           const titleElement =
@@ -517,148 +525,61 @@ class FragmentManager {
     animateImmersion();
   }
 
-  // Sauvegarder le background initial
-  saveInitialBackground() {
-    const background = this.app.scene.children.find(
-      (child) =>
-        child.material && child.material.map && child.position.z === -300
-    );
-    if (background) {
-      this.initialBackground = background;
-      this.initialBackground.material.transparent = true;
-    }
-  }
-
-  // Changer le background
-  updateBackground(atelierName) {
-    console.log("Updating background with:", atelierName);
-    if (!this.initialBackground) {
-      console.log("Saving initial background");
-      this.saveInitialBackground();
+  updateEnvironment(atelierName) {
+    // Nettoyer l'environnement précédent
+    if (this.envMesh) {
+        this.app.scene.remove(this.envMesh);
     }
 
     if (!atelierName) {
-      console.log("No atelier name, reverting to initial background");
-      if (this.activeBackground) {
-        window.gsap.to(this.activeBackground.material, {
-          opacity: 0,
-          duration: 0.5,
-          onComplete: () => {
-            this.activeBackground.visible = false;
-            if (this.initialBackground && this.initialBackground.parent) {
-              this.initialBackground.visible = true;
-              window.gsap.to(this.initialBackground.material, {
-                opacity: 1,
-                duration: 0.5,
-              });
-            } else {
-              this.setupInitialBackground();
-            }
-          },
-        });
-      }
-      return;
+        if (this.initialEnvironment) {
+            this.createEnvironmentSphere(this.initialEnvironment);
+        }
+        return;
     }
 
-    const texturePath = this.backgroundTextures[atelierName];
-    console.log("Loading texture from:", texturePath);
-    if (!texturePath) {
-      console.log("No texture path found for:", atelierName);
-      return;
-    }
+    const texturePath = this.environmentTextures[atelierName];
+    if (!texturePath) return;
 
     const textureLoader = new THREE.TextureLoader();
-    textureLoader.load(
-      texturePath,
-      (texture) => {
-        console.log("Texture loaded successfully");
-        if (this.activeBackground) {
-          const previousBackground = this.activeBackground;
-          window.gsap.to(this.activeBackground.material, {
-            opacity: 0,
-            duration: 0.3,
-            onComplete: () => {
-              const aspectRatio = texture.image.width / texture.image.height;
-              const bgGeometry = new THREE.PlaneGeometry(
-                600 * aspectRatio,
-                550
-              );
-              const bgMaterial = new THREE.MeshBasicMaterial({
-                map: texture,
-                side: THREE.FrontSide,
-                transparent: true,
-                opacity: 0,
-              });
-              texture.encoding = THREE.sRGBEncoding;
-
-              this.activeBackground = new THREE.Mesh(bgGeometry, bgMaterial);
-              this.activeBackground.position.z = -300;
-              this.activeBackground.position.y = 0;
-              this.app.scene.add(this.activeBackground);
-
-              this.app.scene.remove(previousBackground);
-              previousBackground.geometry.dispose();
-              previousBackground.material.dispose();
-
-              window.gsap.to(this.activeBackground.material, {
-                opacity: 1,
-                duration: 0.3,
-              });
-            },
-          });
-        } else {
-          const aspectRatio = texture.image.width / texture.image.height;
-          const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
-          const bgMaterial = new THREE.MeshBasicMaterial({
+    textureLoader.load(texturePath, (texture) => {
+        texture.colorSpace = THREE.SRGBColorSpace;
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        
+        if (!this.initialEnvironment) {
+            this.initialEnvironment = texture;
+        }
+        
+        // Créer la sphère avec la texture
+        const geometry = new THREE.SphereGeometry(500, 60, 40);
+        const material = new THREE.MeshBasicMaterial({
             map: texture,
-            side: THREE.FrontSide,
-            transparent: true,
-            opacity: 0,
-          });
-          this.activeBackground = new THREE.Mesh(bgGeometry, bgMaterial);
-          this.activeBackground.position.z = -300;
-          this.activeBackground.position.y = 0;
-          this.app.scene.add(this.activeBackground);
-          window.gsap.to(this.activeBackground.material, {
-            opacity: 1,
-            duration: 0.5,
-          });
-        }
-
-        if (this.initialBackground) {
-          window.gsap.to(this.initialBackground.material, {
-            opacity: 0,
-            duration: 0.5,
-            onComplete: () => {
-              this.initialBackground.visible = false;
-            },
-          });
-        }
-      },
-      undefined,
-      (error) => {
-        console.error("Error loading texture:", error);
-      }
-    );
+            side: THREE.BackSide
+        });
+        
+        this.envMesh = new THREE.Mesh(geometry, material);
+        this.envMesh.rotation.y = Math.PI / 2;
+        this.app.scene.add(this.envMesh);
+        
+        // Appliquer la même texture pour les réflexions
+        this.app.scene.environment = texture;
+        
+        this.activeEnvironment = texture;
+    });
   }
 
-  setupInitialBackground() {
-    const textureLoader = new THREE.TextureLoader();
-    textureLoader.load("src/textures/escape.png", (texture) => {
-      const aspectRatio = texture.image.width / texture.image.height;
-      const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
-      const bgMaterial = new THREE.MeshBasicMaterial({
+  createEnvironmentSphere(texture) {
+    const geometry = new THREE.SphereGeometry(500, 60, 40);
+    const material = new THREE.MeshBasicMaterial({
         map: texture,
-        side: THREE.FrontSide,
-        transparent: true,
-      });
-      texture.encoding = THREE.sRGBEncoding;
-
-      this.initialBackground = new THREE.Mesh(bgGeometry, bgMaterial);
-      this.initialBackground.position.z = -300;
-      this.initialBackground.position.y = 0;
-      this.app.scene.add(this.initialBackground);
+        side: THREE.BackSide
     });
+    
+    this.envMesh = new THREE.Mesh(geometry, material);
+    this.envMesh.rotation.y = Math.PI / 2;
+    this.app.scene.add(this.envMesh);
+    
+    this.activeEnvironment = texture;
   }
 
   onMouseMove(event) {
@@ -696,7 +617,7 @@ class FragmentManager {
           this.textElement.style.opacity = "1";
 
           if (!this.selectedFragment) {
-            this.updateBackground(fragmentObject.userData.atelierName);
+            this.updateEnvironment(fragmentObject.userData.atelierName);
           }
         }
       }
@@ -712,7 +633,7 @@ class FragmentManager {
           this.textElement.style.display = "none";
         }, 300);
         if (!this.selectedFragment) {
-          this.updateBackground(null);
+          this.updateEnvironment(null);
         }
       }
     }
@@ -781,7 +702,7 @@ class FragmentManager {
         this.selectedFragment = clickedFragment;
         this.moveFragmentForward(clickedFragment);
         this.showVoyagerButton();
-        this.updateBackground(clickedFragment.userData.atelierName);
+        this.updateEnvironment(clickedFragment.userData.atelierName);
 
         if (this.fragmentInstructions) {
           const titleElement =
@@ -847,7 +768,7 @@ class FragmentManager {
     this.selectedFragment = randomFragment;
     this.moveFragmentForward(randomFragment);
     this.showVoyagerButton();
-    this.updateBackground(randomFragment.userData.atelierName);
+    this.updateEnvironment(randomFragment.userData.atelierName);
 
     if (this.fragmentInstructions) {
       const titleElement =

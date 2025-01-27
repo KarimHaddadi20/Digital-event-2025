@@ -21,9 +21,9 @@ class SceneSetup {
     this.setupControls();
 
     // Charger l'HDRI seulement si demandé
-    if (useHDRI) {
-      this.loadHDRI();
-    }
+    // if (useHDRI) {
+    //   this.loadHDRI();
+    // }
 
     // Event listeners de base
     window.addEventListener("resize", () => this.onResize());
@@ -50,7 +50,7 @@ class SceneSetup {
     this.controls.dampingFactor = 0.05;
     this.controls.enableZoom = false;
     this.controls.enablePan = true;
-    this.controls.enableRotate = false;
+    this.controls.enableRotate = true;
 
     this.controls.minDistance = 50;
     this.controls.maxDistance = 200;
@@ -82,96 +82,96 @@ class SceneSetup {
     this.scene.add(frontLight);
   }
 
-  loadHDRI() {
-    const rgbeLoader = new RGBELoader();
-    rgbeLoader.load("src/assets/grey2.hdr", (texture) => {
-      texture.mapping = THREE.EquirectangularReflectionMapping;
+  // loadHDRI() {
+  //   const rgbeLoader = new RGBELoader();
+  //   rgbeLoader.load("src/assets/grey2.hdr", (texture) => {
+  //     texture.mapping = THREE.EquirectangularReflectionMapping;
 
-      // Create PMREMGenerator for better reflections
-      const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
-      const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+  //     // Create PMREMGenerator for better reflections
+  //     const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+  //     const envMap = pmremGenerator.fromEquirectangular(texture).texture;
 
-      // Apply environment but keep black background
-      this.scene.environment = envMap;
-      this.scene.background = new THREE.Color(0x000000);
+  //     // Apply environment but keep black background
+  //     this.scene.environment = envMap;
+  //     this.scene.background = new THREE.Color(0x000000);
 
-      // Dispose resources
-      texture.dispose();
-      pmremGenerator.dispose();
-    });
-  }
+  //     // Dispose resources
+  //     texture.dispose();
+  //     pmremGenerator.dispose();
+  //   });
+  // }
 
-  setupBackground() {
-    const textureLoader = new THREE.TextureLoader();
-    console.log("Loading initial background texture");
-    textureLoader.load(
-      "src/textures/escape.png",
-      (texture) => {
-        console.log("Initial background texture loaded");
-        const aspectRatio = texture.image.width / texture.image.height;
+  // setupBackground() {
+  //   const textureLoader = new THREE.TextureLoader();
+  //   console.log("Loading initial background texture");
+  //   textureLoader.load(
+  //     "src/textures/escape.png",
+  //     (texture) => {
+  //       console.log("Initial background texture loaded");
+  //       const aspectRatio = texture.image.width / texture.image.height;
 
-        const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
-        const bgMaterial = new THREE.MeshBasicMaterial({
-          map: texture,
-          side: THREE.FrontSide,
-          transparent: true,
-        });
+  //       const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
+  //       const bgMaterial = new THREE.MeshBasicMaterial({
+  //         map: texture,
+  //         side: THREE.FrontSide,
+  //         transparent: true,
+  //       });
 
-        const background = new THREE.Mesh(bgGeometry, bgMaterial);
-        background.position.z = -300;
-        background.position.y = 0;
-        texture.encoding = THREE.sRGBEncoding;
+  //       const background = new THREE.Mesh(bgGeometry, bgMaterial);
+  //       background.position.z = -300;
+  //       background.position.y = 0;
+  //       texture.encoding = THREE.sRGBEncoding;
 
-        this.scene.add(background);
-        this.scene.background = new THREE.Color(0x000000);
-      },
-      undefined,
-      (error) => {
-        console.error("Error loading initial background:", error);
-      }
-    );
-  }
+  //       this.scene.add(background);
+  //       this.scene.background = new THREE.Color(0x000000);
+  //     },
+  //     undefined,
+  //     (error) => {
+  //       console.error("Error loading initial background:", error);
+  //     }
+  //   );
+  // }
 
-  setupEnvironment() {
-    // Clear any existing environment
-    if (this.scene.environment) {
-      this.scene.environment.dispose();
-    }
+  // setupEnvironment() {
+  //   // Clear any existing environment
+  //   if (this.scene.environment) {
+  //     this.scene.environment.dispose();
+  //   }
 
-    const textureLoader = new THREE.TextureLoader();
-    console.log("Loading texture from: src/textures/espace.game.png");
+  //   const textureLoader = new THREE.TextureLoader();
+  //   console.log("Loading texture from: src/textures/espace.game.png");
 
-    textureLoader.load(
-      "src/textures/espace.game.png",
-      (texture) => {
-        console.log("Texture loaded successfully");
+  //   textureLoader.load(
+  //     "src/textures/espace.game.png",
+  //     (texture) => {
+  //       console.log("Texture loaded successfully");
 
-        // Configure texture
-        texture.encoding = THREE.sRGBEncoding;
-        texture.mapping = THREE.EquirectangularReflectionMapping;
-        texture.needsUpdate = true;
+  //       // Configure texture
+  //       texture.encoding = THREE.sRGBEncoding;
+  //       texture.mapping = THREE.EquirectangularReflectionMapping;
+  //       texture.needsUpdate = true;
 
-        // Generate environment map
-        const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
-        pmremGenerator.compileEquirectangularShader();
+  //       // Generate environment map
+  //       const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
+  //       pmremGenerator.compileEquirectangularShader();
 
-        const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+  //       const envMap = pmremGenerator.fromEquirectangular(texture).texture;
 
-        // Apply to scene - both as environment and background
-        this.scene.environment = envMap;
-        this.scene.background = envMap;
+  //       // Apply to scene - both as environment and background
+  //       this.scene.environment = envMap;
+  //       this.scene.background = envMap;
 
-        console.log("Environment set up complete");
+  //       console.log("Environment set up complete");
 
-        // Cleanup
-        pmremGenerator.dispose();
-      },
-      undefined, // onProgress callback
-      (error) => {
-        console.error("Error loading texture:", error);
-      }
-    );
-  }
+  //       // Cleanup
+  //       pmremGenerator.dispose();
+  //     },
+  //     undefined, // onProgress callback
+  //     (error) => {
+  //       console.error("Error loading texture:", error);
+  //     }
+  //   );
+  // }
 
   onResize() {
     this.camera.aspect = window.innerWidth / window.innerHeight;
