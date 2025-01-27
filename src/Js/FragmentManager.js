@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 
 class FragmentManager {
   constructor(app) {
@@ -13,42 +13,52 @@ class FragmentManager {
     this.fragmentInstructions = document.querySelector(
       ".fragment-instructions"
     );
-    
+
+    // Initialize renderer
+    this.renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      powerPreference: "high-performance",
+    });
+    this.renderer.outputEncoding = THREE.sRGBEncoding; // Pour un meilleur rendu des couleurs
+    this.renderer.toneMapping = THREE.ACESFilmicToneMapping; // Tonemapping pour des couleurs réalistes
+    this.renderer.setPixelRatio(window.devicePixelRatio); // Adapter au ratio de l'écran
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+
     // Charger la texture initiale
     const textureLoader = new THREE.TextureLoader();
     textureLoader.load("src/textures/homepage.webp", (texture) => {
-        texture.colorSpace = THREE.SRGBColorSpace;
-        texture.mapping = THREE.EquirectangularReflectionMapping;
-        
-        // Créer la sphère d'environnement
-        const geometry = new THREE.SphereGeometry(500, 60, 40);
-        const material = new THREE.MeshBasicMaterial({
-            map: texture,
-            side: THREE.BackSide
-        });
-        
-        this.envMesh = new THREE.Mesh(geometry, material);
-        this.envMesh.rotation.y = Math.PI / 2;
-        this.app.scene.add(this.envMesh);
-        
-        // Configurer l'environnement pour les réflexions
-        this.app.scene.environment = texture;
-        this.initialEnvironment = texture;
-        this.activeEnvironment = texture;
+      texture.colorSpace = THREE.SRGBColorSpace;
+      texture.mapping = THREE.EquirectangularReflectionMapping;
+
+      // Créer la sphère d'environnement
+      const geometry = new THREE.SphereGeometry(500, 60, 40); // Au lieu de 60, 40
+      const material = new THREE.MeshBasicMaterial({
+        map: texture,
+        side: THREE.BackSide,
+      });
+
+      this.envMesh = new THREE.Mesh(geometry, material);
+      this.envMesh.rotation.y = Math.PI / 2;
+      this.app.scene.add(this.envMesh);
+
+      // Configurer l'environnement pour les réflexions
+      this.app.scene.environment = texture;
+      this.initialEnvironment = texture;
+      this.activeEnvironment = texture;
     });
 
     this.environmentTextures = {
       "Site web": "src/textures/site.web.webp",
       "Video Mapping": "src/textures/video.mapping.webp",
-      "Creative Coding": "src/textures/creative.coding.webp",
+      "Creative Coding": "src/textures/creative_coding.jpg",
       "Gaming & Pop-corn": "src/textures/gaming.popcorn.webp",
-      "Video": "src/textures/video.studio.webp",
+      Video: "src/textures/video.studio.webp",
       "Escape game": "src/textures/espace.game.webp",
-      "Podcast": "src/textures/podcast.webp",
+      Podcast: "src/textures/podcast.webp",
       "Photo reportage": "src/textures/photo.reportage.webp",
       "AI Driven visual stories": "src/textures/ai.driven.visual.stories.webp",
       "Game design": "src/textures/game.design.webp",
-      "Organisation": "src/textures/organisation.webp"
+      Organisation: "src/textures/organisation.webp",
     };
     this.atelierNames = [
       "Site web",
@@ -61,7 +71,7 @@ class FragmentManager {
       "Photo reportage",
       "AI Driven visual stories",
       "Game design",
-      "Organisation"
+      "Organisation",
     ];
 
     this.autoSelectTimer = null;
@@ -120,11 +130,15 @@ class FragmentManager {
     document.body.appendChild(this.textElement);
 
     // Ajouter l'événement click sur le bouton Voyager
+    // Gestion du clic
     this.voyagerButton.addEventListener("click", () => {
       if (this.selectedFragment) {
-        this.startImmersionAnimation(this.selectedFragment);
+        this.hideVoyagerButton();
+        this.animateFragmentFall(this.selectedFragment);
       }
     });
+
+    document.body.appendChild(this.voyagerButton);
   }
 
   initRaycaster() {
@@ -154,24 +168,24 @@ class FragmentManager {
             -240
           );
 
-          this.app.mirror.traverse((child) => {
-            if (child.isMesh) {
-              child.material = new THREE.MeshPhysicalMaterial({
-                metalness: 1,
-                roughness: 0,
-                transmission: 0.1,
-                thickness: 10,
-                envMap: this.app.scene.environment,
-                envMapIntensity: 1.5,
-                clearcoat: 10,
-                clearcoatRoughness: 0.06,
-                transparent: false,
-                opacity: 0.7,
-                side: THREE.DoubleSide,
-                depthWrite: false,
-              });
-            }
-          });
+          // this.app.mirror.traverse((child) => {
+          //   if (child.isMesh) {
+          //     child.material = new THREE.MeshPhysicalMaterial({
+          //       metalness: 0,
+          //       roughness: 0,
+          //       transmission: 0,
+          //       thickness: 0,
+          //       envMap: this.app.scene.environment,
+          //       envMapIntensity: 0,
+          //       clearcoat: 0,
+          //       clearcoatRoughness: 0,
+          //       transparent: true,
+          //       opacity: 0,
+          //       side: THREE.DoubleSide,
+          //       depthWrite: true,
+          //     });
+          //   }
+          // });
 
           this.app.mirror.traverse((child) => {
             if (child.isMesh) {
@@ -180,19 +194,19 @@ class FragmentManager {
                 metalness: 1, // 1 = totalement métallique, 0 = non métallique
                 roughness: 0.06, // 0 = surface parfaitement lisse (miroir), 1 = surface rugueuse
                 // Propriétés de transparence
-                transmission: 1, // 0 = opaque, 1 = totalement transparent
-                thickness: 1, // Épaisseur du matériau pour les effets de réfraction
+                transmission: 0, // 0 = opaque, 1 = totalement transparent
+                thickness: 10, // Épaisseur du matériau pour les effets de réfraction
                 reflectivity: 0, // Intensité des reflets
-                iridescence: 0, // Intensité de l'iridescence
+                iridescence: 1, // Intensité de l'iridescence
                 // Propriétés de réflexion
                 envMap: this.app.scene.environment, // Texture d'environnement pour les reflets
-                envMapIntensity: 0.25, // Intensité des reflets de l'environnement
+                envMapIntensity: 1.5, // Intensité des reflets de l'environnement
                 // Propriétés de revêtement
                 clearcoat: 0, // Couche de vernis (0 = aucune, 1 = maximum)
                 clearcoatRoughness: 0, // Rugosité de la couche de vernis
                 // Propriétés de rendu
                 transparent: true, // Active/désactive la transparence
-                opacity: 1, // 1 = totalement opaque, 0 = invisible
+                opacity: 0.6, // 1 = totalement opaque, 0 = invisible
                 side: THREE.DoubleSide, // Rendre les deux côtés du matériau
                 depthWrite: true, // Écriture dans le buffer de profondeur
               });
@@ -230,6 +244,9 @@ class FragmentManager {
       { index: 11, row: 3, position: 1 },
     ];
 
+    const HORIZONTAL_SPACING = -3; // Augmente l'espacement horizontal (défaut: 1)
+    const VERTICAL_SPACING = 3; // Augmente l'espacement vertical (défaut: 1)
+
     atelierConfig.forEach((config) => {
       const fileName = `src/models/fragments3/monde${config.index}.glb`;
       loader.load(
@@ -250,13 +267,13 @@ class FragmentManager {
                 iridescence: 0, // Intensité de l'iridescence
                 // Propriétés de réflexion
                 envMap: this.app.scene.environment, // Texture d'environnement pour les reflets
-                envMapIntensity: 0.25, // Intensité des reflets de l'environnement
+                envMapIntensity: 1, // Intensité des reflets de l'environnement
                 // Propriétés de revêtement
                 clearcoat: 0, // Couche de vernis (0 = aucune, 1 = maximum)
                 clearcoatRoughness: 0, // Rugosité de la couche de vernis
                 // Propriétés de rendu
                 transparent: true, // Active/désactive la transparence
-                opacity: 1, // 1 = totalement opaque, 0 = invisible
+                opacity: 0.5, // 1 = totalement opaque, 0 = invisible
                 side: THREE.DoubleSide, // Rendre les deux côtés du matériau
                 depthWrite: true, // Écriture dans le buffer de profondeur
               });
@@ -265,8 +282,9 @@ class FragmentManager {
 
           fragment.scale.set(1, 1, 1);
           fragment.rotation.set(0, 0, 0);
-          fragment.position.x = config.position - (rowCount - 1) / 2;
-          fragment.position.y = -config.row - 55;
+          fragment.position.x =
+            (config.position - (rowCount - 1) / 2) * HORIZONTAL_SPACING;
+          fragment.position.y = -config.row * VERTICAL_SPACING - 55;
           fragment.position.z = -150;
 
           fragment.visible = false;
@@ -548,59 +566,69 @@ class FragmentManager {
   }
 
   updateEnvironment(atelierName) {
-    // Nettoyer l'environnement précédent
+    // Clear previous environment
     if (this.envMesh) {
-        this.app.scene.remove(this.envMesh);
+      this.app.scene.remove(this.envMesh);
     }
 
-    if (!atelierName) {
-        if (this.initialEnvironment) {
-            this.createEnvironmentSphere(this.initialEnvironment);
-        }
-        return;
-    }
-
+    // Get texture path for selected atelier
     const texturePath = this.environmentTextures[atelierName];
-    if (!texturePath) return;
+    if (!texturePath) {
+      // Fallback to initial environment
+      if (this.initialEnvironment) {
+        this.createEnvironmentSphere(this.initialEnvironment);
+      }
+      return;
+    }
 
+    // Load new environment texture
     const textureLoader = new THREE.TextureLoader();
     textureLoader.load(texturePath, (texture) => {
-        texture.colorSpace = THREE.SRGBColorSpace;
-        texture.mapping = THREE.EquirectangularReflectionMapping;
-        
-        if (!this.initialEnvironment) {
-            this.initialEnvironment = texture;
-        }
-        
-        // Créer la sphère avec la texture
-        const geometry = new THREE.SphereGeometry(500, 60, 40);
-        const material = new THREE.MeshBasicMaterial({
-            map: texture,
-            side: THREE.BackSide
+      texture.colorSpace = THREE.SRGBColorSpace;
+      texture.mapping = THREE.EquirectangularReflectionMapping;
+      texture.generateMipmaps = true;
+      texture.minFilter = THREE.LinearMipmapLinearFilter;
+      texture.magFilter = THREE.LinearFilter;
+      texture.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
+
+      // Create environment sphere
+      const geometry = new THREE.SphereGeometry(500, 256, 256); // Au lieu de 60, 40
+      const material = new THREE.MeshBasicMaterial({
+        map: texture,
+        side: THREE.BackSide,
+      });
+
+      this.envMesh = new THREE.Mesh(geometry, material);
+      this.envMesh.rotation.y = Math.PI / 2;
+      this.app.scene.add(this.envMesh);
+
+      // Update fragment materials to reflect new environment
+      this.fragments.forEach((fragment) => {
+        fragment.traverse((child) => {
+          if (child.isMesh && child.material) {
+            child.material.envMap = texture;
+            child.material.needsUpdate = true;
+          }
         });
-        
-        this.envMesh = new THREE.Mesh(geometry, material);
-        this.envMesh.rotation.y = Math.PI / 2;
-        this.app.scene.add(this.envMesh);
-        
-        // Appliquer la même texture pour les réflexions
-        this.app.scene.environment = texture;
-        
-        this.activeEnvironment = texture;
+      });
+
+      // Set scene environment for reflections
+      this.app.scene.environment = texture;
+      this.activeEnvironment = texture;
     });
   }
 
   createEnvironmentSphere(texture) {
-    const geometry = new THREE.SphereGeometry(500, 60, 40);
+    const geometry = new THREE.SphereGeometry(500, 128, 128); // Au lieu de 60, 40
     const material = new THREE.MeshBasicMaterial({
-        map: texture,
-        side: THREE.BackSide
+      map: texture,
+      side: THREE.BackSide,
     });
-    
+
     this.envMesh = new THREE.Mesh(geometry, material);
     this.envMesh.rotation.y = Math.PI / 2;
     this.app.scene.add(this.envMesh);
-    
+
     this.activeEnvironment = texture;
   }
 
