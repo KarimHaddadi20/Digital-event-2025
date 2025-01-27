@@ -72,6 +72,10 @@ export class PortalTransitionScene extends SceneSetup {
         
         // Gestion du scroll desktop
         window.addEventListener('wheel', (event) => {
+            // Ne pas scroller les fragments si la popup est active
+            if (document.body.classList.contains('popup-active')) {
+                return;
+            }
             event.preventDefault();
             const delta = event.deltaY * 0.05;
             this.updateCameraPosition(delta);
@@ -79,8 +83,8 @@ export class PortalTransitionScene extends SceneSetup {
 
         // Gestion améliorée du scroll mobile
         window.addEventListener('touchstart', (event) => {
-            // Ne pas empêcher le comportement par défaut si on clique sur le menu burger ou le menu latéral
-            if (event.target.closest('#burger-menu') || event.target.closest('#side-menu')) {
+            // Ne pas empêcher le comportement par défaut si on est dans la popup
+            if (event.target.closest('.subtitle-popup') || document.body.classList.contains('popup-active')) {
                 return;
             }
             event.preventDefault();
@@ -88,8 +92,8 @@ export class PortalTransitionScene extends SceneSetup {
         }, { passive: false });
 
         window.addEventListener('touchmove', (event) => {
-            // Ne pas empêcher le comportement par défaut si on interagit avec le menu
-            if (event.target.closest('#burger-menu') || event.target.closest('#side-menu')) {
+            // Ne pas empêcher le comportement par défaut si on est dans la popup
+            if (event.target.closest('.subtitle-popup') || document.body.classList.contains('popup-active')) {
                 return;
             }
             event.preventDefault();
@@ -97,7 +101,6 @@ export class PortalTransitionScene extends SceneSetup {
             const delta = (touchStartY - touchY) * (isMobile ? 0.2 : 0.1);
             touchStartY = touchY;
 
-            // Mise à jour immédiate pour mobile
             if (isMobile) {
                 this.camera.position.z -= delta;
                 this.camera.position.z = Math.max(
@@ -111,7 +114,6 @@ export class PortalTransitionScene extends SceneSetup {
             }
         }, { passive: false });
 
-        // Empêcher le scroll par défaut
         document.body.style.overflow = 'hidden';
     }
 
@@ -267,57 +269,67 @@ export class PortalTransitionScene extends SceneSetup {
     async setupFragments() {
         try {
             const response = await fetch('/src/data/portalData.json');
-            const data = await response.json();
+            if (!response.ok) throw new Error('Erreur lors du chargement du JSON');
             
-            // Déterminer quel atelier a été sélectionné (1-11)
+            const data = await response.json();
             const atelierIndex = this.selectedFragmentIndex + 1;
             const atelierKey = `atelier${atelierIndex}`;
             
-            // Récupérer les données de l'atelier spécifique
             const atelierData = data[atelierKey];
             if (!atelierData) {
-                console.error(`Pas de données pour ${atelierKey}`);
+                console.warn(`Pas de données pour ${atelierKey}`);
                 return;
             }
-            
+
+            console.log('Données de l\'atelier:', atelierData);
+
+            // Trouver le set "Convergence" qui contient la liste des étudiants
+            const convergenceSet = atelierData.sets.find(set => set.title === "Convergence");
+            const studentsList = convergenceSet ? convergenceSet.students : null;
+
             const responsive = this.getResponsivePositions();
-            
-            // Créer les fragments pour chaque set de l'atelier
             const fragmentsData = atelierData.sets.map((set, index) => {
+                console.log('Set data:', set);
                 return {
-                    texture: set.image1,
-                    image2: set.image2,
-                    image3: set.image3,
+                    texture: this.validateImagePath(set.image1),
+                    image2: this.validateImagePath(set.image2),
+                    image3: this.validateImagePath(set.image3),
                     title: set.title,
                     subtitle: set.subtitle,
-                    position: { 
-                        x: index % 2 === 0 ? -responsive.xOffset : responsive.xOffset, 
-                        y: responsive.yOffset, 
-                        z: -5 - (index * responsive.zSpacing) 
+                    // Utiliser la liste d'étudiants uniquement pour Convergence
+                    students: set.title === "Convergence" ? studentsList : null,
+                    position: {
+                        x: index % 2 === 0 ? -responsive.xOffset : responsive.xOffset,
+                        y: responsive.yOffset,
+                        z: -5 - (index * responsive.zSpacing)
                     },
                     scale: responsive.scale,
                     exitDirection: index % 2 === 0 ? 'left' : 'right'
                 };
             });
 
-            // Créer les fragments
             for (const data of fragmentsData) {
-                await this.createFragment(data);
+                await this.createFragment(data).catch(console.warn);
             }
         } catch (error) {
-            console.error('Erreur lors du chargement des données:', error);
+            console.warn('Erreur lors du chargement des données:', error);
         }
+    }
+
+    validateImagePath(path) {
+        if (!path) return null;
+        // Ajouter ici une image par défaut si nécessaire
+        return path;
     }
 
     async createFragment(data) {
         return new Promise((resolve, reject) => {
             const textureLoader = new THREE.TextureLoader();
             
-            // Charger les trois textures en parallèle
             Promise.all([
                 new Promise((res, rej) => textureLoader.load(data.texture, res, undefined, rej)),
-                new Promise((res, rej) => textureLoader.load(data.image2, res, undefined, rej)),
-                new Promise((res, rej) => textureLoader.load(data.image3, res, undefined, rej))
+                data.image2 ? new Promise((res, rej) => textureLoader.load(data.image2, res, undefined, rej)) : Promise.resolve(null),
+                data.image3 ? new Promise((res, rej) => textureLoader.load(data.image3, res, undefined, rej)) : Promise.resolve(null)
             ]).then(([texture1, texture2, texture3]) => {
                 const responsive = this.getResponsivePositions();
                 
@@ -389,9 +401,10 @@ export class PortalTransitionScene extends SceneSetup {
                 imageMesh.add(detail1);
                 imageMesh.add(detail2);
                 
-                // Création du conteneur de texte
+                // Modification de la création du conteneur de texte
                 const textContainer = document.createElement('div');
                 textContainer.className = 'portal-text';
+                textContainer.style.pointerEvents = 'auto';
                 
                 const title = document.createElement('h2');
                 title.textContent = data.title;
@@ -403,7 +416,7 @@ export class PortalTransitionScene extends SceneSetup {
                     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
                 `;
                 
-                const subtitle = document.createElement('p');
+                const subtitle = document.createElement('div'); // Changé de p à div
                 subtitle.textContent = data.subtitle;
                 subtitle.style.cssText = `
                     font-family: 'Aktiv Grotesk, sans-serif';
@@ -411,7 +424,34 @@ export class PortalTransitionScene extends SceneSetup {
                     color: rgba(255, 255, 255, 0.8);
                     margin: 0;
                     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+                    cursor: pointer;
+                    pointer-events: auto;
+                    user-select: none;
                 `;
+
+                // Ajout d'un gestionnaire d'événements tactile
+                let touchStartTime;
+                subtitle.addEventListener('touchstart', (e) => {
+                    touchStartTime = Date.now();
+                }, { passive: true });
+
+                subtitle.addEventListener('touchend', (e) => {
+                    const touchDuration = Date.now() - touchStartTime;
+                    if (touchDuration < 200) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.showSubtitlePopup(data.title, data.subtitle, data.students);
+                    }
+                }, { passive: false });
+
+                // Gestionnaire de clic normal
+                subtitle.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Data passée au click:', data); // Log pour vérifier les données au clic
+                    console.log('Students:', data.students); // Log spécifique pour students
+                    this.showSubtitlePopup(data.title, data.subtitle, data.students);
+                });
                 
                 textContainer.appendChild(title);
                 textContainer.appendChild(subtitle);
@@ -426,9 +466,95 @@ export class PortalTransitionScene extends SceneSetup {
                 });
                 resolve();
             }).catch(error => {
-                console.error('Erreur lors du chargement des textures:', error);
-                reject(error);
+                console.warn('Erreur lors du chargement des textures:', error);
+                resolve(); // Résoudre quand même pour continuer le chargement
             });
+        });
+    }
+
+    showSubtitlePopup(title, subtitle, students) {
+        let popup = document.querySelector('.subtitle-popup');
+        if (!popup) {
+            popup = document.createElement('div');
+            popup.className = 'subtitle-popup';
+            document.body.appendChild(popup);
+        }
+
+        document.body.classList.add('popup-active');
+
+        if (title === "Convergence" && students && Array.isArray(students) && students.length > 0) {
+            popup.innerHTML = `
+                <button class="popup-close" aria-label="Fermer" type="button">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+                <div class="popup-content">
+                    <div class="popup-header">
+                    </div>
+                    <div class="students-list">
+                        <div class="students-header">
+                            <div class="header-nom">Nom</div>
+                            <div class="header-prenom">Prénom</div>
+                            <div class="header-classe">Classe</div>
+                        </div>
+                        <div class="students-rows">
+                            ${students.map(student => `
+                                <div class="student-row">
+                                    <div class="student-nom">${student.nom}</div>
+                                    <div class="student-prenom">${student.prenom}</div>
+                                    <div class="student-classe">
+                                        ${student.classe.endsWith('.svg') 
+                                            ? `<img src="${student.classe}" alt="Classe" class="classe-icon"/>` 
+                                            : student.classe}
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else {
+            // Pour tous les autres sets, afficher un message indiquant de cliquer sur Convergence
+            popup.innerHTML = `
+                <div class="popup-content">
+                    <div class="popup-header">
+                        <h3 class="popup-title">${title}</h3>
+                        <button class="popup-close">
+                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M18 6L6 18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M6 6L18 18" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="popup-text">
+                        Pour voir la liste des étudiants, veuillez cliquer sur le fragment "Convergence".
+                    </div>
+                </div>
+            `;
+        }
+
+        const closeButton = popup.querySelector('.popup-close');
+        
+        // Supprimer les anciens event listeners s'ils existent
+        const closePopup = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            popup.classList.remove('active');
+            document.body.classList.remove('popup-active');
+            setTimeout(() => {
+                popup.remove();
+            }, 300);
+        };
+
+        // Ajouter les nouveaux event listeners
+        closeButton.addEventListener('click', closePopup, { passive: false });
+        closeButton.addEventListener('touchend', closePopup, { passive: false });
+
+        popup.offsetHeight;
+        requestAnimationFrame(() => {
+            popup.classList.add('active');
         });
     }
 

@@ -19,22 +19,112 @@
             {
                 "title": "Passage Éthéré",
                 "subtitle": "La transition entre deux mondes",
-                "image1": "src/textures/A1-03.png",
-                "image2": "src/textures/A1-04.png",
-                "image3": "src/textures/A1-05.png"
+                "image1": "src/textures/A1-01.png",
+                "image2": "src/textures/A1-01.png",
+                "image3": "src/textures/A1-01.png"
             },
             {
                 "title": "Résonance Spatiale",
                 "subtitle": "L'écho des dimensions parallèles",
-                "image1": "src/textures/A1-04.png",
+                "image1": "src/textures/A1-01.png",
                 "quote1": "L'écho des dimensions parallèles"
             },
             {
                 "title": "Convergence",
                 "subtitle": "Le point de rencontre des réalités",
-                "image1": "src/textures/A1-05.png",
-                "image2": "src/textures/A1-06.png",
-                "image3": "src/textures/A1-07.png"
+                "image1": "src/textures/A1-01.png",
+                "students": [
+                    {
+                        "nom": "Martin",
+                        "prenom": "Emma",
+                        "classe": "src/tag/B3DEV.svg"
+                    },
+                    {
+                        "nom": "Dubois",
+                        "prenom": "Lucas",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Bernard",
+                        "prenom": "Sophie",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Petit",
+                        "prenom": "Thomas",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Robert",
+                        "prenom": "Julie",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Richard",
+                        "prenom": "Antoine",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Moreau",
+                        "prenom": "Clara",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Simon",
+                        "prenom": "Louis",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Laurent",
+                        "prenom": "Marie",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Michel",
+                        "prenom": "Paul",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Lefebvre",
+                        "prenom": "Léa",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Garcia",
+                        "prenom": "Hugo",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "David",
+                        "prenom": "Chloé",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Bertrand",
+                        "prenom": "Nathan",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Roux",
+                        "prenom": "Sarah",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Vincent",
+                        "prenom": "Maxime",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Fournier",
+                        "prenom": "Alice",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Morel",
+                        "prenom": "Gabriel",
+                        "classe": "B3 DEV"
+                    }
+                ]
             }
         ]
     },
@@ -72,9 +162,149 @@
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
                 "image1": "src/textures/A10-05.png",
-                "image2": "src/textures/A10-06.png",
-                "image3": "src/textures/A10-07.png"
-            }
+                 "students": [
+                        {
+                            "nom": "Martin",
+                            "prenom": "Emma",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Dubois",
+                            "prenom": "Lucas",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Bernard",
+                            "prenom": "Sophie",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Petit",
+                            "prenom": "Thomas",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Robert",
+                            "prenom": "Julie",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Richard",
+                            "prenom": "Antoine",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Moreau",
+                            "prenom": "Clara",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Simon",
+                            "prenom": "Louis",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Laurent",
+                            "prenom": "Marie",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Michel",
+                            "prenom": "Paul",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Lefebvre",
+                            "prenom": "Léa",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Garcia",
+                            "prenom": "Hugo",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "David",
+                            "prenom": "Chloé",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Bertrand",
+                            "prenom": "Nathan",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Roux",
+                            "prenom": "Sarah",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Vincent",
+                            "prenom": "Maxime",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Fournier",
+                            "prenom": "Alice",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Morel",
+                            "prenom": "Gabriel",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Giraud",
+                            "prenom": "Emma",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Blanc",
+                            "prenom": "Louis",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Robin",
+                            "prenom": "Julie",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Chevalier",
+                            "prenom": "Antoine",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Guyot",
+                            "prenom": "Clara",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Langlois",
+                            "prenom": "Hugo",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Marchand",
+                            "prenom": "Léa",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Renard",
+                            "prenom": "Nathan",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Barbier",
+                            "prenom": "Chloé",
+                            "classe": "B3 DEV"
+                        },
+                        {
+                            "nom": "Perrot",
+                            "prenom": "Paul",
+                            "classe": "B3 DEV"
+                        }
+                    ]
+                }
         ]
     },
     "atelier3": {
@@ -111,8 +341,93 @@
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
                 "image1": "src/textures/A3-05.png",
-                "image2": "src/textures/A3-06.png",
-                "image3": "src/textures/A3-07.png"
+                "students": [
+        {
+            "nom": "Martin",
+            "prenom": "Emma",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Dubois",
+            "prenom": "Lucas",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Bernard",
+            "prenom": "Sophie",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Petit",
+            "prenom": "Thomas",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Robert",
+            "prenom": "Julie",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Richard",
+            "prenom": "Antoine",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Moreau",
+            "prenom": "Clara",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Simon",
+            "prenom": "Louis",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Laurent",
+            "prenom": "Marie",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Michel",
+            "prenom": "Paul",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Garcia",
+            "prenom": "Hugo",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "David",
+            "prenom": "Chloé",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Bertrand",
+            "prenom": "Nathan",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Roux",
+            "prenom": "Sarah",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Vincent",
+            "prenom": "Maxime",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Fournier",
+            "prenom": "Alice",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Morel",
+            "prenom": "Gabriel",
+            "classe": "B3 DEV"
+        }
+    ]
             }
         ]
     },
@@ -150,8 +465,148 @@
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
                 "image1": "src/textures/A6-05.png",
-                "image2": "src/textures/A6-06.png",
-                "image3": "src/textures/A6-07.png"
+                "students": [
+                    {
+                        "nom": "Martin",
+                        "prenom": "Emma",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Dubois",
+                        "prenom": "Lucas",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Bernard",
+                        "prenom": "Sophie",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Petit",
+                        "prenom": "Thomas",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Robert",
+                        "prenom": "Julie",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Richard",
+                        "prenom": "Antoine",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Moreau",
+                        "prenom": "Clara",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Simon",
+                        "prenom": "Louis",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Laurent",
+                        "prenom": "Marie",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Michel",
+                        "prenom": "Paul",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Garcia",
+                        "prenom": "Hugo",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "David",
+                        "prenom": "Chloé",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Bertrand",
+                        "prenom": "Nathan",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Roux",
+                        "prenom": "Sarah",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Vincent",
+                        "prenom": "Maxime",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Fournier",
+                        "prenom": "Alice",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Morel",
+                        "prenom": "Gabriel",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Girard",
+                        "prenom": "Emma",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Blanc",
+                        "prenom": "Louis",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Robin",
+                        "prenom": "Julie",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Chevalier",
+                        "prenom": "Antoine",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Guyot",
+                        "prenom": "Clara",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Langlois",
+                        "prenom": "Hugo",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Marchand",
+                        "prenom": "Léa",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Renard",
+                        "prenom": "Nathan",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Barbier",
+                        "prenom": "Chloé",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Perrot",
+                        "prenom": "Paul",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Chauvin",
+                        "prenom": "Alice",
+                        "classe": "B3 DEV"
+                    }
+                ]
             }
         ]
     },
@@ -189,8 +644,168 @@
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
                 "image1": "src/textures/A9-05.png",
-                "image2": "src/textures/A9-06.png",
-                "image3": "src/textures/A9-07.png"
+                "students": [
+        {
+            "nom": "Martin",
+            "prenom": "Emma",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Dubois",
+            "prenom": "Lucas",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Bernard",
+            "prenom": "Sophie",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Petit",
+            "prenom": "Thomas",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Robert",
+            "prenom": "Julie",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Richard",
+            "prenom": "Antoine",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Moreau",
+            "prenom": "Clara",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Simon",
+            "prenom": "Louis",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Laurent",
+            "prenom": "Marie",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Michel",
+            "prenom": "Paul",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Garcia",
+            "prenom": "Hugo",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "David",
+            "prenom": "Chloé",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Bertrand",
+            "prenom": "Nathan",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Roux",
+            "prenom": "Sarah",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Vincent",
+            "prenom": "Maxime",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Fournier",
+            "prenom": "Alice",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Morel",
+            "prenom": "Gabriel",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Girard",
+            "prenom": "Emma",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Blanc",
+            "prenom": "Louis",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Robin",
+            "prenom": "Julie",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Chevalier",
+            "prenom": "Antoine",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Guyot",
+            "prenom": "Clara",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Langlois",
+            "prenom": "Hugo",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Marchand",
+            "prenom": "Léa",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Renard",
+            "prenom": "Nathan",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Barbier",
+            "prenom": "Chloé",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Perrot",
+            "prenom": "Paul",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Chauvin",
+            "prenom": "Alice",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Dufour",
+            "prenom": "Emma",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Moulin",
+            "prenom": "Louis",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Noel",
+            "prenom": "Julie",
+            "classe": "B3 DEV"
+        },
+        {
+            "nom": "Paris",
+            "prenom": "Antoine",
+            "classe": "B3 DEV"
+        }
+    ]
             }
         ]
     },
@@ -228,8 +843,209 @@
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
                 "image1": "src/textures/A4-05.png",
-                "image2": "src/textures/A4-06.png",
-                "image3": "src/textures/A4-07.png"
+                "students": [
+                    {
+                        "nom": "Martin",
+                        "prenom": "Emma",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Dubois",
+                        "prenom": "Lucas",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Bernard",
+                        "prenom": "Sophie",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Petit",
+                        "prenom": "Thomas",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Robert",
+                        "prenom": "Julie",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Richard",
+                        "prenom": "Antoine",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Moreau",
+                        "prenom": "Clara",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Simon",
+                        "prenom": "Louis",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Laurent",
+                        "prenom": "Marie",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Michel",
+                        "prenom": "Paul",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Garcia",
+                        "prenom": "Hugo",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "David",
+                        "prenom": "Chloé",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Bertrand",
+                        "prenom": "Nathan",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Roux",
+                        "prenom": "Sarah",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Vincent",
+                        "prenom": "Maxime",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Fournier",
+                        "prenom": "Alice",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Morel",
+                        "prenom": "Gabriel",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Girard",
+                        "prenom": "Emma",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Blanc",
+                        "prenom": "Louis",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Robin",
+                        "prenom": "Julie",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Chevalier",
+                        "prenom": "Antoine",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Guyot",
+                        "prenom": "Clara",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Langlois",
+                        "prenom": "Hugo",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Marchand",
+                        "prenom": "Léa",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Renard",
+                        "prenom": "Nathan",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Barbier",
+                        "prenom": "Chloé",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Perrot",
+                        "prenom": "Paul",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Chauvin",
+                        "prenom": "Alice",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Dufour",
+                        "prenom": "Emma",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Moulin",
+                        "prenom": "Louis",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Noel",
+                        "prenom": "Julie",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Paris",
+                        "prenom": "Antoine",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Leroy",
+                        "prenom": "Camille",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Roche",
+                        "prenom": "Victor",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Dupont",
+                        "prenom": "Léonie",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Fontaine",
+                        "prenom": "Arthur",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Rousseau",
+                        "prenom": "Jade",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Lemaire",
+                        "prenom": "Raphaël",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Boyer",
+                        "prenom": "Inès",
+                        "classe": "B3 DEV"
+                    },
+                    {
+                        "nom": "Denis",
+                        "prenom": "Théo",
+                        "classe": "B3 DEV"
+                    }
+                ]
+
             }
         ]
     },
@@ -266,9 +1082,7 @@
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image1": "src/textures/A8-05.png",
-                "image2": "src/textures/A8-06.png",
-                "image3": "src/textures/A8-07.png"
+                "image1": "src/textures/A8-05.png"
             }
         ]
     },
@@ -305,9 +1119,7 @@
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image1": "src/textures/A7-05.png",
-                "image2": "src/textures/A7-06.png",
-                "image3": "src/textures/A7-07.png"
+                "image1": "src/textures/A7-05.png"
             }
         ]
     },
@@ -344,9 +1156,7 @@
             {
                 "title": "Convergence",
                 "subtitle": "Le point de rencontre des réalités",
-                "image1": "src/textures/A1-05.png",
-                "image2": "src/textures/A1-06.png",
-                "image3": "src/textures/A1-07.png"
+                "image1": "src/textures/A1-05.png"
             }
         ]
     },
@@ -383,9 +1193,7 @@
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image1": "src/textures/A5-05.png",
-                "image2": "src/textures/A5-06.png",
-                "image3": "src/textures/A5-07.png"
+                "image1": "src/textures/A5-05.png"
             }
         ]
     },
@@ -422,9 +1230,7 @@
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image1": "src/textures/A2-05.png",
-                "image2": "src/textures/A2-06.png",
-                "image3": "src/textures/A2-07.png"
+                "image1": "src/textures/A2-05.png"
             }
         ]
     }
