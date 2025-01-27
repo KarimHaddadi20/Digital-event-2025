@@ -42,6 +42,8 @@ class FragmentManager {
     ];
 
     this.autoSelectTimer = null;
+    this.isMobile = window.innerWidth <= 768;
+    this.footerElements = document.querySelectorAll('.footer-right p');
 
     this.setupUI();
     this.initRaycaster();
@@ -53,11 +55,11 @@ class FragmentManager {
     this.voyagerButton.textContent = "Voyager";
     this.voyagerButton.style.position = "fixed";
     this.voyagerButton.style.left = "50%";
-    this.voyagerButton.style.bottom = "4vh";
+    this.voyagerButton.style.bottom = "calc(4vh + min(4vh, 100px))"; // Responsive position higher up
     this.voyagerButton.style.transform = "translateX(-50%)";
     this.voyagerButton.style.display = "none";
     this.voyagerButton.style.opacity = "0";
-    this.voyagerButton.style.padding = "18px 52px";
+    this.voyagerButton.style.padding = "12px 24px"; // Reduced padding
     this.voyagerButton.style.justifyContent = "center";
     this.voyagerButton.style.alignItems = "center";
     this.voyagerButton.style.gap = "4px";
@@ -67,11 +69,14 @@ class FragmentManager {
       "linear-gradient(344deg, rgba(21, 21, 27, 0.20) -1.4%, rgba(79, 79, 86, 0.20) 104.72%)";
     this.voyagerButton.style.backdropFilter = "blur(2px)";
     this.voyagerButton.style.color = "white";
-    this.voyagerButton.style.fontSize = "20px";
+    this.voyagerButton.style.fontSize = "16px"; // Smaller font size
     this.voyagerButton.style.fontFamily = "Arial, sans-serif";
     this.voyagerButton.style.cursor = "pointer";
     this.voyagerButton.style.transition = "all 0.3s ease";
     this.voyagerButton.style.zIndex = "1000";
+    this.voyagerButton.style.width = "auto"; // Let width adjust to content
+    this.voyagerButton.style.maxWidth = "200px"; // Prevent too wide buttons
+    this.voyagerButton.style.margin = "0 auto"; // Center horizontally
 
     // Effets de hover
     this.voyagerButton.addEventListener("mouseenter", () => {
@@ -95,6 +100,51 @@ class FragmentManager {
     });
 
     document.body.appendChild(this.voyagerButton);
+
+    // Ajout de la gestion responsive
+    const handleResponsive = () => {
+        const isMobile = window.innerWidth <= 768;
+        
+        if (isMobile) {
+            // Cacher les mentions de confidentialité
+            const privacyElements = document.querySelectorAll('.privacy-mention');
+            privacyElements.forEach(el => el.style.display = 'none');
+            
+            // Ajuster le style du bouton pour mobile
+            this.voyagerButton.style.cssText = `
+              position: fixed;
+              left: 50%;
+              bottom: 8vh; 
+              transform: translateX(-50%);
+              display: none;
+              padding: 8px 16px;
+              font-size: 12px;
+              width: auto;
+              min-width: 80px;
+              max-width: 120px;
+              border: 1px solid #FFF;
+              background: linear-gradient(344deg, rgba(21, 21, 27, 0.20) -1.4%, rgba(79, 79, 86, 0.20) 104.72%);
+              color: white;
+              border-radius: 4px;
+              z-index: 1000;
+              cursor: pointer;
+            `;
+        } else {
+            // Réafficher les mentions pour desktop
+            const privacyElements = document.querySelectorAll('.privacy-mention');
+            privacyElements.forEach(el => el.style.display = 'block');
+        }
+    };
+
+    // Appliquer initialement et sur redimensionnement
+    handleResponsive();
+    window.addEventListener('resize', handleResponsive);
+    window.addEventListener('resize', () => {
+      this.isMobile = window.innerWidth <= 768;
+      if (this.selectedFragment) {
+        this.hideLegalNotices();
+      }
+    });
   }
 
   initRaycaster() {
@@ -793,6 +843,7 @@ class FragmentManager {
             `;
           }
         }
+        this.hideLegalNotices();
       }
     }
   }
@@ -879,6 +930,20 @@ class FragmentManager {
       }, 10000);
     }
   }
+
+  hideLegalNotices() {
+    if (this.isMobile) {
+      this.footerElements.forEach(element => {
+        element.style.transition = 'opacity 0.3s ease';
+        element.style.opacity = '0';
+        setTimeout(() => {
+          element.style.display = 'none';
+        }, 300);
+      });
+    }
+  }
 }
 
 export { FragmentManager };
+
+

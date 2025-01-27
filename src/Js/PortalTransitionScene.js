@@ -231,37 +231,27 @@ export class PortalTransitionScene extends SceneSetup {
     // Nouvelle méthode pour obtenir les positions responsives
     getResponsivePositions() {
         const width = window.innerWidth;
-        if (width <= 768) { // Mobile
+        if (width <= 768) { // Mobile only
             return {
-                xOffset: 1.5, // Réduit l'espacement horizontal
-                yOffset: -2, // Déplace les fragments vers le bas
-                zSpacing: 8, // Réduit l'espacement en profondeur
-                scale: 0.8, // Ajuste la taille des fragments
-                verticalLayout: true, // Nouveau paramètre pour la disposition verticale
-                detailsScale: 0.5, // Échelle pour les fragments de détail
-                mainFragmentY: 0.7 // Position Y du fragment principal
-            };
-        } else if (width <= 1024) { // Tablet
-            return {
-                xOffset: 3,
-                yOffset: 0.8,
-                zSpacing: 17,
-                scale: 0.85,
-                verticalLayout: false,
-                detailsScale: 0.6,
-                mainFragmentY: 0
-            };
-        } else { // Desktop
-            return {
-                xOffset: 4,
+                xOffset: -5, // Fragment principal à gauche
                 yOffset: 0,
-                zSpacing: 20,
-                scale: 1,
-                verticalLayout: false,
-                detailsScale: 0.6,
-                mainFragmentY: 0
+                zSpacing: 8,
+                scale: 0.8,
+                verticalLayout: true,
+                detailsScale: 0.5,
+                mainFragmentY: 0,
+                vanishingPoint: {x: 0, y: 0, z: -30} // Point de fuite central
             };
         }
+        return {
+            xOffset: 4,
+            yOffset: 0,
+            zSpacing: 20,
+            scale: 1,
+            verticalLayout: false,
+            detailsScale: 0.6,
+            mainFragmentY: 0
+        };
     }
 
     async setupFragments() {
@@ -386,6 +376,20 @@ export class PortalTransitionScene extends SceneSetup {
                 detail1.rotation.z = responsive.verticalLayout ? 0.1 : (data.exitDirection === 'left' ? 0.2 : -0.2);
                 detail2.rotation.z = responsive.verticalLayout ? -0.1 : (data.exitDirection === 'left' ? -0.3 : 0.3);
 
+                // Position mobile
+                if (responsive.verticalLayout) {
+                    // Fragment principal à gauche
+                    imageMesh.position.set(-3, responsive.mainFragmentY, data.position.z);
+                    
+                    // Fragments de détail en bas
+                    detail1.position.set(2, -3, 0);
+                    detail2.position.set(-2, -3, 0);
+                    
+                    // Rotation vers le point de fuite
+                    detail1.lookAt(0, 0, responsive.vanishingPoint.z);
+                    detail2.lookAt(0, 0, responsive.vanishingPoint.z);
+                }
+
                 imageMesh.add(detail1);
                 imageMesh.add(detail2);
                 
@@ -416,8 +420,43 @@ export class PortalTransitionScene extends SceneSetup {
                 textContainer.appendChild(title);
                 textContainer.appendChild(subtitle);
                 
+                // Style pour le conteneur de texte
+                textContainer.style.cssText = `
+                    position: absolute;
+                    width: 200px;
+                    text-align: center;
+                    pointer-events: none;
+                    user-select: none;
+                    z-index: 1000;
+                `;
+
+                // Ajuster la taille du texte en responsive
+                title.style.cssText = `
+                    font-family: 'Fraunces', serif;
+                    font-size: ${window.innerWidth <= 768 ? '1em' : '1.2em'};
+                    color: white;
+                    margin: 0 0 0.5em 0;
+                    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+                `;
+
+                subtitle.style.cssText = `
+                    font-family: 'Aktiv Grotesk', sans-serif;
+                    font-size: ${window.innerWidth <= 768 ? '0.8em' : '0.9em'};
+                    color: rgba(255, 255, 255, 0.8);
+                    margin: 0;
+                    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+                `;
+
+                // Ajuster la position du label en responsive
                 const label = new CSS2DObject(textContainer);
-                label.position.set(0, -3.5, 0);
+                if (window.innerWidth <= 768) {
+                    label.position.set(0, -2.5, 0); // Position plus haute en mobile
+                } else {
+                    label.position.set(0, -3.5, 0);
+                }
+                
+                // S'assurer que le label est visible
+                label.layers.set(0);
                 imageMesh.add(label);
                 
                 this.fragments.push({
