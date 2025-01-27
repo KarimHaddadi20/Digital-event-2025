@@ -44,6 +44,7 @@ class FragmentManager {
     this.autoSelectTimer = null;
     this.isMobile = window.innerWidth <= 768;
     this.footerElements = document.querySelectorAll('.footer-right p');
+    this.soundIcon = document.querySelector('.footer-left');
 
     this.setupUI();
     this.initRaycaster();
@@ -844,6 +845,7 @@ class FragmentManager {
           }
         }
         this.hideLegalNotices();
+        this.centerSoundIcon();
       }
     }
   }
@@ -940,6 +942,16 @@ class FragmentManager {
           element.style.display = 'none';
         }, 300);
       });
+    }
+  }
+
+  centerSoundIcon() {
+    if (window.innerWidth <= 768) {
+      this.soundIcon.style.position = 'fixed';
+      this.soundIcon.style.left = '50%';
+      this.soundIcon.style.bottom = '10px';
+      this.soundIcon.style.transform = 'translateX(-50%)';
+      this.soundIcon.style.transition = 'all 0.3s ease';
     }
   }
 }

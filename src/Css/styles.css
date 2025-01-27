@@ -773,4 +773,20 @@ body {
     mask-composite: exclude;
     pointer-events: none;
   }
+
+}
+
+
+.footer-left {
+  transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+  .footer-left.centered {
+    position: fixed;
+    left: 50%;
+    bottom: 25px;
+    transform: translateX(-50%);
+    z-index: 1000;
+  }
 }
