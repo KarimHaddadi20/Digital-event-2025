@@ -13,20 +13,42 @@ class FragmentManager {
     this.fragmentInstructions = document.querySelector(
       ".fragment-instructions"
     );
-    this.initialEnvironment = null;
-    this.activeEnvironment = null;
+    
+    // Charger la texture initiale
+    const textureLoader = new THREE.TextureLoader();
+    textureLoader.load("src/textures/homepage.webp", (texture) => {
+        texture.colorSpace = THREE.SRGBColorSpace;
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        
+        // Créer la sphère d'environnement
+        const geometry = new THREE.SphereGeometry(500, 60, 40);
+        const material = new THREE.MeshBasicMaterial({
+            map: texture,
+            side: THREE.BackSide
+        });
+        
+        this.envMesh = new THREE.Mesh(geometry, material);
+        this.envMesh.rotation.y = Math.PI / 2;
+        this.app.scene.add(this.envMesh);
+        
+        // Configurer l'environnement pour les réflexions
+        this.app.scene.environment = texture;
+        this.initialEnvironment = texture;
+        this.activeEnvironment = texture;
+    });
+
     this.environmentTextures = {
-      "Site web": "src/textures/site_web.jpg",
-      "Video Mapping": "src/textures/video_mapping.jpg",
-      "Creative Coding": "src/textures/creative_coding.jpg",
-      "Gaming & Pop-corn": "src/textures/gaming_popcorn.png",
-      "Video": "src/textures/video_studio.jpg",
-      "Escape game": "src/textures/escape.png",
-      "Podcast": "src/textures/podcast.jpg",
-      "Photo reportage": "src/textures/photo_reportage.jpg",
-      "AI Driven visual stories": "src/textures/ai_driven_visual_stories.jpg",
-      "Game design": "src/textures/game_design.jpg",
-      "Organisation": "src/textures/parcours_organisation.jpg"
+      "Site web": "src/textures/site.web.webp",
+      "Video Mapping": "src/textures/video.mapping.webp",
+      "Creative Coding": "src/textures/creative.coding.webp",
+      "Gaming & Pop-corn": "src/textures/gaming.popcorn.webp",
+      "Video": "src/textures/video.studio.webp",
+      "Escape game": "src/textures/espace.game.webp",
+      "Podcast": "src/textures/podcast.webp",
+      "Photo reportage": "src/textures/photo.reportage.webp",
+      "AI Driven visual stories": "src/textures/ai.driven.visual.stories.webp",
+      "Game design": "src/textures/game.design.webp",
+      "Organisation": "src/textures/organisation.webp"
     };
     this.atelierNames = [
       "Site web",

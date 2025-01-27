@@ -101,36 +101,36 @@ class SceneSetup {
   //   });
   // }
 
-  // setupBackground() {
-  //   const textureLoader = new THREE.TextureLoader();
-  //   console.log("Loading initial background texture");
-  //   textureLoader.load(
-  //     "src/textures/escape.png",
-  //     (texture) => {
-  //       console.log("Initial background texture loaded");
-  //       const aspectRatio = texture.image.width / texture.image.height;
+  setupBackground() {
+    const textureLoader = new THREE.TextureLoader();
+    console.log("Loading initial background texture");
+    textureLoader.load(
+      "src/textures/escape.png",
+      (texture) => {
+        console.log("Initial background texture loaded");
+        const aspectRatio = texture.image.width / texture.image.height;
 
-  //       const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
-  //       const bgMaterial = new THREE.MeshBasicMaterial({
-  //         map: texture,
-  //         side: THREE.FrontSide,
-  //         transparent: true,
-  //       });
+        const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
+        const bgMaterial = new THREE.MeshBasicMaterial({
+          map: texture,
+          side: THREE.FrontSide,
+          transparent: true,
+        });
 
-  //       const background = new THREE.Mesh(bgGeometry, bgMaterial);
-  //       background.position.z = -300;
-  //       background.position.y = 0;
-  //       texture.encoding = THREE.sRGBEncoding;
+        const background = new THREE.Mesh(bgGeometry, bgMaterial);
+        background.position.z = -300;
+        background.position.y = 0;
+        texture.encoding = THREE.sRGBEncoding;
 
-  //       this.scene.add(background);
-  //       this.scene.background = new THREE.Color(0x000000);
-  //     },
-  //     undefined,
-  //     (error) => {
-  //       console.error("Error loading initial background:", error);
-  //     }
-  //   );
-  // }
+        this.scene.add(background);
+        this.scene.background = new THREE.Color(0x000000);
+      },
+      undefined,
+      (error) => {
+        console.error("Error loading initial background:", error);
+      }
+    );
+  }
 
   // setupEnvironment() {
   //   // Clear any existing environment

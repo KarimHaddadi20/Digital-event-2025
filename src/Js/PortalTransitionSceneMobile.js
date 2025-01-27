@@ -29,12 +29,12 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
                 title: set.title,
                 subtitle: set.subtitle,
                 position: { 
-                    x: 0,               // Centré horizontalement
-                    y: -4,               // Position Y fixe
-                    z: -5 - (index * 15) // Espacement en Z
+                    x: 0,                    // Centré horizontalement
+                    y: 4,                    // Position Y fixe
+                    z: -20 - (index * 25)    // Position Z initiale plus éloignée et espacement plus grand
                 },
                 scale: 0.8,
-                exitDirection: 'left'  // Direction de sortie au centre
+                exitDirection: 'left'
             }));
 
             // Créer les fragments
@@ -62,12 +62,16 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
             // Fragment principal
             const mainFragment = this.createMainFragment(data, texture1);
             
-            // Fragments détaillés
+            // Fragments détaillés avec une taille plus grande
             const [detail1, detail2] = this.createDetailFragments(data, texture2, texture3);
             
+            // Augmenter la taille des fragments détaillés (par exemple 1.5 fois plus grand)
+            detail1.scale.set(2, 2, 1);
+            detail2.scale.set(2, 2, 1);
+            
             // Position des fragments détaillés
-            detail1.position.set(-2, 4, -3);
-            detail2.position.set(2, 4, -5);
+            detail1.position.set(2, -6, -3); // Ajusté la position X pour compenser la nouvelle taille
+            detail2.position.set(-2, -6, -5);  // Ajusté la position X pour compenser la nouvelle taille
             
             // Rotation des fragments détaillés
             detail1.rotation.z = 0.1;
@@ -144,29 +148,38 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
             // Effet de vague
             this.updateWaveEffect(mesh);
 
-            // Opacité du fragment principal - transition plus rapide
+            // Opacité du fragment principal - transition douce
             let mainOpacity = 0.5;
-            if (Math.abs(distance) < 5) { // Réduit de 15 à 5
-                mainOpacity = 1; // Passage direct à 1 au lieu d'une transition progressive
+            const transitionDistance = 20;
+            
+            if (Math.abs(distance) < transitionDistance) {
+                const progress = 1 - (Math.abs(distance) / transitionDistance);
+                mainOpacity = 0.66 + (0.5 * progress);
             } else if (distance <= -30 || distance >= 30) {
                 mainOpacity = 0;
             }
             mesh.material.opacity = THREE.MathUtils.clamp(mainOpacity, 0, 1);
 
-            // Position X : maintenir au centre
-            mesh.position.x = 0;
+            // Calcul de la progression pour le mouvement latéral
+            const moveProgress = Math.max(0, 1 - (Math.abs(distance) / 30));
+            
+            // Fragment principal : déplacement vers la droite
+            mesh.position.x = moveProgress * 8; // Déplacement vers la droite
 
             // Scale progressif
-            const baseScale = 0.8;
+            const baseScale = 1.2;
             const maxScale = 1.5;
             const scaleProgress = Math.max(0, 1 - (Math.abs(distance) / 30));
             const newScale = baseScale + (maxScale - baseScale) * scaleProgress;
             mesh.scale.set(newScale, newScale, 1);
 
-            // Fragments détaillés
+            // Fragments détaillés : déplacement vers la gauche
             mesh.children.forEach(child => {
                 if (child instanceof THREE.Mesh) {
                     child.material.opacity = 0.9;
+                    // Position de base + déplacement vers la gauche
+                    const baseX = child.position.x < 0 ? -2 : 2; // Conserve la position de base
+                    child.position.x = baseX - (moveProgress * 6); // Déplacement vers la gauche
                 }
             });
 
