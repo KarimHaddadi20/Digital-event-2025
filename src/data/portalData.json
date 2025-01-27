@@ -5,124 +5,137 @@
             {
                 "title": "Site web",
                 "subtitle": "Une œuvre abstraite évoquant les limites entre ciel et terre",
-                "image1": "src/textures/Atelier11.png",
-                "image2": "src/textures/A1-01.png",
-                "image3": "src/textures/A1-02.png"
+                "image1": "src/photo/A/A1-01.jpg",
+                "image2": "src/photo/A/A1-02.jpg",
+                "image3": "src/photo/A/A1-03.jpg"
             },
             {
                 "title": "Frontières Invisibles",
                 "subtitle": "Exploration des limites de la perception",
-                "image1": "src/textures/Atelier1.png",
-                "image2": "src/textures/A1-01.png",
-                "image3": "src/textures/A1-02.png"
+                "image1": "src/photo/A/A2-01.jpg",
+                "image2": "src/photo/A/A2-02.jpg",
+                "image3": "src/photo/A/A2-03.jpg"
             },
             {
                 "title": "Passage Éthéré",
                 "subtitle": "La transition entre deux mondes",
-                "image1": "src/textures/A1-01.png",
-                "image2": "src/textures/A1-01.png",
-                "image3": "src/textures/A1-01.png"
+                "image1": "src/photo/A/A3-01.jpg",
+                "image2": "src/photo/A/A3-02.jpg",
+                "image3": "src/photo/A/A3-03.jpg"
             },
             {
                 "title": "Résonance Spatiale",
                 "subtitle": "L'écho des dimensions parallèles",
-                "image1": "src/textures/A1-01.png",
+                "image1": "src/photo/A/A4-01.jpg",
                 "quote1": "L'écho des dimensions parallèles"
+            },
+            {
+                "image1": "src/photo/A/A4-02.jpg",
+                "quote2": "L'écho des dimensions parallèles"
+            },
+            {
+                "image3": "src/photo/A/A4-03.jpg",
+                "quote3": "L'écho des dimensions parallèles"
             },
             {
                 "title": "Convergence",
                 "subtitle": "Le point de rencontre des réalités",
-                "image1": "src/textures/A1-01.png",
+                "image1": "src/photo/A/A4-01.jpg",
                 "students": [
                     {
-                        "nom": "Martin",
-                        "prenom": "Emma",
+                        "nom": "Bona",
+                        "prenom": "Hugo",
+                        "classe": "src/tag/M1UXUI.svg"
+                    },
+                    {
+                        "nom": "Gautier",
+                        "prenom": "Antonin",
                         "classe": "src/tag/B3DEV.svg"
                     },
                     {
-                        "nom": "Dubois",
-                        "prenom": "Lucas",
-                        "classe": "B3 DEV"
+                        "nom": "Rion",
+                        "prenom": "Julien",
+                        "classe": "src/tag/M1UXUI.svg"
                     },
                     {
-                        "nom": "Bernard",
-                        "prenom": "Sophie",
-                        "classe": "B3 DEV"
+                        "nom": "Palomba",
+                        "prenom": "Ornella",
+                        "classe": "src/tag/B3CI.svg"
                     },
                     {
-                        "nom": "Petit",
-                        "prenom": "Thomas",
-                        "classe": "B3 DEV"
+                        "nom": "Folgalvez",
+                        "prenom": "Quentin",
+                        "classe": "src/tag/B2DEV.svg"
                     },
                     {
-                        "nom": "Robert",
-                        "prenom": "Julie",
-                        "classe": "B3 DEV"
+                        "nom": "Chambon",
+                        "prenom": "Jérémy",
+                        "classe": "src/tag/B2DEV.svg"
                     },
                     {
-                        "nom": "Richard",
-                        "prenom": "Antoine",
-                        "classe": "B3 DEV"
+                        "nom": "Saidi",
+                        "prenom": "Ranim",
+                        "classe": "src/tag/B3DEV.svg"
                     },
                     {
-                        "nom": "Moreau",
-                        "prenom": "Clara",
-                        "classe": "B3 DEV"
+                        "nom": "Alhiane",
+                        "prenom": "Kawthar",
+                        "classe": "src/tag/B3CI.svg"
                     },
                     {
-                        "nom": "Simon",
-                        "prenom": "Louis",
-                        "classe": "B3 DEV"
+                        "nom": "Del Rosario",
+                        "prenom": "Rochelle",
+                        "classe": "src/tag/B3CI.svg"
                     },
                     {
-                        "nom": "Laurent",
-                        "prenom": "Marie",
-                        "classe": "B3 DEV"
+                        "nom": "Burner",
+                        "prenom": "Matthieu",
+                        "classe": "src/tag/M1UXUI.svg"
                     },
                     {
-                        "nom": "Michel",
-                        "prenom": "Paul",
-                        "classe": "B3 DEV"
+                        "nom": "Guillemot",
+                        "prenom": "Luca",
+                        "classe": "src/tag/B3DEV.svg"
                     },
                     {
-                        "nom": "Lefebvre",
-                        "prenom": "Léa",
-                        "classe": "B3 DEV"
+                        "nom": "Marbaud",
+                        "prenom": "Adrien",
+                        "classe": "src/tag/M1UXUI.svg"
                     },
                     {
-                        "nom": "Garcia",
-                        "prenom": "Hugo",
-                        "classe": "B3 DEV"
+                        "nom": "Diallo",
+                        "prenom": "Abdoulaye",
+                        "classe": "src/tag/M1UXUI.svg"
                     },
                     {
-                        "nom": "David",
-                        "prenom": "Chloé",
-                        "classe": "B3 DEV"
+                        "nom": "Haddadi",
+                        "prenom": "Karim",
+                        "classe": "src/tag/B3DEV.svg"
                     },
                     {
-                        "nom": "Bertrand",
-                        "prenom": "Nathan",
-                        "classe": "B3 DEV"
+                        "nom": "Nohur",
+                        "prenom": "Yaasmine",
+                        "classe": "src/tag/B3CI.svg"
                     },
                     {
-                        "nom": "Roux",
-                        "prenom": "Sarah",
-                        "classe": "B3 DEV"
+                        "nom": "Huynh",
+                        "prenom": "Nhi",
+                        "classe": "src/tag/M1UXUI.svg"
                     },
                     {
-                        "nom": "Vincent",
-                        "prenom": "Maxime",
-                        "classe": "B3 DEV"
+                        "nom": "Bournonville",
+                        "prenom": "Jean-Charles",
+                        "classe": "src/tag/M1UXUI.svg"
                     },
                     {
-                        "nom": "Fournier",
-                        "prenom": "Alice",
-                        "classe": "B3 DEV"
+                        "nom": "Ucla",
+                        "prenom": "Alexis",
+                        "classe": "src/tag/M1UXUI.svg"
                     },
                     {
-                        "nom": "Morel",
-                        "prenom": "Gabriel",
-                        "classe": "B3 DEV"
+                        "nom": "Dacquet",
+                        "prenom": "J-B",
+                        "classe": "src/tag/Referent.svg"
                     }
                 ]
             }
@@ -134,176 +147,189 @@
             {
                 "title": "Video Mapping",
                 "subtitle": "Une œuvre abstraite évoquant les limites entre ciel et terre",
-                "image1": "src/textures/Atelier10.png",
-                "image2": "src/textures/A10-02.png",
-                "image3": "src/textures/A10-03.png"
+                "image1": "src/photo/B/B1-01.jpg",
+                "image2": "src/photo/B/B1-02.jpg",
+                "image3": "src/photo/B/B1-03.jpg"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image1": "src/textures/A10-02.png",
-                "image2": "src/textures/A10-03.png",
-                "image3": "src/textures/A10-04.png"
+                "image1": "src/photo/B/B2-01.jpg",
+                "image2": "src/photo/B/B2-02.jpg",
+                "image3": "src/photo/B/B2-03.jpg"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image1": "src/textures/A10-03.png",
-                "image2": "src/textures/A10-04.png",
-                "image3": "src/textures/A10-05.png"
+                "image1": "src/photo/B/B3-01.jpg",
+                "image2": "src/photo/B/B3-02.jpg",
+                "image3": "src/photo/B/B3-03.jpg"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image1": "src/textures/A10-04.png",
-                "quote1": "Visualisation du son dans l'espace"
+                "image1": "src/photo/B/B4-01.jpg",
+                "quote1": "Visualisation du son dans l'espace",
+                "image2": "src/photo/B/B4-02.jpg",
+                "quote2": "Visualisation du son dans l'espace",
+                "image3": "src/photo/B/B4-03.jpg",
+                "quote3": "Visualisation du son dans l'espace"  
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image1": "src/textures/A10-05.png",
-                 "students": [
-                        {
-                            "nom": "Martin",
-                            "prenom": "Emma",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Dubois",
-                            "prenom": "Lucas",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Bernard",
-                            "prenom": "Sophie",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Petit",
-                            "prenom": "Thomas",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Robert",
-                            "prenom": "Julie",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Richard",
-                            "prenom": "Antoine",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Moreau",
-                            "prenom": "Clara",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Simon",
-                            "prenom": "Louis",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Laurent",
-                            "prenom": "Marie",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Michel",
-                            "prenom": "Paul",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Lefebvre",
-                            "prenom": "Léa",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Garcia",
-                            "prenom": "Hugo",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "David",
-                            "prenom": "Chloé",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Bertrand",
-                            "prenom": "Nathan",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Roux",
-                            "prenom": "Sarah",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Vincent",
-                            "prenom": "Maxime",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Fournier",
-                            "prenom": "Alice",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Morel",
-                            "prenom": "Gabriel",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Giraud",
-                            "prenom": "Emma",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Blanc",
-                            "prenom": "Louis",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Robin",
-                            "prenom": "Julie",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Chevalier",
-                            "prenom": "Antoine",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Guyot",
-                            "prenom": "Clara",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Langlois",
-                            "prenom": "Hugo",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Marchand",
-                            "prenom": "Léa",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Renard",
-                            "prenom": "Nathan",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Barbier",
-                            "prenom": "Chloé",
-                            "classe": "B3 DEV"
-                        },
-                        {
-                            "nom": "Perrot",
-                            "prenom": "Paul",
-                            "classe": "B3 DEV"
-                        }
-                    ]
+                "students": [
+                    {
+                        "nom": "Courjean",
+                        "prenom": "Nicolas",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "De rogez",
+                        "prenom": "Travis",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Kashouh",
+                        "prenom": "Christa",
+                        "classe": "src/tag/M1DESIGN.svg"
+                    },
+                    {
+                        "nom": "Lascar",
+                        "prenom": "Enzo",
+                        "classe": "src/tag/M1DESIGN.svg"
+                    },
+                    {
+                        "nom": "Makaya",
+                        "prenom": "Gabrielle",
+                        "classe": "src/tag/M1DESIGN.svg"
+                    },
+                    {
+                        "nom": "Zoghbi",
+                        "prenom": "Aya",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Lajeunie",
+                        "prenom": "Alexie",
+                        "classe": "src/tag/B3DESIGN.svg"
+                    },
+                    {
+                        "nom": "Courtas",
+                        "prenom": "Romane",
+                        "classe": "src/tag/B3DESIGN.svg"
+                    },
+                    {
+                        "nom": "François",
+                        "prenom": "Thomas",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Révérand",
+                        "prenom": "Césaire",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Stoehr",
+                        "prenom": "Mathéo",
+                        "classe": "src/tag/M1DESIGN.svg"
+                    },
+                    {
+                        "nom": "Ijjou",
+                        "prenom": "Emmanuel",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Gilbert-Desvallons",
+                        "prenom": "Leon",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Villalon",
+                        "prenom": "Jade",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Sibien",
+                        "prenom": "Arthur",
+                        "classe": "src/tag/B3DESIGN.svg"
+                    },
+                    {
+                        "nom": "Nastorg",
+                        "prenom": "Audrey",
+                        "classe": "src/tag/M1DESIGN.svg"
+                    },
+                    {
+                        "nom": "Ait Dadda",
+                        "prenom": "Kawtar",
+                        "classe": "src/tag/M1DESIGN.svg"
+                    },
+                    {
+                        "nom": "Tormos Posada",
+                        "prenom": "Jean-pierre",
+                        "classe": "src/tag/B3DESIGN.svg"
+                    },
+                    {
+                        "nom": "Saim",
+                        "prenom": "Mael",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Xu",
+                        "prenom": "Nathalie",
+                        "classe": "src/tag/M1UXUI.svg"
+                    },
+                    {
+                        "nom": "Alomatsi Akou",
+                        "prenom": "Blandine",
+                        "classe": "src/tag/M1UXUI.svg"
+                    },
+                    {
+                        "nom": "Aboa",
+                        "prenom": "Neil",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Ajlil",
+                        "prenom": "Narjisse",
+                        "classe": "src/tag/B3DEV.svg"
+                    },
+                    {
+                        "nom": "Perennes",
+                        "prenom": "Milo",
+                        "classe": "src/tag/M1DESIGN.svg"
+                    },
+                    {
+                        "nom": "Moirignot",
+                        "prenom": "Lea",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Liu",
+                        "prenom": "Emma",
+                        "classe": "src/tag/M1UXUI.svg"
+                    },
+                    {
+                        "nom": "Deluze",
+                        "prenom": "Armand",
+                        "classe": "src/tag/M2UXUI.svg"
+                    },
+                    {
+                        "nom": "Shan",
+                        "prenom": "Christophe",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Starzinskas",
+                        "prenom": "Fabrice",
+                        "classe": "src/tag/Referent.svg"
+                    },
+                    {
+                        "nom": "Mercier",
+                        "prenom": "Sébastien",
+                        "classe": "src/tag/Referent.svg"
+                    }
+                ]
                 }
         ]
     },
@@ -313,121 +339,129 @@
             {
                 "title": "Creative Coding",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image1": "src/textures/Atelier3.png",
-                "image2": "src/textures/A3-02.png",
-                "image3": "src/textures/A3-03.png"
+                "image1": "src/photo/C/C1-01.jpg",
+                "image2": "src/photo/C/C1-02.jpg",
+                "image3": "src/photo/C/C1-03.jpg"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image1": "src/textures/A3-02.png",
-                "image2": "src/textures/A3-03.png",
-                "image3": "src/textures/A3-04.png"
+                "image1": "src/photo/C/C2-01.jpg",
+                "image2": "src/photo/C/C2-02.jpg",
+                "image3": "src/photo/C/C2-03.jpg"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image1": "src/textures/A3-03.png",
-                "image2": "src/textures/A3-04.png",
-                "image3": "src/textures/A3-05.png"
+                "image1": "src/photo/C/C3-01.jpg",
+                "image2": "src/photo/C/C3-02.jpg",
+                "image3": "src/photo/C/C3-03.jpg"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image1": "src/textures/A3-04.png",
-                "quote1": "Visualisation du son dans l'espace"
+                "image1": "src/photo/C/C4-01.jpg",
+                "quote1": "Visualisation du son dans l'espace",
+                "image2": "src/photo/C/C4-02.jpg",
+                "quote2": "Visualisation du son dans l'espace",
+                "image3": "src/photo/C/C4-03.jpg",
+                "quote3": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image1": "src/textures/A3-05.png",
                 "students": [
-        {
-            "nom": "Martin",
-            "prenom": "Emma",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Dubois",
-            "prenom": "Lucas",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Bernard",
-            "prenom": "Sophie",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Petit",
-            "prenom": "Thomas",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Robert",
-            "prenom": "Julie",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Richard",
-            "prenom": "Antoine",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Moreau",
-            "prenom": "Clara",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Simon",
-            "prenom": "Louis",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Laurent",
-            "prenom": "Marie",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Michel",
-            "prenom": "Paul",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Garcia",
-            "prenom": "Hugo",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "David",
-            "prenom": "Chloé",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Bertrand",
-            "prenom": "Nathan",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Roux",
-            "prenom": "Sarah",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Vincent",
-            "prenom": "Maxime",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Fournier",
-            "prenom": "Alice",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Morel",
-            "prenom": "Gabriel",
-            "classe": "B3 DEV"
-        }
-    ]
+                    {
+                        "nom": "Gaborit",
+                        "prenom": "Corentin",
+                        "classe": "src/tag/M1DESIGN.svg"
+                    },
+                    {
+                        "nom": "Leal",
+                        "prenom": "Blandine",
+                        "classe": "src/tag/M1DESIGN.svg"
+                    },
+                    {
+                        "nom": "Nou",
+                        "prenom": "Alexandre",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Le",
+                        "prenom": "Dat",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Nahmani",
+                        "prenom": "Sacha",
+                        "classe": "src/tag/B3DEV.svg"
+                    },
+                    {
+                        "nom": "Buoy",
+                        "prenom": "Mayline",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Kanzaki",
+                        "prenom": "Toko",
+                        "classe": "src/tag/M2UXUI.svg"
+                    },
+                    {
+                        "nom": "Khounsombath",
+                        "prenom": "Camille",
+                        "classe": "src/tag/M2UXUI.svg"
+                    },
+                    {
+                        "nom": "Rayan",
+                        "prenom": "Ettis",
+                        "classe": "src/tag/B3DEV.svg"
+                    },
+                    {
+                        "nom": "Pichereau",
+                        "prenom": "Valentine",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Belhous",
+                        "prenom": "Mehdi",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Gao",
+                        "prenom": "Sylvie",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Le Saux",
+                        "prenom": "Victor",
+                        "classe": "src/tag/M1DESIGN.svg"
+                    },
+                    {
+                        "nom": "Gateau",
+                        "prenom": "Killian",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Tran Que Chi",
+                        "prenom": "Jennifer",
+                        "classe": "src/tag/M1DESIGN.svg"
+                    },
+                    {
+                        "nom": "Mendy",
+                        "prenom": "Kylian",
+                        "classe": "src/tag/M2UXUI.svg"
+                    },
+                    {
+                        "nom": "Morio De L'isle",
+                        "prenom": "Sixte",
+                        "classe": "src/tag/B3DEV.svg"
+                    },
+                    {
+                        "nom": "Struthers-Jobin",
+                        "prenom": "Eliza",
+                        "classe": "src/tag/Referent.svg"
+                    }
+                ]
             }
         ]
     },
@@ -437,176 +471,209 @@
             {
                 "title": "Gaming & Pop-corn",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image1": "src/textures/Atelier6.png",
-                "image2": "src/textures/A6-02.png",
-                "image3": "src/textures/A6-03.png"
+                "image1": "src/photo/D/D1-01.jpg",
+                "image2": "src/photo/D/D1-02.jpg",
+                "image3": "src/photo/D/D1-03.jpg"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image1": "src/textures/A6-02.png",
-                "image2": "src/textures/A6-03.png",
-                "image3": "src/textures/A6-04.png"
+                "image1": "src/photo/D/D2-01.jpg",
+                "image2": "src/photo/D/D2-02.jpg",
+                "image3": "src/photo/D/D2-03.jpg"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image1": "src/textures/A6-03.png",
-                "image2": "src/textures/A6-04.png",
-                "image3": "src/textures/A6-05.png"
+                "image1": "src/photo/D/D3-01.jpg",
+                "image2": "src/photo/D/D3-02.jpg",
+                "image3": "src/photo/D/D3-03.jpg"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image1": "src/textures/A6-04.png",
-                "quote1": "Visualisation du son dans l'espace"
+                "image1": "src/photo/D/D4-01.jpg",
+                "quote1": "Visualisation du son dans l'espace",
+                "image2": "src/photo/D/D4-02.jpg",
+                "quote2": "Visualisation du son dans l'espace",
+                "image3": "src/photo/D/D4-03.jpg",
+                "quote3": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image1": "src/textures/A6-05.png",
-                "students": [
-                    {
-                        "nom": "Martin",
-                        "prenom": "Emma",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Dubois",
+                    "students": [
+                        {
+                        "nom": "Mougenot",
                         "prenom": "Lucas",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Bernard",
-                        "prenom": "Sophie",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Petit",
-                        "prenom": "Thomas",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Robert",
-                        "prenom": "Julie",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Richard",
-                        "prenom": "Antoine",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Moreau",
-                        "prenom": "Clara",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Simon",
-                        "prenom": "Louis",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Laurent",
-                        "prenom": "Marie",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Michel",
-                        "prenom": "Paul",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Garcia",
-                        "prenom": "Hugo",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "David",
-                        "prenom": "Chloé",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Bertrand",
-                        "prenom": "Nathan",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Roux",
+                        "classe": "src/tag/M2DESIGN.svg"
+                        },
+                        {
+                        "nom": "Haddad",
+                        "prenom": "Raphaël",
+                        "classe": "src/tag/M2DESIGN.svg"
+                        },
+                        {
+                        "nom": "Legrand",
+                        "prenom": "Thibault",
+                        "classe": "src/tag/M2DESIGN.svg"
+                        },
+                        {
+                        "nom": "Sinseau",
+                        "prenom": "Amélie",
+                        "classe": "src/tag/M2DESIGN.svg"
+                        },
+                        {
+                        "nom": "Fall",
+                        "prenom": "Adama",
+                        "classe": "src/tag/M2DESIGN.svg"
+                        },
+                        {
+                        "nom": "Buyle",
+                        "prenom": "Lea",
+                        "classe": "src/tag/M2DESIGN.svg"
+                        },
+                        {
+                        "nom": "Gérard",
+                        "prenom": "Marion",
+                        "classe": "src/tag/M2DESIGN.svg"
+                        },
+                        {
+                        "nom": "Briot",
+                        "prenom": "Nicolas",
+                        "classe": "src/tag/M1UXUI.svg"
+                        },
+                        {
+                        "nom": "Vilaine",
+                        "prenom": "Anaïs",
+                        "classe": "src/tag/M1UXUI.svg"
+                        },
+                        {
+                        "nom": "Boulanouar",
+                        "prenom": "Ines",
+                        "classe": "src/tag/B3DESIGN.svg"
+                        },
+                        {
+                        "nom": "Chemloul",
+                        "prenom": "Melissa",
+                        "classe": "src/tag/B3DESIGN.svg"
+                        },
+                        {
+                        "nom": "Mesange",
+                        "prenom": "Jeremy",
+                        "classe": "src/tag/B3DESIGN.svg"
+                        },
+                        {
+                        "nom": "Bertinetti",
+                        "prenom": "Matthieu",
+                        "classe": "src/tag/B3DESIGN.svg"
+                        },
+                        {
+                        "nom": "Skaoui",
+                        "prenom": "Nabil",
+                        "classe": "src/tag/B3DESIGN.svg"
+                        },
+                        {
+                        "nom": "Mazeas",
                         "prenom": "Sarah",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Vincent",
-                        "prenom": "Maxime",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Fournier",
-                        "prenom": "Alice",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Morel",
-                        "prenom": "Gabriel",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Girard",
-                        "prenom": "Emma",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Blanc",
-                        "prenom": "Louis",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Robin",
-                        "prenom": "Julie",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Chevalier",
-                        "prenom": "Antoine",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Guyot",
-                        "prenom": "Clara",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Langlois",
-                        "prenom": "Hugo",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Marchand",
-                        "prenom": "Léa",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Renard",
-                        "prenom": "Nathan",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Barbier",
-                        "prenom": "Chloé",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Perrot",
-                        "prenom": "Paul",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Chauvin",
-                        "prenom": "Alice",
-                        "classe": "B3 DEV"
-                    }
-                ]
+                        "classe": "src/tag/B3CI.svg"
+                        },
+                        {
+                        "nom": "Inès",
+                        "prenom": "GESLIN",
+                        "classe": "src/tag/B3Market.svg"
+                        },
+                        {
+                        "nom": "Boulord",
+                        "prenom": "Hedi",
+                        "classe": "src/tag/B1CPD.svg"
+                        },
+                        {
+                        "nom": "Wu",
+                        "prenom": "Yanwen",
+                        "classe": "src/tag/B2CPD.svg"
+                        },
+                        {
+                        "nom": "Vankovic",
+                        "prenom": "Ivana",
+                        "classe": "src/tag/B2CPD.svg"
+                        },
+                        {
+                        "nom": "Moreau gendre",
+                        "prenom": "Theo",
+                        "classe": "src/tag/B2CPD.svg"
+                        },
+                        {
+                        "nom": "Derouet",
+                        "prenom": "Aurélien",
+                        "classe": "src/tag/B2DEV.svg"
+                        },
+                        {
+                        "nom": "Sy",
+                        "prenom": "Mohamadou",
+                        "classe": "src/tag/B2DEV.svg"
+                        },
+                        {
+                        "nom": "Boulord",
+                        "prenom": "Hedi",
+                        "classe": "src/tag/B1CPD.svg"
+                        },
+                        {
+                        "nom": "Ben Ghouzi",
+                        "prenom": "Ethan",
+                        "classe": "src/tag/B1CPD.svg"
+                        },
+                        {
+                        "nom": "Tayama",
+                        "prenom": "Kyliane",
+                        "classe": "src/tag/B1CPD.svg"
+                        },
+                        {
+                        "nom": "Mouanga",
+                        "prenom": "Prisca",
+                        "classe": "src/tag/Referent.svg"
+                        },
+                        {
+                        "nom": "Zitouni",
+                        "prenom": "Romain",
+                        "classe": "src/tag/Referent.svg"
+                        },
+                        {
+                        "nom": "Dausseur",
+                        "prenom": "Anthony",
+                        "classe": "src/tag/Referent.svg"
+                        },
+                        {
+                        "nom": "Bousseau",
+                        "prenom": "Marie",
+                        "classe": "src/tag/Referent.svg"
+                        },
+                        {
+                        "nom": "Wiart",
+                        "prenom": "Stanislas",
+                        "classe": "src/tag/Referent.svg"
+                        },
+                        {
+                        "nom": "Zirah",
+                        "prenom": "Carla",
+                        "classe": "src/tag/Referent.svg"
+                        },
+                        {
+                        "nom": "Benkada",
+                        "prenom": "Alaa",
+                        "classe": "src/tag/Referent.svg"
+                        },
+                        {
+                        "nom": "Dessemonnd",
+                        "prenom": "Amélie",
+                        "classe": "src/tag/Referent.svg"
+                        },
+                        {
+                        "nom": "Dauplais",
+                        "prenom": "Charlotte",
+                        "classe": "src/tag/Referent.svg"
+                        }
+                    ]
             }
         ]
     },
@@ -616,196 +683,224 @@
             {
                 "title": "Video",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image1": "src/textures/Atelier9.png",
-                "image2": "src/textures/A9-02.png",
-                "image3": "src/textures/A9-03.png"
+                "image1": "src/photo/E/E1-01.jpg",
+                "image2": "src/photo/E/E1-02.jpg",
+                "image3": "src/photo/E/E1-03.jpg"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image1": "src/textures/A9-02.png",
-                "image2": "src/textures/A9-03.png",
-                "image3": "src/textures/A9-04.png"
+                "image1": "src/photo/E/E2-01.jpg",
+                "image2": "src/photo/E/E2-02.jpg",
+                "image3": "src/photo/E/E2-03.jpg"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image1": "src/textures/A9-03.png",
-                "image2": "src/textures/A9-04.png",
-                "image3": "src/textures/A9-05.png"
+                "image1": "src/photo/E/E3-01.jpg",
+                "image2": "src/photo/E/E3-02.jpg",
+                "image3": "src/photo/E/E3-03.jpg"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image1": "src/textures/A9-04.png",
-                "quote1": "Visualisation du son dans l'espace"
+                "image1": "src/photo/E/E4-01.jpg",
+                "quote1": "Visualisation du son dans l'espace",
+                "image2": "src/photo/E/E4-02.jpg",
+                "quote2": "Visualisation du son dans l'espace",
+                "image3": "src/photo/E/E4-03.jpg",
+                "quote3": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image1": "src/textures/A9-05.png",
-                "students": [
-        {
-            "nom": "Martin",
-            "prenom": "Emma",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Dubois",
-            "prenom": "Lucas",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Bernard",
-            "prenom": "Sophie",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Petit",
-            "prenom": "Thomas",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Robert",
-            "prenom": "Julie",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Richard",
-            "prenom": "Antoine",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Moreau",
-            "prenom": "Clara",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Simon",
-            "prenom": "Louis",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Laurent",
-            "prenom": "Marie",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Michel",
-            "prenom": "Paul",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Garcia",
-            "prenom": "Hugo",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "David",
-            "prenom": "Chloé",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Bertrand",
-            "prenom": "Nathan",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Roux",
-            "prenom": "Sarah",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Vincent",
-            "prenom": "Maxime",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Fournier",
-            "prenom": "Alice",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Morel",
-            "prenom": "Gabriel",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Girard",
-            "prenom": "Emma",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Blanc",
-            "prenom": "Louis",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Robin",
-            "prenom": "Julie",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Chevalier",
-            "prenom": "Antoine",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Guyot",
-            "prenom": "Clara",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Langlois",
-            "prenom": "Hugo",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Marchand",
-            "prenom": "Léa",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Renard",
-            "prenom": "Nathan",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Barbier",
-            "prenom": "Chloé",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Perrot",
-            "prenom": "Paul",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Chauvin",
-            "prenom": "Alice",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Dufour",
-            "prenom": "Emma",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Moulin",
-            "prenom": "Louis",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Noel",
-            "prenom": "Julie",
-            "classe": "B3 DEV"
-        },
-        {
-            "nom": "Paris",
-            "prenom": "Antoine",
-            "classe": "B3 DEV"
-        }
-    ]
+               "students": [
+                    {
+                        "nom": "Yessad",
+                        "prenom": "Naela",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Bissaud",
+                        "prenom": "Neil",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Weizmann",
+                        "prenom": "Victor",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Barré",
+                        "prenom": "Loïc",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Le Coz",
+                        "prenom": "Valentin",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "AAA",
+                        "prenom": "AAA",
+                        "classe": "src/tag/B3DEV.svg"
+                    },
+                    {
+                        "nom": "Mbuta Mubalu",
+                        "prenom": "Jackson",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Dodeur",
+                        "prenom": "Hugo",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "AAA",
+                        "prenom": "AAA",
+                        "classe": "src/tag/B3DEV.svg"
+                    },
+                    {
+                        "nom": "Azizyan",
+                        "prenom": "Edouard",
+                        "classe": "src/tag/M1UXUI.svg"
+                    },
+                    {
+                        "nom": "Panechou",
+                        "prenom": "Loïc",
+                        "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                        "nom": "De Marcellus",
+                        "prenom": "Maxime",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Lefebvre",
+                        "prenom": "Julien",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Bove",
+                        "prenom": "Yohann",
+                        "classe": "src/tag/B3DESIGN.svg"
+                    },
+                    {
+                        "nom": "Fon",
+                        "prenom": "Neiville",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Abounayme",
+                        "prenom": "Omar",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Lan-tak-sun",
+                        "prenom": "Quentin",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Monfroy",
+                        "prenom": "Ines",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Wang",
+                        "prenom": "Philippe",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Carvès",
+                        "prenom": "Augustin",
+                        "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                        "nom": "Henry",
+                        "prenom": "Camille",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Lannoy",
+                        "prenom": "Benjamin",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Roy",
+                        "prenom": "Axel",
+                        "classe": "src/tag/B3CI.svg"
+                    },
+                    {
+                        "nom": "AAA",
+                        "prenom": "AAA",
+                        "classe": "src/tag/B3DEV.svg"
+                    },
+                    {
+                        "nom": "Louis-Joseph",
+                        "prenom": "Mélora",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Deniaud",
+                        "prenom": "Benjamin",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Benelkebir",
+                        "prenom": "Sabri",
+                        "classe": "src/tag/B3DESIGN.svg"
+                    },
+                    {
+                        "nom": "Rousset",
+                        "prenom": "Lena",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Lavalley",
+                        "prenom": "Kim",
+                        "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                        "nom": "Djeffal",
+                        "prenom": "Yousra",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Chlih",
+                        "prenom": "Ayoub",
+                        "classe": "src/tag/B3CI.svg"
+                    },
+                    {
+                        "nom": "Tavares",
+                        "prenom": "Titouan",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Tselepis",
+                        "prenom": "Oscar",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Gaydu",
+                        "prenom": "Matthias",
+                        "classe": "src/tag/B3CI.svg"
+                    },
+                    {
+                        "nom": "Scaron",
+                        "prenom": "Aimeric",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Chevalier",
+                        "prenom": "Mikaël",
+                        "classe": "src/tag/Referent.svg"
+                    },
+                    {
+                        "nom": "Dausseur",
+                        "prenom": "Anthony",
+                        "classe": "src/tag/Referent.svg"
+                    }
+                ]
             }
         ]
     },
@@ -815,237 +910,254 @@
             {
                 "title": "Escape game",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image1": "src/textures/Atelier4.png",
-                "image2": "src/textures/A4-02.png",
-                "image3": "src/textures/A4-03.png"
+                "image1": "src/photo/F/F1-01.jpg",
+                "image2": "src/photo/F/F1-02.jpg",
+                "image3": "src/photo/F/F1-03.jpg"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image1": "src/textures/A4-02.png",
-                "image2": "src/textures/A4-03.png",
-                "image3": "src/textures/A4-04.png"
+                "image1": "src/photo/F/F2-01.jpg",
+                "image2": "src/photo/F/F2-02.jpg",
+                "image3": "src/photo/F/F2-03.jpg"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image1": "src/textures/A4-03.png",
-                "image2": "src/textures/A4-04.png",
-                "image3": "src/textures/A4-05.png"
+                "image1": "src/photo/F/F3-01.jpg",
+                "image2": "src/photo/F/F3-02.jpg",
+                "image3": "src/photo/F/F3-03.jpg"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image1": "src/textures/A4-04.png",
-                "quote1": "Visualisation du son dans l'espace"
+                "image1": "src/photo/F/F4-01.jpg",
+                "quote1": "Visualisation du son dans l'espace",
+                "image2": "src/photo/F/F4-02.jpg",
+                "quote2": "Visualisation du son dans l'espace",
+                "image3": "src/photo/F/F4-03.jpg",
+                "quote3": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image1": "src/textures/A4-05.png",
                 "students": [
                     {
-                        "nom": "Martin",
-                        "prenom": "Emma",
-                        "classe": "B3 DEV"
+                        "nom": "Quélavoine",
+                        "prenom": "Killian",
+                        "classe": "src/tag/M1VIDEO.svg"
                     },
                     {
-                        "nom": "Dubois",
-                        "prenom": "Lucas",
-                        "classe": "B3 DEV"
+                        "nom": "Monier",
+                        "prenom": "Eugénie",
+                        "classe": "src/tag/M2UXUI.svg"
                     },
                     {
-                        "nom": "Bernard",
-                        "prenom": "Sophie",
-                        "classe": "B3 DEV"
+                        "nom": "Dhollande",
+                        "prenom": "Alexandrine",
+                        "classe": "src/tag/M2UXUI.svg"
                     },
                     {
-                        "nom": "Petit",
-                        "prenom": "Thomas",
-                        "classe": "B3 DEV"
+                        "nom": "Carpinteiro",
+                        "prenom": "Tiago",
+                        "classe": "src/tag/M1DESIGN.svg"
                     },
                     {
-                        "nom": "Robert",
-                        "prenom": "Julie",
-                        "classe": "B3 DEV"
+                        "nom": "Turlot",
+                        "prenom": "Céline",
+                        "classe": "src/tag/B3DEV.svg"
                     },
                     {
-                        "nom": "Richard",
-                        "prenom": "Antoine",
-                        "classe": "B3 DEV"
+                        "nom": "Balard",
+                        "prenom": "Enzo",
+                        "classe": "src/tag/B2CPD.svg"
                     },
                     {
-                        "nom": "Moreau",
-                        "prenom": "Clara",
-                        "classe": "B3 DEV"
+                        "nom": "Ayave",
+                        "prenom": "Brandon",
+                        "classe": "src/tag/B2CPD.svg"
                     },
                     {
-                        "nom": "Simon",
-                        "prenom": "Louis",
-                        "classe": "B3 DEV"
+                        "nom": "Solomiac",
+                        "prenom": "Emile",
+                        "classe": "src/tag/M2UXUI.svg"
                     },
                     {
-                        "nom": "Laurent",
-                        "prenom": "Marie",
-                        "classe": "B3 DEV"
+                        "nom": "Lin",
+                        "prenom": "Florent",
+                        "classe": "src/tag/B2CPD.svg"
                     },
                     {
-                        "nom": "Michel",
-                        "prenom": "Paul",
-                        "classe": "B3 DEV"
+                        "nom": "Mze Ali",
+                        "prenom": "Irmane",
+                        "classe": "src/tag/M2UXUI.svg"
                     },
                     {
-                        "nom": "Garcia",
-                        "prenom": "Hugo",
-                        "classe": "B3 DEV"
+                        "nom": "Sancio",
+                        "prenom": "Maëva",
+                        "classe": "src/tag/B3DEV.svg"
                     },
                     {
-                        "nom": "David",
-                        "prenom": "Chloé",
-                        "classe": "B3 DEV"
+                        "nom": "Cohen",
+                        "prenom": "Mayane",
+                        "classe": "src/tag/M2DESIGN.svg"
                     },
                     {
-                        "nom": "Bertrand",
-                        "prenom": "Nathan",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Roux",
-                        "prenom": "Sarah",
-                        "classe": "B3 DEV"
+                        "nom": "Persyn",
+                        "prenom": "Joséphine",
+                        "classe": "src/tag/M2UXUI.svg"
                     },
                     {
                         "nom": "Vincent",
+                        "prenom": "Louise",
+                        "classe": "src/tag/M1UXUI.svg"
+                    },
+                    {
+                        "nom": "Diaguili",
+                        "prenom": "Bertille",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Ait Tabet",
+                        "prenom": "Sheryn",
+                        "classe": "src/tag/B3DESIGN.svg"
+                    },
+                    {
+                        "nom": "Genet",
+                        "prenom": "Charlotte",
+                        "classe": "src/tag/B2CPD.svg"
+                    },
+                    {
+                        "nom": "Saouas",
+                        "prenom": "Julien",
+                        "classe": "src/tag/B1CPD.svg"
+                    },
+                    {
+                        "nom": "Gayat",
+                        "prenom": "Clémentine",
+                        "classe": "src/tag/M2UXUI.svg"
+                    },
+                    {
+                        "nom": "Liot",
+                        "prenom": "Apolline",
+                        "classe": "src/tag/M2UXUI.svg"
+                    },
+                    {
+                        "nom": "Kalisetty Appadu",
+                        "prenom": "Vaneesha",
+                        "classe": "src/tag/M1UXUI.svg"
+                    },
+                    {
+                        "nom": "Arromaini",
+                        "prenom": "Amine",
+                        "classe": "src/tag/B3Market.svg"
+                    },
+                    {
+                        "nom": "Ait Ouhmad",
+                        "prenom": "Sarah",
+                        "classe": "src/tag/B3Market.svg"
+                    },
+                    {
+                        "nom": "Munding",
+                        "prenom": "Antoine",
+                        "classe": "src/tag/B3DEV.svg"
+                    },
+                    {
+                        "nom": "Serkhane",
+                        "prenom": "Sarah",
+                        "classe": "src/tag/M2UXUI.svg"
+                    },
+                    {
+                        "nom": "Zerbib-Callegari",
+                        "prenom": "Carla",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Ghariani",
+                        "prenom": "Nader",
+                        "classe": "src/tag/B3CI.svg"
+                    },
+                    {
+                        "nom": "Martinez",
+                        "prenom": "Aymeric",
+                        "classe": "src/tag/B2DEV.svg"
+                    },
+                    {
+                        "nom": "Bouchaala",
+                        "prenom": "Souha",
+                        "classe": "src/tag/M2UXUI.svg"
+                    },
+                    {
+                        "nom": "Martins",
+                        "prenom": "Sarah",
+                        "classe": "src/tag/B2CPD.svg"
+                    },
+                    {
+                        "nom": "Beyragued",
+                        "prenom": "Maryam",
+                        "classe": "src/tag/B3DESIGN.svg"
+                    },
+                    {
+                        "nom": "Tyburn",
+                        "prenom": "Maély",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Doukanse",
+                        "prenom": "Fatouma",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Painchaud",
+                        "prenom": "Corentin",
+                        "classe": "src/tag/M2UXUI.svg"
+                    },
+                    {
+                        "nom": "Trinh",
+                        "prenom": "Vinh",
+                        "classe": "src/tag/B1CPD.svg"
+                    },
+                    {
+                        "nom": "Smagghue",
+                        "prenom": "Jonathan",
+                        "classe": "src/tag/B1CPD.svg"
+                    },
+                    {
+                        "nom": "Mazan",
+                        "prenom": "Louison",
+                        "classe": "src/tag/B3DEV.svg"
+                    },
+                    {
+                        "nom": "Baleste",
+                        "prenom": "Julie",
+                        "classe": "src/tag/B3Market.svg"
+                    },
+                    {
+                        "nom": "Rasoamanana",
+                        "prenom": "Anthony",
+                        "classe": "src/tag/B3Market.svg"
+                    },
+                    {
+                        "nom": "Asselin",
+                        "prenom": "Timothée",
+                        "classe": "src/tag/B3CI.svg"
+                    },
+                    {
+                        "nom": "Coutachot",
+                        "prenom": "Allan",
+                        "classe": "src/tag/Referent.svg"
+                    },
+                    {
+                        "nom": "Roman",
                         "prenom": "Maxime",
-                        "classe": "B3 DEV"
+                        "classe": "src/tag/Referent.svg"
                     },
                     {
-                        "nom": "Fournier",
-                        "prenom": "Alice",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Morel",
-                        "prenom": "Gabriel",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Girard",
-                        "prenom": "Emma",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Blanc",
-                        "prenom": "Louis",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Robin",
-                        "prenom": "Julie",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Chevalier",
-                        "prenom": "Antoine",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Guyot",
-                        "prenom": "Clara",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Langlois",
-                        "prenom": "Hugo",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Marchand",
-                        "prenom": "Léa",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Renard",
-                        "prenom": "Nathan",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Barbier",
-                        "prenom": "Chloé",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Perrot",
-                        "prenom": "Paul",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Chauvin",
-                        "prenom": "Alice",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Dufour",
-                        "prenom": "Emma",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Moulin",
-                        "prenom": "Louis",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Noel",
-                        "prenom": "Julie",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Paris",
-                        "prenom": "Antoine",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Leroy",
-                        "prenom": "Camille",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Roche",
-                        "prenom": "Victor",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Dupont",
-                        "prenom": "Léonie",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Fontaine",
-                        "prenom": "Arthur",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Rousseau",
-                        "prenom": "Jade",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Lemaire",
-                        "prenom": "Raphaël",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Boyer",
-                        "prenom": "Inès",
-                        "classe": "B3 DEV"
-                    },
-                    {
-                        "nom": "Denis",
-                        "prenom": "Théo",
-                        "classe": "B3 DEV"
+                        "nom": "Sylvain",
+                        "prenom": "Jampy",
+                        "classe": "src/tag/Referent.svg"
                     }
                 ]
-
             }
         ]
     },
@@ -1055,34 +1167,144 @@
             {
                 "title": "Podcast",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image1": "src/textures/Atelier8.png",
-                "image2": "src/textures/A8-02.png",
-                "image3": "src/textures/A8-03.png"
+                "image1": "src/photo/G/G1-01.jpg",
+                "image2": "src/photo/G/G1-02.jpg",
+                "image3": "src/photo/G/G1-03.jpg"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image1": "src/textures/A8-02.png",
-                "image2": "src/textures/A8-03.png",
-                "image3": "src/textures/A8-04.png"
+                "image1": "src/photo/G/G2-01.jpg",
+                "image2": "src/photo/G/G2-02.jpg",
+                "image3": "src/photo/G/G2-03.jpg"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image1": "src/textures/A8-03.png",
-                "image2": "src/textures/A8-04.png",
-                "image3": "src/textures/A8-05.png"
+                "image1": "src/photo/G/G3-01.jpg",
+                "image2": "src/photo/G/G3-02.jpg",
+                "image3": "src/photo/G/G3-03.jpg"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image1": "src/textures/A8-04.png",
-                "quote1": "Visualisation du son dans l'espace"
+                "image1": "src/photo/G/G4-01.jpg",
+                "quote1": "Visualisation du son dans l'espace",
+                "image2": "src/photo/G/G4-02.jpg",
+                "quote2": "Visualisation du son dans l'espace",
+                "image3": "src/photo/G/G4-03.jpg",
+                "quote3": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image1": "src/textures/A8-05.png"
+                "students": [
+                    {
+                        "nom": "Le Goff",
+                        "prenom": "Steven",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Balouk",
+                        "prenom": "Anissa",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Aland",
+                        "prenom": "Bathias",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Dali",
+                        "prenom": "Sasha",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Ofilat",
+                        "prenom": "Daria",
+                        "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                        "nom": "Gautier",
+                        "prenom": "Laura",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Sanchez",
+                        "prenom": "Louise",
+                        "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                        "nom": "Doucet",
+                        "prenom": "Alexis",
+                        "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                        "nom": "Issa Bongo",
+                        "prenom": "Hapsitaï",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Belbrun",
+                        "prenom": "Jennifer",
+                        "classe": "src/tag/M2UXUI.svg"
+                    },
+                    {
+                        "nom": "Duarte",
+                        "prenom": "Fatima",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Petit",
+                        "prenom": "Anaïs",
+                        "classe": "src/tag/M2UXUI.svg"
+                    },
+                    {
+                        "nom": "Do",
+                        "prenom": "Sophie",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Raho",
+                        "prenom": "Chainez",
+                        "classe": "src/tag/M2UXUI.svg"
+                    },
+                    {
+                        "nom": "Toure",
+                        "prenom": "Ketura",
+                        "classe": "src/tag/M2UXUI.svg"
+                    },
+                    {
+                        "nom": "Chopin",
+                        "prenom": "Zoe",
+                        "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                        "nom": "Du Fay",
+                        "prenom": "Cyrien",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Gayrard",
+                        "prenom": "Mathieu",
+                        "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                        "nom": "Chong Toua",
+                        "prenom": "Elena",
+                        "classe": "src/tag/B1CPD.svg"
+                    },
+                    {
+                        "nom": "Feliot",
+                        "prenom": "Benjamin",
+                        "classe": "src/tag/M1VIDEO.svg"
+                    },
+                    {
+                        "nom": "Sylvain",
+                        "prenom": "Jampy",
+                        "classe": "src/tag/Referent.svg"
+                    }
+                ]
             }
         ]
     },
@@ -1092,34 +1314,192 @@
             {
                 "title": "Photo reportage",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image1": "src/textures/Atelier7.png",
-                "image2": "src/textures/A7-02.png",
-                "image3": "src/textures/A7-03.png"
+                "image1": "src/photo/H/H1-01.jpg",
+                "image2": "src/photo/H/H1-02.jpg",
+                "image3": "src/photo/H/H1-03.jpg"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image1": "src/textures/A7-02.png",
-                "image2": "src/textures/A7-03.png",
-                "image3": "src/textures/A7-04.png"
+                "image1": "src/photo/H/H2-01.jpg",
+                "image2": "src/photo/H/H2-02.jpg",
+                "image3": "src/photo/H/H2-03.jpg"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image1": "src/textures/A7-03.png",
-                "image2": "src/textures/A7-04.png",
-                "image3": "src/textures/A7-05.png"
+                "image1": "src/photo/H/H3-01.jpg",
+                "image2": "src/photo/H/H3-02.jpg",
+                "image3": "src/photo/H/H3-03.jpg"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image1": "src/textures/A7-04.png",
-                "quote1": "Visualisation du son dans l'espace"
+                "image1": "src/photo/H/H4-01.jpg",
+                "quote1": "Visualisation du son dans l'espace",
+                "image2": "src/photo/H/H4-02.jpg",
+                "quote2": "Visualisation du son dans l'espace",
+                "image3": "src/photo/H/H4-03.jpg",
+                "quote3": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image1": "src/textures/A7-05.png"
+                "students": [
+                    {
+                    "nom": "Ghannouchi",
+                    "prenom": "Inès",
+                    "classe": "src/tag/M2UXUI.svg"
+                    },
+                    {
+                    "nom": "Pham",
+                    "prenom": "Théo",
+                    "classe": "src/tag/M2UXUI.svg"
+                    },
+
+                    {
+                    "nom": "Zegzaoui",
+                    "prenom": "Nadia",
+                    "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                    "nom": "Tremblay",
+                    "prenom": "Nathan",
+                    "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                    "nom": "Cholet",
+                    "prenom": "Wendy",
+                    "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                    "nom": "Servais",
+                    "prenom": "Blandine",
+                    "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                    "nom": "Oulahal",
+                    "prenom": "Ambrine",
+                    "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                    "nom": "Potier",
+                    "prenom": "Ronan",
+                    "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                    "nom": "Renaud",
+                    "prenom": "Marie",
+                    "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                    "nom": "Aubert",
+                    "prenom": "Mila",
+                    "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                    "nom": "Grandgirard",
+                    "prenom": "Alexis",
+                    "classe": "src/tag/M2VIDEO.svg"
+                    },
+
+                    {
+                    "nom": "Passey",
+                    "prenom": "Alix",
+                    "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                    "nom": "Umar",
+                    "prenom": "Amal",
+                    "classe": "src/tag/M2DESIGN.svg"
+                    },
+
+                    {
+                    "nom": "Goglin",
+                    "prenom": "Yoann",
+                    "classe": "src/tag/M1UXUI.svg"
+                    },
+                    {
+                    "nom": "Dania",
+                    "prenom": "Belabbas",
+                    "classe": "src/tag/M1UXUI.svg"
+                    },
+                    {
+                    "nom": "Hutin",
+                    "prenom": "Mickaëla",
+                    "classe": "src/tag/M1UXUI.svg"
+                    },
+
+                    {
+                    "nom": "Kannada",
+                    "prenom": "Rizlane",
+                    "classe": "src/tag/B3DESIGN.svg"
+                    },
+
+                    {
+                    "nom": "Akyuz",
+                    "prenom": "Ezda",
+                    "classe": "src/tag/B3Market.svg"
+                    },
+
+                    {
+                    "nom": "Cherkaoui",
+                    "prenom": "Yasmina",
+                    "classe": "src/tag/B2DEV.svg"
+                    },
+
+                    {
+                    "nom": "Trevisan",
+                    "prenom": "Matteo",
+                    "classe": "src/tag/B2CPD.svg"
+                    },
+                    {
+                    "nom": "Nicouleau-Bourles",
+                    "prenom": "Mathis",
+                    "classe": "src/tag/B2CPD.svg"
+                    },
+                    {
+                    "nom": "Pellicer",
+                    "prenom": "Noémi",
+                    "classe": "src/tag/B2CPD.svg"
+                    },
+
+                    {
+                    "nom": "Le Petit",
+                    "prenom": "Marguerite",
+                    "classe": "src/tag/B1CPD.svg"
+                    },
+                    {
+                    "nom": "Bousseau",
+                    "prenom": "Marie",
+                    "classe": "src/tag/Referent.svg"
+                    },
+                    {
+                    "nom": "Wiart",
+                    "prenom": "Stanislas",
+                    "classe": "src/tag/Referent.svg"
+                    },
+                    {
+                    "nom": "Zirah",
+                    "prenom": "Carla",
+                    "classe": "src/tag/Referent.svg"
+                    },
+                    {
+                    "nom": "Benkada",
+                    "prenom": "Alaa",
+                    "classe": "src/tag/Referent.svg"
+                    },
+                    {
+                    "nom": "Dessemonnd",
+                    "prenom": "Amélie",
+                    "classe": "src/tag/Referent.svg"
+                    },
+                    {
+                    "nom": "Dauplais",
+                    "prenom": "Charlotte",
+                    "classe": "src/tag/Referent.svg"
+                    }
+                ]
             }
         ]
     },
@@ -1129,34 +1509,160 @@
             {
                 "title": "AI Driven visual stories",
                 "subtitle": "Une œuvre abstraite évoquant les limites entre ciel et terre",
-                "image1": "src/textures/Atelier1.png",
-                "image2": "src/textures/A1-02.png",
-                "image3": "src/textures/A1-03.png"
+                "image1": "src/photo/I/I1-01.jpg",
+                "image2": "src/photo/I/I1-02.jpg",
+                "image3": "src/photo/I/I1-03.jpg"
             },
             {
                 "title": "Frontières Invisibles",
                 "subtitle": "Exploration des limites de la perception",
-                "image1": "src/textures/A1-02.png",
-                "image2": "src/textures/A1-03.png",
-                "image3": "src/textures/A1-04.png"
+                "image1": "src/photo/I/I2-01.jpg",
+                "image2": "src/photo/I/I2-02.jpg",
+                "image3": "src/photo/I/I2-03.jpg"
             },
             {
                 "title": "Passage Éthéré",
                 "subtitle": "La transition entre deux mondes",
-                "image1": "src/textures/A1-03.png",
-                "image2": "src/textures/A1-04.png",
-                "image3": "src/textures/A1-05.png"
+                "image1": "src/photo/I/I3-01.jpg",
+                "image2": "src/photo/I/I3-02.jpg",
+                "image3": "src/photo/I/I3-03.jpg"
             },
             {
                 "title": "Résonance Spatiale",
                 "subtitle": "L'écho des dimensions parallèles",
-                "image1": "src/textures/A1-04.png",
-                "quote1": "L'écho des dimensions parallèles"
+                "image1": "src/photo/I/I4-01.jpg",
+                "quote1": "L'écho des dimensions parallèles",
+                "image2": "src/photo/I/I4-02.jpg",
+                "quote2": "L'écho des dimensions parallèles",
+                "image3": "src/photo/I/I4-03.jpg",
+                "quote3": "L'écho des dimensions parallèles"
             },
             {
                 "title": "Convergence",
                 "subtitle": "Le point de rencontre des réalités",
-                "image1": "src/textures/A1-05.png"
+                "students": [
+                    {
+                    "nom": "Niamkey",
+                    "prenom": "Diane",
+                    "classe": "src/tag/M2UXUI.svg"
+                    },
+                    {
+                    "nom": "Carasco",
+                    "prenom": "Sophie",
+                    "classe": "src/tag/M2UXUI.svg"
+                    },
+                    {
+                    "nom": "Mazurier",
+                    "prenom": "Titouan",
+                    "classe": "src/tag/M2UXUI.svg"
+                    },
+
+                    {
+                    "nom": "Rigaud",
+                    "prenom": "Thomas",
+                    "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                    "nom": "Bessone",
+                    "prenom": "Loïs",
+                    "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                    "nom": "Jeyakanthan",
+                    "prenom": "Majurika",
+                    "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                    "nom": "Benaziez",
+                    "prenom": "Jalani",
+                    "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                    "nom": "Shaimardanova",
+                    "prenom": "Faniia",
+                    "classe": "src/tag/M2VIDEO.svg"
+                    },
+                    {
+                    "nom": "Alves",
+                    "prenom": "Luisa",
+                    "classe": "src/tag/M2VIDEO.svg"
+                    },
+
+                    {
+                    "nom": "Paulos Gomes",
+                    "prenom": "Raphaël",
+                    "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                    "nom": "Konate",
+                    "prenom": "Junior",
+                    "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                    "nom": "Saouas",
+                    "prenom": "Vincent",
+                    "classe": "src/tag/M2DESIGN.svg"
+                    },
+                    {
+                    "nom": "Tony",
+                    "prenom": "Kevin",
+                    "classe": "src/tag/M2DESIGN.svg"
+                    },
+
+                    {
+                    "nom": "Swynghedauw",
+                    "prenom": "Gaspard",
+                    "classe": "src/tag/M1DESIGN.svg"
+                    },
+                    {
+                    "nom": "Fettaka",
+                    "prenom": "Aicha",
+                    "classe": "src/tag/M1DESIGN.svg"
+                    },
+                    {
+                    "nom": "Drouhot",
+                    "prenom": "Agathe",
+                    "classe": "src/tag/M1DESIGN.svg"
+                    },
+                    {
+                    "nom": "Costa",
+                    "prenom": "Andréa",
+                    "classe": "src/tag/M1DESIGN.svg"
+                    },
+                    {
+                    "nom": "Ozkara",
+                    "prenom": "Beritan",
+                    "classe": "src/tag/M1DESIGN.svg"
+                    },
+                    {
+                    "nom": "Métayer",
+                    "prenom": "Camille",
+                    "classe": "src/tag/M1DESIGN.svg"
+                    },
+
+                    {
+                    "nom": "Guyot",
+                    "prenom": "Alexandre",
+                    "classe": "src/tag/B3DESIGN.svg"
+                    },
+                    {
+                    "nom": "Soreau",
+                    "prenom": "Quentin",
+                    "classe": "src/tag/B3DESIGN.svg"
+                    },
+
+                    {
+                    "nom": "Dubuc",
+                    "prenom": "Clara",
+                    "classe": "src/tag/B2CPD.svg"
+                    },
+
+                    {
+                    "nom": "Wiart",
+                    "prenom": "Stanislas",
+                    "classe": "src/tag/Referent.svg"
+                    }
+                ]
             }
         ]
     },
@@ -1166,34 +1672,37 @@
             {
                 "title": "Game design",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image1": "src/textures/Atelier5.png",
-                "image2": "src/textures/A5-02.png",
-                "image3": "src/textures/A5-03.png"
+                "image1": "src/photo/J/J1-01.jpg",
+                "image2": "src/photo/J/J1-02.jpg",
+                "image3": "src/photo/J/J1-03.jpg"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image1": "src/textures/A5-02.png",
-                "image2": "src/textures/A5-03.png",
-                "image3": "src/textures/A5-04.png"
+                "image1": "src/photo/J/J2-01.jpg",
+                "image2": "src/photo/J/J2-02.jpg",
+                "image3": "src/photo/J/J2-03.jpg"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image1": "src/textures/A5-03.png",
-                "image2": "src/textures/A5-04.png",
-                "image3": "src/textures/A5-05.png"
+                "image1": "src/photo/J/J3-01.jpg",
+                "image2": "src/photo/J/J3-02.jpg",
+                "image3": "src/photo/J/J3-03.jpg"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image1": "src/textures/A5-04.png",
-                "quote1": "Visualisation du son dans l'espace"
+                "image1": "src/photo/J/J4-01.jpg",
+                "quote1": "Visualisation du son dans l'espace",
+                "image2": "src/photo/J/J4-02.jpg",
+                "quote2": "Visualisation du son dans l'espace",
+                "image3": "src/photo/J/J4-03.jpg",
+                "quote3": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
-                "image1": "src/textures/A5-05.png"
+                "subtitle": "L'orchestration des éléments visuels"
             }
         ]
     },
@@ -1203,34 +1712,100 @@
             {
                 "title": "Organisation",
                 "subtitle": "Une composition visuelle inspirée par la musique",
-                "image1": "src/textures/Atelier2.png",
-                "image2": "src/textures/A2-02.png",
-                "image3": "src/textures/A2-03.png"
+                "image1": "src/photo/K/K1-01.jpg",
+                "image2": "src/photo/K/K1-02.jpg",
+                "image3": "src/photo/K/K1-03.jpg"
             },
             {
                 "title": "Rythme Numérique",
                 "subtitle": "La danse des pixels dans l'espace",
-                "image1": "src/textures/A2-02.png",
-                "image2": "src/textures/A2-03.png",
-                "image3": "src/textures/A2-04.png"
+                "image1": "src/photo/K/K2-01.jpg",
+                "image2": "src/photo/K/K2-02.jpg",
+                "image3": "src/photo/K/K2-03.jpg"
             },
             {
                 "title": "Harmonie Digitale",
                 "subtitle": "La fusion parfaite entre son et image",
-                "image1": "src/textures/A2-03.png",
-                "image2": "src/textures/A2-04.png",
-                "image3": "src/textures/A2-05.png"
+                "image1": "src/photo/K/K3-01.jpg",
+                "image2": "src/photo/K/K3-02.jpg",
+                "image3": "src/photo/K/K3-03.jpg"
             },
             {
                 "title": "Onde Sonore",
                 "subtitle": "Visualisation du son dans l'espace",
-                "image1": "src/textures/A2-04.png",
-                "quote1": "Visualisation du son dans l'espace"
+                "image1": "src/photo/K/K4-01.jpg",
+                "quote1": "Visualisation du son dans l'espace",
+                "image2": "src/photo/K/K4-02.jpg",
+                "quote2": "Visualisation du son dans l'espace",
+                "image3": "src/photo/K/K4-03.jpg",
+                "quote3": "Visualisation du son dans l'espace"
             },
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
-                "image1": "src/textures/A2-05.png"
+                 "students": [
+                    {
+                    "nom": "Drissi el bouzaidi",
+                    "prenom": "Lamya",
+                    "classe": "src/tag/M1UXUI.svg"
+                    },
+
+                    {
+                    "nom": "Brun",
+                    "prenom": "Julie",
+                    "classe": "src/tag/B3DESIGN.svg"
+                    },
+
+                    {
+                    "nom": "Ranaivoson",
+                    "prenom": "Telina",
+                    "classe": "src/tag/B3Market.svg"
+                    },
+                    {
+                    "nom": "Dangi Ackyl",
+                    "prenom": "junior",
+                    "classe": "src/tag/B3Market.svg"
+                    },
+                    {
+                    "nom": "Azoulay",
+                    "prenom": "Orelle",
+                    "classe": "src/tag/B3Market.svg"
+                    },
+
+                    {
+                    "nom": "Kharoubi",
+                    "prenom": "Sacha",
+                    "classe": "src/tag/B2CPD.svg"
+                    },
+
+                    {
+                    "nom": "Galland",
+                    "prenom": "Joris",
+                    "classe": "src/tag/B1CPD.svg"
+                    },
+
+                    {
+                    "nom": "Zirah",
+                    "prenom": "Carla",
+                    "classe": "src/tag/Referent.svg"
+                    },
+                    {
+                    "nom": "Benkada",
+                    "prenom": "Alaa",
+                    "classe": "src/tag/Referent.svg"
+                    },
+                    {
+                    "nom": "Dessemonnd",
+                    "prenom": "Amélie",
+                    "classe": "src/tag/Referent.svg"
+                    },
+                    {
+                    "nom": "Dauplais",
+                    "prenom": "Charlotte",
+                    "classe": "src/tag/Referent.svg"
+                    }
+                ]
+
             }
         ]
     }

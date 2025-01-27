@@ -327,11 +327,14 @@ export class PortalTransitionScene extends SceneSetup {
             const textureLoader = new THREE.TextureLoader();
             
             Promise.all([
-                new Promise((res, rej) => textureLoader.load(data.texture, res, undefined, rej)),
+                new Promise((res, rej) => textureLoader.load(data.texture || data.image1, res, undefined, rej)),
                 data.image2 ? new Promise((res, rej) => textureLoader.load(data.image2, res, undefined, rej)) : Promise.resolve(null),
                 data.image3 ? new Promise((res, rej) => textureLoader.load(data.image3, res, undefined, rej)) : Promise.resolve(null)
             ]).then(([texture1, texture2, texture3]) => {
                 const responsive = this.getResponsivePositions();
+                
+                // Vérifier si c'est le 4ème fragment (Résonance Spatiale)
+                const isResonanceSpatiale = data.title === "Résonance Spatiale";
                 
                 // Fragment principal avec échelle responsive
                 const geometry = new THREE.PlaneGeometry(6 * data.scale, 6 * data.scale, 50, 50);
@@ -343,6 +346,70 @@ export class PortalTransitionScene extends SceneSetup {
                 });
                 const imageMesh = new THREE.Mesh(geometry, material);
 
+                // Si c'est Résonance Spatiale, créer un conteneur pour l'image et le quote
+                if (isResonanceSpatiale) {
+                    // Créer les fragments de détail avec leurs quotes
+                    const createDetailWithQuote = (texture, quote, position) => {
+                        const detailGeometry = new THREE.PlaneGeometry(
+                            4 * data.scale * responsive.detailsScale,
+                            4 * data.scale * responsive.detailsScale,
+                            50, 50
+                        );
+                        
+                        const detailMesh = new THREE.Mesh(
+                            detailGeometry,
+                            new THREE.MeshBasicMaterial({
+                                map: texture,
+                                transparent: true,
+                                opacity: 0.7,
+                                side: THREE.DoubleSide
+                            })
+                        );
+                        
+                        detailMesh.position.copy(position);
+                        
+                        // Ajouter le quote
+                        const quoteDiv = document.createElement('div');
+                        quoteDiv.className = 'quote-overlay';
+                        quoteDiv.textContent = quote;
+                        quoteDiv.style.cssText = `
+                            color: white;
+                            font-size: 1.2em;
+                            padding: 20px;
+                            background: rgba(0, 0, 0, 0.7);
+                            border-radius: 8px;
+                            backdrop-filter: blur(10px);
+                            max-width: 300px;
+                            text-align: center;
+                        `;
+                        
+                        const quoteObject = new CSS2DObject(quoteDiv);
+                        quoteObject.position.set(2, 0, 0);
+                        detailMesh.add(quoteObject);
+                        
+                        return detailMesh;
+                    };
+                    
+                    // Ajouter les détails avec leurs quotes
+                    if (texture2 && data.quote2) {
+                        const detail2 = createDetailWithQuote(
+                            texture2,
+                            data.quote2,
+                            new THREE.Vector3(4, 2, -5)
+                        );
+                        imageMesh.add(detail2);
+                    }
+                    
+                    if (texture3 && data.quote3) {
+                        const detail3 = createDetailWithQuote(
+                            texture3,
+                            data.quote3,
+                            new THREE.Vector3(4, -2, -8)
+                        );
+                        imageMesh.add(detail3);
+                    }
+                }
+
                 // Ajuster la position en fonction du layout
                 if (responsive.verticalLayout) {
                     imageMesh.position.set(0, responsive.mainFragmentY, data.position.z);
@@ -351,55 +418,6 @@ export class PortalTransitionScene extends SceneSetup {
                 }
 
                 this.scene.add(imageMesh);
-
-                // Fragments de détail avec échelle responsive
-                const detailGeometry = new THREE.PlaneGeometry(
-                    4 * data.scale * responsive.detailsScale,
-                    4 * data.scale * responsive.detailsScale,
-                    50,
-                    50
-                );
-                
-                // Premier détail avec image2
-                const detail1 = new THREE.Mesh(
-                    detailGeometry,
-                    new THREE.MeshBasicMaterial({
-                        map: texture2,
-                        transparent: true,
-                        opacity: 0.7,
-                        side: THREE.DoubleSide
-                    })
-                );
-                
-                // Deuxième détail avec image3
-                const detail2 = new THREE.Mesh(
-                    detailGeometry,
-                    new THREE.MeshBasicMaterial({
-                        map: texture3,
-                        transparent: true,
-                        opacity: 0.7,
-                        side: THREE.DoubleSide
-                    })
-                );
-
-                // Positionner les détails en fonction du layout
-                if (responsive.verticalLayout) {
-                    // En mobile, les détails vont en haut, plus centrés
-                    detail1.position.set(-2, 4, -3); // Premier fragment à gauche
-                    detail2.position.set(2, 4, -5);  // Second fragment à droite et légèrement plus loin
-                } else {
-                    // En desktop, garder la disposition originale
-                    const detailOffset = data.exitDirection === 'left' ? 8 * data.scale : -8 * data.scale;
-                    detail1.position.set(detailOffset, 2 * data.scale, -5);
-                    detail2.position.set(detailOffset * 1.2, -2 * data.scale, -8);
-                }
-
-                // Ajouter une légère rotation aux détails
-                detail1.rotation.z = responsive.verticalLayout ? 0.1 : (data.exitDirection === 'left' ? 0.2 : -0.2);
-                detail2.rotation.z = responsive.verticalLayout ? -0.1 : (data.exitDirection === 'left' ? -0.3 : 0.3);
-
-                imageMesh.add(detail1);
-                imageMesh.add(detail2);
                 
                 // Modification de la création du conteneur de texte
                 const textContainer = document.createElement('div');
