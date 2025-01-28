@@ -23,8 +23,47 @@ class MirrorBreakEffect extends SceneSetup {
     // Initialisation du gestionnaire de fragments
     this.fragmentManager = new FragmentManager(this);
 
+    // Ajouter l'écouteur pour le bouton back
+    this.handleBackButton = this.handleBackButton.bind(this);
+    window.addEventListener('popstate', this.handleBackButton);
+
     // Initialiser l'environnement
     this.init();
+  }
+
+  handleBackButton(event) {
+    console.log("Back button pressed - Réinitialisation complète de la scène");
+    // Forcer une réinitialisation complète
+    this.fullReset();
+  }
+
+  async fullReset() {
+    // Arrêter toute animation en cours
+    this.isAnimating = false;
+    
+    // Nettoyer complètement la scène actuelle
+    this.cleanup();
+    
+    // Nettoyer le conteneur
+    const container = document.getElementById("scene-container");
+    if (container) {
+      while (container.firstChild) {
+        container.removeChild(container.firstChild);
+      }
+    }
+    
+    // Réinitialiser tous les états
+    this.isBreaking = false;
+    this.isFragmentSelected = false;
+    this.mirror = null;
+    this.isInitialized = false;
+    this.fragmentManager = null;
+    
+    // Recréer le fragment manager
+    this.fragmentManager = new FragmentManager(this);
+    
+    // Réinitialiser la scène
+    await this.init();
   }
 
   async init() {
@@ -34,8 +73,46 @@ class MirrorBreakEffect extends SceneSetup {
         this.cleanup();
       }
 
+      // Réinitialiser la scène de base
+      this.scene = new THREE.Scene();
+      this.camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
+      
+      // Recréer le renderer
+      const container = document.getElementById("scene-container");
+      if (container) {
+        // Nettoyer le container
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+        
+        // Créer un nouveau renderer
+        this.renderer = new THREE.WebGLRenderer({ 
+          antialias: true,
+          alpha: true
+        });
+        this.renderer.setSize(window.innerWidth, window.innerHeight);
+        this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.setClearColor(0x000000, 1);
+        container.appendChild(this.renderer.domElement);
+      }
+
+      // Configurer la caméra
+      this.camera.position.set(0, 0, 5);
+      this.camera.lookAt(0, 0, 0);
+
+      // Configurer les contrôles
+      this.setupControls();
+
       // Configurer les lumières
       await this.setupLights();
+      
+      // Réinitialiser le fragment manager
+      this.fragmentManager = new FragmentManager(this);
       
       // Charger le modèle du miroir
       await this.fragmentManager.loadMirrorModel();
@@ -263,17 +340,28 @@ class MirrorBreakEffect extends SceneSetup {
   }
 
   cleanup() {
+    console.log("Nettoyage de MirrorBreakEffect");
+    
+    // Nettoyer les éléments UI
     this.cleanupUIElements();
 
     // Nettoyer les événements
     document.removeEventListener("click", this.handleClick);
-    window.removeEventListener("mousemove", this.fragmentManager.onMouseMove);
+    window.removeEventListener("mousemove", this.fragmentManager?.onMouseMove);
     window.removeEventListener("resize", this.onWindowResize);
+
+    // Arrêter l'animation
+    this.isAnimating = false;
+
+    // Nettoyer le fragment manager
+    if (this.fragmentManager) {
+      this.fragmentManager = null;
+    }
 
     // Nettoyer la scène
     if (this.scene) {
-      // Nettoyer tous les objets de la scène
-      this.scene.traverse((object) => {
+      while(this.scene.children.length > 0) {
+        const object = this.scene.children[0];
         if (object.geometry) {
           object.geometry.dispose();
         }
@@ -284,20 +372,42 @@ class MirrorBreakEffect extends SceneSetup {
             object.material.dispose();
           }
         }
-      });
-
-      // Vider la scène
-      while(this.scene.children.length > 0) {
-        this.scene.remove(this.scene.children[0]);
+        this.scene.remove(object);
       }
+      this.scene = null;
+    }
+
+    // Nettoyer le renderer
+    if (this.renderer) {
+      this.renderer.dispose();
+      this.renderer.forceContextLoss();
+      const gl = this.renderer.getContext();
+      if (gl) {
+        const loseContext = gl.getExtension('WEBGL_lose_context');
+        if (loseContext) loseContext.loseContext();
+      }
+      this.renderer.domElement.remove();
+      this.renderer = null;
+    }
+
+    // Nettoyer les contrôles
+    if (this.controls) {
+      this.controls.dispose();
+      this.controls = null;
+    }
+
+    // Nettoyer la caméra
+    if (this.camera) {
+      this.camera = null;
     }
 
     // Réinitialiser les états
     this.isBreaking = false;
     this.isFragmentSelected = false;
     this.mirror = null;
-    this.isAnimating = false;
     this.isInitialized = false;
+
+    console.log("Nettoyage terminé");
   }
 }
 

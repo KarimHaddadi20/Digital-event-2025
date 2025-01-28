@@ -4,6 +4,21 @@ class Loader {
     constructor() {
         this.CUBE_COUNT = 7;
         this.cubes = [];
+        this.mirrorEffect = null;
+        this.init();
+
+        // Ajouter l'écouteur pour le bouton back
+        window.addEventListener('popstate', () => this.handleBackButton());
+    }
+
+    handleBackButton() {
+        console.log("Loader: Back button pressed - Réinitialisation");
+        if (this.mirrorEffect) {
+            // Nettoyer l'ancienne instance
+            this.mirrorEffect.cleanup();
+            this.mirrorEffect = null;
+        }
+        // Réinitialiser le loader
         this.init();
     }
 
@@ -168,41 +183,26 @@ class Loader {
                 },
                 onComplete: async () => {
                     try {
+                        // Nettoyer l'ancienne instance si elle existe
+                        if (this.mirrorEffect) {
+                            this.mirrorEffect.cleanup();
+                            this.mirrorEffect = null;
+                        }
+
                         // Précharger la scène du miroir
                         const { MirrorBreakEffect } = await import('./MirrorBreakEffect.js');
-                        const mirrorEffect = new MirrorBreakEffect();
+                        this.mirrorEffect = new MirrorBreakEffect();
                         
                         // Timeout de sécurité de 3 secondes
                         const timeout = setTimeout(() => {
-                            const loadingContainer = document.getElementById('loading-container');
-                            const mainContent = document.getElementById('main-content');
-                            const navbar = document.querySelector('.navbar');
-                            const footer = document.querySelector('.footer');
-
-                            if (loadingContainer) loadingContainer.remove();
-                            if (mainContent) mainContent.style.display = 'block';
-                            if (navbar) navbar.style.display = 'block';
-                            if (footer) footer.style.display = 'block';
-
-                            window.mirrorEffect = mirrorEffect;
+                            this.finishLoading();
                             resolve();
                         }, 1000);
                         
                         // Une fois que la scène est prête
-                        mirrorEffect.onReady = () => {
+                        this.mirrorEffect.onReady = () => {
                             clearTimeout(timeout);
-                            
-                            const loadingContainer = document.getElementById('loading-container');
-                            const mainContent = document.getElementById('main-content');
-                            const navbar = document.querySelector('.navbar');
-                            const footer = document.querySelector('.footer');
-
-                            if (loadingContainer) loadingContainer.remove();
-                            if (mainContent) mainContent.style.display = 'block';
-                            if (navbar) navbar.style.display = 'block';
-                            if (footer) footer.style.display = 'block';
-
-                            window.mirrorEffect = mirrorEffect;
+                            this.finishLoading();
                             resolve();
                         };
                     } catch (error) {
@@ -213,6 +213,20 @@ class Loader {
                 ease: "power1.inOut"
             });
         });
+    }
+
+    finishLoading() {
+        const loadingContainer = document.getElementById('loading-container');
+        const mainContent = document.getElementById('main-content');
+        const navbar = document.querySelector('.navbar');
+        const footer = document.querySelector('.footer');
+
+        if (loadingContainer) loadingContainer.remove();
+        if (mainContent) mainContent.style.display = 'block';
+        if (navbar) navbar.style.display = 'block';
+        if (footer) footer.style.display = 'block';
+
+        window.mirrorEffect = this.mirrorEffect;
     }
 
     setupCamera() {
