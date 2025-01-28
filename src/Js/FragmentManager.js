@@ -60,13 +60,13 @@ class FragmentManager {
       "Video Mapping": "src/textures/video.mapping.webp",
       "Creative Coding": "src/textures/creative.coding.webp",
       "Gaming & Pop-corn": "src/textures/gaming.popcorn.webp",
-      Video: "src/textures/video.studio.webp",
+      "Video": "src/textures/video.studio.webp",
       "Escape game": "src/textures/espace.game.webp",
-      Podcast: "src/textures/podcast.webp",
-      "Photo reportage": "src/textures/photo.reportage.webp",
+      "Podcast": "src/textures/podcast.webp",
+      "Photo reportage": "src/textures/photography.webp",
       "AI Driven visual stories": "src/textures/ai.driven.visual.stories.webp",
       "Game design": "src/textures/game.design.webp",
-      Organisation: "src/textures/organisation.webp",
+      "Organisation": "src/textures/organisation.webp",
     };
     this.atelierNames = [
       "Site web",
@@ -339,8 +339,6 @@ class FragmentManager {
     window.addEventListener("mousemove", this.onMouseMove);
     window.addEventListener("click", this.handleFragmentClick);
 
-    this.app.camera.position.z = 5;
-
     // Activer les clics sur les fragments après un court délai
     setTimeout(() => {
       this.fragments.forEach((fragment) => {
@@ -511,17 +509,17 @@ class FragmentManager {
     const index = fragment.userData.index;
 
     const finalPositions = [
-      { x: -30, y: -140, z: 0 },
-      { x: 0, y: -145, z: 0 },
-      { x: 35, y: -145, z: 0 },
-      { x: -30, y: -90, z: 0 },
-      { x: 0, y: -90, z: 0 },
-      { x: 35, y: -100, z: 0 },
-      { x: -30, y: -40, z: 0 },
-      { x: 0, y: -40, z: 0 },
-      { x: 35, y: -45, z: 0 },
-      { x: -20, y: -10, z: 0 },
-      { x: 35, y: -10, z: 0 },
+      { x: -30, y: -140, z: -5 },
+      { x: 0, y: -145, z: -5 },
+      { x: 35, y: -145, z: -5 },
+      { x: -30, y: -90, z: -5 },
+      { x: 0, y: -90, z: -5 },
+      { x: 35, y: -100, z: -5 },
+      { x: -30, y: -40, z: -5 },
+      { x: 0, y: -40, z: -5 },
+      { x: 35, y: -45, z: -5 },
+      { x: -20, y: -10, z: -5 },
+      { x: 35, y: -10, z: -5 },
     ];
 
     const finalPosition = this.app.camera.position.clone();

@@ -49,12 +49,59 @@ class SceneSetup {
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.05;
     this.controls.enableZoom = false;
-    this.controls.enablePan = true;
+    this.controls.enablePan = false;
     this.controls.enableRotate = true;
+    this.controls.autoRotate = false;
+    
+    // Activer la rotation sans clic
+    this.controls.mouseButtons = {
+      LEFT: THREE.MOUSE.ROTATE,
+      MIDDLE: THREE.MOUSE.DOLLY,
+      RIGHT: THREE.MOUSE.PAN
+    };
+    this.controls.touches = {
+      ONE: THREE.TOUCH.ROTATE,
+      TWO: THREE.TOUCH.DOLLY_PAN
+    };
+    this.controls.screenSpacePanning = true;
+    this.controls.listenToKeyEvents = false;
+
+    // Limites de rotation
+    this.controls.minPolarAngle = Math.PI / 2.5; // Environ 72 degrés
+    this.controls.maxPolarAngle = Math.PI / 1.7; // Environ 108 degrés
+    this.controls.minAzimuthAngle = -Math.PI / 8; // -22.5 degrés
+    this.controls.maxAzimuthAngle = Math.PI / 8; // 22.5 degrés
 
     this.controls.minDistance = 50;
     this.controls.maxDistance = 200;
     this.controls.rotateSpeed = 0.5;
+
+    // Suivre le curseur
+    window.addEventListener('mousemove', (e) => {
+      if (!this.controls.enabled) return;
+
+      // Convertir la position de la souris en coordonnées normalisées (-1 à 1)
+      const x = (e.clientX / window.innerWidth) * 2 - 1;
+      const y = -(e.clientY / window.innerHeight) * 2 + 1;
+
+      // Calculer l'angle de rotation en fonction de la position de la souris
+      const targetX = x * Math.PI / 4; // 45 degrés max de rotation
+      const targetY = y * Math.PI / 4;
+
+      // Mettre à jour la position cible de la caméra
+      this.controls.target.x = Math.sin(targetX) * 10;
+      this.controls.target.y = Math.sin(targetY) * 10;
+
+      // Forcer la mise à jour des contrôles
+      this.controls.update();
+    });
+
+    // Empêcher la désactivation du contrôle au relâchement du clic
+    this.controls.domElement.addEventListener('mouseup', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    });
   }
 
   setupLights() {
@@ -81,25 +128,6 @@ class SceneSetup {
     frontLight.penumbra = 0.7;
     this.scene.add(frontLight);
   }
-
-  // loadHDRI() {
-  //   const rgbeLoader = new RGBELoader();
-  //   rgbeLoader.load("src/assets/grey2.hdr", (texture) => {
-  //     texture.mapping = THREE.EquirectangularReflectionMapping;
-
-  //     // Create PMREMGenerator for better reflections
-  //     const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
-  //     const envMap = pmremGenerator.fromEquirectangular(texture).texture;
-
-  //     // Apply environment but keep black background
-  //     this.scene.environment = envMap;
-  //     this.scene.background = new THREE.Color(0x000000);
-
-  //     // Dispose resources
-  //     texture.dispose();
-  //     pmremGenerator.dispose();
-  //   });
-  // }
 
   setupBackground() {
     const textureLoader = new THREE.TextureLoader();
@@ -131,47 +159,6 @@ class SceneSetup {
       }
     );
   }
-
-  // setupEnvironment() {
-  //   // Clear any existing environment
-  //   if (this.scene.environment) {
-  //     this.scene.environment.dispose();
-  //   }
-
-  //   const textureLoader = new THREE.TextureLoader();
-  //   console.log("Loading texture from: src/textures/espace.game.png");
-
-  //   textureLoader.load(
-  //     "src/textures/espace.game.png",
-  //     (texture) => {
-  //       console.log("Texture loaded successfully");
-
-  //       // Configure texture
-  //       texture.encoding = THREE.sRGBEncoding;
-  //       texture.mapping = THREE.EquirectangularReflectionMapping;
-  //       texture.needsUpdate = true;
-
-  //       // Generate environment map
-  //       const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
-  //       pmremGenerator.compileEquirectangularShader();
-
-  //       const envMap = pmremGenerator.fromEquirectangular(texture).texture;
-
-  //       // Apply to scene - both as environment and background
-  //       this.scene.environment = envMap;
-  //       this.scene.background = envMap;
-
-  //       console.log("Environment set up complete");
-
-  //       // Cleanup
-  //       pmremGenerator.dispose();
-  //     },
-  //     undefined, // onProgress callback
-  //     (error) => {
-  //       console.error("Error loading texture:", error);
-  //     }
-  //   );
-  // }
 
   onResize() {
     this.camera.aspect = window.innerWidth / window.innerHeight;
