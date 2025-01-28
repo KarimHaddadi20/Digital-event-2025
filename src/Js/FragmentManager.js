@@ -839,6 +839,10 @@ class FragmentManager {
         this.showVoyagerButton();
         this.updateEnvironment(clickedFragment.userData.atelierName);
 
+        // Garder la position actuelle de la caméra
+        const currentCameraPosition = this.app.camera.position.clone();
+        const currentCameraRotation = this.app.camera.rotation.clone();
+
         if (this.fragmentInstructions) {
           const titleElement =
             this.fragmentInstructions.querySelector(".instruction-title");
