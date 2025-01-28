@@ -27,20 +27,18 @@
                 "title": "Résonance Spatiale",
                 "subtitle": "L'écho des dimensions parallèles",
                 "image1": "src/photo/A/A4-01.jpg",
-                "quote1": "L'écho des dimensions parallèles"
-            },
-            {
-                "image1": "src/photo/A/A4-02.jpg",
-                "quote2": "L'écho des dimensions parallèles"
-            },
-            {
+                "quote1": "L'écho des dimensions parallèles",
+                "image2": "src/photo/A/A4-02.jpg",
+                "quote2": "L'écho des dimensions parallèles",
                 "image3": "src/photo/A/A4-03.jpg",
                 "quote3": "L'écho des dimensions parallèles"
             },
+
             {
                 "title": "Convergence",
                 "subtitle": "Le point de rencontre des réalités",
                 "image1": "src/photo/A/A4-01.jpg",
+                "team": "Voir l'équipe",
                 "students": [
                     {
                         "nom": "Bona",
@@ -178,6 +176,7 @@
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
+                "team": "Voir l'équipe",
                 "students": [
                     {
                         "nom": "Courjean",
@@ -370,6 +369,7 @@
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
+                "team": "Voir l'équipe",
                 "students": [
                     {
                         "nom": "Gaborit",
@@ -502,6 +502,7 @@
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
+                "team": "Voir l'équipe",
                     "students": [
                         {
                         "nom": "Mougenot",
@@ -714,6 +715,7 @@
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
+                "team": "Voir l'équipe",
                "students": [
                     {
                         "nom": "Yessad",
@@ -941,6 +943,7 @@
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
+                "team": "Voir l'équipe",
                 "students": [
                     {
                         "nom": "Quélavoine",
@@ -1198,6 +1201,7 @@
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
+                "team": "Voir l'équipe",
                 "students": [
                     {
                         "nom": "Le Goff",
@@ -1345,6 +1349,7 @@
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
+                "team": "Voir l'équipe",
                 "students": [
                     {
                     "nom": "Ghannouchi",
@@ -1540,6 +1545,7 @@
             {
                 "title": "Convergence",
                 "subtitle": "Le point de rencontre des réalités",
+                "team": "Voir l'équipe",
                 "students": [
                     {
                     "nom": "Niamkey",
@@ -1702,7 +1708,132 @@
             },
             {
                 "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels"
+                "subtitle": "L'orchestration des éléments visuels",
+                "team": "Voir l'équipe",
+                    "students": [
+                      {
+                        "nom": "Assailly",
+                        "prenom": "Mathilde",
+                        "classe": "B1 CPD"
+                      },
+                      {
+                        "nom": "Luiz",
+                        "prenom": "Humbert",
+                        "classe": "B1 CPD"
+                      },
+                      {
+                        "nom": "Brenner",
+                        "prenom": "Camille",
+                        "classe": "B1 CPD"
+                      },
+                      {
+                        "nom": "Edjekouane",
+                        "prenom": "Lyam",
+                        "classe": "B1 CPD"
+                      },
+                      {
+                        "nom": "Jeyakumar",
+                        "prenom": "Sadurshan",
+                        "classe": "B1 CPD"
+                      },
+                      {
+                        "nom": "Lebghil",
+                        "prenom": "Dounia",
+                        "classe": "B1 CPD"
+                      },
+                  
+                      {
+                        "nom": "Gondard",
+                        "prenom": "Léo",
+                        "classe": "B2 CPD"
+                      },
+                      {
+                        "nom": "Marinet",
+                        "prenom": "Elie",
+                        "classe": "B2 CPD"
+                      },
+                      {
+                        "nom": "Martin Maxwell",
+                        "prenom": "Noé",
+                        "classe": "B2 CPD"
+                      },
+                      {
+                        "nom": "Mandi",
+                        "prenom": "Anissa",
+                        "classe": "B2 CPD"
+                      },
+                  
+                      {
+                        "nom": "Liu",
+                        "prenom": "Charlie",
+                        "classe": "B3 CI"
+                      },
+                      {
+                        "nom": "Beucher",
+                        "prenom": "Joyce",
+                        "classe": "B3 CI"
+                      },
+                      {
+                        "nom": "Elharras",
+                        "prenom": "Oussama",
+                        "classe": "B3 CI"
+                      },
+                  
+                      {
+                        "nom": "Cerqueira de Almeida",
+                        "prenom": "Patricia",
+                        "classe": "B3 DESIGN"
+                      },
+                      {
+                        "nom": "Callies",
+                        "prenom": "Océane",
+                        "classe": "B3 DESIGN"
+                      },
+                      {
+                        "nom": "Azoulai",
+                        "prenom": "Léo",
+                        "classe": "B3 DESIGN"
+                      },
+                      {
+                        "nom": "Penichon",
+                        "prenom": "Rémy",
+                        "classe": "B3 DESIGN"
+                      },
+                  
+                      {
+                        "nom": "Weber",
+                        "prenom": "Aurore",
+                        "classe": "B3 MARKET"
+                      },
+                  
+                      {
+                        "nom": "Calippe",
+                        "prenom": "Manon",
+                        "classe": "M1 UX/UI"
+                      },
+                      {
+                        "nom": "Seck",
+                        "prenom": "Coumba",
+                        "classe": "M1 UX/UI"
+                      },
+                      {
+                        "nom": "Botran",
+                        "prenom": "Célia",
+                        "classe": "M1 UX/UI"
+                      },
+                  
+                      {
+                        "nom": "Gibot",
+                        "prenom": "Paul",
+                        "classe": "M1 VIDEO"
+                      },
+                  
+                      {
+                        "nom": "Pham",
+                        "prenom": "Sonia",
+                        "classe": "INTERVENANT"
+                      }
+                    ]
             }
         ]
     },
@@ -1743,6 +1874,7 @@
             {
                 "title": "Symphonie Visuelle",
                 "subtitle": "L'orchestration des éléments visuels",
+                "team": "Voir l'équipe",
                  "students": [
                     {
                     "nom": "Drissi el bouzaidi",
