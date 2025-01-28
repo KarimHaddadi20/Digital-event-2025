@@ -91,6 +91,7 @@ class FragmentManager {
     this.isMobile = window.innerWidth <= 768;
     this.footerElements = document.querySelectorAll('.footer-right p');
     this.soundIcon = document.querySelector('.footer-left');
+    this.fragmentSelectSound = document.getElementById('fragment-select-sound');
   }
 
   setupUI() {
@@ -850,6 +851,9 @@ class FragmentManager {
           this.resetFragmentPosition(this.selectedFragment);
         }
 
+        this.fragmentSelectSound.currentTime = 0;
+        this.fragmentSelectSound.volume = 0.3;
+        this.fragmentSelectSound.play();
         this.selectedFragment = clickedFragment;
         this.moveFragmentForward(clickedFragment, 10);
         this.showVoyagerButton();
