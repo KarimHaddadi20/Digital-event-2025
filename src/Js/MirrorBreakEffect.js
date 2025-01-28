@@ -160,6 +160,8 @@ class MirrorBreakEffect extends SceneSetup {
         }
 
         this.mirrorBreakSound.currentTime = 0;
+        this.mirrorBreakSound.volume = 0.3; // Set volume to 30%
+
         this.mirrorBreakSound.play();
         this.fragmentManager.breakMirror();
         this.isBroken = true;
