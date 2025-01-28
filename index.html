@@ -74,13 +74,14 @@
     <footer class="footer" style="display: none">
       <div class="footer-content">
        <div class="footer-left">
-        <audio id="background-music" autoplay>
+        <audio id="background-music" autoplay loop>
           <source src="src/sound/sample home..mp3" type="audio/mpeg">
           Votre navigateur ne supporte pas l'élément audio.
       </audio>
       <audio id="mirror-break-sound">
         <source src="src/sound/sound effect mirror crash.mp3" type="audio/mpeg">
     </audio>
+  
   <img
     src="src/assets/icons/icn_sound.svg"
     alt="Sound icon"
@@ -169,7 +170,8 @@
     <script>
   document.addEventListener('DOMContentLoaded', function() {
     const music = document.getElementById('background-music');
-    
+        music.volume = 0.2; // Set volume to 20%
+
     // Tentative de lecture automatique
     const playPromise = music.play();
     if (playPromise !== undefined) {
