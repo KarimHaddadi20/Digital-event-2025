@@ -42,7 +42,7 @@ class FragmentManager {
         map: texture,
         side: THREE.BackSide,
         transparent: true,
-        opacity: 1
+        opacity: 1,
       });
 
       this.envMesh = new THREE.Mesh(geometry, material);
@@ -60,13 +60,13 @@ class FragmentManager {
       "Video Mapping": "src/textures/video.mapping.webp",
       "Creative Coding": "src/textures/creative.coding.webp",
       "Gaming & Pop-corn": "src/textures/gaming.popcorn.webp",
-      "Video": "src/textures/video.studio.webp",
+      Video: "src/textures/video.studio.webp",
       "Escape game": "src/textures/espace.game.webp",
-      "Podcast": "src/textures/podcast.webp",
+      Podcast: "src/textures/podcast.webp",
       "Photo reportage": "src/textures/photography.webp",
       "AI Driven visual stories": "src/textures/ai.driven.visual.stories.webp",
       "Game design": "src/textures/game.design.webp",
-      "Organisation": "src/textures/organisation.webp",
+      Organisation: "src/textures/organisation.webp",
     };
     this.atelierNames = [
       "Site web",
@@ -89,10 +89,10 @@ class FragmentManager {
 
     // Ajout des propriétés pour le responsive
     this.isMobile = window.innerWidth <= 768;
-    this.footerElements = document.querySelectorAll('.footer-right p');
-    this.soundIcon = document.querySelector('.footer-left');
-    this.fragmentSelectSound = document.getElementById('fragment-select-sound');
-    this.buttonPressSound = document.getElementById('button-press-sound');
+    this.footerElements = document.querySelectorAll(".footer-right p");
+    this.soundIcon = document.querySelector(".footer-left");
+    this.fragmentSelectSound = document.getElementById("fragment-select-sound");
+    this.buttonPressSound = document.getElementById("button-press-sound");
   }
 
   setupUI() {
@@ -152,16 +152,16 @@ class FragmentManager {
         this.buttonPressSound.currentTime = 0;
         this.buttonPressSound.volume = 0.1;
         this.buttonPressSound.play();
-        
+
         this.hideVoyagerButton();
         this.animateFragmentFall(this.selectedFragment);
-        
+
         // Désactiver les contrôles de la caméra
         this.app.controls.enabled = false;
-        
+
         // Bloquer le suivi du curseur
         this.app.isNavigating = true;
-        
+
         // // Réinitialiser la position de la caméra
         // window.gsap.to(this.app.camera.position, {
         //   x: 0,
@@ -177,7 +177,7 @@ class FragmentManager {
           y: 0,
           z: 0,
           duration: 1.5,
-          ease: "power2.inOut"
+          ease: "power2.inOut",
         });
       }
     });
@@ -187,7 +187,7 @@ class FragmentManager {
     // Ajout de la gestion responsive
     const handleResponsive = () => {
       const isMobile = window.innerWidth <= 768;
-      
+
       if (isMobile) {
         // Ajuster le style du bouton pour mobile
         this.voyagerButton.style.cssText = `
@@ -213,8 +213,8 @@ class FragmentManager {
 
     // Appliquer le responsive
     handleResponsive();
-    window.addEventListener('resize', handleResponsive);
-    window.addEventListener('resize', () => {
+    window.addEventListener("resize", handleResponsive);
+    window.addEventListener("resize", () => {
       this.isMobile = window.innerWidth <= 768;
       if (this.selectedFragment) {
         this.hideLegalNotices();
@@ -248,25 +248,6 @@ class FragmentManager {
             -center.y * scale + 35,
             -240
           );
-
-          // this.app.mirror.traverse((child) => {
-          //   if (child.isMesh) {
-          //     child.material = new THREE.MeshPhysicalMaterial({
-          //       metalness: 0,
-          //       roughness: 0,
-          //       transmission: 0,
-          //       thickness: 0,
-          //       envMap: this.app.scene.environment,
-          //       envMapIntensity: 0,
-          //       clearcoat: 0,
-          //       clearcoatRoughness: 0,
-          //       transparent: true,
-          //       opacity: 0,
-          //       side: THREE.DoubleSide,
-          //       depthWrite: true,
-          //     });
-          //   }
-          // });
 
           this.app.mirror.traverse((child) => {
             if (child.isMesh) {
@@ -348,13 +329,13 @@ class FragmentManager {
                 iridescence: 0, // Intensité de l'iridescence
                 // Propriétés de réflexion
                 envMap: this.app.scene.environment, // Texture d'environnement pour les reflets
-                envMapIntensity: 1, // Intensité des reflets de l'environnement
+                envMapIntensity: 1.5, // Intensité des reflets de l'environnement
                 // Propriétés de revêtement
                 clearcoat: 0, // Couche de vernis (0 = aucune, 1 = maximum)
                 clearcoatRoughness: 0, // Rugosité de la couche de vernis
                 // Propriétés de rendu
                 transparent: true, // Active/désactive la transparence
-                opacity: 0.5, // 1 = totalement opaque, 0 = invisible
+                opacity: 0.8, // 1 = totalement opaque, 0 = invisible
                 side: THREE.DoubleSide, // Rendre les deux côtés du matériau
                 depthWrite: true, // Écriture dans le buffer de profondeur
               });
@@ -671,7 +652,7 @@ class FragmentManager {
         map: texture,
         side: THREE.BackSide,
         transparent: true,
-        opacity: 0
+        opacity: 0,
       });
 
       const newEnvMesh = new THREE.Mesh(geometry, material);
@@ -759,7 +740,7 @@ class FragmentManager {
       }
 
       if (fragmentObject.userData && fragmentObject.userData.atelierName) {
-        document.body.style.cursor = 'pointer';
+        document.body.style.cursor = "pointer";
         if (fragmentObject === this.selectedFragment) return;
 
         if (this.hoveredFragment !== fragmentObject) {
@@ -779,7 +760,7 @@ class FragmentManager {
         }
       }
     } else {
-      document.body.style.cursor = 'default';
+      document.body.style.cursor = "default";
       if (
         this.hoveredFragment &&
         this.hoveredFragment !== this.selectedFragment
@@ -872,8 +853,10 @@ class FragmentManager {
         if (this.fragmentInstructions) {
           const titleElement =
             this.fragmentInstructions.querySelector(".instruction-title");
-          const subtitleElement = this.fragmentInstructions.querySelector(".instruction-subtitle");
-          
+          const subtitleElement = this.fragmentInstructions.querySelector(
+            ".instruction-subtitle"
+          );
+
           if (titleElement) {
             titleElement.innerHTML = `
               <span class="font-aktiv">${clickedFragment.userData.atelierName}</span>
@@ -883,11 +866,13 @@ class FragmentManager {
 
           // Mettre à jour le sous-titre avec la description de l'atelier
           if (subtitleElement) {
-            fetch('/src/data/description.json')
-              .then(response => response.json())
-              .then(data => {
+            fetch("/src/data/description.json")
+              .then((response) => response.json())
+              .then((data) => {
                 const atelierName = clickedFragment.userData.atelierName;
-                const description = data[atelierName]?.description || "Découvrez les ateliers en détail";
+                const description =
+                  data[atelierName]?.description ||
+                  "Découvrez les ateliers en détail";
                 subtitleElement.textContent = description;
               });
           }
@@ -996,11 +981,11 @@ class FragmentManager {
   // Nouvelle méthode pour cacher les mentions légales
   hideLegalNotices() {
     if (this.isMobile) {
-      this.footerElements.forEach(element => {
-        element.style.transition = 'opacity 0.3s ease';
-        element.style.opacity = '0';
+      this.footerElements.forEach((element) => {
+        element.style.transition = "opacity 0.3s ease";
+        element.style.opacity = "0";
         setTimeout(() => {
-          element.style.display = 'none';
+          element.style.display = "none";
         }, 300);
       });
     }
@@ -1009,11 +994,11 @@ class FragmentManager {
   // Nouvelle méthode pour centrer l'icône son
   centerSoundIcon() {
     if (window.innerWidth <= 768) {
-      this.soundIcon.style.position = 'fixed';
-      this.soundIcon.style.left = '50%';
-      this.soundIcon.style.bottom = '10px';
-      this.soundIcon.style.transform = 'translateX(-50%)';
-      this.soundIcon.style.transition = 'all 0.3s ease';
+      this.soundIcon.style.position = "fixed";
+      this.soundIcon.style.left = "50%";
+      this.soundIcon.style.bottom = "10px";
+      this.soundIcon.style.transform = "translateX(-50%)";
+      this.soundIcon.style.transition = "all 0.3s ease";
     }
   }
 }
