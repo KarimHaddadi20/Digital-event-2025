@@ -25,30 +25,31 @@ class MirrorBreakEffect extends SceneSetup {
     // Initialiser l'environnement
     this.onReady = () => {
       // Ajouter les instructions
-      const container = document.createElement('div');
-      container.className = 'mirror-instructions';
-      container.textContent = 'Cassez le miroir';
+      const container = document.createElement("div");
+      container.className = "mirror-instructions";
+      container.textContent = "Cassez le miroir";
       document.body.appendChild(container);
 
-      const fragmentInstructions = document.createElement('div');
-      fragmentInstructions.className = 'fragment-instructions';
-      fragmentInstructions.textContent = 'Cliquez sur un fragment pour découvrir son atelier';
-      fragmentInstructions.style.display = 'none';
+      const fragmentInstructions = document.createElement("div");
+      fragmentInstructions.className = "fragment-instructions";
+      fragmentInstructions.textContent =
+        "Cliquez sur un fragment pour découvrir son atelier";
+      fragmentInstructions.style.display = "none";
       document.body.appendChild(fragmentInstructions);
 
       if (this.startBroken) {
         console.log("Cassure automatique du miroir...");
         // Cacher les instructions du miroir et afficher les instructions des fragments
-        container.style.display = 'none';
-        fragmentInstructions.style.display = 'block';
-        
+        container.style.display = "none";
+        fragmentInstructions.style.display = "block";
+
         // Casser le miroir
         this.mirror.visible = false;
         this.isBreaking = true;
         this.fragmentManager.breakMirror();
       }
     };
-    
+
     this.setupScene();
   }
 
@@ -69,7 +70,7 @@ class MirrorBreakEffect extends SceneSetup {
     // Charger le modèle du miroir
     this.fragmentManager.loadMirrorModel().then(() => {
       modelLoaded = true;
-      
+
       if (this.onReady) {
         this.onReady();
       }
@@ -104,8 +105,22 @@ class MirrorBreakEffect extends SceneSetup {
   }
 
   handleClick(event) {
+    // First check if the menu is open
+    const sideMenu = document.getElementById("side-menu");
+    if (sideMenu.classList.contains("open")) {
+      return; // Exit early if menu is open
+    }
+
+    // Check if clicked element is the burger menu
+    if (
+      event.target.closest("#burger-menu") ||
+      event.target.closest("#side-menu")
+    ) {
+      return; // Exit early if clicking menu elements
+    }
+
     if (this.isBroken) return;
-    
+
     if (!this.isBreaking && this.mirror) {
       // Créer un raycaster pour détecter le clic sur le miroir
       const mouse = new THREE.Vector2();
@@ -134,11 +149,11 @@ class MirrorBreakEffect extends SceneSetup {
 
         this.fragmentManager.breakMirror();
         this.isBroken = true;
-        
+
         // Déclencher l'événement mirrorBroken
-        const mirrorBrokenEvent = new Event('mirrorBroken');
+        const mirrorBrokenEvent = new Event("mirrorBroken");
         document.dispatchEvent(mirrorBrokenEvent);
-        
+
         return;
       }
     }
