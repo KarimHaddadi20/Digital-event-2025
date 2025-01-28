@@ -125,24 +125,24 @@ class FragmentManager {
     `;
     document.body.appendChild(this.voyagerButton);
 
-    // Créer l'élément de texte pour le nom de l'atelier
-    this.textElement = document.createElement("div");
-    this.textElement.style.cssText = `
-      display: none;
-      opacity: 0;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      font-family: 'Aktiv Grotesk', sans-serif;
-      font-size: 24px;
-      text-align: center;
-      pointer-events: none;
-      z-index: 1000;
-      transition: opacity 0.3s ease;
-    `;
-    document.body.appendChild(this.textElement);
+    // // Créer l'élément de texte pour le nom de l'atelier
+    // this.textElement = document.createElement("div");
+    // this.textElement.style.cssText = `
+    //   display: none;
+    //   opacity: 0;
+    //   position: fixed;
+    //   top: 50%;
+    //   left: 50%;
+    //   transform: translate(-50%, -50%);
+    //   color: white;
+    //   font-family: 'Aktiv Grotesk', sans-serif;
+    //   font-size: 24px;
+    //   text-align: center;
+    //   pointer-events: none;
+    //   z-index: 1000;
+    //   transition: opacity 0.3s ease;
+    // `;
+    // document.body.appendChild(this.textElement);
 
     // Ajouter l'événement click sur le bouton Voyager
     // Gestion du clic
