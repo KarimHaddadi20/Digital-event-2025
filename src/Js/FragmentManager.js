@@ -61,7 +61,7 @@ class FragmentManager {
       "Creative Coding": "src/textures/creative.coding.webp",
       "Gaming & Pop-corn": "src/textures/gaming.popcorn.webp",
       Video: "src/textures/video.studio.webp",
-      "Escape game": "src/textures/espace.game.webp",
+      "Escape game": "src/textures/escape.game.webp",
       Podcast: "src/textures/podcast.webp",
       "Photo reportage": "src/textures/photography.webp",
       "AI Driven visual stories": "src/textures/ai.driven.visual.stories.webp",
@@ -335,7 +335,7 @@ class FragmentManager {
                 clearcoatRoughness: 0, // Rugosité de la couche de vernis
                 // Propriétés de rendu
                 transparent: true, // Active/désactive la transparence
-                opacity: 0.8, // 1 = totalement opaque, 0 = invisible
+                opacity: 1, // 1 = totalement opaque, 0 = invisible
                 side: THREE.DoubleSide, // Rendre les deux côtés du matériau
                 depthWrite: true, // Écriture dans le buffer de profondeur
               });
