@@ -1,42 +1,40 @@
 {
     "atelier1": {
-        "backgroundImage": "src/textures/site.web.web",
+        "backgroundImage": "src/textures/site.web.webp",
         "sets": [
             {
-                "title": "Site web",
-                "subtitle": "Une œuvre abstraite évoquant les limites entre ciel et terre",
+                "title": "Inspiration",
+                "subtitle": "Dans cet atelier, les membres doivent fabriquer 2 sites ( un catalogue des œuvres du digitale event ainsi que le portail qui donnent accès au sites créés ces 5 dernières années).",
                 "image1": "src/photo/A/A1-01.jpg",
                 "image2": "src/photo/A/A1-02.jpg",
                 "image3": "src/photo/A/A1-03.jpg"
             },
             {
-                "title": "Frontières Invisibles",
-                "subtitle": "Exploration des limites de la perception",
+                "title": "Collaboration",
+                "subtitle": "L’objectif principal est de mettre en avant tous les ateliers de l’évènement. Mais aussi, de créer une capture temporelle et de pérenniser ce qui est réalisé. Il y a par ailleurs, un travail en commun entre tous les membres avec la répartition des tâches qui sont millimétrées et encadrées.",
                 "image1": "src/photo/A/A2-01.jpg",
                 "image2": "src/photo/A/A2-02.jpg",
                 "image3": "src/photo/A/A2-03.jpg"
             },
             {
-                "title": "Passage Éthéré",
-                "subtitle": "La transition entre deux mondes",
+                "title": "Maquette",
+                "subtitle": "Pour réaliser le site, ils utilisent différents logiciels créatifs et de codes tels que Blender, Figma pour la conception de maquette. D’un point de vue code, ils utilisent des langages types  threeJS, GSAP, HTML/CSS JS sur le logiciel VSCode. ",
                 "image1": "src/photo/A/A3-01.jpg",
                 "image2": "src/photo/A/A3-02.jpg",
                 "image3": "src/photo/A/A3-03.jpg"
             },
             {
-                "title": "Résonance Spatiale",
-                "subtitle": "L'écho des dimensions parallèles",
+                "title": "Échange de savoir-faire",
+                "subtitle": "Découvrez ce que nos étudiants ont à dire...",
                 "image1": "src/photo/A/A4-01.jpg",
-                "quote1": "L'écho des dimensions parallèles",
+                "quote1": "“Avec l’atelier, je découvre plusieurs univers et ça me forge un nouveau caractère et cela me donne beaucoup d’inspiration pour la suite.”",
                 "image2": "src/photo/A/A4-02.jpg",
-                "quote2": "L'écho des dimensions parallèles",
+                "quote2": "“On a choisi de prendre des photos qui représentent la diversité. Notre collaboration avec l’autre atelier permet d’unifier l'esthétique de l’atelier et ça fait toujours plaisir de partager les contenus entre nous et de s’entraider”",
                 "image3": "src/photo/A/A4-03.jpg",
-                "quote3": "L'écho des dimensions parallèles"
+                "quote3": "“Je peux continuer de développer mes compétences et les mettre aux services d’un tel projet, je trouve ça super sympa. Je peux échanger avec des personnes qui sont du même milieu que moi et j’en apprend aussi beaucoup d’eux.”"
             },
 
             {
-                "title": "Convergence",
-                "subtitle": "Le point de rencontre des réalités",
                 "image1": "src/photo/A/A4-01.jpg",
                 "team": "Voir l'équipe",
                 "students": [
@@ -140,42 +138,41 @@
         ]
     },
     "atelier2": {
-        "backgroundImage": "src/textures/video_mapping.jpg",
+        "backgroundImage": "src/textures/videomapping.webp",
         "sets": [
             {
-                "title": "Video Mapping",
-                "subtitle": "Une œuvre abstraite évoquant les limites entre ciel et terre",
+                "title": "Expression personnelle",
+                "subtitle": "Des binômes se lancent dans une quête créative avec pour mission de réaliser une courte séquence visuelle où chacun apporte sa propre interprétation des Mondes Parallèles. C’est dans le noir que leurs projets prendront vie.",
                 "image1": "src/photo/B/B1-01.jpg",
                 "image2": "src/photo/B/B1-02.jpg",
                 "image3": "src/photo/B/B1-03.jpg"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
+                "title": "Projection",
+                "subtitle": "L’équipe a pour objectif final de projeter des vidéos, accompagnées de bandes sonores, sur des structures installées sur le haut de l’atrium. Leurs œuvres seront exposées lors de la Diginight pour une immersion totale dans les mondes parallèles de l’ESD.",
                 "image1": "src/photo/B/B2-01.jpg",
                 "image2": "src/photo/B/B2-02.jpg",
                 "image3": "src/photo/B/B2-03.jpg"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
+                "title": "Animations",
+                "subtitle": "Pour donner vie à leurs projets, ils utiliseront divers logiciels comme TouchDesigner pour la création d’animations visuelles, MadMapper pour la projection et le mapping, Blender pour les modèles 3D ainsi que After Effects pour des effets spéciaux supplémentaires.",
                 "image1": "src/photo/B/B3-01.jpg",
                 "image2": "src/photo/B/B3-02.jpg",
                 "image3": "src/photo/B/B3-03.jpg"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
+                "title": "Travail d’équipe",
+                "subtitle": "Découvrez ce que nos étudiants ont à dire...",
                 "image1": "src/photo/B/B4-01.jpg",
-                "quote1": "Visualisation du son dans l'espace",
+                "quote1": "« L’atelier nous permet d’exprimer notre singularité au niveau artistique et donc d’apporter notre touche perso. »",
                 "image2": "src/photo/B/B4-02.jpg",
-                "quote2": "Visualisation du son dans l'espace",
+                "quote2": "« Tester pour réussir, parce qu’en essayant, on arrive à des idées qui évoluent constamment. »",
                 "image3": "src/photo/B/B4-03.jpg",
-                "quote3": "Visualisation du son dans l'espace"  
+                "quote3": "« Intéressant, ça me permet de travailler de nouvelles choses et surtout de mélanger mes compétences à celles des autres en rencontrant de nouvelles personnes. »"  
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
+                "image1": "src/photo/A/A4-01.jpg",
                 "team": "Voir l'équipe",
                 "students": [
                     {
@@ -333,42 +330,41 @@
         ]
     },
     "atelier3": {
-        "backgroundImage": "src/textures/creative_coding.jpg",
+        "backgroundImage": "src/textures/creative.coding.webp",
         "sets": [
             {
-                "title": "Creative Coding",
-                "subtitle": "Une composition visuelle inspirée par la musique",
+                "title": "Transition ",
+                "subtitle": "L’idée centrale consiste à concevoir une interface de transition entre notre monde et un monde parrallèle  : une caméra détecte les mouvements des visiteurs et les transporte en temps réel dans un univers parallèle. Cet atelier relie la programmation (les lignes de code) aux créations artistiques.",
                 "image1": "src/photo/C/C1-01.jpg",
                 "image2": "src/photo/C/C1-02.jpg",
                 "image3": "src/photo/C/C1-03.jpg"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
+                "title": "Mouvements",
+                "subtitle": "Cet univers offre une expérience immersive et ludique, où les visiteurs peuvent interagir avec un monde parallèle au travers d’un écran. Chaque projet invite à explorer et expérimenter ces interactions uniques.",
                 "image1": "src/photo/C/C2-01.jpg",
                 "image2": "src/photo/C/C2-02.jpg",
                 "image3": "src/photo/C/C2-03.jpg"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
+                "title": "Interaction",
+                "subtitle": "Pour donner vie à leurs projets, ils utilisent Touchdesigner pour la création d’interfaces interactives et Blender qui est l’idéal pour la modélisation et l’intégration d’éléments visuels 3D uniques.",
                 "image1": "src/photo/C/C3-01.jpg",
                 "image2": "src/photo/C/C3-02.jpg",
                 "image3": "src/photo/C/C3-03.jpg"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
+                "title": "Expérimentation",
+                "subtitle": "Découvrez ce que nos étudiants ont à dire...",
                 "image1": "src/photo/C/C4-01.jpg",
-                "quote1": "Visualisation du son dans l'espace",
+                "quote1": "« Beaucoup de challenges, mais ces défis nous permettent de progresser. »",
                 "image2": "src/photo/C/C4-02.jpg",
-                "quote2": "Visualisation du son dans l'espace",
+                "quote2": "« Ce qui ne nous tue pas nous rend plus forts. »",
                 "image3": "src/photo/C/C4-03.jpg",
-                "quote3": "Visualisation du son dans l'espace"
+                "quote3": "« Une découverte passionnante d’un logiciel qui ouvre de nombreuses opportunités pour l’avenir. »"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
+                "image1": "src/photo/A/A4-01.jpg",
                 "team": "Voir l'équipe",
                 "students": [
                     {
@@ -466,42 +462,41 @@
         ]
     },
     "atelier4": {
-        "backgroundImage": "src/textures/gaming_pop_corn.jpg",
+        "backgroundImage": "src/textures/gaming.popcorn.webp",
         "sets": [
             {
-                "title": "Gaming & Pop-corn",
-                "subtitle": "Une composition visuelle inspirée par la musique",
+                "title": "Coexistence",
+                "subtitle": "Organisés en groupes de cinq, ils travaillent sur la création d’un jeu vidéo dont le but est de résoudre des énigmes. L’équipe a imaginé un monde parallèle en explorant la coexistence de deux univers distincts.",
                 "image1": "src/photo/D/D1-01.jpg",
                 "image2": "src/photo/D/D1-02.jpg",
                 "image3": "src/photo/D/D1-03.jpg"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
+                "title": "Références culturelles",
+                "subtitle": "Ils réinterprètent le jeu Popcorn en concevant un concept qui testent les références de deux thèmes parallèles. qui, bien que différents, coexistent. Le rendu final est donc un jeu interactif et stimulant.",
                 "image1": "src/photo/D/D2-01.jpg",
                 "image2": "src/photo/D/D2-02.jpg",
                 "image3": "src/photo/D/D2-03.jpg"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
+                "title": "Amusant",
+                "subtitle": "Afin de mener à bien leur mission, plusieurs logiciels ont été utilisés tels que des IA comme MidJourney et Suino, de nombreux logiciels comme Photoshop, Figma, Premiere Pro, VS Code (React JS), Cursor et Illustrator.",
                 "image1": "src/photo/D/D3-01.jpg",
                 "image2": "src/photo/D/D3-02.jpg",
                 "image3": "src/photo/D/D3-03.jpg"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
+                "title": "Création collaborative",
+                "subtitle": "Découvrez ce que nos étudiants ont à dire...",
                 "image1": "src/photo/D/D4-01.jpg",
-                "quote1": "Visualisation du son dans l'espace",
+                "quote1": "« On travaille notre créativité en développant des jeux. »",
                 "image2": "src/photo/D/D4-02.jpg",
-                "quote2": "Visualisation du son dans l'espace",
+                "quote2": "« Cet atelier permet de combiner des logiciels qu’on n’utilise pas ensemble habituellement. »",
                 "image3": "src/photo/D/D4-03.jpg",
-                "quote3": "Visualisation du son dans l'espace"
+                "quote3": "« Une expérience qui stimule la créativité tout en explorant des thèmes actuels qui nous intéressent. »"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
+                "image1": "src/photo/A/A4-01.jpg",
                 "team": "Voir l'équipe",
                     "students": [
                         {
@@ -679,42 +674,41 @@
         ]
     },
     "atelier5": {
-        "backgroundImage": "src/textures/video.jpg",
+        "backgroundImage": "src/textures/video.studio.webp",
         "sets": [
             {
-                "title": "Video",
-                "subtitle": "Une composition visuelle inspirée par la musique",
+                "title": "Vision unique",
+                "subtitle": "Les membres de l’atelier sont répartis en 8 groupes composés de 4 à 5 personnes qui collaborent pour relever deux défis créatifs : concevoir une pastille visuelle (sans narration) autour d’un thème imposé et produire une bande-annonce ou une publicité en lien avec la thématique.",
                 "image1": "src/photo/E/E1-01.jpg",
                 "image2": "src/photo/E/E1-02.jpg",
                 "image3": "src/photo/E/E1-03.jpg"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
+                "title": "Imagination",
+                "subtitle": "L’objectif de cet univers est de mettre en lumière au travers de la vidéo, la vision unique de chaque groupe sur le monde parallèle. Mais aussi, de plonger le spectateur dans un nouvel univers grâce à la vidéo.",
                 "image1": "src/photo/E/E2-01.jpg",
                 "image2": "src/photo/E/E2-02.jpg",
                 "image3": "src/photo/E/E2-03.jpg"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
+                "title": "Production",
+                "subtitle": "Pour donner vie à leurs imaginations, ils pourront utiliser divers logiciels tels que Premiere Pro, After Effects et DaVinci Resolve.",
                 "image1": "src/photo/E/E3-01.jpg",
                 "image2": "src/photo/E/E3-02.jpg",
                 "image3": "src/photo/E/E3-03.jpg"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
+                "title": "Expression",
+                "subtitle": "Découvrez ce que nos étudiants ont à dire...",
                 "image1": "src/photo/E/E4-01.jpg",
-                "quote1": "Visualisation du son dans l'espace",
+                "quote1": "« Cet atelier permet de ressortir son côté artistique en vidéo. »",
                 "image2": "src/photo/E/E4-02.jpg",
-                "quote2": "Visualisation du son dans l'espace",
+                "quote2": "« Cet atelier c’est l’art d’exprimer ses émotions en filmant. »",
                 "image3": "src/photo/E/E4-03.jpg",
-                "quote3": "Visualisation du son dans l'espace"
+                "quote3": "« Venez voir les films de l’atelier, y’aura du pop-corn. »"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
+                "image1": "src/photo/A/A4-01.jpg",
                 "team": "Voir l'équipe",
                "students": [
                     {
@@ -907,42 +901,41 @@
         ]
     },
     "atelier6": {
-        "backgroundImage": "src/textures/escape_game.jpg",
+        "backgroundImage": "src/textures/escape.game.webp",
         "sets": [
             {
-                "title": "Escape game",
-                "subtitle": "Une composition visuelle inspirée par la musique",
+                "title": "Défi",
+                "subtitle": "Divisés en groupes, ils ont pour mission de concevoir de A à Z un escape game. Chaque groupe crée un jeu de piste composé d’énigmes, destiné à des équipes de 2 à 4 joueurs. ",
                 "image1": "src/photo/F/F1-01.jpg",
                 "image2": "src/photo/F/F1-02.jpg",
                 "image3": "src/photo/F/F1-03.jpg"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
+                "title": "Décors",
+                "subtitle": "L’objectif est simple mais ambitieux : offrir une expérience immersive où la réflexion, la collaboration et la créativité se mêlent. Il s’agit de concevoir un jeu immersif comprenant deux à trois énigmes à résoudre dans un temps imparti.",
                 "image1": "src/photo/F/F2-01.jpg",
                 "image2": "src/photo/F/F2-02.jpg",
                 "image3": "src/photo/F/F2-03.jpg"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
+                "title": "Réalité virtuelle",
+                "subtitle": "Pour donner vie à leurs idées, ils utilisent les logiciels Arduino afin d’assurer les interactions physiques, Figma pour le prototypage ainsi que des technologies immersives comme des casques VR pour enrichir l’expérience sensorielle.",
                 "image1": "src/photo/F/F3-01.jpg",
                 "image2": "src/photo/F/F3-02.jpg",
                 "image3": "src/photo/F/F3-03.jpg"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
+                "title": "Liberté",
+                "subtitle": "Découvrez ce que nos étudiants ont à dire... ",
                 "image1": "src/photo/F/F4-01.jpg",
-                "quote1": "Visualisation du son dans l'espace",
+                "quote1": "« L’atelier est super intéressant, on travaille avec différentes technologies tout en laissant place à l’imagination. Travailler en groupe permet de croiser les visions et d’inventer ensemble. »",
                 "image2": "src/photo/F/F4-02.jpg",
-                "quote2": "Visualisation du son dans l'espace",
+                "quote2": "« Ce que j’adore, c’est la liberté de créer un jeu, des énigmes, et de voir tout prendre forme. Le jour J, ce sera l’aboutissement d’un projet collectif vraiment sympa. »",
                 "image3": "src/photo/F/F4-03.jpg",
-                "quote3": "Visualisation du son dans l'espace"
+                "quote3": "« C’est un mélange génial de créativité et de compétences : entre Arduino, décor et construction, on touche à tout et ça booste nos idées. »"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
+                "image1": "src/photo/A/A4-01.jpg",
                 "team": "Voir l'équipe",
                 "students": [
                     {
@@ -1168,39 +1161,38 @@
         "backgroundImage": "src/textures/podcast.jpg",
         "sets": [
             {
-                "title": "Podcast",
-                "subtitle": "Une composition visuelle inspirée par la musique",
+                "title": "Captivant",
+                "subtitle": "Dans cet univers, chaque groupe traite le son à sa manière pour répondre au thème sous des formats différents : interviews, narration et talk show. Chaque équipe s’approprie le sujet pour raconter des histoires uniques et captivantes.",
                 "image1": "src/photo/G/G1-01.jpg",
                 "image2": "src/photo/G/G1-02.jpg",
                 "image3": "src/photo/G/G1-03.jpg"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
+                "title": "Émotions",
+                "subtitle": "L’objectif est de jouer sur les effets techniques pour immerger pleinement les auditeurs dans l’univers imaginaire uniquement par le son.",
                 "image1": "src/photo/G/G2-01.jpg",
                 "image2": "src/photo/G/G2-02.jpg",
                 "image3": "src/photo/G/G2-03.jpg"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
+                "title": "Mixage",
+                "subtitle": "Leur immersion sonore a vu le jour grâce à l’utilisation d’Adobe Audition pour la capture et le mixage sonore, de Premiere Pro et Trello pour l’organisation des idées et la planification.",
                 "image1": "src/photo/G/G3-01.jpg",
                 "image2": "src/photo/G/G3-02.jpg",
                 "image3": "src/photo/G/G3-03.jpg"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
+                "title": "Imaginaire",
+                "subtitle": "Découvrez ce que nos étudiants ont à dire...",
                 "image1": "src/photo/G/G4-01.jpg",
-                "quote1": "Visualisation du son dans l'espace",
+                "quote1": "« Premier atelier de ce type et j’adore ! Ça me permet de travailler sur le son et de rencontrer de nouvelles personnes. »",
                 "image2": "src/photo/G/G4-02.jpg",
-                "quote2": "Visualisation du son dans l'espace",
+                "quote2": "« Sortir de ma zone de confort et construire un univers imaginaire uniquement avec du son, c’est un vrai défi et une expérience enrichissante. »",
                 "image3": "src/photo/G/G4-03.jpg",
-                "quote3": "Visualisation du son dans l'espace"
+                "quote3": "« Travailler avec des profils pluridisciplinaires ouvre des portes vers un univers créatif inédit. »"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
+                "image1": "src/photo/A/A4-01.jpg",
                 "team": "Voir l'équipe",
                 "students": [
                     {
@@ -1313,42 +1305,41 @@
         ]
     },
     "atelier8": {
-        "backgroundImage": "src/textures/photo_reportage.jpg",
+        "backgroundImage": "src/textures/photography.webp",
         "sets": [
             {
-                "title": "Photo reportage",
-                "subtitle": "Une composition visuelle inspirée par la musique",
+                "title": "Captures",
+                "subtitle": "Cet univers a pour mission de donner vie à deux projets : la création d’un film photographique et un reportage photo, immortalisant l’énergie des ateliers et les moments spontanés qui s’y déroulent. Les membres de l’atelier peuvent aussi interpréter à leur façon la thématique.",
                 "image1": "src/photo/H/H1-01.jpg",
                 "image2": "src/photo/H/H1-02.jpg",
                 "image3": "src/photo/H/H1-03.jpg"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
+                "title": "AuthentiquesAuthentiques",
+                "subtitle": "Le but premier de cet atelier est de capturer l’énergie collective mais aussi de stimuler leur créativité individuelle. ",
                 "image1": "src/photo/H/H2-01.jpg",
                 "image2": "src/photo/H/H2-02.jpg",
                 "image3": "src/photo/H/H2-03.jpg"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
+                "title": "Exploration",
+                "subtitle": "Pour transformer leurs idées en visuels, ils utilisent des outils tels que Lightroom, qui ajuste la lumière et les couleurs des clichés, et Photoshop, qui sera utile à la retouche et aux montages créatifs.",
                 "image1": "src/photo/H/H3-01.jpg",
                 "image2": "src/photo/H/H3-02.jpg",
                 "image3": "src/photo/H/H3-03.jpg"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
+                "title": "Souvenirs",
+                "subtitle": "Découvrez ce que nos étudiants ont à dire...",
                 "image1": "src/photo/H/H4-01.jpg",
-                "quote1": "Visualisation du son dans l'espace",
+                "quote1": "« Ce que j’aime, c’est photographier les autres pendant qu’ils travaillent, capturer des instants naturels sans pose. »",
                 "image2": "src/photo/H/H4-02.jpg",
-                "quote2": "Visualisation du son dans l'espace",
+                "quote2": "« L’atelier est vraiment cool, on peut exprimer notre créativité, surtout avec notre propre interprétation des mondes parallèles. »",
                 "image3": "src/photo/H/H4-03.jpg",
-                "quote3": "Visualisation du son dans l'espace"
+                "quote3": "«Je suis contente de faire partie de cet atelier, on est libre de faire ce qu’on veut et je peux aussi améliorer mes propres compétences pour mon cursus»"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
+                "image1": "src/photo/A/A4-01.jpg",
                 "team": "Voir l'équipe",
                 "students": [
                     {
@@ -1512,39 +1503,38 @@
         "backgroundImage": "src/textures/ai_driven_visual_stories.jpg",
         "sets": [
             {
-                "title": "AI Driven visual stories",
-                "subtitle": "Une œuvre abstraite évoquant les limites entre ciel et terre",
+                "title": "Innovation",
+                "subtitle": "Les membres de l’atelier devront repousser les limites de l’IA en réalisant un teaser vidéo avec des éléments fantastiques mais aussi réalistes. Ces trois créations sont ensuite assemblées pour former une narration cohérente, reliant différents mondes imaginaires.",
                 "image1": "src/photo/I/I1-01.jpg",
                 "image2": "src/photo/I/I1-02.jpg",
                 "image3": "src/photo/I/I1-03.jpg"
             },
             {
-                "title": "Frontières Invisibles",
-                "subtitle": "Exploration des limites de la perception",
+                "title": "Fantaisie",
+                "subtitle": "L’objectif est de créer des récits équilibrés en combinant réalisme et fantaisie mais aussi d’utiliser des outils d’IA innovants pour générer des éléments visuels intéressants. Ainsi, la finalité est d’assembler les vidéos montées et de diffuser les créations sur trois écrans pour offrir une expérience multidimensionnelle.",
                 "image1": "src/photo/I/I2-01.jpg",
                 "image2": "src/photo/I/I2-02.jpg",
                 "image3": "src/photo/I/I2-03.jpg"
             },
             {
-                "title": "Passage Éthéré",
-                "subtitle": "La transition entre deux mondes",
+                "title": "Art",
+                "subtitle": "Pour créer les visuels, ils utilisent différents logiciels tels que Runway pour générer et modifier les vidéos avec l’intelligence artificielle, MidJourney pour la création d’images, ainsi qu’Adobe Premiere Pro pour le montage et l’assemblage des vidéos.",
                 "image1": "src/photo/I/I3-01.jpg",
                 "image2": "src/photo/I/I3-02.jpg",
                 "image3": "src/photo/I/I3-03.jpg"
             },
             {
-                "title": "Résonance Spatiale",
-                "subtitle": "L'écho des dimensions parallèles",
+                "title": "Réflexion",
+                "subtitle": "Découvrez ce que nos étudiants ont à dire...",
                 "image1": "src/photo/I/I4-01.jpg",
-                "quote1": "L'écho des dimensions parallèles",
+                "quote1": "« Je suis surpris de voir ce qu’on peut faire avec l’IA. Il y a une marge de développement énorme, mais c’est incroyable de partir de rien et d’arriver à ça. »",
                 "image2": "src/photo/I/I4-02.jpg",
-                "quote2": "L'écho des dimensions parallèles",
+                "quote2": "« L’idée d’équilibrer réalisme et fantaisie est un vrai défi, mais c’est aussi ce qui rend cet atelier fascinant. »",
                 "image3": "src/photo/I/I4-03.jpg",
-                "quote3": "L'écho des dimensions parallèles"
+                "quote3": "« Je suis ravie de faire partie de cet atelier parce que on explore les nouvelles tendances et des outils actuels qui nous seront utiles dans le monde du travail  »"
             },
             {
-                "title": "Convergence",
-                "subtitle": "Le point de rencontre des réalités",
+                "image1": "src/photo/A/A4-01.jpg",
                 "team": "Voir l'équipe",
                 "students": [
                     {
@@ -1673,42 +1663,41 @@
         ]
     },
     "atelier10": {
-        "backgroundImage": "src/textures/game_design.jpg",
+        "backgroundImage": "src/textures/game.design.webp",
         "sets": [
             {
-                "title": "Game design",
-                "subtitle": "Une composition visuelle inspirée par la musique",
+                "title": "Invention",
+                "subtitle": "Cet atelier consiste à concevoir des jeux de société en apportant la vision unique de chaque groupe sur le monde parallèle. Ils testent différents jeux, étudient leurs mécanismes et adaptent leurs idées en mélangeant le digital au réel.",
                 "image1": "src/photo/J/J1-01.jpg",
                 "image2": "src/photo/J/J1-02.jpg",
                 "image3": "src/photo/J/J1-03.jpg"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
+                "title": "Dynamique",
+                "subtitle": "L’objectif est de créer des jeux de sociétés adaptés à tous les âges et favorisant les interactions collectives. Ces jeux doivent traiter de la thématique de cette année. ",
                 "image1": "src/photo/J/J2-01.jpg",
                 "image2": "src/photo/J/J2-02.jpg",
                 "image3": "src/photo/J/J2-03.jpg"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
+                "title": "Graphisme",
+                "subtitle": "Pour donner vie à leurs idées, ils utilisent différents Figma pour le design et la mise en forme digitale du jeu, Illustrator pour créer les éléments (logos, icônes) mais aussi photoshop pour la retouche et l’enrichissement visuel des composants du jeu.",
                 "image1": "src/photo/J/J3-01.jpg",
                 "image2": "src/photo/J/J3-02.jpg",
                 "image3": "src/photo/J/J3-03.jpg"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
+                "title": "Idéation",
+                "subtitle": "Découvrez ce que nos étudiants ont à dire...",
                 "image1": "src/photo/J/J4-01.jpg",
-                "quote1": "Visualisation du son dans l'espace",
+                "quote1": "« Je suis contente de m’améliorer sur Figma, de monter en compétences, et de progresser en design »",
                 "image2": "src/photo/J/J4-02.jpg",
-                "quote2": "Visualisation du son dans l'espace",
+                "quote2": "« Ce que j’aime, c’est la création pure, imaginer un jeu et voir les idées prendre forme. »",
                 "image3": "src/photo/J/J4-03.jpg",
-                "quote3": "Visualisation du son dans l'espace"
+                "quote3": "« Travailler avec des gens d’horizons différents, c’est génial : on apprend les uns des autres tout en créant. »"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
+                "image1": "src/photo/A/A4-01.jpg",
                 "team": "Voir l'équipe",
                     "students": [
                       {
@@ -1838,42 +1827,41 @@
         ]
     },
     "atelier11": {
-        "backgroundImage": "src/textures/organisation.jpg",
+        "backgroundImage": "src/textures/organisation.webp",
         "sets": [
             {
-                "title": "Organisation",
-                "subtitle": "Une composition visuelle inspirée par la musique",
+                "title": "Evenementiel ",
+                "subtitle": "Les membres de l’atelier s’occupent de la communication, de l'organisation et du parcours visiteurs pour garantir le bon déroulement de l’événement.",
                 "image1": "src/photo/K/K1-01.jpg",
                 "image2": "src/photo/K/K1-02.jpg",
                 "image3": "src/photo/K/K1-03.jpg"
             },
             {
-                "title": "Rythme Numérique",
-                "subtitle": "La danse des pixels dans l'espace",
+                "title": " Expérience visiteur",
+                "subtitle": "Dans cet univers, ils se donnent pour mission de créer une ambiance unique, offrant aux étudiants une parenthèse dans leur routine. Ils visent également à attirer de nouveaux étudiants en valorisant l’événement sur les réseaux sociaux et à proposer une expérience optimale aux visiteurs grâce à une bonne organisation et communication.",
                 "image1": "src/photo/K/K2-01.jpg",
                 "image2": "src/photo/K/K2-02.jpg",
                 "image3": "src/photo/K/K2-03.jpg"
             },
             {
-                "title": "Harmonie Digitale",
-                "subtitle": "La fusion parfaite entre son et image",
+                "title": "Implication",
+                "subtitle": "Pour mener à bien leurs missions, ils utilisent différents outils de gestion de projet tels que Excel pour la gestion et le suivi des plannings et Canva pour la création de visuels simples et rapides pour la communication.",
                 "image1": "src/photo/K/K3-01.jpg",
                 "image2": "src/photo/K/K3-02.jpg",
                 "image3": "src/photo/K/K3-03.jpg"
             },
             {
-                "title": "Onde Sonore",
-                "subtitle": "Visualisation du son dans l'espace",
+                "title": "Coordination",
+                "subtitle": "Découvrez ce que nos étudiants ont à dire...",
                 "image1": "src/photo/K/K4-01.jpg",
-                "quote1": "Visualisation du son dans l'espace",
+                "quote1": "« Ce que j’aime, c’est capturer des moments naturels pendant que les autres travaillent, sans mise en scène. »",
                 "image2": "src/photo/K/K4-02.jpg",
-                "quote2": "Visualisation du son dans l'espace",
+                "quote2": "« Cet atelier donne de vraies responsabilités, on se sent impliqué. »",
                 "image3": "src/photo/K/K4-03.jpg",
-                "quote3": "Visualisation du son dans l'espace"
+                "quote3": "« Chaque jour, on a une mission différente, toujours innovante. »"
             },
             {
-                "title": "Symphonie Visuelle",
-                "subtitle": "L'orchestration des éléments visuels",
+                "image1": "src/photo/A/A4-01.jpg",
                 "team": "Voir l'équipe",
                  "students": [
                     {

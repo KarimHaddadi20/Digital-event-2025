@@ -23,17 +23,26 @@ export class PortalTransitionSceneBase extends SceneSetup {
         
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(0x000000);
+
+        // Désactiver complètement les contrôles de la caméra
+        
+        this.controls.enabled = false;
+        this.controls.enableRotate = false;
+        this.controls.enablePan = false;
+        this.controls.enableZoom = false;
         
         this.initScene();
     }
 
     initScene() {
+        console.log('InitScene Base - Début');
         this.setupRenderers();
         this.setupCustomLights();
         this.setupBackground();
         this.setupFragments();
-        this.setupScrollHandler();
+        console.log('InitScene Base - Avant animate');
         this.animate();
+        console.log('InitScene Base - Fin');
     }
 
     setupRenderers() {
@@ -256,9 +265,5 @@ export class PortalTransitionSceneBase extends SceneSetup {
 
     updateFragments() {
         throw new Error('updateFragments doit être implémenté dans la classe enfant');
-    }
-
-    setupScrollHandler() {
-        throw new Error('setupScrollHandler doit être implémenté dans la classe enfant');
     }
 } 
