@@ -31,12 +31,18 @@ class FragmentManager {
     textureLoader.load("src/textures/homepage.webp", (texture) => {
       texture.colorSpace = THREE.SRGBColorSpace;
       texture.mapping = THREE.EquirectangularReflectionMapping;
+      texture.generateMipmaps = true;
+      texture.minFilter = THREE.LinearMipmapLinearFilter;
+      texture.magFilter = THREE.LinearFilter;
+      texture.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
 
       // Créer la sphère d'environnement
-      const geometry = new THREE.SphereGeometry(500, 60, 40); // Au lieu de 60, 40
+      const geometry = new THREE.SphereGeometry(500, 256, 256);
       const material = new THREE.MeshBasicMaterial({
         map: texture,
         side: THREE.BackSide,
+        transparent: true,
+        opacity: 1
       });
 
       this.envMesh = new THREE.Mesh(geometry, material);
@@ -137,6 +143,14 @@ class FragmentManager {
       if (this.selectedFragment) {
         this.hideVoyagerButton();
         this.animateFragmentFall(this.selectedFragment);
+        // Réinitialiser la position de la caméra avec une animation GSAP
+        window.gsap.to(this.app.camera.position, {
+          x: 0,
+          y: 0,
+          z: 5,
+          duration: 1.5,
+          ease: "power2.inOut"
+        });
       }
     });
 
@@ -372,7 +386,7 @@ class FragmentManager {
     }
   }
 
-  moveFragmentForward(fragment) {
+  moveFragmentForward(fragment, distance = 5) {
     if (fragment.userData.originalY === undefined) {
       fragment.userData.originalY = fragment.position.y;
       fragment.userData.originalZ = fragment.position.z;
@@ -380,7 +394,7 @@ class FragmentManager {
 
     const duration = 1500;
     const startZ = fragment.position.z;
-    const targetZ = fragment.userData.originalZ + 10;
+    const targetZ = fragment.userData.originalZ + distance;
     const startTime = Date.now();
 
     const moveForward = () => {
@@ -568,11 +582,6 @@ class FragmentManager {
   }
 
   updateEnvironment(atelierName) {
-    // Clear previous environment
-    if (this.envMesh) {
-      this.app.scene.remove(this.envMesh);
-    }
-
     // Get texture path for selected atelier
     const texturePath = this.environmentTextures[atelierName];
     if (!texturePath) {
@@ -593,16 +602,49 @@ class FragmentManager {
       texture.magFilter = THREE.LinearFilter;
       texture.anisotropy = this.renderer.capabilities.getMaxAnisotropy();
 
-      // Create environment sphere
-      const geometry = new THREE.SphereGeometry(500, 256, 256); // Au lieu de 60, 40
+      // Create new environment sphere
+      const geometry = new THREE.SphereGeometry(500, 256, 256);
       const material = new THREE.MeshBasicMaterial({
         map: texture,
         side: THREE.BackSide,
+        transparent: true,
+        opacity: 0
       });
 
-      this.envMesh = new THREE.Mesh(geometry, material);
-      this.envMesh.rotation.y = Math.PI / 2;
-      this.app.scene.add(this.envMesh);
+      const newEnvMesh = new THREE.Mesh(geometry, material);
+      newEnvMesh.rotation.y = Math.PI / 2;
+      this.app.scene.add(newEnvMesh);
+
+      // Fade out old environment and fade in new one
+      const duration = 1000; // 1 seconde pour la transition
+      const startTime = Date.now();
+
+      const animate = () => {
+        const currentTime = Date.now();
+        const progress = Math.min((currentTime - startTime) / duration, 1);
+
+        // Fade out old environment
+        if (this.envMesh) {
+          this.envMesh.material.opacity = 1 - progress;
+        }
+
+        // Fade in new environment
+        newEnvMesh.material.opacity = progress;
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          // Remove old environment when transition is complete
+          if (this.envMesh) {
+            this.app.scene.remove(this.envMesh);
+            this.envMesh.material.dispose();
+            this.envMesh.geometry.dispose();
+          }
+          this.envMesh = newEnvMesh;
+        }
+      };
+
+      animate();
 
       // Update fragment materials to reflect new environment
       this.fragments.forEach((fragment) => {
@@ -654,6 +696,7 @@ class FragmentManager {
       }
 
       if (fragmentObject.userData && fragmentObject.userData.atelierName) {
+        document.body.style.cursor = 'pointer';
         if (fragmentObject === this.selectedFragment) return;
 
         if (this.hoveredFragment !== fragmentObject) {
@@ -665,7 +708,7 @@ class FragmentManager {
           }
 
           this.hoveredFragment = fragmentObject;
-          this.moveFragmentForward(this.hoveredFragment);
+          this.moveFragmentForward(this.hoveredFragment, 3);
 
           this.textElement.textContent = fragmentObject.userData.atelierName;
           this.textElement.style.display = "block";
@@ -673,6 +716,7 @@ class FragmentManager {
         }
       }
     } else {
+      document.body.style.cursor = 'default';
       if (
         this.hoveredFragment &&
         this.hoveredFragment !== this.selectedFragment
@@ -751,7 +795,7 @@ class FragmentManager {
         }
 
         this.selectedFragment = clickedFragment;
-        this.moveFragmentForward(clickedFragment);
+        this.moveFragmentForward(clickedFragment, 10);
         this.showVoyagerButton();
         this.updateEnvironment(clickedFragment.userData.atelierName);
 
