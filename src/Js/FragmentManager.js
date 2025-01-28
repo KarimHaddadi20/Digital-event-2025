@@ -10,6 +10,8 @@ class FragmentManager {
     this.isAnimatingFragment = false;
     this.selectedFragment = null;
     this.userHasInteracted = false;
+    this.lastActivityTime = Date.now();
+    this.inactivityTimeout = 10000; // 10 secondes
     this.fragmentInstructions = document.querySelector(
       ".fragment-instructions"
     );
@@ -50,7 +52,7 @@ class FragmentManager {
     this.environmentTextures = {
       "Site web": "src/textures/site.web.webp",
       "Video Mapping": "src/textures/video.mapping.webp",
-      "Creative Coding": "src/textures/creative_coding.jpg",
+      "Creative Coding": "src/textures/creative.coding.webp",
       "Gaming & Pop-corn": "src/textures/gaming.popcorn.webp",
       Video: "src/textures/video.studio.webp",
       "Escape game": "src/textures/espace.game.webp",
@@ -635,6 +637,9 @@ class FragmentManager {
   onMouseMove(event) {
     if (!this.app.isBreaking || this.isAnimatingFragment) return;
 
+    this.lastActivityTime = Date.now();
+    this.userHasInteracted = true;
+
     this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 
@@ -665,10 +670,6 @@ class FragmentManager {
           this.textElement.textContent = fragmentObject.userData.atelierName;
           this.textElement.style.display = "block";
           this.textElement.style.opacity = "1";
-
-          if (!this.selectedFragment) {
-            this.updateEnvironment(fragmentObject.userData.atelierName);
-          }
         }
       }
     } else {
@@ -682,15 +683,15 @@ class FragmentManager {
         setTimeout(() => {
           this.textElement.style.display = "none";
         }, 300);
-        if (!this.selectedFragment) {
-          this.updateEnvironment(null);
-        }
       }
     }
   }
 
   handleFragmentClick(event) {
     if (this.isAnimatingFragment) return;
+
+    this.lastActivityTime = Date.now();
+    this.userHasInteracted = true;
 
     const mouse = new THREE.Vector2();
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -844,11 +845,21 @@ class FragmentManager {
       clearTimeout(this.autoSelectTimer);
     }
 
-    if (!this.selectedFragment) {
-      this.autoSelectTimer = setTimeout(() => {
-        this.selectRandomFragment();
-      }, 10000);
-    }
+    const checkInactivity = () => {
+      const currentTime = Date.now();
+      const inactiveTime = currentTime - this.lastActivityTime;
+
+      if (inactiveTime >= this.inactivityTimeout) {
+        this.userHasInteracted = false;
+        if (!this.selectedFragment) {
+          this.selectRandomFragment();
+        }
+      }
+
+      this.autoSelectTimer = setTimeout(checkInactivity, 1000); // Vérifier toutes les secondes
+    };
+
+    this.autoSelectTimer = setTimeout(checkInactivity, 1000);
   }
 }
 
