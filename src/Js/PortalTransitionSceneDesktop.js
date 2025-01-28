@@ -318,7 +318,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
             position: fixed;
             left: ${section.position === 'left' ? '40px' : 'auto'};
             right: ${section.position === 'right' ? '40px' : 'auto'};
-            bottom: 40px;
+            bottom: 120px;
             color: white;
             text-align: ${section.position};
             pointer-events: auto;
