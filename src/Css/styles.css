@@ -782,7 +782,7 @@ body.popup-active {
   transform: translateY(100%);
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2000;
-  
+
   display: flex;
   width: 440px;
   height: 700px;
@@ -790,10 +790,14 @@ body.popup-active {
   flex-direction: column;
   align-items: flex-start;
   gap: 14px;
-  
+
   border-radius: 0px 8px 8px 0px;
-  border: 1px solid #FFF;
-  background: linear-gradient(344deg, rgba(21, 21, 27, 0.64) -1.4%, rgba(79, 79, 86, 0.64) 104.72%);
+  border: 1px solid #fff;
+  background: linear-gradient(
+    344deg,
+    rgba(21, 21, 27, 0.64) -1.4%,
+    rgba(79, 79, 86, 0.64) 104.72%
+  );
   backdrop-filter: blur(24px);
   pointer-events: all;
 }
@@ -820,7 +824,7 @@ body.popup-active {
   gap: 14px;
   flex: 1;
   align-self: stretch;
-  max-height: calc(100vh - 200px); 
+  max-height: calc(100vh - 200px);
 }
 
 .students-header {
@@ -882,7 +886,7 @@ body.popup-active {
   display: flex;
   align-items: center;
   overflow: hidden;
-  color: #E6E6E6;
+  color: #e6e6e6;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-family: "Aktiv Grotesk";
@@ -893,7 +897,6 @@ body.popup-active {
   letter-spacing: -0.24px;
   text-transform: uppercase;
 }
-
 
 .header-nom,
 .header-prenom,
@@ -915,7 +918,7 @@ body.popup-active {
   display: flex;
   align-items: center;
   overflow: hidden;
-  color: #E6E6E6;
+  color: #e6e6e6;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-family: "Aktiv Grotesk";
@@ -933,7 +936,7 @@ body.popup-active {
   display: flex;
   justify-content: flex-end;
   position: relative;
-  margin-bottom: 24px; 
+  margin-bottom: 24px;
 }
 
 .popup-close {
@@ -948,7 +951,7 @@ body.popup-active {
   opacity: 0.8;
   transition: opacity 0.2s ease;
   z-index: 2001;
-  touch-action: manipulation; 
+  touch-action: manipulation;
 }
 
 .popup-close:hover {
@@ -970,11 +973,11 @@ body.popup-active {
   }
 
   .popup-header {
-    margin-bottom: 16px; 
+    margin-bottom: 16px;
   }
 
   .students-list {
-    padding-bottom: 16px; 
+    padding-bottom: 16px;
   }
 
   .students-rows {
@@ -983,18 +986,17 @@ body.popup-active {
   }
 
   .popup-close {
-    position: fixed; 
-    top: 16px; 
+    position: fixed;
+    top: 16px;
     right: 16px;
     padding: 12px;
-    transform: scale(1.2); 
+    transform: scale(1.2);
   }
 
   .students-list {
     max-height: calc(97vh - 150px);
   }
 }
-
 
 @media (max-height: 600px) {
   .subtitle-popup {
@@ -1008,51 +1010,49 @@ body.popup-active {
 
 /* Ajout du style pour le texte fixe */
 .fragment-label {
-    position: fixed;
-    bottom: 120px;
-    left: 48px;
-    pointer-events: auto;
-    z-index: 100;
-    text-align: left;
-    transition: opacity 0.3s ease;
+  position: fixed;
+  bottom: 120px;
+  left: 48px;
+  pointer-events: auto;
+  z-index: 100;
+  text-align: left;
+  transition: opacity 0.3s ease;
 }
 
 .label-content {
-    color: white;
-    max-width: 300px;
+  color: white;
+  max-width: 300px;
 }
 
 .label-content h2 {
-    font-family: "Fraunces", serif;
-    font-size: 32px;
-    font-style: italic;
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: -0.84px;
-    margin-bottom: 8px;
+  font-family: "Fraunces", serif;
+  font-size: 32px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.84px;
+  margin-bottom: 8px;
 }
 
 .label-content .subtitle {
-    font-family: "Aktiv Grotesk", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 140%;
-    letter-spacing: -0.28px;
-    opacity: 0.6;
+  font-family: "Aktiv Grotesk", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: -0.28px;
+  opacity: 0.6;
 }
 
 @media (max-width: 768px) {
-    .fragment-label {
-        bottom: 100px;
-        left: 24px;
-    }
+  .fragment-label {
+    bottom: 100px;
+    left: 24px;
+  }
 
-    .label-content h2 {
-        font-size: 24px;
-    }
+  .label-content h2 {
+    font-size: 24px;
+  }
 }
-
-
 
 .footer-left {
   transition: all 0.3s ease;
@@ -1067,8 +1067,6 @@ body.popup-active {
     z-index: 1000;
   }
 }
-
-
 
 @media screen and (max-width: 768px) {
   .fragment-instructions {

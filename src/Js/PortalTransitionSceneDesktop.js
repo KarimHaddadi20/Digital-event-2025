@@ -287,6 +287,17 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
   }
 
   createQuoteMeshes(quotes) {
+    document.fonts.ready.then(() => {
+      console.log("Fonts loaded:");
+      for (const font of document.fonts) {
+        console.log(`Font: ${font.family}, Status: ${font.status}`);
+      }
+      console.log(
+        "Is Fraunces available?",
+        document.fonts.check('1em "Fraunces"')
+      );
+    });
+
     return quotes.map((quote) => {
       const canvas = document.createElement("canvas");
       canvas.width = 1024;
@@ -298,9 +309,17 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       const lineHeight = (fontSize * lineHeightPercent) / 100; // Convertir en pixels
 
       ctx.fillStyle = "rgba(255, 255, 255, 1)"; // Blanc opaque
-      ctx.font = `italic 900 ${fontSize}px Fraunces`; // Style de la police
+      ctx.font = `italic 900 ${fontSize}px "Fraunces", serif`; // Style de la police avec fallback serif
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
+
+      console.log("Default font:", ctx.font);
+      ctx.font = `italic 900 ${fontSize}px "Fraunces", serif`;
+      console.log("Applied font:", ctx.font);
+      console.log(
+        "Font family check:",
+        window.getComputedStyle(canvas).fontFamily
+      );
 
       // Diviser le texte pour une meilleure présentation
       const words = quote.split(" ");
