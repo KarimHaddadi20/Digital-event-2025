@@ -326,6 +326,21 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
             z-index: 1000;
             opacity: ${fragment.position.z === -10 ? 1 : 0};
         `;
+
+        const labelContent = labelDiv.querySelector('.label-content');
+        labelContent.style.cssText = `
+            display: flex;
+            width: 502px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+        `;
+
+        // Suppression des marges par défaut
+        const title = labelDiv.querySelector('h2');
+        const subtitle = labelDiv.querySelector('.subtitle');
+        title.style.margin = '0';
+        subtitle.style.margin = '0';
     }
 
     addTeamLabel(fragment, section) {
@@ -415,7 +430,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     }
 
     updateFragments() {
-        this.fragments.forEach((fragment) => {
+        this.fragments.forEach((fragment, index) => {
             if (!fragment.mesh || !fragment.group) return;
 
             const distance = fragment.group.position.z - this.camera.position.z;
@@ -424,7 +439,6 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
                 this.updateWaveEffect(fragment.mesh);
             }
 
-            // Nouveau calcul d'opacité avec un fade plus progressif
             let opacity = 0.9;
             const fadeDistance = 20;
             const startFadeDistance = 15;
@@ -460,15 +474,22 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
             // Gestion de l'opacité des labels
             if (fragment.group.userData && fragment.group.userData.label) {
                 const label = fragment.group.userData.label;
+                const cameraZ = this.camera.position.z;
                 
-                if (fragment.group.position.z === -130) { // Section team
+                if (fragment.group.position.z === -130 || index === 4) { // Section team
                     label.style.opacity = opacity;
                 } else {
-                    // Fade plus rapide pour les labels
-                    if (Math.abs(distance) > 8) {
-                        label.style.opacity = 0;
+                    // Logique pour les sections normales
+                    if (index === 0 && cameraZ > -30) {  // Première section
+                        label.style.opacity = 1;
+                    } else if (index === 1 && cameraZ <= -30 && cameraZ > -80) {  // Deuxième section
+                        label.style.opacity = 1;
+                    } else if (index === 2 && cameraZ <= -80 && cameraZ > -130) {  // Troisième section
+                        label.style.opacity = 1;
+                    } else if (index === 3 && cameraZ <= -130 && cameraZ > -180) {  // Quatrième section
+                        label.style.opacity = 1;
                     } else {
-                        label.style.opacity = opacity;
+                        label.style.opacity = 0;
                     }
                 }
             }
