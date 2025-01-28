@@ -86,6 +86,11 @@ class FragmentManager {
 
     this.setupUI();
     this.initRaycaster();
+
+    // Ajout des propriétés pour le responsive
+    this.isMobile = window.innerWidth <= 768;
+    this.footerElements = document.querySelectorAll('.footer-right p');
+    this.soundIcon = document.querySelector('.footer-left');
   }
 
   setupUI() {
@@ -155,6 +160,43 @@ class FragmentManager {
     });
 
     document.body.appendChild(this.voyagerButton);
+
+    // Ajout de la gestion responsive
+    const handleResponsive = () => {
+      const isMobile = window.innerWidth <= 768;
+      
+      if (isMobile) {
+        // Ajuster le style du bouton pour mobile
+        this.voyagerButton.style.cssText = `
+          position: fixed;
+          left: 50%;
+          bottom: 8vh; 
+          transform: translateX(-50%);
+          display: none;
+          padding: 8px 16px;
+          font-size: 12px;
+          width: auto;
+          min-width: 80px;
+          max-width: 120px;
+          border: 1px solid #FFF;
+          background: linear-gradient(344deg, rgba(21, 21, 27, 0.20) -1.4%, rgba(79, 79, 86, 0.20) 104.72%);
+          color: white;
+          border-radius: 4px;
+          z-index: 1000;
+          cursor: pointer;
+        `;
+      }
+    };
+
+    // Appliquer le responsive
+    handleResponsive();
+    window.addEventListener('resize', handleResponsive);
+    window.addEventListener('resize', () => {
+      this.isMobile = window.innerWidth <= 768;
+      if (this.selectedFragment) {
+        this.hideLegalNotices();
+      }
+    });
   }
 
   initRaycaster() {
@@ -807,6 +849,10 @@ class FragmentManager {
             `;
           }
         }
+
+        // Ajouter ces lignes
+        this.hideLegalNotices();
+        this.centerSoundIcon();
       }
     }
   }
@@ -902,6 +948,30 @@ class FragmentManager {
     };
 
     this.autoSelectTimer = setTimeout(checkInactivity, 1000);
+  }
+
+  // Nouvelle méthode pour cacher les mentions légales
+  hideLegalNotices() {
+    if (this.isMobile) {
+      this.footerElements.forEach(element => {
+        element.style.transition = 'opacity 0.3s ease';
+        element.style.opacity = '0';
+        setTimeout(() => {
+          element.style.display = 'none';
+        }, 300);
+      });
+    }
+  }
+
+  // Nouvelle méthode pour centrer l'icône son
+  centerSoundIcon() {
+    if (window.innerWidth <= 768) {
+      this.soundIcon.style.position = 'fixed';
+      this.soundIcon.style.left = '50%';
+      this.soundIcon.style.bottom = '10px';
+      this.soundIcon.style.transform = 'translateX(-50%)';
+      this.soundIcon.style.transition = 'all 0.3s ease';
+    }
   }
 }
 
