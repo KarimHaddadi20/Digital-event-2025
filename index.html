@@ -192,12 +192,20 @@
     }, { once: true });
 
     function toggleMusic() {
-      if (music.paused) {
+    const music = document.getElementById('background-music');
+    const soundIcon = document.querySelector('.footer-left img');
+
+    if (music.paused) {
         music.play();
-      } else {
+        soundIcon.src = "src/assets/icons/icn_sound.svg";
+    } else {
         music.pause();
-      }
+        soundIcon.src = "src/assets/icons/icn_sound.svg";
     }
+}
+
+// Make function available globally
+window.toggleMusic = toggleMusic;
   });
     </script>
   </body>

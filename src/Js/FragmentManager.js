@@ -150,7 +150,7 @@ class FragmentManager {
       if (this.selectedFragment) {
         // Play button press sound
         this.buttonPressSound.currentTime = 0;
-        this.buttonPressSound.volume = 0.3;
+        this.buttonPressSound.volume = 0.1;
         this.buttonPressSound.play();
         
         this.hideVoyagerButton();
