@@ -20,19 +20,16 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
 
         const handleScroll = (event) => {
             event.preventDefault();
-            console.log('Scroll event - Camera Z:', this.camera.position.z);
             const delta = Math.sign(event.deltaY) * 0.3;
             
             const maxZ = 7;
-            const fragmentSpacing = 30;
-            const lastFragmentPosition = -10 - ((this.fragments.length - 1) * fragmentSpacing);
-            const minZ = lastFragmentPosition - 15;
-            
+            const fragmentSpacing = 50;
+            const lastFragmentPosition = -260 - 15;
+            const minZ = lastFragmentPosition;
+
             let newZ = this.camera.position.z - delta;
             newZ = Math.max(minZ, Math.min(maxZ, newZ));
-            
             this.camera.position.z = newZ;
-            console.log('Nouvelle position Z:', newZ);
             
             const progress = Math.min(Math.abs(maxZ - this.camera.position.z) / Math.abs(maxZ - minZ), 1);
             if (this.progressFill) {
@@ -74,7 +71,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
                     secondaryImages: [atelierData.sets[1].image2, atelierData.sets[1].image3],
                     title: atelierData.sets[1].title,
                     subtitle: atelierData.sets[1].subtitle,
-                    zPosition: -40
+                    zPosition: -60
                 },
                 {
                     type: 'standard',
@@ -83,7 +80,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
                     secondaryImages: [atelierData.sets[2].image2, atelierData.sets[2].image3],
                     title: atelierData.sets[2].title,
                     subtitle: atelierData.sets[2].subtitle,
-                    zPosition: -70
+                    zPosition: -110
                 },
                 {
                     type: 'quote',
@@ -97,15 +94,15 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
                     ],
                     title: atelierData.sets[3].title,
                     subtitle: atelierData.sets[3].subtitle,
-                    zPosition: -100
+                    zPosition: -160
                 },
                 {
                     type: 'team',
-                    position: 'left',
+                    position: 'center',
                     image: atelierData.sets[4].image1,
                     team: atelierData.sets[4].team,
                     students: atelierData.sets[4].students,
-                    zPosition: -130
+                    zPosition: -240
                 }
             ];
 
@@ -120,23 +117,29 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     async createSection(section) {
         const textureLoader = new THREE.TextureLoader();
         const group = new THREE.Group();
+        let mainMesh;
         
-        // Augmentation du décalage latéral
-        const baseOffset = section.position === 'left' ? -8 : 8;
-        group.position.set(baseOffset, 0, section.zPosition);
+        if (section.type === 'team' || section.type === 'quote') {
+            group.position.set(0, 0, section.zPosition);
+        } else {
+            const baseOffset = section.position === 'left' ? -8 : 8;
+            group.position.set(baseOffset, 0, section.zPosition);
+        }
 
         // Création de l'image principale
         let mainTexture;
         if (section.type === 'team') {
             mainTexture = await this.loadTexture(textureLoader, section.image1 || section.image);
+            mainMesh = this.createMainMesh(mainTexture);
+            mainMesh.scale.set(1.2, 1.2, 1.2);
         } else {
             mainTexture = await this.loadTexture(textureLoader, section.mainImage);
+            mainMesh = this.createMainMesh(mainTexture);
         }
-
-        const mainMesh = this.createMainMesh(mainTexture);
+        
         group.add(mainMesh);
 
-        // Gestion des images secondaires avec plus de décalage
+        // Gestion des images secondaires
         if (section.type !== 'team' && section.secondaryImages) {
             const [texture2, texture3] = await Promise.all([
                 this.loadTexture(textureLoader, section.secondaryImages[0]),
@@ -145,26 +148,47 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
 
             const [detail1, detail2] = this.createSecondaryMeshes(texture2, texture3);
             
-            // Ajustement des positions pour un défilement horizontal
-            const secondaryOffset = section.position === 'left' ? 12 : -12;
-            
-            detail1.position.set(secondaryOffset, 2, 0); // Modification de la position Y à 2 au lieu de -2
-            detail2.position.set(secondaryOffset * 1.2, -2, 0); // Modification de la position Y à -2
-            
-            // Ajustement des rotations pour l'effet de perspective
-            detail1.rotation.z = section.position === 'left' ? -0.1 : 0.1;
-            detail2.rotation.z = section.position === 'left' ? 0.1 : -0.1;
+            if (section.type === 'quote') {
+                const quotesMeshes = this.createQuoteMeshes(section.quotes);
+                
+                // Premier ensemble (image droite, quote gauche)
+                mainMesh.position.set(5, 0, 0);
+                mainMesh.userData = { direction: 'right', initialX: 5, initialZ: 0 };
+                mainMesh.rotation.y = -0.1;
+                
+                quotesMeshes[0].position.set(-3.5, 0, -1);
+                quotesMeshes[0].userData = { direction: 'left', initialX: -3.5, initialZ: -1 };
+                quotesMeshes[0].scale.set(0.8, 0.8, 1);
+                group.add(quotesMeshes[0]);
+                
+                // Deuxième ensemble (image gauche, quote droite)
+                detail1.position.set(-3.5, 0, -15);
+                detail1.userData = { direction: 'left', initialX: -3.5, initialZ: -15 };
+                detail1.rotation.y = 0.1;
+                
+                quotesMeshes[1].position.set(5, 0, -16);
+                quotesMeshes[1].userData = { direction: 'right', initialX: 5, initialZ: -16 };
+                quotesMeshes[1].scale.set(0.8, 0.8, 1);
+                group.add(quotesMeshes[1]);
+                
+                // Troisième ensemble (image droite, quote gauche)
+                detail2.position.set(5, 0, -30);
+                detail2.userData = { direction: 'right', initialX: 5, initialZ: -30 };
+                detail2.rotation.y = -0.1;
+                
+                quotesMeshes[2].position.set(-3.5, 0, -31);
+                quotesMeshes[2].userData = { direction: 'left', initialX: -3.5, initialZ: -31 };
+                quotesMeshes[2].scale.set(0.8, 0.8, 1);
+                group.add(quotesMeshes[2]);
+            } else {
+                // Positionnement normal pour toutes les autres sections
+                const secondaryOffset = section.position === 'left' ? 12 : -12;
+                detail1.position.set(secondaryOffset, 0.5, -5);
+                const extraOffset = section.position === 'left' ? 4 : -4;
+                detail2.position.set(secondaryOffset * 1.2 + extraOffset, -2, -10);
+            }
             
             group.add(detail1, detail2);
-        }
-
-        // Ajout des quotes pour la section quote
-        if (section.type === 'quote' && section.quotes) {
-            const quotesMeshes = this.createQuoteMeshes(section.quotes);
-            quotesMeshes.forEach((mesh, index) => {
-                mesh.position.set(0, -6 - (index * 2), -5 - (index * 10));
-                group.add(mesh);
-            });
         }
 
         this.scene.add(group);
@@ -184,7 +208,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
 
     createMainMesh(texture) {
         return new THREE.Mesh(
-            new THREE.PlaneGeometry(6, 6, 50, 50),
+            new THREE.PlaneGeometry(8, 8, 50, 50),
             new THREE.MeshBasicMaterial({
                 map: texture,
                 transparent: true,
@@ -195,7 +219,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     }
 
     createSecondaryMeshes(texture2, texture3) {
-        const geometry = new THREE.PlaneGeometry(4, 4, 1, 1);
+        const geometry = new THREE.PlaneGeometry(3, 3, 1, 1);
         const material2 = new THREE.MeshBasicMaterial({
             map: texture2,
             transparent: true,
@@ -215,6 +239,18 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
         ];
     }
 
+    createQuoteImage(texture) {
+        return new THREE.Mesh(
+            new THREE.PlaneGeometry(6, 4), 
+            new THREE.MeshBasicMaterial({
+                map: texture,
+                transparent: true,
+                opacity: 0.9,
+                side: THREE.DoubleSide
+            })
+        );
+    }
+
     createQuoteMeshes(quotes) {
         return quotes.map(quote => {
             const canvas = document.createElement('canvas');
@@ -223,10 +259,31 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
             const ctx = canvas.getContext('2d');
             
             ctx.fillStyle = 'white';
-            ctx.font = 'bold 48px Arial';
+            ctx.font = 'italic 36px Georgia'; // Style  citations
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.fillText(quote, canvas.width/2, canvas.height/2);
+            
+            // Wrap le texte pour une meilleure présentation
+            const words = quote.split(' ');
+            let line = '';
+            let lines = [];
+            let y = canvas.height/2;
+            
+            words.forEach(word => {
+                const testLine = line + word + ' ';
+                if (ctx.measureText(testLine).width > 900) {
+                    lines.push(line);
+                    line = word + ' ';
+                } else {
+                    line = testLine;
+                }
+            });
+            lines.push(line);
+            
+            // Dessiner chaque ligne
+            lines.forEach((line, i) => {
+                ctx.fillText(line, canvas.width/2, y + (i - lines.length/2) * 40);
+            });
             
             const texture = new THREE.CanvasTexture(canvas);
             
@@ -273,7 +330,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
 
     addTeamLabel(fragment, section) {
         const labelDiv = document.createElement('div');
-        labelDiv.className = 'fragment-label';
+        labelDiv.className = 'fragment-label team-label';
         labelDiv.style.pointerEvents = 'auto';
         labelDiv.innerHTML = `
             <div class="label-content">
@@ -292,14 +349,17 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
         
         labelDiv.style.cssText = `
             position: fixed;
-            left: ${section.position === 'left' ? '40px' : 'auto'};
-            right: ${section.position === 'right' ? '40px' : 'auto'};
-            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 15%;
             color: white;
-            text-align: ${section.position};
+            text-align: center;
             pointer-events: auto;
-            transition: opacity 0.1s linear;
+            transition: opacity 0.3s ease;
             z-index: 1000;
+            font-size: 1.2em;
+            font-weight: bold;
+            opacity: 0.9;
         `;
     }
 
@@ -313,8 +373,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
 
         document.body.classList.add('popup-active');
 
-        popup.innerHTML = `
-            <button class="popup-close" aria-label="Fermer" type="button">
+        popup.innerHTML = `            <button class="popup-close" aria-label="Fermer" type="button">
                 <svg viewBox="0 0 24 24">
                     <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                     <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -365,32 +424,52 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
                 this.updateWaveEffect(fragment.mesh);
             }
 
+            // Nouveau calcul d'opacité avec un fade plus progressif
             let opacity = 0.9;
-            if (distance < -15 && distance > -30) {
-                opacity = 0.9 * ((distance + 30) / 15);
-            } else if (distance > 15 && distance < 30) {
-                opacity = 0.9 * (1 - ((distance - 15) / 15));
-            } else if (distance <= -30 || distance >= 30) {
-                opacity = 0;
+            const fadeDistance = 20;
+            const startFadeDistance = 15;
+
+            if (distance > startFadeDistance) {
+                opacity = Math.max(0, 0.9 * (1 - (distance - startFadeDistance) / fadeDistance));
+            } else if (distance < -startFadeDistance) {
+                opacity = Math.max(0, 0.9 * (1 - (Math.abs(distance) - startFadeDistance) / fadeDistance));
             }
 
+            // Appliquer l'opacité à tous les éléments du groupe
             fragment.group.traverse((child) => {
                 if (child.material) {
-                    child.material.opacity = opacity;
+                    if (child.userData.initialZ) {
+                        // C'est une image secondaire, calculer son opacité en fonction de sa profondeur
+                        const secondaryDistance = (child.userData.initialZ + fragment.group.position.z) - this.camera.position.z;
+                        let secondaryOpacity = 0.9;
+                        
+                        if (secondaryDistance > startFadeDistance) {
+                            secondaryOpacity = Math.max(0, 0.9 * (1 - (secondaryDistance - startFadeDistance) / fadeDistance));
+                        } else if (secondaryDistance < -startFadeDistance) {
+                            secondaryOpacity = Math.max(0, 0.9 * (1 - (Math.abs(secondaryDistance) - startFadeDistance) / fadeDistance));
+                        }
+                        
+                        child.material.opacity = secondaryOpacity;
+                    } else {
+                        // Image principale
+                        child.material.opacity = opacity;
+                    }
                 }
             });
 
+            // Gestion de l'opacité des labels
             if (fragment.group.userData && fragment.group.userData.label) {
                 const label = fragment.group.userData.label;
                 
-                if (this.camera.position.z === 0 && fragment.group.position.z === -10) {
-                    return;
-                }
-                
-                if (Math.abs(distance) > 8) {
-                    label.style.opacity = 0;
-                } else {
+                if (fragment.group.position.z === -130) { // Section team
                     label.style.opacity = opacity;
+                } else {
+                    // Fade plus rapide pour les labels
+                    if (Math.abs(distance) > 8) {
+                        label.style.opacity = 0;
+                    } else {
+                        label.style.opacity = opacity;
+                    }
                 }
             }
         });
