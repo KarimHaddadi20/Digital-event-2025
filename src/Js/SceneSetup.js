@@ -52,55 +52,52 @@ class SceneSetup {
     this.controls.enablePan = false;
     this.controls.enableRotate = true;
     this.controls.autoRotate = false;
-    
-    // Activer la rotation sans clic
-    this.controls.mouseButtons = {
-      LEFT: THREE.MOUSE.ROTATE,
-      MIDDLE: THREE.MOUSE.DOLLY,
-      RIGHT: THREE.MOUSE.PAN
+
+    // Détection plus précise des appareils mobiles
+    const isMobileDevice = () => {
+      const hasTouchScreen = navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
+      const isSmallScreen = window.innerWidth <= 768;
+      return hasTouchScreen && isSmallScreen;
     };
-    this.controls.touches = {
-      ONE: THREE.TOUCH.ROTATE,
-      TWO: THREE.TOUCH.DOLLY_PAN
-    };
+
+    // Configuration mobile uniquement
+    if (isMobileDevice()) {
+      this.controls.mouseButtons = {};
+      this.controls.touches = {
+        ONE: THREE.TOUCH.ROTATE
+      };
+    }
+
     this.controls.screenSpacePanning = true;
     this.controls.listenToKeyEvents = false;
 
     // Limites de rotation
-    this.controls.minPolarAngle = Math.PI / 2.5; // Environ 72 degrés
-    this.controls.maxPolarAngle = Math.PI / 1.7; // Environ 108 degrés
-    this.controls.minAzimuthAngle = -Math.PI / 8; // -22.5 degrés
-    this.controls.maxAzimuthAngle = Math.PI / 8; // 22.5 degrés
+    this.controls.minPolarAngle = Math.PI / 2.5;
+    this.controls.maxPolarAngle = Math.PI / 1.7;
+    this.controls.minAzimuthAngle = -Math.PI / 8;
+    this.controls.maxAzimuthAngle = Math.PI / 8;
 
     this.controls.minDistance = 50;
     this.controls.maxDistance = 200;
     this.controls.rotateSpeed = 0.5;
 
-    // Suivre le curseur
+    // Suivre le curseur sur desktop
     window.addEventListener('mousemove', (e) => {
       if (!this.controls.enabled) return;
+      
+      // Ne pas appliquer le suivi du curseur sur mobile
+      if (isMobileDevice()) return;
 
-      // Convertir la position de la souris en coordonnées normalisées (-1 à 1)
       const x = (e.clientX / window.innerWidth) * 2 - 1;
       const y = -(e.clientY / window.innerHeight) * 2 + 1;
 
-      // Calculer l'angle de rotation en fonction de la position de la souris
-      const targetX = x * Math.PI / 4; // 45 degrés max de rotation
+      const targetX = x * Math.PI / 4;
       const targetY = y * Math.PI / 4;
 
-      // Mettre à jour la position cible de la caméra
       this.controls.target.x = Math.sin(targetX) * 10;
       this.controls.target.y = Math.sin(targetY) * 10;
 
-      // Forcer la mise à jour des contrôles
       this.controls.update();
-    });
-
-    // Empêcher la désactivation du contrôle au relâchement du clic
-    this.controls.domElement.addEventListener('mouseup', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      return false;
     });
   }
 
