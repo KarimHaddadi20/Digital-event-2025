@@ -24,12 +24,20 @@ export class PortalTransitionSceneBase extends SceneSetup {
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(0x000000);
 
-        // Désactiver complètement les contrôles de la caméra
-        
-        this.controls.enabled = false;
-        this.controls.enableRotate = false;
-        this.controls.enablePan = false;
-        this.controls.enableZoom = false;
+        // Désactiver les contrôles
+        if (this.controls) {
+            this.controls.enabled = false;
+            this.controls.enableRotate = false;
+            this.controls.enablePan = false;
+            this.controls.enableZoom = false;
+        }
+
+        // Initialisation du bouton back
+        this.backButton = document.querySelector('#back-button');
+        if (this.backButton) {
+            this.backButton.style.display = 'block';
+            this.backButton.addEventListener('click', () => this.refreshPage());
+        }
         
         this.initScene();
     }
@@ -265,5 +273,25 @@ export class PortalTransitionSceneBase extends SceneSetup {
 
     updateFragments() {
         throw new Error('updateFragments doit être implémenté dans la classe enfant');
+    }
+
+    refreshPage() {
+        // Nettoyer la scène et les ressources
+        if (this.app) {
+            this.app.clearScene();
+        }
+
+        // Supprimer les event listeners
+        window.removeEventListener('mousemove', this.onMouseMove);
+        window.removeEventListener('click', this.handleFragmentClick);
+        window.removeEventListener('resize', this.onWindowResize);
+
+        // Nettoyer les contrôles
+        if (this.controls) {
+            this.controls.dispose();
+        }
+
+        // Recharger la page
+        window.location.reload();
     }
 } 
