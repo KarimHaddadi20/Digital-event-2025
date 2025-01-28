@@ -47,7 +47,7 @@
 
     <div id="main-content" style="display: none">
       <div class="scene-wrapper">
-        
+
         <div id="scene-container"></div>
         <div class="scroll-progress-container">
           <div class="scroll-progress-bar">
@@ -73,14 +73,22 @@
     <!-- Footer  -->
     <footer class="footer" style="display: none">
       <div class="footer-content">
-        <div class="footer-left">
-          <img
-            src="src/assets/icons/icn_sound.svg"
-            alt="Sound icon"
-            width="40"
-            height="40"
-          />
-        </div>
+       <div class="footer-left">
+        <audio id="background-music" autoplay>
+          <source src="src/sound/sample home..mp3" type="audio/mpeg">
+          Votre navigateur ne supporte pas l'élément audio.
+      </audio>
+      <audio id="mirror-break-sound">
+        <source src="src/sound/sound effect mirror crash.mp3" type="audio/mpeg">
+    </audio>
+  <img
+    src="src/assets/icons/icn_sound.svg"
+    alt="Sound icon"
+    width="40"
+    height="40"
+    onclick="toggleMusic()"
+  />
+</div>
         <div class="footer-right">
           <p>Mentions légales</p>
           <p>Politique de confidentialité</p>
@@ -158,5 +166,32 @@
     <script type="module" src="src/Js/Loader.js"></script>
     <script src="./src/Js/menu.js"></script>
     <!-- <script type="module" src="src/Js/AtelierGallerySceneNew.js"></script> -->
+    <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const music = document.getElementById('background-music');
+    
+    // Tentative de lecture automatique
+    const playPromise = music.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        // Auto-play was prevented
+        console.log("Autoplay prevented");
+      });
+    }
+
+    // Démarrer la musique après la première interaction
+    document.addEventListener('click', function() {
+      music.play();
+    }, { once: true });
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+  });
+    </script>
   </body>
 </html>
