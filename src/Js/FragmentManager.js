@@ -92,6 +92,7 @@ class FragmentManager {
     this.footerElements = document.querySelectorAll('.footer-right p');
     this.soundIcon = document.querySelector('.footer-left');
     this.fragmentSelectSound = document.getElementById('fragment-select-sound');
+    this.buttonPressSound = document.getElementById('button-press-sound');
   }
 
   setupUI() {
@@ -147,6 +148,11 @@ class FragmentManager {
     // Gestion du clic
     this.voyagerButton.addEventListener("click", () => {
       if (this.selectedFragment) {
+        // Play button press sound
+        this.buttonPressSound.currentTime = 0;
+        this.buttonPressSound.volume = 0.3;
+        this.buttonPressSound.play();
+        
         this.hideVoyagerButton();
         this.animateFragmentFall(this.selectedFragment);
         
