@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { CSS2DRenderer, CSS2DObject } from 'three/addons/renderers/CSS2DRenderer.js';
 import { SceneSetup } from './SceneSetup.js';
+import { Loader } from './Loader.js';
 
 export class PortalTransitionSceneBase extends SceneSetup {
     constructor(app, selectedFragmentIndex) {
@@ -24,12 +25,23 @@ export class PortalTransitionSceneBase extends SceneSetup {
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(0x000000);
 
-        // Désactiver complètement les contrôles de la caméra
-        
-        this.controls.enabled = false;
-        this.controls.enableRotate = false;
-        this.controls.enablePan = false;
-        this.controls.enableZoom = false;
+        // Initialiser les contrôles après la création de la scène
+        this.setupControls();
+
+        // Désactiver les contrôles
+        if (this.controls) {
+            this.controls.enabled = false;
+            this.controls.enableRotate = false;
+            this.controls.enablePan = false;
+            this.controls.enableZoom = false;
+        }
+
+        // Initialisation du bouton back
+        this.backButton = document.querySelector('#back-button');
+        if (this.backButton) {
+            this.backButton.style.display = 'block';
+            this.backButton.addEventListener('click', () => this.handleBackButton());
+        }
         
         this.initScene();
     }
@@ -265,5 +277,48 @@ export class PortalTransitionSceneBase extends SceneSetup {
 
     updateFragments() {
         throw new Error('updateFragments doit être implémenté dans la classe enfant');
+    }
+
+    handleBackButton() {
+        // Nettoyer la scène actuelle
+        if (this.app) {
+            this.app.clearScene();
+        }
+
+        // Recréer la structure HTML nécessaire
+        document.body.innerHTML = `
+            <div id="loading-container">
+                <div class="loading-title">
+                    <span class="font-aktiv">Digital Event</span>
+                    <span class="font-fraunces">Edition 2025</span>
+                </div>
+                <div id="percentage">0%</div>
+                <div id="mirror-percentage">0%</div>
+                <div class="loader-footer">
+                    <img src="src/assets/icons/esd_logo_NoTexte_Jade 1.svg" alt="esd icon" width="40" height="40" />
+                    <p>Ecole Supérieure du Digital</p>
+                </div>
+            </div>
+            <div id="main-content" style="display: none">
+                <div class="scene-wrapper">
+                    <div id="scene-container"></div>
+                    <div class="scroll-progress-container">
+                        <div class="scroll-progress-bar">
+                            <div class="scroll-progress-fill"></div>
+                        </div>
+                    </div>
+                    <div class="mirror-instructions">
+                        <p class="instruction-title">Cassez le miroir</p>
+                        <p class="instruction-subtitle">Cliquez pour découvrir les ateliers</p>
+                    </div>
+                </div>
+            </div>`;
+
+        // Recréer la scène initiale
+        this.recreateInitialScene();
+
+        // Créer une nouvelle instance du loader
+        const loader = new Loader();
+        loader.init();
     }
 } 
