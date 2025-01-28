@@ -1,40 +1,57 @@
 // Dans app.js ou un nouveau fichier menu.js
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM Content Loaded");
+
   const burgerButton = document.getElementById("burger-menu");
   const sideMenu = document.getElementById("side-menu");
   const menuLinks = document.querySelectorAll(".menu-list a");
-  const closeButton = document.getElementById("close-menu"); // Ajout de cette ligne
+  const closeButton = document.getElementById("close-menu");
 
-  // Ajout du listener pour le bouton close
-  closeButton.addEventListener("click", () => {
-    sideMenu.classList.remove("open");
+  // Debug DOM elements
+  console.log({
+    burgerButton: !!burgerButton,
+    sideMenu: !!sideMenu,
+    menuLinksCount: menuLinks.length,
+    closeButton: !!closeButton,
   });
 
-  // Toggle menu
-  burgerButton.addEventListener("click", () => {
-    sideMenu.classList.toggle("open");
-  });
-
-  // Handle menu item clicks
-  menuLinks.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const atelierIndex = parseInt(link.dataset.atelier) - 1;
-
-      // Fermer le menu
-      sideMenu.classList.remove("open");
-
-      // Transition vers l'atelier sélectionné
-      if (window.mirrorEffect) {
-        window.mirrorEffect.switchToGalleryScene(atelierIndex);
-      }
+  // Debug menu links data
+  menuLinks.forEach((link, index) => {
+    console.log(`Link ${index}:`, {
+      text: link.textContent,
+      dataset: link.dataset,
+      href: link.href,
     });
   });
 
-  // Close menu when clicking outside
-  document.addEventListener("click", (e) => {
-    if (!sideMenu.contains(e.target) && !burgerButton.contains(e.target)) {
-      sideMenu.classList.remove("open");
-    }
-  });
+  console.log("Menu links found:", menuLinks.length);
+
+  const initializeMenu = () => {
+    // Menu toggle functionality
+    burgerButton.addEventListener("click", () =>
+      sideMenu.classList.toggle("open")
+    );
+    closeButton.addEventListener("click", () =>
+      sideMenu.classList.remove("open")
+    );
+
+    // Navigation functionality with scene states
+    menuLinks.forEach((link) => {
+      link.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const sceneIndex = parseInt(link.dataset.atelier) - 1;
+
+        if (window.mirrorEffect) {
+          try {
+            sideMenu.classList.remove("open");
+            window.mirrorEffect.transitionToScene(sceneIndex);
+          } catch (error) {
+            console.error("Scene transition error:", error);
+          }
+        }
+      });
+    });
+  };
+
+  initializeMenu();
 });

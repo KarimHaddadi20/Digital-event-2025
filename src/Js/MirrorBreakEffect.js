@@ -96,14 +96,24 @@ class MirrorBreakEffect extends SceneSetup {
 
   animate() {
     if (!this.isAnimating) return;
-    requestAnimationFrame(() => this.animate());
-    if (this.isBreaking) {
-      this.fragmentManager.animateFragments();
+
+    // Add safety checks
+    if (this.renderer && this.scene && this.camera) {
+      requestAnimationFrame(() => this.animate());
+
+      if (this.isBreaking) {
+        this.fragmentManager.animateFragments();
+      }
+
+      if (this.controls) {
+        this.controls.update();
+      }
+
+      this.renderer.render(this.scene, this.camera);
+    } else {
+      this.isAnimating = false;
+      console.log("Animation stopped - missing required components");
     }
-    if (this.controls) {
-      this.controls.update();
-    }
-    this.renderer.render(this.scene, this.camera);
   }
 
   handleClick(event) {
@@ -224,6 +234,18 @@ class MirrorBreakEffect extends SceneSetup {
       requestAnimationFrame(fadeOut);
     };
     fadeOut();
+  }
+
+  transitionToScene(sceneIndex) {
+    console.log("MirrorBreakEffect: Début de la transition");
+    this.isAnimating = false; // Stop animation loop before cleanup
+
+    this.clearScene();
+    document.removeEventListener("click", this.handleClick);
+    window.removeEventListener("mousemove", this.fragmentManager.onMouseMove);
+
+    console.log("MirrorBreakEffect: Création de la scène de transition");
+    const transitionScene = new PortalTransitionScene(this, sceneIndex);
   }
 
   // loadHDRI() {
