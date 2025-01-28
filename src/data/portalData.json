@@ -1,6 +1,6 @@
 {
     "atelier1": {
-        "backgroundImage": "src/textures/site_web.jpg",
+        "backgroundImage": "src/textures/site.web.web",
         "sets": [
             {
                 "title": "Site web",

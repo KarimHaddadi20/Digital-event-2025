@@ -81,9 +81,11 @@ class SceneSetup {
     this.controls.maxDistance = 200;
     this.controls.rotateSpeed = 0.5;
 
+    this.isNavigating = false;
+
     // Suivre le curseur sur desktop
     window.addEventListener('mousemove', (e) => {
-      if (!this.controls.enabled) return;
+      if (!this.controls.enabled || this.isNavigating) return;
       
       // Ne pas appliquer le suivi du curseur sur mobile
       if (isMobileDevice()) return;

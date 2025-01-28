@@ -148,11 +148,27 @@ class FragmentManager {
       if (this.selectedFragment) {
         this.hideVoyagerButton();
         this.animateFragmentFall(this.selectedFragment);
-        // Réinitialiser la position de la caméra avec une animation GSAP
-        window.gsap.to(this.app.camera.position, {
+        
+        // Désactiver les contrôles de la caméra
+        this.app.controls.enabled = false;
+        
+        // Bloquer le suivi du curseur
+        this.app.isNavigating = true;
+        
+        // // Réinitialiser la position de la caméra
+        // window.gsap.to(this.app.camera.position, {
+        //   x: 0,
+        //   y: 0,
+        //   z: 5,
+        //   duration: 1.5,
+        //   ease: "power2.inOut",
+        // });
+
+        // Réinitialiser la rotation de la caméra
+        window.gsap.to(this.app.camera.rotation, {
           x: 0,
           y: 0,
-          z: 5,
+          z: 0,
           duration: 1.5,
           ease: "power2.inOut"
         });
