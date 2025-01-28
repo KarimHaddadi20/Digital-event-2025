@@ -96,7 +96,7 @@ export class PortalTransitionSceneBase extends SceneSetup {
     }
 
     setupDefaultBackground() {
-        this.loadBackgroundTexture('src/textures/gaming_popcorn.png');
+        this.loadBackgroundTexture('src/textures/homepage.webp');
     }
 
     loadBackgroundTexture(texturePath) {
