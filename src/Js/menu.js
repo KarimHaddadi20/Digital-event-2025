@@ -55,3 +55,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initializeMenu();
 });
+
+// Dans le fichier src/Js/menu.js ou directement dans l'index.html
+document.addEventListener("DOMContentLoaded", () => {
+  // Sélectionner le bouton retour
+  const backButton = document.getElementById("back-button");
+
+  // Ajouter l'écouteur d'événement pour rafraîchir la page
+  if (backButton) {
+    backButton.addEventListener("click", () => {
+      window.location.reload(); // Rafraîchit la page
+    });
+  }
+});
