@@ -1500,7 +1500,7 @@
         ]
     },
     "atelier9": {
-        "backgroundImage": "src/textures/ai_driven_visual_stories.jpg",
+        "backgroundImage": "src/textures/ai.driven.visual.stories.webp",
         "sets": [
             {
                 "title": "Innovation",

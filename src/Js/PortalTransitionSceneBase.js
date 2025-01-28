@@ -113,52 +113,65 @@ export class PortalTransitionSceneBase extends SceneSetup {
     }
 
     setupDefaultBackground() {
-        this.loadBackgroundTexture('src/textures/homepage.webp');
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.load('src/textures/homepage.webp', (texture) => {
+            const aspectRatio = texture.image.width / texture.image.height;
+            const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
+            const bgMaterial = new THREE.MeshBasicMaterial({
+                map: texture,
+                side: THREE.FrontSide,
+                transparent: true,
+            });
+
+            this.background = new THREE.Mesh(bgGeometry, bgMaterial);
+            this.background.position.z = -300;
+            this.background.position.y = 0;
+            texture.encoding = THREE.sRGBEncoding;
+
+            this.scene.add(this.background);
+            this.scene.background = new THREE.Color(0x000000);
+        });
     }
 
-    loadBackgroundTexture(texturePath) {
+    loadBackgroundTexture(path) {
         const textureLoader = new THREE.TextureLoader();
-        textureLoader.load(
-            texturePath,
-            (texture) => {
-                texture.colorSpace = THREE.SRGBColorSpace;
-                
-                const imageRatio = texture.image.width / texture.image.height;
-                const screenRatio = window.innerWidth / window.innerHeight;
-                
-                let planeWidth, planeHeight;
-                if (screenRatio > imageRatio) {
-                    planeWidth = 20 * screenRatio;
-                    planeHeight = planeWidth / imageRatio;
-                } else {
-                    planeHeight = 20;
-                    planeWidth = planeHeight * imageRatio;
-                }
-                
-                const bgGeometry = new THREE.PlaneGeometry(planeWidth, planeHeight);
-                const bgMaterial = new THREE.MeshBasicMaterial({
-                    map: texture,
-                    side: THREE.DoubleSide,
-                    depthWrite: false,
-                    depthTest: false
-                });
-                const bgMesh = new THREE.Mesh(bgGeometry, bgMaterial);
-                
-                bgMesh.position.z = -13;
-                bgMesh.renderOrder = -1;
-                
-                this.camera.add(bgMesh);
-                
-                if (!this.scene.children.includes(this.camera)) {
-                    this.scene.add(this.camera);
-                }
-            },
-            undefined,
-            (error) => {
-                console.error("Erreur lors du chargement de l'image de fond:", error);
-                this.setupDefaultBackground();
+        textureLoader.load(path, (texture) => {
+            const aspectRatio = texture.image.width / texture.image.height;
+            const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
+            const bgMaterial = new THREE.MeshBasicMaterial({
+                map: texture,
+                side: THREE.FrontSide,
+                transparent: true,
+            });
+
+            if (this.background) {
+                this.scene.remove(this.background);
+                this.background.geometry.dispose();
+                this.background.material.dispose();
             }
-        );
+
+            this.background = new THREE.Mesh(bgGeometry, bgMaterial);
+            this.background.position.z = -300;
+            this.background.position.y = 0;
+            texture.encoding = THREE.sRGBEncoding;
+
+            this.scene.add(this.background);
+            this.scene.background = new THREE.Color(0x000000);
+        });
+    }
+
+    updateParallax() {
+        if (this.background) {
+            // Calculer la position relative de la caméra par rapport à sa position initiale
+            const cameraZOffset = this.camera.position.z - 7; // 7 est la position initiale en Z
+            
+            // Appliquer un très léger zoom au background basé sur la position de la caméra
+            const zoomFactor = 1 + (Math.abs(cameraZOffset) * 0.0005); // Facteur très faible pour un effet subtil
+            this.background.scale.set(zoomFactor, zoomFactor, 1);
+            
+            // Ajuster légèrement la position Z du background pour donner une sensation de profondeur
+            this.background.position.z = -300 + (cameraZOffset * 0.1);
+        }
     }
 
     loadTexture(loader, path) {
@@ -253,6 +266,7 @@ export class PortalTransitionSceneBase extends SceneSetup {
         requestAnimationFrame(() => this.animate());
         this.time += 0.01;
         this.updateFragments();
+        this.updateParallax();
         
         if (this.renderer && this.scene && this.camera) {
             this.renderer.render(this.scene, this.camera);
