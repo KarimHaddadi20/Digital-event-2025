@@ -1,0 +1,46 @@
+{
+  "Site web": {
+    "title": "Site web",
+    "description": "Explorez les coulisses du site du Digital Event 2025."
+  },
+  "Video Mapping": {
+    "title": "Vidéo mapping",
+    "description": "Plongez dans le noir et observez le vidéo mapping…"
+  },
+  "Creative Coding": {
+    "title": "Creative coding",
+    "description": "Vivez l'expérience creative coding grâce à la force du code."
+  },
+  "Gaming & Pop-corn": {
+    "title": "Pop corn",
+    "description": "Repérez et testez vos références culturelles…"
+  },
+  "Video": {
+    "title": "Vidéo",
+    "description": "Entrez dans un autre monde, vidéo après vidéo."
+  },
+  "Escape game": {
+    "title": "Escape Game",
+    "description": "Venez résoudre nos énigmes …"
+  },
+  "Podcast": {
+    "title": "Podcast",
+    "description": "Laissez-vous bercer par nos narrateurs."
+  },
+  "Photo reportage": {
+    "title": "Photo",
+    "description": "Découvrez les clichés mémorables du Digital Event"
+  },
+  "AI Driven visual stories": {
+    "title": "AI Driven Visual Stories",
+    "description": "Dépassez les frontières de l'intelligence artificielle"
+  },
+  "Game design": {
+    "title": "Game Design",
+    "description": "Explorez les multiples facettes de la conception de jeu"
+  },
+  "Organisation": {
+    "title": "Organisation",
+    "description": "Découvrez les coulisses et l'organisation de l'événement"
+  }
+}

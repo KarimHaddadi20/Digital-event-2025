@@ -72,10 +72,10 @@ class SceneSetup {
     this.controls.listenToKeyEvents = false;
 
     // Limites de rotation
-    this.controls.minPolarAngle = Math.PI / 2.5;
-    this.controls.maxPolarAngle = Math.PI / 1.7;
-    this.controls.minAzimuthAngle = -Math.PI / 8;
-    this.controls.maxAzimuthAngle = Math.PI / 8;
+    this.controls.minPolarAngle = Math.PI / 2; // Bloque à l'horizontale
+    this.controls.maxPolarAngle = Math.PI / 2; // Bloque à l'horizontale
+    this.controls.minAzimuthAngle = -Math.PI / 12;
+    this.controls.maxAzimuthAngle = Math.PI / 12;
 
     this.controls.minDistance = 50;
     this.controls.maxDistance = 200;
@@ -96,7 +96,7 @@ class SceneSetup {
       const targetX = x * Math.PI / 4;
       const targetY = y * Math.PI / 4;
 
-      this.controls.target.x = Math.sin(targetX) * 10;
+      this.controls.target.x = Math.sin(targetX) * 20;
       this.controls.target.y = Math.sin(targetY) * 10;
 
       this.controls.update();

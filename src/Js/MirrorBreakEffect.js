@@ -21,6 +21,8 @@ class MirrorBreakEffect extends SceneSetup {
 
     // Initialisation du gestionnaire de fragments
     this.fragmentManager = new FragmentManager(this);
+    this.mirrorBreakSound = document.getElementById('mirror-break-sound');
+
 
     // Initialiser l'environnement
     this.onReady = () => {
@@ -157,6 +159,8 @@ class MirrorBreakEffect extends SceneSetup {
           fragmentInstructions.style.display = "block";
         }
 
+        this.mirrorBreakSound.currentTime = 0;
+        this.mirrorBreakSound.play();
         this.fragmentManager.breakMirror();
         this.isBroken = true;
 

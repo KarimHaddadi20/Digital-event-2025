@@ -862,11 +862,24 @@ class FragmentManager {
         if (this.fragmentInstructions) {
           const titleElement =
             this.fragmentInstructions.querySelector(".instruction-title");
+          const subtitleElement = this.fragmentInstructions.querySelector(".instruction-subtitle");
+          
           if (titleElement) {
             titleElement.innerHTML = `
               <span class="font-aktiv">${clickedFragment.userData.atelierName}</span>
               <span class="font-fraunces">fragment</span>
             `;
+          }
+
+          // Mettre à jour le sous-titre avec la description de l'atelier
+          if (subtitleElement) {
+            fetch('/src/data/description.json')
+              .then(response => response.json())
+              .then(data => {
+                const atelierName = clickedFragment.userData.atelierName;
+                const description = data[atelierName]?.description || "Découvrez les ateliers en détail";
+                subtitleElement.textContent = description;
+              });
           }
         }
 
