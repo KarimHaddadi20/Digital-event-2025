@@ -340,7 +340,6 @@ body {
 .back-button img {
   width: 40px;
   height: 40px;
-  opacity: 0.6;
 }
 
 /* Font styles */
@@ -430,10 +429,6 @@ body {
   opacity: 1;
   transition: opacity 0.3s ease;
   filter: brightness(2.5);
-}
-
-.back-button {
-  opacity: 0.5;
 }
 
 /* Instructions du miroir */
