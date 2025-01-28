@@ -38,9 +38,46 @@
             font-family: Arial, sans-serif;
             z-index: 1000;
         }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .back-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            display: none;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .back-button:hover {
+            opacity: 1;
+        }
+
+        .back-button img {
+            width: 24px;
+            height: 24px;
+        }
     </style>
 </head>
 <body>
+    <nav class="navbar">
+        <button id="back-button" class="back-button">
+            <img src="/src/assets/icons/back-arrow.svg" alt="Retour">
+        </button>
+    </nav>
+
     <div id="loading-screen">
         <h1>Chargement...</h1>
     </div>

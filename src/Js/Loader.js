@@ -2,23 +2,81 @@ import * as THREE from 'three';
 
 class Loader {
     constructor() {
+        this.CUBE_COUNT = 7;
         this.cubes = [];
-        this.CUBE_COUNT = 20; // Réduit pour une ligne plus claire
         this.init();
     }
 
     init() {
-        // Initialisation Three.js
-        this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        this.renderer = new THREE.WebGLRenderer({ antialias: true });
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('loading-container').appendChild(this.renderer.domElement);
-        
-        this.createCubes();
-        this.setupCamera();
-        this.animate();
+        // Créer les éléments DOM nécessaires s'ils n'existent pas
+        this.createDOMElements();
         this.animateLoading();
+    }
+
+    createDOMElements() {
+        // Créer le conteneur de chargement s'il n'existe pas
+        let loadingContainer = document.getElementById('loading-container');
+        if (!loadingContainer) {
+            loadingContainer = document.createElement('div');
+            loadingContainer.id = 'loading-container';
+            document.body.appendChild(loadingContainer);
+        }
+
+        // Créer le titre de chargement
+        let loadingTitle = loadingContainer.querySelector('.loading-title');
+        if (!loadingTitle) {
+            loadingTitle = document.createElement('div');
+            loadingTitle.className = 'loading-title';
+            loadingTitle.innerHTML = `
+                <span class="font-aktiv">Digital Event</span>
+                <span class="font-fraunces">Edition 2025</span>
+            `;
+            loadingContainer.appendChild(loadingTitle);
+        }
+
+        // Créer les éléments de pourcentage
+        let percentage = document.getElementById('percentage');
+        if (!percentage) {
+            percentage = document.createElement('div');
+            percentage.id = 'percentage';
+            percentage.textContent = '0%';
+            loadingContainer.appendChild(percentage);
+        }
+
+        let mirrorPercentage = document.getElementById('mirror-percentage');
+        if (!mirrorPercentage) {
+            mirrorPercentage = document.createElement('div');
+            mirrorPercentage.id = 'mirror-percentage';
+            mirrorPercentage.textContent = '0%';
+            loadingContainer.appendChild(mirrorPercentage);
+        }
+
+        // Créer le contenu principal s'il n'existe pas
+        let mainContent = document.getElementById('main-content');
+        if (!mainContent) {
+            mainContent = document.createElement('div');
+            mainContent.id = 'main-content';
+            mainContent.style.display = 'none';
+            document.body.appendChild(mainContent);
+        }
+
+        // Créer la navbar si elle n'existe pas
+        let navbar = document.querySelector('.navbar');
+        if (!navbar) {
+            navbar = document.createElement('nav');
+            navbar.className = 'navbar';
+            navbar.style.display = 'none';
+            document.body.appendChild(navbar);
+        }
+
+        // Créer le footer s'il n'existe pas
+        let footer = document.querySelector('.footer');
+        if (!footer) {
+            footer = document.createElement('footer');
+            footer.className = 'footer';
+            footer.style.display = 'none';
+            document.body.appendChild(footer);
+        }
     }
 
     createCubes() {
@@ -83,8 +141,12 @@ class Loader {
                 duration: 1,
                 onUpdate: () => {
                     const currentPercent = Math.round(progress.value * 100);
-                    percentageElement.textContent = `${currentPercent}%`;
-                    mirrorPercentageElement.textContent = `${currentPercent}%`;
+                    if (percentageElement) {
+                        percentageElement.textContent = `${currentPercent}%`;
+                    }
+                    if (mirrorPercentageElement) {
+                        mirrorPercentageElement.textContent = `${currentPercent}%`;
+                    }
 
                     this.cubes.forEach((point, index) => {
                         const centerIndex = (this.CUBE_COUNT - 1) / 2;
@@ -112,10 +174,16 @@ class Loader {
                         
                         // Timeout de sécurité de 3 secondes
                         const timeout = setTimeout(() => {
-                            document.getElementById('loading-container').remove();
-                            document.getElementById('main-content').style.display = 'block';
-                            document.querySelector('.navbar').style.display = 'block';
-                            document.querySelector('.footer').style.display = 'block';
+                            const loadingContainer = document.getElementById('loading-container');
+                            const mainContent = document.getElementById('main-content');
+                            const navbar = document.querySelector('.navbar');
+                            const footer = document.querySelector('.footer');
+
+                            if (loadingContainer) loadingContainer.remove();
+                            if (mainContent) mainContent.style.display = 'block';
+                            if (navbar) navbar.style.display = 'block';
+                            if (footer) footer.style.display = 'block';
+
                             window.mirrorEffect = mirrorEffect;
                             resolve();
                         }, 1000);
@@ -123,24 +191,23 @@ class Loader {
                         // Une fois que la scène est prête
                         mirrorEffect.onReady = () => {
                             clearTimeout(timeout);
-                            // Cacher l'écran de chargement
-                            document.getElementById('loading-container').remove();
                             
-                            // Afficher le contenu principal
+                            const loadingContainer = document.getElementById('loading-container');
                             const mainContent = document.getElementById('main-content');
-                            if (mainContent) {
-                                mainContent.style.display = 'block';
-                            }
-                            
-                            // Afficher la navbar et le footer
-                            document.querySelector('.navbar').style.display = 'block';
-                            document.querySelector('.footer').style.display = 'block';
-                            
+                            const navbar = document.querySelector('.navbar');
+                            const footer = document.querySelector('.footer');
+
+                            if (loadingContainer) loadingContainer.remove();
+                            if (mainContent) mainContent.style.display = 'block';
+                            if (navbar) navbar.style.display = 'block';
+                            if (footer) footer.style.display = 'block';
+
                             window.mirrorEffect = mirrorEffect;
                             resolve();
                         };
                     } catch (error) {
-                        console.error('Erreur lors du chargement:', error);
+                        console.error('Erreur lors du chargement de la scène:', error);
+                        resolve();
                     }
                 },
                 ease: "power1.inOut"

@@ -1,10 +1,8 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 import { SceneSetup } from "./SceneSetup.js";
 import { FragmentManager } from "./FragmentManager.js";
-// import { AtelierGalleryScene } from "./AtelierGalleryScene.js";
 import { PortalTransitionScene } from "./PortalTransitionScene.js";
 
 class MirrorBreakEffect extends SceneSetup {
@@ -18,69 +16,129 @@ class MirrorBreakEffect extends SceneSetup {
     this.mirror = null;
     this.startBroken = startBroken;
     this.isAnimating = true;
+    this.mirrorInstructions = null;
+    this.fragmentInstructions = null;
+    this.isInitialized = false;
 
     // Initialisation du gestionnaire de fragments
     this.fragmentManager = new FragmentManager(this);
 
     // Initialiser l'environnement
-    this.onReady = () => {
-      // Ajouter les instructions
-      const container = document.createElement("div");
-      container.className = "mirror-instructions";
-      container.textContent = "Cassez le miroir";
-      document.body.appendChild(container);
-
-      const fragmentInstructions = document.createElement("div");
-      fragmentInstructions.className = "fragment-instructions";
-      fragmentInstructions.textContent =
-        "Cliquez sur un fragment pour découvrir son atelier";
-      fragmentInstructions.style.display = "none";
-      document.body.appendChild(fragmentInstructions);
-
-      if (this.startBroken) {
-        console.log("Cassure automatique du miroir...");
-        // Cacher les instructions du miroir et afficher les instructions des fragments
-        container.style.display = "none";
-        fragmentInstructions.style.display = "block";
-
-        // Casser le miroir
-        this.mirror.visible = false;
-        this.isBreaking = true;
-        this.fragmentManager.breakMirror();
-      }
-    };
-
-    this.setupScene();
+    this.init();
   }
 
-  setupScene() {
-    let hdriLoaded = false;
-    let modelLoaded = false;
-
-    // Charger l'environnement et les lumières
-    this.setupLights();
-    // this.setupBackground();
-    // this.loadHDRI().then(() => {
-    //     hdriLoaded = true;
-    //     if (modelLoaded && this.onReady) {
-    //         this.onReady();
-    //     }
-    // });
-
-    // Charger le modèle du miroir
-    this.fragmentManager.loadMirrorModel().then(() => {
-      modelLoaded = true;
-
-      if (this.onReady) {
-        this.onReady();
+  async init() {
+    try {
+      // Nettoyer la scène précédente si elle existe
+      if (this.isInitialized) {
+        this.cleanup();
       }
-    });
 
-    // Event listeners
-    this.setupEventListeners();
+      // Configurer les lumières
+      await this.setupLights();
+      
+      // Charger le modèle du miroir
+      await this.fragmentManager.loadMirrorModel();
+      
+      // Créer les éléments UI
+      this.createUIElements();
 
-    // Démarrer l'animation
-    this.animate();
+      // Configurer l'état initial
+      if (this.startBroken) {
+        this.initBrokenState();
+      }
+
+      // Configurer les événements
+      this.setupEventListeners();
+
+      // Démarrer l'animation
+      this.isAnimating = true;
+      this.animate();
+
+      this.isInitialized = true;
+    } catch (error) {
+      console.error("Erreur lors de l'initialisation de la scène:", error);
+    }
+  }
+
+  async setupLights() {
+    // Lumière ambiante
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    this.scene.add(ambientLight);
+
+    // Lumière directionnelle principale
+    const mainLight = new THREE.DirectionalLight(0xffffff, 1);
+    mainLight.position.set(5, 5, 5);
+    mainLight.castShadow = true;
+    this.scene.add(mainLight);
+
+    // Lumières d'accentuation
+    const pointLight1 = new THREE.PointLight(0xffffff, 1, 10);
+    pointLight1.position.set(-5, 5, 0);
+    this.scene.add(pointLight1);
+
+    const pointLight2 = new THREE.PointLight(0xffffff, 1, 10);
+    pointLight2.position.set(5, -5, 0);
+    this.scene.add(pointLight2);
+  }
+
+  createUIElements() {
+    // Supprimer les anciennes instructions si elles existent
+    this.cleanupUIElements();
+
+    // Créer les instructions du miroir
+    this.mirrorInstructions = document.createElement("div");
+    this.mirrorInstructions.className = "mirror-instructions";
+    this.mirrorInstructions.innerHTML = `
+      <div class="instruction-title">
+        <span class="font-aktiv">Cassez le</span>
+        <span class="font-fraunces">miroir</span>
+      </div>
+      <div class="instruction-subtitle">Cliquez pour découvrir les ateliers</div>
+    `;
+    document.body.appendChild(this.mirrorInstructions);
+
+    // Créer les instructions des fragments
+    this.fragmentInstructions = document.createElement("div");
+    this.fragmentInstructions.className = "fragment-instructions";
+    this.fragmentInstructions.innerHTML = `
+      <div class="instruction-title">
+        <span class="font-aktiv">Sélectionnez un</span>
+        <span class="font-fraunces">fragment</span>
+      </div>
+      <div class="instruction-subtitle">Cliquez pour découvrir l'atelier</div>
+    `;
+    this.fragmentInstructions.style.display = "none";
+    document.body.appendChild(this.fragmentInstructions);
+  }
+
+  cleanupUIElements() {
+    // Supprimer les anciennes instructions si elles existent
+    const oldMirrorInstructions = document.querySelector(".mirror-instructions");
+    const oldFragmentInstructions = document.querySelector(".fragment-instructions");
+
+    if (oldMirrorInstructions) {
+      oldMirrorInstructions.remove();
+    }
+    if (oldFragmentInstructions) {
+      oldFragmentInstructions.remove();
+    }
+  }
+
+  initBrokenState() {
+    console.log("Initialisation de l'état brisé...");
+    if (this.mirrorInstructions) {
+      this.mirrorInstructions.style.display = "none";
+    }
+    if (this.fragmentInstructions) {
+      this.fragmentInstructions.style.display = "block";
+    }
+    if (this.mirror) {
+      this.mirror.visible = false;
+      this.isBreaking = true;
+      this.isBroken = true;
+      this.fragmentManager.breakMirror();
+    }
   }
 
   setupEventListeners() {
@@ -105,24 +163,23 @@ class MirrorBreakEffect extends SceneSetup {
   }
 
   handleClick(event) {
-    // First check if the menu is open
+    // Vérifier si le menu est ouvert
     const sideMenu = document.getElementById("side-menu");
-    if (sideMenu.classList.contains("open")) {
-      return; // Exit early if menu is open
+    if (sideMenu && sideMenu.classList.contains("open")) {
+      return;
     }
 
-    // Check if clicked element is the burger menu
+    // Vérifier si on clique sur le menu burger
     if (
       event.target.closest("#burger-menu") ||
       event.target.closest("#side-menu")
     ) {
-      return; // Exit early if clicking menu elements
+      return;
     }
 
     if (this.isBroken) return;
 
     if (!this.isBreaking && this.mirror) {
-      // Créer un raycaster pour détecter le clic sur le miroir
       const mouse = new THREE.Vector2();
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -130,35 +187,25 @@ class MirrorBreakEffect extends SceneSetup {
       const raycaster = new THREE.Raycaster();
       raycaster.setFromCamera(mouse, this.camera);
 
-      // Vérifier si le clic touche le miroir
       const intersects = raycaster.intersectObject(this.mirror, true);
 
       if (intersects.length > 0) {
-        // Cacher les instructions du miroir et afficher les instructions des fragments
-        const instructions = document.querySelector(".mirror-instructions");
-        const fragmentInstructions = document.querySelector(
-          ".fragment-instructions"
-        );
-
-        if (instructions) {
-          instructions.style.display = "none";
+        if (this.mirrorInstructions) {
+          this.mirrorInstructions.style.display = "none";
         }
-        if (fragmentInstructions) {
-          fragmentInstructions.style.display = "block";
+        if (this.fragmentInstructions) {
+          this.fragmentInstructions.style.display = "block";
         }
 
         this.fragmentManager.breakMirror();
         this.isBroken = true;
 
-        // Déclencher l'événement mirrorBroken
         const mirrorBrokenEvent = new Event("mirrorBroken");
         document.dispatchEvent(mirrorBrokenEvent);
-
         return;
       }
     }
 
-    // Gérer les clics sur les fragments si le miroir est déjà cassé
     this.fragmentManager.handleFragmentClick(event);
   }
 
@@ -171,7 +218,6 @@ class MirrorBreakEffect extends SceneSetup {
   switchToGalleryScene(fragmentIndex) {
     console.log("MirrorBreakEffect: Début de la transition");
 
-    // Créer un plan noir pour le fade
     const fadeGeometry = new THREE.PlaneGeometry(100, 100);
     const fadeMaterial = new THREE.MeshBasicMaterial({
       color: 0x000000,
@@ -185,32 +231,26 @@ class MirrorBreakEffect extends SceneSetup {
     fadePlane.renderOrder = 999;
     this.scene.add(fadePlane);
 
-    // Animation de fade out
     let fadeOutComplete = false;
     const fadeOut = () => {
       if (fadeMaterial.opacity >= 1) {
         fadeOutComplete = true;
         console.log("MirrorBreakEffect: Fade out terminé");
 
-        // Arrêter l'animation de cette scène
         this.isAnimating = false;
 
-        // Désactiver les contrôles avant de les nettoyer
         if (this.controls && this.controls.enabled) {
           this.controls.enabled = false;
         }
 
-        // Nettoyer la scène actuelle
         this.clearScene();
 
-        // Supprimer les event listeners
         document.removeEventListener("click", this.handleClick);
         window.removeEventListener(
           "mousemove",
           this.fragmentManager.onMouseMove
         );
 
-        // Créer la scène de transition
         console.log("MirrorBreakEffect: Création de la scène de transition");
         const transitionScene = new PortalTransitionScene(this, fragmentIndex);
 
@@ -222,17 +262,43 @@ class MirrorBreakEffect extends SceneSetup {
     fadeOut();
   }
 
-  // loadHDRI() {
-  //     return new Promise((resolve) => {
-  //         const rgbeLoader = new RGBELoader();
-  //         rgbeLoader.load("src/assets/night.hdr", (texture) => {
-  //             texture.mapping = THREE.EquirectangularReflectionMapping;
-  //             this.scene.background = texture;
-  //             this.scene.environment = texture;
-  //             resolve();
-  //         });
-  //     });
-  // }
+  cleanup() {
+    this.cleanupUIElements();
+
+    // Nettoyer les événements
+    document.removeEventListener("click", this.handleClick);
+    window.removeEventListener("mousemove", this.fragmentManager.onMouseMove);
+    window.removeEventListener("resize", this.onWindowResize);
+
+    // Nettoyer la scène
+    if (this.scene) {
+      // Nettoyer tous les objets de la scène
+      this.scene.traverse((object) => {
+        if (object.geometry) {
+          object.geometry.dispose();
+        }
+        if (object.material) {
+          if (Array.isArray(object.material)) {
+            object.material.forEach(material => material.dispose());
+          } else {
+            object.material.dispose();
+          }
+        }
+      });
+
+      // Vider la scène
+      while(this.scene.children.length > 0) {
+        this.scene.remove(this.scene.children[0]);
+      }
+    }
+
+    // Réinitialiser les états
+    this.isBreaking = false;
+    this.isFragmentSelected = false;
+    this.mirror = null;
+    this.isAnimating = false;
+    this.isInitialized = false;
+  }
 }
 
 export { MirrorBreakEffect };
