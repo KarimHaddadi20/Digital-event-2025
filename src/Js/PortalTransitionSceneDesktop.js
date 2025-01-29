@@ -400,16 +400,18 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
 
   createQuoteMeshes(quotes) {
     return quotes.map((quote) => {
-      const canvas = document.createElement("canvas");
-      canvas.width = 1024;
+      // Créer deux canvas : un pour le fond et un pour le texte
+      const backgroundCanvas = document.createElement("canvas");
+      const textCanvas = document.createElement("canvas");
+      backgroundCanvas.width = textCanvas.width = 1024;
 
       // Pre-calculate lines to determine height
-      const ctx = canvas.getContext("2d");
-      const fontSize = Math.floor(1024 / 12); // Base font size on width
+      const ctx = textCanvas.getContext("2d");
+      const fontSize = Math.floor(1024 / 12);
       const fontString = `italic 300 ${fontSize}px Fraunces`;
       ctx.font = fontString;
       const lineHeight = fontSize * 1.4;
-      const padding = fontSize;
+      const padding = fontSize * 2;
       const maxWidth = 900;
 
       // Split text into lines first to calculate height
@@ -428,33 +430,118 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       });
       lines.push(line);
 
-      // Set canvas height based on content
       const totalTextHeight = lines.length * lineHeight;
-      canvas.height = totalTextHeight + padding * 2;
+      backgroundCanvas.height = textCanvas.height = totalTextHeight + padding * 2;
 
-      // Redraw with correct dimensions
+      // Dessiner le fond sur le premier canvas
+      const bgCtx = backgroundCanvas.getContext("2d");
+      const gradient = bgCtx.createLinearGradient(0, 0, backgroundCanvas.width, backgroundCanvas.height);
+      
+      // Reproduire exactement le gradient du Figma
+      gradient.addColorStop(0.0321, 'rgba(160, 160, 160, 0.25)');
+      gradient.addColorStop(0.1334, 'rgba(243, 243, 243, 0.25)');
+      gradient.addColorStop(0.2315, 'rgba(195, 195, 195, 0.25)');
+      gradient.addColorStop(0.5018, 'rgba(255, 255, 255, 0.25)');
+      gradient.addColorStop(0.7532, 'rgba(177, 177, 177, 0.25)');
+      gradient.addColorStop(0.8611, 'rgba(236, 236, 236, 0.25)');
+      gradient.addColorStop(0.9696, 'rgba(153, 153, 153, 0.25)');
+
+      // Dessiner le rectangle arrondi avec un radius de 5px
+      const cornerRadius = 5;
+      bgCtx.beginPath();
+      bgCtx.moveTo(cornerRadius, 0);
+      bgCtx.lineTo(backgroundCanvas.width - cornerRadius, 0);
+      bgCtx.quadraticCurveTo(backgroundCanvas.width, 0, backgroundCanvas.width, cornerRadius);
+      bgCtx.lineTo(backgroundCanvas.width, backgroundCanvas.height - cornerRadius);
+      bgCtx.quadraticCurveTo(backgroundCanvas.width, backgroundCanvas.height, backgroundCanvas.width - cornerRadius, backgroundCanvas.height);
+      bgCtx.lineTo(cornerRadius, backgroundCanvas.height);
+      bgCtx.quadraticCurveTo(0, backgroundCanvas.height, 0, backgroundCanvas.height - cornerRadius);
+      bgCtx.lineTo(0, cornerRadius);
+      bgCtx.quadraticCurveTo(0, 0, cornerRadius, 0);
+      bgCtx.closePath();
+
+      bgCtx.fillStyle = gradient;
+      bgCtx.fill();
+
+      // Ajouter la bordure exacte du Figma
+      bgCtx.strokeStyle = 'rgba(255, 255, 255, 0.20)';
+      bgCtx.lineWidth = 0.625;
+      bgCtx.stroke();
+
+      // Dessiner le texte sur le deuxième canvas
       ctx.font = fontString;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
-      // Draw text
+      // Réinitialiser toutes les propriétés qui pourraient affecter le rendu du texte
+      ctx.shadowColor = 'transparent';
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
+      ctx.globalAlpha = 1;
+
       lines.forEach((line, i) => {
         const y = padding + i * lineHeight + lineHeight / 2;
-        ctx.fillStyle = "rgba(255, 255, 255, 1)";
-        ctx.fillText(line, canvas.width / 2, y);
+        ctx.fillStyle = "#FFFFFF";
+        // Dessiner le texte deux fois pour le rendre plus net
+        ctx.fillText(line, textCanvas.width / 2, y);
+        ctx.fillText(line, textCanvas.width / 2, y);
       });
 
-      const texture = new THREE.CanvasTexture(canvas);
+      // Créer les textures
+      const backgroundTexture = new THREE.CanvasTexture(backgroundCanvas);
+      const textTexture = new THREE.CanvasTexture(textCanvas);
+      backgroundTexture.needsUpdate = textTexture.needsUpdate = true;
 
       // Create mesh with proportional geometry
-      const aspect = canvas.width / canvas.height;
+      const aspect = backgroundCanvas.width / backgroundCanvas.height;
       return new THREE.Mesh(
         new THREE.PlaneGeometry(6, 6 / aspect),
-        new THREE.MeshBasicMaterial({
-          map: texture,
+        new THREE.ShaderMaterial({
+          uniforms: {
+            tBackground: { value: backgroundTexture },
+            tText: { value: textTexture },
+            opacity: { value: 1.0 },
+            blurSize: { value: 0.025 }  // Augmenté pour correspondre au blur de 25px
+          },
+          vertexShader: `
+            varying vec2 vUv;
+            void main() {
+              vUv = uv;
+              gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+            }
+          `,
+          fragmentShader: `
+            uniform sampler2D tBackground;
+            uniform sampler2D tText;
+            uniform float opacity;
+            uniform float blurSize;
+            varying vec2 vUv;
+
+            void main() {
+              vec4 sum = vec4(0.0);
+              float total = 0.0;
+              
+              // Flou gaussien intense (25px)
+              for(float i = -4.0; i <= 4.0; i += 1.0) {
+                for(float j = -4.0; j <= 4.0; j += 1.0) {
+                  vec2 offset = vec2(i, j) * blurSize;
+                  float weight = exp(-(i*i + j*j) / 8.0);
+                  sum += texture2D(tBackground, vUv + offset) * weight;
+                  total += weight;
+                }
+              }
+              sum /= total;
+
+              // Ajouter le texte non flouté
+              vec4 text = texture2D(tText, vUv);
+              
+              // Mélanger le fond flouté avec le texte
+              gl_FragColor = mix(sum, text, text.a) * opacity;
+            }
+          `,
           transparent: true,
-          opacity: 0.9,
-          side: THREE.DoubleSide,
+          side: THREE.DoubleSide
         })
       );
     });
