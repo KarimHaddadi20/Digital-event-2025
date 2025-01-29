@@ -28,7 +28,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       const delta = Math.sign(event.deltaY) * 0.6;
 
       const maxZ = 7; // Position de départ
-      const lastFragmentPosition = -230; // Position du dernier fragment
+      const lastFragmentPosition = -205; // Position du dernier fragment
       const minZ = lastFragmentPosition; // Position finale
 
       let newZ = this.camera.position.z - delta;
@@ -94,7 +94,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
           ],
           title: atelierData.sets[1].title,
           subtitle: atelierData.sets[1].subtitle,
-          zPosition: -60,
+          zPosition: -55,
         },
         {
           type: "standard",
@@ -106,7 +106,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
           ],
           title: atelierData.sets[2].title,
           subtitle: atelierData.sets[2].subtitle,
-          zPosition: -110,
+          zPosition: -100,
         },
         {
           type: "quote",
@@ -123,7 +123,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
           ],
           title: atelierData.sets[3].title,
           subtitle: atelierData.sets[3].subtitle,
-          zPosition: -160,
+          zPosition: -145,
         },
         {
           type: "team",
@@ -131,7 +131,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
           image: atelierData.sets[4].image1,
           team: atelierData.sets[4].team,
           students: atelierData.sets[4].students,
-          zPosition: -240,
+          zPosition: -220,
         },
       ];
 
@@ -189,11 +189,11 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
         mainMesh.userData = { direction: "right", initialX: 5, initialZ: 0 };
         mainMesh.rotation.y = -0.1;
 
-        quotesMeshes[0].position.set(-3.5, 0, -1);
+        quotesMeshes[0].position.set(-3.5, 0, -5);
         quotesMeshes[0].userData = {
           direction: "left",
           initialX: -3.5,
-          initialZ: -1,
+          initialZ: -5,
         };
         quotesMeshes[0].scale.set(0.8, 0.8, 1);
         group.add(quotesMeshes[0]);
@@ -203,11 +203,11 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
         detail1.userData = { direction: "left", initialX: -3.5, initialZ: -15 };
         detail1.rotation.y = 0.1;
 
-        quotesMeshes[1].position.set(5, 0, -16);
+        quotesMeshes[1].position.set(5, 0, -20);
         quotesMeshes[1].userData = {
           direction: "right",
           initialX: 5,
-          initialZ: -16,
+          initialZ: -20,
         };
         quotesMeshes[1].scale.set(0.8, 0.8, 1);
         group.add(quotesMeshes[1]);
@@ -217,11 +217,11 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
         detail2.userData = { direction: "right", initialX: 5, initialZ: -30 };
         detail2.rotation.y = -0.1;
 
-        quotesMeshes[2].position.set(-3.5, 0, -31);
+        quotesMeshes[2].position.set(-3.5, 0, -35);
         quotesMeshes[2].userData = {
           direction: "left",
           initialX: -3.5,
-          initialZ: -31,
+          initialZ: -35,
         };
         quotesMeshes[2].scale.set(0.8, 0.8, 1);
         group.add(quotesMeshes[2]);
