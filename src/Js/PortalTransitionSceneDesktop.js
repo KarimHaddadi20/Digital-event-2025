@@ -612,46 +612,91 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
             <svg width="24" height="24" viewBox="0 0 24 24">
               <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
               <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </button>
+          </svg>
+        </button>
         </div>
         <div class="inventory-content">
           <div class="menu-list">
             <a href="#" data-atelier="1" class="menu-item">
-              <span class="menu-item-title">AI Driven visual stories</span>
+              <div class="container-menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.Site Web.png" alt="Site Web" class="menu-item-img">
+              </div>
+              <span class="stroke-white"></span>
+              <span class="menu-item-title">Site Web</span>
             </a>
             <a href="#" data-atelier="2" class="menu-item">
-              <span class="menu-item-title">Organisation</span>
+              <div class="container-menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.Vidéo Mapping.png" alt="Vidéo Mapping" class="menu-item-img">
+              </div>
+              <span class="stroke-white"></span>
+              <span class="menu-item-title">Vidéo Mapping</span>
             </a>
             <a href="#" data-atelier="3" class="menu-item">
+              <div class="container-menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.Creative Coding.png" alt="Creative Coding" class="menu-item-img">
+              </div>
+              <span class="stroke-white"></span>
               <span class="menu-item-title">Creative Coding</span>
             </a>
             <a href="#" data-atelier="4" class="menu-item">
+              <div class="container-menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.Gaming & Pop-corn.png" alt="Gaming & Pop-corn" class="menu-item-img">
+              </div>
+              <span class="stroke-white"></span>
               <span class="menu-item-title">Gaming & Pop-corn</span>
             </a>
             <a href="#" data-atelier="5" class="menu-item">
-              <span class="menu-item-title">Video</span>
+              <div class="container-menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.Vidéo.png" alt="Vidéo" class="menu-item-img">
+              </div>
+              <span class="stroke-white"></span>
+              <span class="menu-item-title">Vidéo</span>
             </a>
             <a href="#" data-atelier="6" class="menu-item">
-              <span class="menu-item-title">Escape game</span>
+              <div class="container-menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.Escape Game.png" alt="Escape Game" class="menu-item-img">
+              </div>
+              <span class="stroke-white"></span>
+              <span class="menu-item-title">Escape Game</span>
             </a>
             <a href="#" data-atelier="7" class="menu-item">
+              <div class="container-menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.Podcast.png" alt="Podcast" class="menu-item-img">
+              </div>
+              <span class="stroke-white"></span>
               <span class="menu-item-title">Podcast</span>
             </a>
             <a href="#" data-atelier="8" class="menu-item">
-              <span class="menu-item-title">Photo reportage</span>
+              <div class="container-menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.Photo.png" alt="Photo" class="menu-item-img">
+              </div>
+              <span class="stroke-white"></span>
+              <span class="menu-item-title">Photo</span>
             </a>
             <a href="#" data-atelier="9" class="menu-item">
-              <span class="menu-item-title">Site web</span>
+              <div class="container-menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.AI Driven Visual Stories.png" alt="AI Driven Visual Stories" class="menu-item-img">
+              </div>
+              <span class="stroke-white"></span>
+              <span class="menu-item-title">AI Driven Visual Stories</span>
             </a>
             <a href="#" data-atelier="10" class="menu-item">
-              <span class="menu-item-title">Video Mapping</span>
+              <div class="container-menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.Game Design.png" alt="Game Design" class="menu-item-img">
+              </div>
+              <span class="stroke-white"></span>
+              <span class="menu-item-title">Game Design</span>
             </a>
             <a href="#" data-atelier="11" class="menu-item">
-              <span class="menu-item-title">Game design</span>
+              <div class="container-menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.Organisation.png" alt="Contenus RS/Com/Parcours visiteurs/Scéno" class="menu-item-img">
+              </div>
+              <span class="stroke-white"></span>
+              <span class="menu-item-title">Organisation</span>
             </a>
           </div>
         </div>
+
       `;
       document.body.appendChild(inventory);
 
