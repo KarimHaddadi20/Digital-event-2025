@@ -112,50 +112,23 @@ class FragmentManager {
     // Créer le bouton Voyager
     this.voyagerButton = document.createElement("button");
     this.voyagerButton.textContent = "Voyager";
-    this.voyagerButton.className = "voyager-button";
     this.voyagerButton.style.cssText = `
+      position: fixed;
+      left: 50%;
+      bottom: 20vh;
+      transform: translateX(-50%);
       display: none;
       opacity: 0;
-      position: fixed;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 18px 52px;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 4px;
-      border-radius: 4px;
+      padding: 12px 24px;
+      font-size: 24px;
       border: 1px solid #FFF;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.03) 100%);
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-      cursor: pointer;
-      z-index: 1000;
-      font-family: 'Aktiv Grotesk', sans-serif;
+      background: linear-gradient(344deg, rgba(21, 21, 27, 0.20) -1.4%, rgba(79, 79, 86, 0.20) 104.72%);
       color: white;
-      font-size: 16px;
+      border-radius: 4px;
+      z-index: 1000;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
     `;
-    document.body.appendChild(this.voyagerButton);
-
-    // // Créer l'élément de texte pour le nom de l'atelier
-    // this.textElement = document.createElement("div");
-    // this.textElement.style.cssText = `
-    //   display: none;
-    //   opacity: 0;
-    //   position: fixed;
-    //   top: 50%;
-    //   left: 50%;
-    //   transform: translate(-50%, -50%);
-    //   color: white;
-    //   font-family: 'Aktiv Grotesk', sans-serif;
-    //   font-size: 24px;
-    //   text-align: center;
-    //   pointer-events: none;
-    //   z-index: 1000;
-    //   transition: opacity 0.3s ease;
-    // `;
-    // document.body.appendChild(this.textElement);
 
     // Ajouter l'événement click sur le bouton Voyager
     // Gestion du clic
@@ -174,15 +147,6 @@ class FragmentManager {
 
         // Bloquer le suivi du curseur
         this.app.isNavigating = true;
-
-        // // Réinitialiser la position de la caméra
-        // window.gsap.to(this.app.camera.position, {
-        //   x: 0,
-        //   y: 0,
-        //   z: 5,
-        //   duration: 1.5,
-        //   ease: "power2.inOut",
-        // });
 
         // Réinitialiser la rotation de la caméra
         window.gsap.to(this.app.camera.rotation, {
@@ -621,10 +585,6 @@ class FragmentManager {
         this.app.isBreaking = false;
         this.hoveredFragment = null;
 
-        if (this.textElement && this.textElement.parentNode) {
-          this.textElement.parentNode.removeChild(this.textElement);
-        }
-
         window.removeEventListener("mousemove", this.onMouseMove);
         window.removeEventListener("click", this.handleFragmentClick);
 
@@ -841,10 +801,6 @@ class FragmentManager {
 
           this.hoveredFragment = fragmentObject;
           this.moveFragmentForward(this.hoveredFragment, 3);
-
-          this.textElement.textContent = fragmentObject.userData.atelierName;
-          this.textElement.style.display = "block";
-          this.textElement.style.opacity = "1";
         }
       }
     } else {
@@ -855,10 +811,6 @@ class FragmentManager {
       ) {
         this.resetFragmentPosition(this.hoveredFragment);
         this.hoveredFragment = null;
-        this.textElement.style.opacity = "0";
-        setTimeout(() => {
-          this.textElement.style.display = "none";
-        }, 300);
       }
     }
   }

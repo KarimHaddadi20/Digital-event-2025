@@ -7,15 +7,14 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
         super(app, selectedFragmentIndex);
         this._touchHandlerInitialized = false;
         
-        // Créer la barre de progression
-        const progressBar = document.createElement('div');
-        progressBar.className = 'progress-bar';
-        const progressFill = document.createElement('div');
-        progressFill.className = 'progress-fill';
-        progressBar.appendChild(progressFill);
-        document.body.appendChild(progressBar);
+        // Récupérer la barre de progression existante
+        this.progressContainer = document.querySelector('.scroll-progress-container');
+        this.progressFill = document.querySelector('.scroll-progress-fill');
         
-        this.progressFill = progressFill;
+        if (this.progressContainer) {
+            this.progressContainer.style.opacity = '1';
+        }
+        
         this.setupScrollHandler();
     }
 
@@ -486,6 +485,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
 
         let touchStartY = 0;
         let lastTouchY = 0;
+        let currentProgress = 0;
 
         const handleTouchStart = (event) => {
             touchStartY = event.touches[0].clientY;
@@ -499,25 +499,20 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
             lastTouchY = currentTouchY;
 
             const maxZ = 7;
-            const lastFragmentPosition = -250;
-            const minZ = lastFragmentPosition + 30;
+            const lastFragmentPosition = -445;  // Position du dernier fragment
+            const minZ = lastFragmentPosition;
 
             let newZ = this.camera.position.z - delta;
-
-            if (newZ > maxZ) {
-                newZ = maxZ;
-            } else if (newZ < minZ) {
-                newZ = minZ;
-            }
-
+            newZ = Math.max(minZ, Math.min(maxZ, newZ));
             this.camera.position.z = newZ;
 
-            const progress = Math.min(
-                Math.abs(maxZ - this.camera.position.z) / Math.abs(maxZ - minZ),
-                1
-            );
+            // Calcul de la progression basé sur la position actuelle
+            currentProgress = (maxZ - newZ) / (maxZ - minZ);
+            currentProgress = Math.max(0, Math.min(1, currentProgress));
+
+            // Mise à jour de la barre de progression
             if (this.progressFill) {
-                this.progressFill.style.setProperty('--progress', progress);
+                this.progressFill.style.setProperty('--progress', currentProgress);
             }
         };
 
