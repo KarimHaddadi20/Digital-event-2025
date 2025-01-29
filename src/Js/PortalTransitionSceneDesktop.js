@@ -25,17 +25,26 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
 
     const handleScroll = (event) => {
       event.preventDefault();
-      const delta = Math.sign(event.deltaY) * 0.3;
+      const delta = Math.sign(event.deltaY) * 0.6;
 
-      const maxZ = 7;
+      const maxZ = 7; // Position la plus haute (inchangée)
       const fragmentSpacing = 50;
-      const lastFragmentPosition = -260 - 15;
-      const minZ = lastFragmentPosition;
+      // Ajuster lastFragmentPosition pour s'arrêter plus tôt
+      const lastFragmentPosition = -258; // Suppression du -15 pour s'arrêter avant
+      const minZ = lastFragmentPosition + 30; // Ajouter une marge pour s'arrêter avant la fin
 
       let newZ = this.camera.position.z - delta;
-      newZ = Math.max(minZ, Math.min(maxZ, newZ));
+
+      // Ajouter un effet de ressort aux limites
+      if (newZ > maxZ) {
+        newZ = maxZ;
+      } else if (newZ < minZ) {
+        newZ = minZ;
+      }
+
       this.camera.position.z = newZ;
 
+      // Calculer la progression
       const progress = Math.min(
         Math.abs(maxZ - this.camera.position.z) / Math.abs(maxZ - minZ),
         1
@@ -156,7 +165,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
         section.image1 || section.image
       );
       mainMesh = this.createMainMesh(mainTexture);
-      mainMesh.scale.set(1.2, 1.2, 1.2);
+      mainMesh.scale.set(0.8, 1.6, 1.2);
     } else {
       mainTexture = await this.loadTexture(textureLoader, section.mainImage);
       mainMesh = this.createMainMesh(mainTexture);
@@ -545,9 +554,9 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
 
       const distance = fragment.group.position.z - this.camera.position.z;
 
-      if (fragment.mesh.geometry.isBufferGeometry) {
-        this.updateWaveEffect(fragment.mesh);
-      }
+      //   if (fragment.mesh.geometry.isBufferGeometry) {
+      //     this.updateWaveEffect(fragment.mesh);
+      //   }
 
       let opacity = 0.9;
       const fadeDistance = 20;
