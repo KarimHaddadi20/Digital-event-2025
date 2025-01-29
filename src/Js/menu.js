@@ -51,6 +51,12 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const sceneIndex = parseInt(link.dataset.atelier) - 1;
 
+        // Réinitialiser la barre de progression
+        const progressFill = document.querySelector('.scroll-progress-fill');
+        if (progressFill) {
+            progressFill.style.setProperty('--progress', 0);
+        }
+
         if (window.mirrorEffect) {
           try {
             // Nettoyer tous les éléments de la scène actuelle
