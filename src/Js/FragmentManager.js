@@ -115,12 +115,12 @@ class FragmentManager {
     this.voyagerButton.style.cssText = `
       position: fixed;
       left: 50%;
-      bottom: 20vh;
+      bottom: 5vh;
       transform: translateX(-50%);
       display: none;
       opacity: 0;
       padding: 12px 24px;
-      font-size: 24px;
+      font-size: 16px;
       border: 1px solid #FFF;
       background: linear-gradient(344deg, rgba(21, 21, 27, 0.20) -1.4%, rgba(79, 79, 86, 0.20) 104.72%);
       color: white;
