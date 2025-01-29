@@ -1,0 +1,11 @@
+@font-face {
+  font-family: "Fraunces";
+  src: url("/src/font/Fraunces_144pt-LightItalic.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.quote-text {
+  font-family: "Fraunces", sans-serif;
+}
