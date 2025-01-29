@@ -138,8 +138,8 @@ body {
 }
 
 .click-icon {
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   color: white;
   /* Ajuster la position de l'icône pour qu'elle s'aligne avec le texte */
   margin-top: -2px;
