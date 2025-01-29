@@ -46,6 +46,17 @@ class SceneSetup {
 
   setupControls() {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+
+    // Désactiver complètement la rotation verticale
+    this.controls.minPolarAngle = Math.PI / 2; // 90 degrés
+    this.controls.maxPolarAngle = Math.PI / 2; // 90 degrés
+
+    // Limiter la rotation horizontale si nécessaire
+    this.controls.minAzimuthAngle = -Math.PI / 12;
+    this.controls.maxAzimuthAngle = Math.PI / 12;
+
+    // Autres configurations...
+
     this.controls.enableDamping = true;
     this.controls.dampingFactor = 0.05;
     this.controls.enableZoom = false;
@@ -55,7 +66,8 @@ class SceneSetup {
 
     // Détection plus précise des appareils mobiles
     const isMobileDevice = () => {
-      const hasTouchScreen = navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
+      const hasTouchScreen =
+        navigator.maxTouchPoints > 0 || "ontouchstart" in window;
       const isSmallScreen = window.innerWidth <= 768;
       return hasTouchScreen && isSmallScreen;
     };
@@ -64,18 +76,12 @@ class SceneSetup {
     if (isMobileDevice()) {
       this.controls.mouseButtons = {};
       this.controls.touches = {
-        ONE: THREE.TOUCH.ROTATE
+        ONE: THREE.TOUCH.ROTATE,
       };
     }
 
     this.controls.screenSpacePanning = true;
     this.controls.listenToKeyEvents = false;
-
-    // Limites de rotation
-    this.controls.minPolarAngle = Math.PI / 2; // Bloque à l'horizontale
-    this.controls.maxPolarAngle = Math.PI / 2; // Bloque à l'horizontale
-    this.controls.minAzimuthAngle = -Math.PI / 12;
-    this.controls.maxAzimuthAngle = Math.PI / 12;
 
     this.controls.minDistance = 50;
     this.controls.maxDistance = 200;
@@ -84,21 +90,20 @@ class SceneSetup {
     this.isNavigating = false;
 
     // Suivre le curseur sur desktop
-    window.addEventListener('mousemove', (e) => {
+    window.addEventListener("mousemove", (e) => {
       if (!this.controls.enabled || this.isNavigating) return;
-      
+
       // Ne pas appliquer le suivi du curseur sur mobile
       if (isMobileDevice()) return;
 
       const x = (e.clientX / window.innerWidth) * 2 - 1;
-      const y = -(e.clientY / window.innerHeight) * 2 + 1;
+      // Supprimer le calcul de y puisqu'on ne veut pas de mouvement vertical
 
-      const targetX = x * Math.PI / 4;
-      const targetY = y * Math.PI / 4;
+      const targetX = (x * Math.PI) / 4;
+      // Ne pas modifier targetY
 
       this.controls.target.x = Math.sin(targetX) * 20;
-      this.controls.target.y = Math.sin(targetY) * 10;
-
+      // Ne pas modifier target.y pour éviter le mouvement vertical
       this.controls.update();
     });
   }
