@@ -4,7 +4,7 @@
         "sets": [
             {
                 "title": "Inspiration",
-                "subtitle": "Dans cet atelier, les membres doivent fabriquer 2 sites ( un catalogue des œuvres du digitale event ainsi que le portail qui donnent accès au sites créés ces 5 dernières années).",
+                "subtitle": "Dans cet atelier, les membres doivent fabriquer 2 sites (un catalogue des œuvres du digitale event ainsi que le portail qui donnent accès aux sites créés ces 5 dernières années).",
                 "image1": "src/photo/A/A1-01.jpg",
                 "image2": "src/photo/A/A1-02.jpg",
                 "image3": "src/photo/A/A1-03.jpg"
@@ -18,7 +18,7 @@
             },
             {
                 "title": "Maquette",
-                "subtitle": "Pour réaliser le site, ils utilisent différents logiciels créatifs et de codes tels que Blender, Figma pour la conception de maquette. D’un point de vue code, ils utilisent des langages types  threeJS, GSAP, HTML/CSS JS sur le logiciel VSCode. ",
+                "subtitle": "Pour réaliser le site, ils·elles utilisent différents logiciels créatifs et de codes tels que Blender, Figma pour la conception de maquette. D’un point de vue code, ils·elles utilisent des langages types  threeJS, GSAP, HTML/CSS JS sur le logiciel VSCode.",
                 "image1": "src/photo/A/A3-01.jpg",
                 "image2": "src/photo/A/A3-02.jpg",
                 "image3": "src/photo/A/A3-03.jpg"
@@ -27,11 +27,11 @@
                 "title": "Échange de savoir-faire",
                 "subtitle": "Découvrez ce que nos étudiants ont à dire...",
                 "image1": "src/photo/A/A4-01.jpg",
-                "quote1": "“Avec l’atelier, je découvre plusieurs univers et ça me forge un nouveau caractère et cela me donne beaucoup d’inspiration pour la suite.”",
+                "quote1": "« Avec l’atelier, je découvre plusieurs univers et ça me forge un nouveau caractère et cela me donne beaucoup d’inspiration pour la suite. »",
                 "image2": "src/photo/A/A4-02.jpg",
-                "quote2": "“On a choisi de prendre des photos qui représentent la diversité. Notre collaboration avec l’autre atelier permet d’unifier l'esthétique de l’atelier et ça fait toujours plaisir de partager les contenus entre nous et de s’entraider”",
+                "quote2": "« On a choisi de prendre des photos qui représentent la diversité. Notre collaboration avec l’autre atelier permet d’unifier l'esthétique de l’atelier et ça fait toujours plaisir de partager les contenus entre nous et de s’entraider »",
                 "image3": "src/photo/A/A4-03.jpg",
-                "quote3": "“Je peux continuer de développer mes compétences et les mettre aux services d’un tel projet, je trouve ça super sympa. Je peux échanger avec des personnes qui sont du même milieu que moi et j’en apprend aussi beaucoup d’eux.”"
+                "quote3": "« Je peux continuer de développer mes compétences et les mettre au service d’un tel projet, je trouve ça super sympa. Je peux échanger avec des personnes qui sont du même milieu que moi et j’en apprends aussi beaucoup d’eux. »"
             },
 
             {
@@ -156,7 +156,7 @@
             },
             {
                 "title": "Animations",
-                "subtitle": "Pour donner vie à leurs projets, ils utiliseront divers logiciels comme TouchDesigner pour la création d’animations visuelles, MadMapper pour la projection et le mapping, Blender pour les modèles 3D ainsi que After Effects pour des effets spéciaux supplémentaires.",
+                "subtitle": "Pour donner vie à leurs projets, ils·elles utiliseront divers logiciels comme TouchDesigner pour la création d’animations visuelles, MadMapper pour la projection et le mapping, Blender pour les modèles 3D ainsi que After Effects pour des effets spéciaux supplémentaires.",
                 "image1": "src/photo/B/B3-01.jpg",
                 "image2": "src/photo/B/B3-02.jpg",
                 "image3": "src/photo/B/B3-03.jpg"
@@ -334,7 +334,7 @@
         "sets": [
             {
                 "title": "Transition ",
-                "subtitle": "L’idée centrale consiste à concevoir une interface de transition entre notre monde et un monde parrallèle  : une caméra détecte les mouvements des visiteurs et les transporte en temps réel dans un univers parallèle. Cet atelier relie la programmation (les lignes de code) aux créations artistiques.",
+                "subtitle": "L’idée centrale consiste à concevoir une interface de transition entre notre monde et un monde parallèle: une caméra détecte les mouvements des visiteurs et les transporte en temps réel dans un univers parallèle. Cet atelier relie la programmation (les lignes de code) aux créations artistiques.",
                 "image1": "src/photo/C/C1-01.jpg",
                 "image2": "src/photo/C/C1-02.jpg",
                 "image3": "src/photo/C/C1-03.jpg"
@@ -348,7 +348,7 @@
             },
             {
                 "title": "Interaction",
-                "subtitle": "Pour donner vie à leurs projets, ils utilisent Touchdesigner pour la création d’interfaces interactives et Blender qui est l’idéal pour la modélisation et l’intégration d’éléments visuels 3D uniques.",
+                "subtitle": "Pour donner vie à leurs projets, ils·elles utilisent Touchdesigner pour la création d’interfaces interactives et Blender qui est l’idéal pour la modélisation et l’intégration d’éléments visuels 3D uniques.",
                 "image1": "src/photo/C/C3-01.jpg",
                 "image2": "src/photo/C/C3-02.jpg",
                 "image3": "src/photo/C/C3-03.jpg"
@@ -466,14 +466,14 @@
         "sets": [
             {
                 "title": "Coexistence",
-                "subtitle": "Organisés en groupes de cinq, ils travaillent sur la création d’un jeu vidéo dont le but est de résoudre des énigmes. L’équipe a imaginé un monde parallèle en explorant la coexistence de deux univers distincts.",
+                "subtitle": "Organisés en groupes de cinq, ils·elles travaillent sur la création d’un jeu vidéo dont le but est de résoudre des énigmes. L’équipe a imaginé un monde parallèle en explorant la coexistence de deux univers distincts.",
                 "image1": "src/photo/D/D1-01.jpg",
                 "image2": "src/photo/D/D1-02.jpg",
                 "image3": "src/photo/D/D1-03.jpg"
             },
             {
                 "title": "Références culturelles",
-                "subtitle": "Ils réinterprètent le jeu Popcorn en concevant un concept qui testent les références de deux thèmes parallèles. qui, bien que différents, coexistent. Le rendu final est donc un jeu interactif et stimulant.",
+                "subtitle": "Ils·elles réinterprètent le jeu Popcorn en testant les références de deux thèmes parallèles, les faisant coexister dans une seule fenêtre. Le rendu final est un jeu inédit.",
                 "image1": "src/photo/D/D2-01.jpg",
                 "image2": "src/photo/D/D2-02.jpg",
                 "image3": "src/photo/D/D2-03.jpg"
@@ -692,7 +692,7 @@
             },
             {
                 "title": "Production",
-                "subtitle": "Pour donner vie à leurs imaginations, ils pourront utiliser divers logiciels tels que Premiere Pro, After Effects et DaVinci Resolve.",
+                "subtitle": "Pour donner vie à leurs imaginations, ils·elles pourront utiliser divers logiciels tels que Premiere Pro, After Effects et DaVinci Resolve.",
                 "image1": "src/photo/E/E3-01.jpg",
                 "image2": "src/photo/E/E3-02.jpg",
                 "image3": "src/photo/E/E3-03.jpg"
@@ -703,7 +703,7 @@
                 "image1": "src/photo/E/E4-01.jpg",
                 "quote1": "« Cet atelier permet de ressortir son côté artistique en vidéo. »",
                 "image2": "src/photo/E/E4-02.jpg",
-                "quote2": "« Cet atelier c’est l’art d’exprimer ses émotions en filmant. »",
+                "quote2": "« Cet atelier, c’est l’art d’exprimer ses émotions en filmant. »",
                 "image3": "src/photo/E/E4-03.jpg",
                 "quote3": "« Venez voir les films de l’atelier, y’aura du pop-corn. »"
             },
@@ -905,7 +905,7 @@
         "sets": [
             {
                 "title": "Défi",
-                "subtitle": "Divisés en groupes, ils ont pour mission de concevoir de A à Z un escape game. Chaque groupe crée un jeu de piste composé d’énigmes, destiné à des équipes de 2 à 4 joueurs. ",
+                "subtitle": "Divisés en groupes, ils·elles ont pour mission de concevoir de A à Z un escape game. Chaque groupe crée un jeu de piste composé d’énigmes, destiné à des équipes de 2 à 4 joueurs. ",
                 "image1": "src/photo/F/F1-01.jpg",
                 "image2": "src/photo/F/F1-02.jpg",
                 "image3": "src/photo/F/F1-03.jpg"
@@ -919,7 +919,7 @@
             },
             {
                 "title": "Réalité virtuelle",
-                "subtitle": "Pour donner vie à leurs idées, ils utilisent les logiciels Arduino afin d’assurer les interactions physiques, Figma pour le prototypage ainsi que des technologies immersives comme des casques VR pour enrichir l’expérience sensorielle.",
+                "subtitle": "Pour donner vie à leurs idées, ils·elles utilisent des bornes Arduino afin d’assurer les interactions physiques, Figma pour le prototypage ainsi que des technologies immersives comme des casques VR pour enrichir l’expérience sensorielle.",
                 "image1": "src/photo/F/F3-01.jpg",
                 "image2": "src/photo/F/F3-02.jpg",
                 "image3": "src/photo/F/F3-03.jpg"
@@ -1162,7 +1162,7 @@
         "sets": [
             {
                 "title": "Captivant",
-                "subtitle": "Dans cet univers, chaque groupe traite le son à sa manière pour répondre au thème sous des formats différents : interviews, narration et talk show. Chaque équipe s’approprie le sujet pour raconter des histoires uniques et captivantes.",
+                "subtitle": "Dans cet univers, chaque groupe traite le son à sa manière pour répondre au thème sous des formats différents : interviews, narration et talk-show. Chaque équipe s’approprie le sujet pour raconter des histoires uniques et captivantes.",
                 "image1": "src/photo/G/G1-01.jpg",
                 "image2": "src/photo/G/G1-02.jpg",
                 "image3": "src/photo/G/G1-03.jpg"
@@ -1316,14 +1316,14 @@
             },
             {
                 "title": "AuthentiquesAuthentiques",
-                "subtitle": "Le but premier de cet atelier est de capturer l’énergie collective mais aussi de stimuler leur créativité individuelle. ",
+                "subtitle": "Le but premier de cet atelier est de capturer l’énergie collective mais aussi de exprimer leur créativité individuelle. ",
                 "image1": "src/photo/H/H2-01.jpg",
                 "image2": "src/photo/H/H2-02.jpg",
                 "image3": "src/photo/H/H2-03.jpg"
             },
             {
                 "title": "Exploration",
-                "subtitle": "Pour transformer leurs idées en visuels, ils utilisent des outils tels que Lightroom, qui ajuste la lumière et les couleurs des clichés, et Photoshop, qui sera utile à la retouche et aux montages créatifs.",
+                "subtitle": "Pour transformer leurs idées en visuels, ils·elles utilisent des outils tels que Lightroom, qui ajuste la lumière et les couleurs des clichés, et Photoshop, qui sera utile à la retouche et aux montages créatifs.",
                 "image1": "src/photo/H/H3-01.jpg",
                 "image2": "src/photo/H/H3-02.jpg",
                 "image3": "src/photo/H/H3-03.jpg"
@@ -1332,11 +1332,11 @@
                 "title": "Souvenirs",
                 "subtitle": "Découvrez ce que nos étudiants ont à dire...",
                 "image1": "src/photo/H/H4-01.jpg",
-                "quote1": "« Ce que j’aime, c’est photographier les autres pendant qu’ils travaillent, capturer des instants naturels sans pose. »",
+                "quote1": "« Ce que j’aime, c’est photographier les autres pendant qu’ils·elles travaillent, capturer des instants naturels sans pose. »",
                 "image2": "src/photo/H/H4-02.jpg",
                 "quote2": "« L’atelier est vraiment cool, on peut exprimer notre créativité, surtout avec notre propre interprétation des mondes parallèles. »",
                 "image3": "src/photo/H/H4-03.jpg",
-                "quote3": "«Je suis contente de faire partie de cet atelier, on est libre de faire ce qu’on veut et je peux aussi améliorer mes propres compétences pour mon cursus»"
+                "quote3": "« Je suis contente de faire partie de cet atelier, on est libre de faire ce qu’on veut et je peux aussi améliorer mes propres compétences pour mon cursus. »"
             },
             {
                 "image1": "src/photo/A/A4-01.jpg",
@@ -1518,7 +1518,7 @@
             },
             {
                 "title": "Art",
-                "subtitle": "Pour créer les visuels, ils utilisent différents logiciels tels que Runway pour générer et modifier les vidéos avec l’intelligence artificielle, MidJourney pour la création d’images, ainsi qu’Adobe Premiere Pro pour le montage et l’assemblage des vidéos.",
+                "subtitle": "Pour créer les visuels, ils·elles utilisent différents logiciels tels que Runway pour générer et modifier les vidéos avec l’intelligence artificielle, MidJourney pour la création d’images, ainsi qu’Adobe Premiere Pro pour le montage et l’assemblage des vidéos.",
                 "image1": "src/photo/I/I3-01.jpg",
                 "image2": "src/photo/I/I3-02.jpg",
                 "image3": "src/photo/I/I3-03.jpg"
@@ -1531,7 +1531,7 @@
                 "image2": "src/photo/I/I4-02.jpg",
                 "quote2": "« L’idée d’équilibrer réalisme et fantaisie est un vrai défi, mais c’est aussi ce qui rend cet atelier fascinant. »",
                 "image3": "src/photo/I/I4-03.jpg",
-                "quote3": "« Je suis ravie de faire partie de cet atelier parce que on explore les nouvelles tendances et des outils actuels qui nous seront utiles dans le monde du travail  »"
+                "quote3": "« Je suis ravie de faire partie de cet atelier parce qu'on explore les nouvelles tendances et des outils actuels qui nous seront utiles dans le monde du travail. »"
             },
             {
                 "image1": "src/photo/A/A4-01.jpg",
@@ -1667,21 +1667,21 @@
         "sets": [
             {
                 "title": "Invention",
-                "subtitle": "Cet atelier consiste à concevoir des jeux de société en apportant la vision unique de chaque groupe sur le monde parallèle. Ils testent différents jeux, étudient leurs mécanismes et adaptent leurs idées en mélangeant le digital au réel.",
+                "subtitle": "Cet atelier consiste à concevoir des jeux de société en apportant la vision unique de chaque groupe sur le monde parallèle. Ils·elles testent différents jeux, étudient leurs mécanismes et les adaptent dans de nouvelles propositions.",
                 "image1": "src/photo/J/J1-01.jpg",
                 "image2": "src/photo/J/J1-02.jpg",
                 "image3": "src/photo/J/J1-03.jpg"
             },
             {
                 "title": "Dynamique",
-                "subtitle": "L’objectif est de créer des jeux de sociétés adaptés à tous les âges et favorisant les interactions collectives. Ces jeux doivent traiter de la thématique de cette année. ",
+                "subtitle": "L’objectif est de créer des jeux de sociétés adaptés à tous les âges et favorisant les interactions. Ces jeux doivent traiter de la thématique de cette année. ",
                 "image1": "src/photo/J/J2-01.jpg",
                 "image2": "src/photo/J/J2-02.jpg",
                 "image3": "src/photo/J/J2-03.jpg"
             },
             {
                 "title": "Graphisme",
-                "subtitle": "Pour donner vie à leurs idées, ils utilisent différents Figma pour le design et la mise en forme digitale du jeu, Illustrator pour créer les éléments (logos, icônes) mais aussi photoshop pour la retouche et l’enrichissement visuel des composants du jeu.",
+                "subtitle": "Pour donner vie à leurs idées, ils·elles utilisent différents Figma pour le design et la mise en forme du jeu, Illustrator pour créer les éléments (logos, icônes) mais aussi photoshop pour la retouche et l’enrichissement visuel des composants du jeu.",
                 "image1": "src/photo/J/J3-01.jpg",
                 "image2": "src/photo/J/J3-02.jpg",
                 "image3": "src/photo/J/J3-03.jpg"
@@ -1690,7 +1690,7 @@
                 "title": "Idéation",
                 "subtitle": "Découvrez ce que nos étudiants ont à dire...",
                 "image1": "src/photo/J/J4-01.jpg",
-                "quote1": "« Je suis contente de m’améliorer sur Figma, de monter en compétences, et de progresser en design »",
+                "quote1": "« Je suis contente de m’améliorer sur Figma, de monter en compétences, et de progresser en design. »",
                 "image2": "src/photo/J/J4-02.jpg",
                 "quote2": "« Ce que j’aime, c’est la création pure, imaginer un jeu et voir les idées prendre forme. »",
                 "image3": "src/photo/J/J4-03.jpg",
@@ -1703,124 +1703,124 @@
                       {
                         "nom": "Assailly",
                         "prenom": "Mathilde",
-                        "classe": "B1 CPD"
+                        "classe": "src/tag/B1CPD.svg"
                       },
                       {
                         "nom": "Luiz",
                         "prenom": "Humbert",
-                        "classe": "B1 CPD"
+                        "classe": "src/tag/B1CPD.svg"
                       },
                       {
                         "nom": "Brenner",
                         "prenom": "Camille",
-                        "classe": "B1 CPD"
+                        "classe": "src/tag/B1CPD.svg"
                       },
                       {
                         "nom": "Edjekouane",
                         "prenom": "Lyam",
-                        "classe": "B1 CPD"
+                        "classe": "src/tag/B1CPD.svg"
                       },
                       {
                         "nom": "Jeyakumar",
                         "prenom": "Sadurshan",
-                        "classe": "B1 CPD"
+                        "classe": "src/tag/B1CPD.svg"
                       },
                       {
                         "nom": "Lebghil",
                         "prenom": "Dounia",
-                        "classe": "B1 CPD"
+                        "classe": "src/tag/B1CPD.svg"
                       },
                   
                       {
                         "nom": "Gondard",
                         "prenom": "Léo",
-                        "classe": "B2 CPD"
+                        "classe": "src/tag/B2CPD.svg"
                       },
                       {
                         "nom": "Marinet",
                         "prenom": "Elie",
-                        "classe": "B2 CPD"
+                        "classe": "src/tag/B2CPD.svg"
                       },
                       {
                         "nom": "Martin Maxwell",
                         "prenom": "Noé",
-                        "classe": "B2 CPD"
+                        "classe": "src/tag/B2CPD.svg"
                       },
                       {
                         "nom": "Mandi",
                         "prenom": "Anissa",
-                        "classe": "B2 CPD"
+                        "classe": "src/tag/B2CPD.svg"
                       },
                   
                       {
                         "nom": "Liu",
                         "prenom": "Charlie",
-                        "classe": "B3 CI"
+                        "classe": "src/tag/B3CI.svg"
                       },
                       {
                         "nom": "Beucher",
                         "prenom": "Joyce",
-                        "classe": "B3 CI"
+                        "classe": "src/tag/B3CI.svg"
                       },
                       {
                         "nom": "Elharras",
                         "prenom": "Oussama",
-                        "classe": "B3 CI"
+                        "classe": "src/tag/B3CI.svg"
                       },
                   
                       {
                         "nom": "Cerqueira de Almeida",
                         "prenom": "Patricia",
-                        "classe": "B3 DESIGN"
+                        "classe": "src/tag/B3DESIGN.svg"
                       },
                       {
                         "nom": "Callies",
                         "prenom": "Océane",
-                        "classe": "B3 DESIGN"
+                        "classe": "src/tag/B3DESIGN.svg"
                       },
                       {
                         "nom": "Azoulai",
                         "prenom": "Léo",
-                        "classe": "B3 DESIGN"
+                        "classe": "src/tag/B3DESIGN.svg"
                       },
                       {
                         "nom": "Penichon",
                         "prenom": "Rémy",
-                        "classe": "B3 DESIGN"
+                        "classe": "src/tag/B3DESIGN.svg"
                       },
                   
                       {
                         "nom": "Weber",
                         "prenom": "Aurore",
-                        "classe": "B3 MARKET"
+                        "classe": "src/tag/B3Market.svg"
                       },
                   
                       {
                         "nom": "Calippe",
                         "prenom": "Manon",
-                        "classe": "M1 UX/UI"
+                        "classe": "src/tag/M1UXUI.svg"
                       },
                       {
                         "nom": "Seck",
                         "prenom": "Coumba",
-                        "classe": "M1 UX/UI"
+                        "classe": "src/tag/M1UXUI.svg"
                       },
                       {
                         "nom": "Botran",
                         "prenom": "Célia",
-                        "classe": "M1 UX/UI"
+                        "classe": "src/tag/M1UXUI.svg"
                       },
                   
                       {
                         "nom": "Gibot",
                         "prenom": "Paul",
-                        "classe": "M1 VIDEO"
+                        "classe": "src/tag/M1VIDEO.svg"
                       },
                   
                       {
                         "nom": "Pham",
                         "prenom": "Sonia",
-                        "classe": "INTERVENANT"
+                        "classe": "src/tag/Referent.svg"
                       }
                     ]
             }
@@ -1830,7 +1830,7 @@
         "backgroundImage": "src/textures/organisation.webp",
         "sets": [
             {
-                "title": "Evenementiel ",
+                "title": "Événementiel",
                 "subtitle": "Les membres de l’atelier s’occupent de la communication, de l'organisation et du parcours visiteurs pour garantir le bon déroulement de l’événement.",
                 "image1": "src/photo/K/K1-01.jpg",
                 "image2": "src/photo/K/K1-02.jpg",
@@ -1838,17 +1838,17 @@
             },
             {
                 "title": " Expérience visiteur",
-                "subtitle": "Dans cet univers, ils se donnent pour mission de créer une ambiance unique, offrant aux étudiants une parenthèse dans leur routine. Ils visent également à attirer de nouveaux étudiants en valorisant l’événement sur les réseaux sociaux et à proposer une expérience optimale aux visiteurs grâce à une bonne organisation et communication.",
+                "subtitle": "Dans cet univers, ils·elles se donnent pour mission de créer une ambiance unique, offrant aux étudiants une parenthèse dans leur routine. Ils·elles ont aussi pour objectif de promouvoir et attirer de futurs étudiants à visiter la Diginigh. Ce parcours visiteur sera dessiné par leur soin.",
                 "image1": "src/photo/K/K2-01.jpg",
                 "image2": "src/photo/K/K2-02.jpg",
                 "image3": "src/photo/K/K2-03.jpg"
             },
             {
                 "title": "Implication",
-                "subtitle": "Pour mener à bien leurs missions, ils utilisent différents outils de gestion de projet tels que Excel pour la gestion et le suivi des plannings et Canva pour la création de visuels simples et rapides pour la communication.",
+                "subtitle": "Pour mener à bien leurs missions, ils·elles utilisent différents outils de gestion de projet tels que Excel pour la gestion et le suivi des plannings et Canva pour la création de visuels simples et rapides pour la communication.",
                 "image1": "src/photo/K/K3-01.jpg",
                 "image2": "src/photo/K/K3-02.jpg",
-                "image3": "src/photo/K/K3-03.jpg"
+                "image3": "src/photo/K/K3-03.jpg" 
             },
             {
                 "title": "Coordination",
