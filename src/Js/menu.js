@@ -29,20 +29,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const initializeMenu = () => {
     // Menu toggle functionality
     burgerButton.addEventListener("click", () => {
-      const isOpening = !sideMenu.classList.contains('open');
+      const isOpening = !sideMenu.classList.contains("open");
       sideMenu.classList.toggle("open");
-      
+
       // Ajouter/retirer la classe sur le body pour gérer la visibilité des éléments
       if (isOpening) {
-        document.body.classList.add('menu-open');
+        document.body.classList.add("menu-open");
       } else {
-        document.body.classList.remove('menu-open');
+        document.body.classList.remove("menu-open");
       }
     });
 
     closeButton.addEventListener("click", () => {
       sideMenu.classList.remove("open");
-      document.body.classList.remove('menu-open');
+      document.body.classList.remove("menu-open");
     });
 
     // Navigation functionality with scene states
@@ -77,4 +77,22 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.reload(); // Rafraîchit la page
     });
   }
+});
+
+// Dans menu.js
+document.addEventListener("DOMContentLoaded", () => {
+  const backButton = document.getElementById("back-button");
+
+  // Fonction pour gérer la visibilité du bouton back
+  const updateBackButtonVisibility = () => {
+    // Vérifier si nous sommes dans une scène de transition
+    const isTransitionScene = window.location.hash.includes("transition");
+    backButton.style.display = isTransitionScene ? "block" : "none";
+  };
+
+  // Écouter les changements de hash pour mettre à jour la visibilité
+  window.addEventListener("hashchange", updateBackButtonVisibility);
+
+  // Initialiser l'état
+  updateBackButtonVisibility();
 });
