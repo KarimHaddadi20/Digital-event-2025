@@ -131,13 +131,23 @@ body {
 .instruction-title {
   display: flex;
   align-items: center;
-  gap: 10px; /* Espace entre l'icône et le texte */
+  justify-content: center; /* Centre horizontalement */
+  gap: 10px;
+  width: 100%; /* S'assure que le conteneur prend toute la largeur */
+  text-align: center; /* Centre le texte */
 }
 
 .click-icon {
   width: 32px;
   height: 32px;
   color: white;
+  /* Ajuster la position de l'icône pour qu'elle s'aligne avec le texte */
+  margin-top: -2px;
+}
+/* Ajuster spécifiquement pour le miroir */
+.mirror-instructions .instruction-title {
+  justify-content: center;
+  gap: 10px;
 } 
 
 .fragments-container {
@@ -559,6 +569,8 @@ body {
   gap: 5px;
   justify-content: center;
   align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .fragment-instructions .font-aktiv {
