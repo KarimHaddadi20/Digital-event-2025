@@ -165,14 +165,13 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
 
             group.userData = { 
                 label: labelDiv,
-                isTeamLabel: true  // S'assurer que c'est bien marqué comme label team
+                isTeamLabel: true  
             };
         } else {
             // Pour toutes les autres sections (standard et quote)
             const mainTexture = await this.loadTexture(textureLoader, section.mainImage);
             mainMesh = this.createMainMesh(mainTexture);
-            mainMesh.position.set(0, 1, 0);
-            mainMesh.scale.set(1, 1, 1);
+            mainMesh.position.set(0, 0.8, 0);    
             group.add(mainMesh);
 
             let detail1, detail2;
@@ -185,16 +184,28 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
 
                 [detail1, detail2] = this.createSecondaryMeshes(texture2, texture3);
                 
-                // Positions initiales plus adaptées au mobile
-                detail1.position.set(-0.9, -1, 0);
-                detail2.position.set(0.9, -1, 0);
+                // Positions initiales identiques pour toutes les sections standard
+                if (section.type === 'standard') {
+                    // Image principale en haut
+                    mainMesh.position.set(0, 1, 0);
+                    mainMesh.scale.set(1, 1, 1);
+                    
+                    // Images secondaires en bas et écartées
+                    if (section.position === 'left') {
+                        detail1.position.set(-1.2, -1, 0);
+                        detail2.position.set(1.2, -1, 0);
+                    } else {
+                        // Pour les sections de droite, même position Y mais X inversé
+                        detail1.position.set(-1.2, -1, 0);
+                        detail2.position.set(1.2, -1, 0);
+                    }
+                }
                 
                 detail1.scale.set(0.6, 0.6, 1);
                 detail2.scale.set(0.6, 0.6, 1);
                 
                 group.add(detail1, detail2);
 
-                // Déplacer l'effet de parallaxe ici, en dehors des conditions
                 const updatePositions = () => {
                     const startZ = group.position.z + 30;
                     const endZ = group.position.z - 30;
@@ -203,23 +214,23 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
                         (startZ - this.camera.position.z) / (startZ - endZ)
                     ));
                     
-                    // Image principale : mouvement diagonal vers haut/droite
+                    // Même mouvement pour toutes les sections standard
                     mainMesh.position.y = 1 + (progress * 6);
-                    mainMesh.position.x = (progress * 4);
+                    mainMesh.position.x = section.position === 'left' ? 
+                        (progress * 4) : -(progress * 4);
                     
-                    // Images secondaires : mouvement diagonal vers bas/direction selon position
                     if (detail1 && detail2) {
                         const secondaryY = -1 - (progress * 6);
                         if (section.position === 'left') {
                             detail1.position.y = secondaryY;
-                            detail1.position.x = -0.9 - (progress * 3);
+                            detail1.position.x = -1.2 - (progress * 3);
                             detail2.position.y = secondaryY;
-                            detail2.position.x = 0.9 - (progress * 3);
+                            detail2.position.x = 1.2 - (progress * 3);
                         } else {
                             detail1.position.y = secondaryY;
-                            detail1.position.x = -0.9 + (progress * 3);
+                            detail1.position.x = -1.2 + (progress * 3);
                             detail2.position.y = secondaryY;
-                            detail2.position.x = 0.9 + (progress * 3);
+                            detail2.position.x = 1.2 + (progress * 3);
                         }
                     }
                 };
