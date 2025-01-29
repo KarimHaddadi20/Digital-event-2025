@@ -628,4 +628,22 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
             popup.classList.add('active');
         });
     }
+
+    cleanup() {
+        // Nettoyer les éléments lors de la destruction de la scène
+        const elements = document.querySelectorAll(
+            ".mobile-section-label, .team-label, .quote-container, .subtitle-popup, .popup-content, .mobile-popup"
+        );
+        elements.forEach((element) => element.remove());
+
+        if (this._touchHandlerInitialized) {
+            window.removeEventListener('touchstart', this._handleTouchStart);
+            window.removeEventListener('touchmove', this._handleTouchMove);
+        }
+
+        // Nettoyer les callbacks
+        this.updateCallbacks = [];
+
+        super.cleanup();
+    }
 } 

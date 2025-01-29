@@ -53,7 +53,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (window.mirrorEffect) {
           try {
+            // Nettoyer tous les éléments de la scène actuelle
+            const elements = document.querySelectorAll(
+              ".mobile-section-label, .team-label, .quote-container, .subtitle-popup, .popup-content, .mobile-popup, .portal-text, .fragment-label"
+            );
+            elements.forEach((element) => element.remove());
+
+            // Fermer le menu
             sideMenu.classList.remove("open");
+            document.body.classList.remove("menu-open");
+
+            // Transition vers la nouvelle scène
             window.mirrorEffect.transitionToScene(sceneIndex);
           } catch (error) {
             console.error("Scene transition error:", error);
