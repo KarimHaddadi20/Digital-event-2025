@@ -27,15 +27,13 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       event.preventDefault();
       const delta = Math.sign(event.deltaY) * 0.6;
 
-      const maxZ = 7; // Position la plus haute (inchangée)
-      const fragmentSpacing = 50;
-      // Ajuster lastFragmentPosition pour s'arrêter plus tôt
-      const lastFragmentPosition = -258; // Suppression du -15 pour s'arrêter avant
-      const minZ = lastFragmentPosition + 30; // Ajouter une marge pour s'arrêter avant la fin
+      const maxZ = 7; // Position de départ
+      const lastFragmentPosition = -230; // Position du dernier fragment
+      const minZ = lastFragmentPosition; // Position finale
 
       let newZ = this.camera.position.z - delta;
 
-      // Ajouter un effet de ressort aux limites
+      // Limiter la position de la caméra
       if (newZ > maxZ) {
         newZ = maxZ;
       } else if (newZ < minZ) {
@@ -45,10 +43,10 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       this.camera.position.z = newZ;
 
       // Calculer la progression
-      const progress = Math.min(
-        Math.abs(maxZ - this.camera.position.z) / Math.abs(maxZ - minZ),
-        1
-      );
+      const totalDistance = Math.abs(maxZ - lastFragmentPosition);
+      const currentDistance = Math.abs(maxZ - this.camera.position.z);
+      const progress = Math.min(currentDistance / (totalDistance * 2), 1); // Division par 2 pour ralentir la progression
+      
       if (this.progressFill) {
         this.progressFill.style.setProperty("--progress", progress);
       }
