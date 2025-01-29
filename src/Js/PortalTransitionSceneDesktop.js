@@ -253,7 +253,10 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
   }
 
   createMainMesh(texture) {
-    return new THREE.Mesh(
+    const group = new THREE.Group();
+
+    // Créer le mesh principal pour l'image
+    const imageMesh = new THREE.Mesh(
       new THREE.PlaneGeometry(12, 8, 50, 50),
       new THREE.MeshBasicMaterial({
         map: texture,
@@ -262,27 +265,125 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
         side: THREE.DoubleSide,
       })
     );
+
+    // Créer le mesh pour la bordure (plus grand)
+    const borderGeometry = new THREE.PlaneGeometry(12.4, 8.4);
+    const borderMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        time: { value: 0 },
+      },
+      vertexShader: `
+        varying vec2 vUv;
+        void main() {
+          vUv = uv;
+          gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        }
+      `,
+      fragmentShader: `
+        varying vec2 vUv;
+        uniform float time;
+
+        void main() {
+          vec2 center = vec2(0.5, 0.5);
+          float angle = 116.0 * 3.14159 / 180.0;
+          vec2 direction = vec2(cos(angle), sin(angle));
+          float gradient = dot(vUv - center, direction) * 0.5 + 0.5;
+
+          vec4 color1 = vec4(0.627, 0.627, 0.627, 0.1);
+          vec4 color2 = vec4(0.925, 0.925, 0.925, 0.1);
+          vec4 finalColor = mix(color1, color2, gradient);
+
+          vec2 border = smoothstep(0.0, 0.02, vUv) * smoothstep(0.0, 0.02, 1.0 - vUv);
+          float borderAlpha = min(border.x, border.y);
+          
+          gl_FragColor = vec4(finalColor.rgb, finalColor.a * borderAlpha);
+          
+          float borderWidth = 0.02;
+          vec2 borderDist = min(vUv, 1.0 - vUv);
+          float borderMask = 1.0 - step(borderWidth, min(borderDist.x, borderDist.y));
+          gl_FragColor = mix(gl_FragColor, vec4(1.0, 1.0, 1.0, 0.2), borderMask);
+        }
+      `,
+      transparent: true,
+      side: THREE.DoubleSide,
+    });
+
+    const borderMesh = new THREE.Mesh(borderGeometry, borderMaterial);
+    borderMesh.position.z = -0.01;
+
+    group.add(borderMesh);
+    group.add(imageMesh);
+
+    return group;
   }
 
   createSecondaryMeshes(texture2, texture3) {
-    const geometry = new THREE.PlaneGeometry(4.5, 3, 1, 1);
-    const material2 = new THREE.MeshBasicMaterial({
-      map: texture2,
-      transparent: true,
-      opacity: 0.9,
-      side: THREE.DoubleSide,
-    });
-    const material3 = new THREE.MeshBasicMaterial({
-      map: texture3,
-      transparent: true,
-      opacity: 0.9,
-      side: THREE.DoubleSide,
-    });
+    const createSecondaryMesh = (texture) => {
+      const group = new THREE.Group();
 
-    return [
-      new THREE.Mesh(geometry, material2),
-      new THREE.Mesh(geometry, material3),
-    ];
+      // Mesh pour l'image
+      const imageMesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(4.5, 3, 1, 1),
+        new THREE.MeshBasicMaterial({
+          map: texture,
+          transparent: true,
+          opacity: 0.9,
+          side: THREE.DoubleSide,
+        })
+      );
+
+      // Mesh pour la bordure (plus grand)
+      const borderGeometry = new THREE.PlaneGeometry(4.8, 3.3);
+      const borderMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+          time: { value: 0 },
+        },
+        vertexShader: `
+          varying vec2 vUv;
+          void main() {
+            vUv = uv;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          }
+        `,
+        fragmentShader: `
+          varying vec2 vUv;
+          uniform float time;
+
+          void main() {
+            vec2 center = vec2(0.5, 0.5);
+            float angle = 116.0 * 3.14159 / 180.0;
+            vec2 direction = vec2(cos(angle), sin(angle));
+            float gradient = dot(vUv - center, direction) * 0.5 + 0.5;
+
+            vec4 color1 = vec4(0.627, 0.627, 0.627, 0.1);
+            vec4 color2 = vec4(0.925, 0.925, 0.925, 0.1);
+            vec4 finalColor = mix(color1, color2, gradient);
+
+            vec2 border = smoothstep(0.0, 0.02, vUv) * smoothstep(0.0, 0.02, 1.0 - vUv);
+            float borderAlpha = min(border.x, border.y);
+            
+            gl_FragColor = vec4(finalColor.rgb, finalColor.a * borderAlpha);
+            
+            float borderWidth = 0.02;
+            vec2 borderDist = min(vUv, 1.0 - vUv);
+            float borderMask = 1.0 - step(borderWidth, min(borderDist.x, borderDist.y));
+            gl_FragColor = mix(gl_FragColor, vec4(1.0, 1.0, 1.0, 0.2), borderMask);
+          }
+        `,
+        transparent: true,
+        side: THREE.DoubleSide,
+      });
+
+      const borderMesh = new THREE.Mesh(borderGeometry, borderMaterial);
+      borderMesh.position.z = -0.01;
+
+      group.add(borderMesh);
+      group.add(imageMesh);
+
+      return group;
+    };
+
+    return [createSecondaryMesh(texture2), createSecondaryMesh(texture3)];
   }
 
   createQuoteImage(texture) {
