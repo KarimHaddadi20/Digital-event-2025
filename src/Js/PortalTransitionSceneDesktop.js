@@ -402,24 +402,20 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     return quotes.map((quote) => {
       const canvas = document.createElement("canvas");
       canvas.width = 1024;
-      canvas.height = 300;
-      const ctx = canvas.getContext("2d");
 
-      const fontSize = 16;
+      // Pre-calculate lines to determine height
+      const ctx = canvas.getContext("2d");
+      const fontSize = Math.floor(1024 / 12); // Base font size on width
       const fontString = `italic 300 ${fontSize}px Fraunces`;
       ctx.font = fontString;
-      const lineHeightPercent = 140;
-      const lineHeight = (fontSize * lineHeightPercent) / 100;
+      const lineHeight = fontSize * 1.4;
+      const padding = fontSize;
+      const maxWidth = 900;
 
-      // Text setup
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-
-      // Split text into lines
+      // Split text into lines first to calculate height
       const words = quote.split(" ");
       let line = "";
       let lines = [];
-      const maxWidth = 900;
 
       words.forEach((word) => {
         const testLine = line + word + " ";
@@ -432,64 +428,28 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       });
       lines.push(line);
 
-      const yOffset = canvas.height / 2 - ((lines.length - 1) * lineHeight) / 2;
-
-      // Calculate background dimensions
-      const padding = 20;
+      // Set canvas height based on content
       const totalTextHeight = lines.length * lineHeight;
-      const backgroundHeight = totalTextHeight + padding * 2;
-      const backgroundWidth = maxWidth + padding * 2;
-      const backgroundX = (canvas.width - backgroundWidth) / 2;
-      const backgroundY = yOffset - padding;
+      canvas.height = totalTextHeight + padding * 2;
 
-      // Create gradient background
-      const gradient = ctx.createLinearGradient(
-        backgroundX,
-        backgroundY,
-        backgroundX + backgroundWidth,
-        backgroundY + backgroundHeight
-      );
-      gradient.addColorStop(0.03, "rgba(160, 160, 160, 0.05)");
-      gradient.addColorStop(0.13, "rgba(243, 243, 243, 0.05)");
-      gradient.addColorStop(0.23, "rgba(195, 195, 195, 0.05)");
-      gradient.addColorStop(0.5, "rgba(255, 255, 255, 0.05)");
-      gradient.addColorStop(0.75, "rgba(177, 177, 177, 0.05)");
-      gradient.addColorStop(0.86, "rgba(236, 236, 236, 0.05)");
-      gradient.addColorStop(0.97, "rgba(153, 153, 153, 0.05)");
-
-      // Apply blur
-      ctx.filter = "blur(25px)";
-
-      // Draw background with rounded corners
-      ctx.fillStyle = gradient;
-      ctx.beginPath();
-      ctx.roundRect(
-        backgroundX,
-        backgroundY,
-        backgroundWidth,
-        backgroundHeight,
-        5
-      );
-      ctx.fill();
-
-      // Draw border
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.20)";
-      ctx.lineWidth = 0.625;
-      ctx.stroke();
-
-      // Reset blur for text
-      ctx.filter = "none";
+      // Redraw with correct dimensions
+      ctx.font = fontString;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
 
       // Draw text
-      ctx.fillStyle = "rgba(255, 255, 255, 1)";
       lines.forEach((line, i) => {
-        ctx.fillText(line, canvas.width / 2, yOffset + i * lineHeight);
+        const y = padding + i * lineHeight + lineHeight / 2;
+        ctx.fillStyle = "rgba(255, 255, 255, 1)";
+        ctx.fillText(line, canvas.width / 2, y);
       });
 
       const texture = new THREE.CanvasTexture(canvas);
 
+      // Create mesh with proportional geometry
+      const aspect = canvas.width / canvas.height;
       return new THREE.Mesh(
-        new THREE.PlaneGeometry(6.2, 2),
+        new THREE.PlaneGeometry(6, 6 / aspect),
         new THREE.MeshBasicMaterial({
           map: texture,
           transparent: true,
@@ -625,9 +585,12 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
                             (student) => `
                             <div class="student-row">
                                 <div class="student-nom">${student.nom}</div>
-                                <div class="student-prenom">${student.prenom}</div>
+                                <div class="student-prenom">${
+                                  student.prenom
+                                }</div>
                                 <div class="student-classe">
-                                    ${student.classe.endsWith(".svg")
+                                    ${
+                                      student.classe.endsWith(".svg")
                                         ? `<img src="${student.classe}" alt="Classe" class="classe-icon"/>`
                                         : student.classe
                                     }
@@ -645,7 +608,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     closeButton.addEventListener("click", () => {
       document.body.classList.remove("popup-active");
       popup.remove();
-      
+
       // Réactiver le scroll de la scène
       if (!this._scrollHandlerInitialized) {
         this.setupScrollHandler();
