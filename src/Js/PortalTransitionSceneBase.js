@@ -38,7 +38,7 @@ export class PortalTransitionSceneBase extends SceneSetup {
             this.backButton.style.display = 'block';
             this.backButton.addEventListener('click', () => this.refreshPage());
         }
-        
+
         this.initScene();
     }
 
