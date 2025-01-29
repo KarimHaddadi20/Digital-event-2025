@@ -137,9 +137,8 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 16px;
                 width: 100%;
-                padding: 0 24px;
+                padding: 0 16px;
             `;
 
             // On utilise le même teamLink pour le style et l'événement
@@ -234,9 +233,9 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
             // Styles pour le label mobile
             labelDiv.style.cssText = `
                 position: fixed;
-                bottom: 80px;
+                bottom: 60px;
                 left: 0;
-                width: 100%;
+                width: 100vw;
                 color: white;
                 text-align: center;
                 pointer-events: none;
@@ -250,9 +249,8 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 16px;
                 width: 100%;
-                padding: 0 24px;
+                padding: 0 16px;
             `;
 
             const title = labelDiv.querySelector('h2');
