@@ -46,7 +46,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       const totalDistance = Math.abs(maxZ - lastFragmentPosition);
       const currentDistance = Math.abs(maxZ - this.camera.position.z);
       const progress = Math.min(currentDistance / (totalDistance * 2), 1); // Division par 2 pour ralentir la progression
-      
+
       if (this.progressFill) {
         this.progressFill.style.setProperty("--progress", progress);
       }
@@ -429,41 +429,79 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       lines.push(line);
 
       const totalTextHeight = lines.length * lineHeight;
-      backgroundCanvas.height = textCanvas.height = totalTextHeight + padding * 2;
+      backgroundCanvas.height = textCanvas.height =
+        totalTextHeight + padding * 2;
 
       // Dessiner le fond sur le premier canvas
       const bgCtx = backgroundCanvas.getContext("2d");
-      const gradient = bgCtx.createLinearGradient(0, 0, backgroundCanvas.width, backgroundCanvas.height);
-      
+      const gradient = bgCtx.createLinearGradient(
+        0,
+        0,
+        backgroundCanvas.width,
+        backgroundCanvas.height
+      );
+
       // Reproduire exactement le gradient du Figma
-      gradient.addColorStop(0.0321, 'rgba(160, 160, 160, 0.25)');
-      gradient.addColorStop(0.1334, 'rgba(243, 243, 243, 0.25)');
-      gradient.addColorStop(0.2315, 'rgba(195, 195, 195, 0.25)');
-      gradient.addColorStop(0.5018, 'rgba(255, 255, 255, 0.25)');
-      gradient.addColorStop(0.7532, 'rgba(177, 177, 177, 0.25)');
-      gradient.addColorStop(0.8611, 'rgba(236, 236, 236, 0.25)');
-      gradient.addColorStop(0.9696, 'rgba(153, 153, 153, 0.25)');
+      gradient.addColorStop(0.0321, "rgba(160, 160, 160, 0.25)");
+      gradient.addColorStop(0.1334, "rgba(243, 243, 243, 0.25)");
+      gradient.addColorStop(0.2315, "rgba(195, 195, 195, 0.25)");
+      gradient.addColorStop(0.5018, "rgba(255, 255, 255, 0.25)");
+      gradient.addColorStop(0.7532, "rgba(177, 177, 177, 0.25)");
+      gradient.addColorStop(0.8611, "rgba(236, 236, 236, 0.25)");
+      gradient.addColorStop(0.9696, "rgba(153, 153, 153, 0.25)");
 
       // Dessiner le rectangle arrondi avec un radius de 5px
       const cornerRadius = 5;
       bgCtx.beginPath();
       bgCtx.moveTo(cornerRadius, 0);
       bgCtx.lineTo(backgroundCanvas.width - cornerRadius, 0);
-      bgCtx.quadraticCurveTo(backgroundCanvas.width, 0, backgroundCanvas.width, cornerRadius);
-      bgCtx.lineTo(backgroundCanvas.width, backgroundCanvas.height - cornerRadius);
-      bgCtx.quadraticCurveTo(backgroundCanvas.width, backgroundCanvas.height, backgroundCanvas.width - cornerRadius, backgroundCanvas.height);
+      bgCtx.quadraticCurveTo(
+        backgroundCanvas.width,
+        0,
+        backgroundCanvas.width,
+        cornerRadius
+      );
+      bgCtx.lineTo(
+        backgroundCanvas.width,
+        backgroundCanvas.height - cornerRadius
+      );
+      bgCtx.quadraticCurveTo(
+        backgroundCanvas.width,
+        backgroundCanvas.height,
+        backgroundCanvas.width - cornerRadius,
+        backgroundCanvas.height
+      );
       bgCtx.lineTo(cornerRadius, backgroundCanvas.height);
-      bgCtx.quadraticCurveTo(0, backgroundCanvas.height, 0, backgroundCanvas.height - cornerRadius);
+      bgCtx.quadraticCurveTo(
+        0,
+        backgroundCanvas.height,
+        0,
+        backgroundCanvas.height - cornerRadius
+      );
       bgCtx.lineTo(0, cornerRadius);
       bgCtx.quadraticCurveTo(0, 0, cornerRadius, 0);
       bgCtx.closePath();
 
-      bgCtx.fillStyle = gradient;
+      bgCtx.fillStyle = "rgba(255, 255, 255, 0.2)";
       bgCtx.fill();
 
       // Ajouter la bordure exacte du Figma
-      bgCtx.strokeStyle = 'rgba(255, 255, 255, 0.20)';
+      bgCtx.strokeStyle = "rgba(255, 255, 255, 0.20)";
       bgCtx.lineWidth = 0.625;
+      bgCtx.stroke();
+
+      // Set crisp lines
+      bgCtx.imageSmoothingEnabled = true;
+      bgCtx.imageSmoothingQuality = "high";
+
+      // Begin path for border
+      bgCtx.beginPath();
+      bgCtx.rect(0, 0, backgroundCanvas.width, backgroundCanvas.height);
+
+      // Fine white border settings
+      bgCtx.strokeStyle = "rgba(255, 255, 255, 1)"; // Subtle white
+      bgCtx.lineWidth = 0.05; // Very thin line
+      bgCtx.setLineDash([]); // Solid line
       bgCtx.stroke();
 
       // Dessiner le texte sur le deuxième canvas
@@ -472,7 +510,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       ctx.textBaseline = "middle";
 
       // Réinitialiser toutes les propriétés qui pourraient affecter le rendu du texte
-      ctx.shadowColor = 'transparent';
+      ctx.shadowColor = "transparent";
       ctx.shadowBlur = 0;
       ctx.shadowOffsetX = 0;
       ctx.shadowOffsetY = 0;
@@ -500,7 +538,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
             tBackground: { value: backgroundTexture },
             tText: { value: textTexture },
             opacity: { value: 1.0 },
-            blurSize: { value: 0.025 }  // Augmenté pour correspondre au blur de 25px
+            blurSize: { value: 0.025 }, // Augmenté pour correspondre au blur de 25px
           },
           vertexShader: `
             varying vec2 vUv;
@@ -539,7 +577,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
             }
           `,
           transparent: true,
-          side: THREE.DoubleSide
+          side: THREE.DoubleSide,
         })
       );
     });
