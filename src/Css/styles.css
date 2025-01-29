@@ -7,6 +7,7 @@ body {
   margin: 0;
   overflow: hidden;
   background: #000;
+  font-family: "Fraunces", serif;
 }
 #scene-container {
   position: fixed;
@@ -1021,12 +1022,13 @@ body.popup-active {
 
 .label-content {
   color: white;
-  max-width: 300px;
+  max-width: 502px;
 }
 
 .label-content h2 {
   font-family: "Fraunces", serif;
-  font-size: 32px;
+  font-weight: semibold;
+  font-size: 18px;
   font-style: italic;
   font-weight: 600;
   line-height: normal;
@@ -1159,176 +1161,188 @@ body.popup-active {
 } */
 
 .inventory {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgb(15, 15, 15);
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    color: white;
-    transform: translateY(100%);
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgb(15, 15, 15);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .inventory.open {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .inventory-header {
-    padding: 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  padding: 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .inventory-header .font-aktiv {
-    font-size: 14px;
-    letter-spacing: 1px;
-    opacity: 0.6;
+  font-size: 14px;
+  letter-spacing: 1px;
+  opacity: 0.6;
 }
 
 .inventory-count {
-    font-family: 'Fraunces', serif;
-    opacity: 0.6;
+  font-family: "Fraunces", serif;
+  opacity: 0.6;
 }
 
 .inventory-content {
-    flex: 1;
-    padding: 0 48px 48px 48px;
-    display: flex;
-    align-items: center;
+  flex: 1;
+  padding: 0 48px 48px 48px;
+  display: flex;
+  align-items: center;
 }
 
 .inventory .menu-list {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 16px;
-    width: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  width: 100%;
 }
 
 .inventory .menu-item {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-decoration: none;
-    color: white;
-    padding: 16px;
-    aspect-ratio: 1;
-    border-radius: 4px;
-    overflow: hidden;
-    background: rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-decoration: none;
+  color: white;
+  padding: 16px;
+  aspect-ratio: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
 }
 
 .inventory .menu-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
-    z-index: 1;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.5) 0%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  z-index: 1;
 }
 
 .inventory .menu-item:hover {
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.inventory .menu-item:nth-last-child(-n+5) {
-    grid-column-end: span 1;
-    transform: translateX(calc(50% * 1.2)); /* Décaler les 5 derniers éléments */
+.inventory .menu-item:nth-last-child(-n + 5) {
+  grid-column-end: span 1;
+  transform: translateX(calc(50% * 1.2)); /* Décaler les 5 derniers éléments */
 }
 
 .inventory .menu-item-title {
-    font-family: 'Fraunces', serif;
-    font-size: 18px;
-    margin-bottom: 4px;
-    position: relative;
-    z-index: 2;
+  font-family: "Fraunces", serif;
+  font-size: 18px;
+  margin-bottom: 4px;
+  position: relative;
+  z-index: 2;
 }
 
 .inventory .menu-item-subtitle {
-    font-family: 'Aktiv Grotesk', sans-serif;
-    font-size: 12px;
-    opacity: 0.6;
-    position: relative;
-    z-index: 2;
+  font-family: "Aktiv Grotesk", sans-serif;
+  font-size: 12px;
+  opacity: 0.6;
+  position: relative;
+  z-index: 2;
 }
 
 .inventory-button {
-    position: fixed;
-    top: 48px;
-    right: 48px;
-    padding: 12px 24px;
-    background: linear-gradient(343.92deg, rgba(21, 21, 27, 0.6) -1.4%, rgba(79, 79, 86, 0.6) 104.72%);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    color: white;
-    font-family: 'Aktiv Grotesk', sans-serif;
-    font-size: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 9998;
+  position: fixed;
+  top: 48px;
+  right: 48px;
+  padding: 12px 24px;
+  background: linear-gradient(
+    343.92deg,
+    rgba(21, 21, 27, 0.6) -1.4%,
+    rgba(79, 79, 86, 0.6) 104.72%
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  color: white;
+  font-family: "Aktiv Grotesk", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 9998;
 }
 
 .inventory-button:hover {
-    background: linear-gradient(343.92deg, rgba(21, 21, 27, 0.8) -1.4%, rgba(79, 79, 86, 0.8) 104.72%);
-    border-color: rgba(255, 255, 255, 0.2);
+  background: linear-gradient(
+    343.92deg,
+    rgba(21, 21, 27, 0.8) -1.4%,
+    rgba(79, 79, 86, 0.8) 104.72%
+  );
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 @media (max-width: 1200px) {
-    .inventory .menu-list {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    .inventory .menu-item:nth-last-child(-n+5) {
-        transform: none;
-    }
+  .inventory .menu-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .inventory .menu-item:nth-last-child(-n + 5) {
+    transform: none;
+  }
 }
 
 @media (max-width: 768px) {
-    .inventory,
-    .inventory-button {
-        display: none !important;
-    }
-    
-    .inventory .menu-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .inventory-header {
-        padding: 24px;
-    }
-    
-    .inventory-content {
-        padding: 0 24px 24px 24px;
-    }
+  .inventory,
+  .inventory-button {
+    display: none !important;
+  }
+
+  .inventory .menu-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .inventory-header {
+    padding: 24px;
+  }
+
+  .inventory-content {
+    padding: 0 24px 24px 24px;
+  }
 }
 
 .inventory-close {
-    background: none;
-    border: none;
-    color: white;
-    opacity: 0.6;
-    cursor: pointer;
-    padding: 8px;
-    transition: opacity 0.3s ease;
+  background: none;
+  border: none;
+  color: white;
+  opacity: 0.6;
+  cursor: pointer;
+  padding: 8px;
+  transition: opacity 0.3s ease;
 }
 
 .inventory-close:hover {
-    opacity: 1;
+  opacity: 1;
 }
 
 .inventory-close svg {
-    width: 24px;
-    height: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 /* Masquer les éléments de la scène quand le menu mobile est ouvert */
@@ -1336,21 +1350,20 @@ body.menu-open .mobile-section-label,
 body.menu-open .fragment-label,
 body.menu-open .fragment-instructions,
 body.menu-open .scroll-progress-container {
-    opacity: 0 !important;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
+  opacity: 0 !important;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
 /* Assurer que le bouton d'inventaire reste visible */
 .inventory-button {
-    z-index: 9998;
+  z-index: 9998;
 }
 
 /* Masquer le menu burger sur desktop */
 @media (min-width: 769px) {
-    #burger-menu,
-    #side-menu {
-        display: none !important;
-    }
+  #burger-menu,
+  #side-menu {
+    display: none !important;
+  }
 }
-

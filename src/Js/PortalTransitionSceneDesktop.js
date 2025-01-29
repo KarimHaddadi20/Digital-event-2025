@@ -376,7 +376,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     const labelContent = labelDiv.querySelector(".label-content");
     labelContent.style.cssText = `
             display: flex;
-            width: 502px;
+            
             flex-direction: column;
             align-items: flex-start;
             gap: 16px;
@@ -385,8 +385,13 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     // Suppression des marges par défaut
     const title = labelDiv.querySelector("h2");
     const subtitle = labelDiv.querySelector(".subtitle");
+
+    subtitle.style.cssText = `
+    margin: 0;
+`;
+
     title.style.margin = "0";
-    subtitle.style.margin = "0";
+    title.style.fontStyle = "normal";
   }
 
   addTeamLabel(fragment, section) {
@@ -580,7 +585,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       window.removeEventListener("wheel", this._currentScrollHandler);
     }
     // Supprimer le bouton d'inventaire lors du nettoyage
-    const inventoryButton = document.querySelector('.inventory-button');
+    const inventoryButton = document.querySelector(".inventory-button");
     if (inventoryButton) {
       inventoryButton.remove();
     }
@@ -588,18 +593,18 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
   }
 
   createInventoryButton() {
-    const button = document.createElement('button');
-    button.className = 'inventory-button';
-    button.textContent = 'Inventaire';
-    button.addEventListener('click', () => this.toggleInventory());
+    const button = document.createElement("button");
+    button.className = "inventory-button";
+    button.textContent = "Inventaire";
+    button.addEventListener("click", () => this.toggleInventory());
     document.body.appendChild(button);
   }
 
   createInventory() {
-    if (!document.getElementById('inventory')) {
-      const inventory = document.createElement('div');
-      inventory.id = 'inventory';
-      inventory.className = 'inventory';
+    if (!document.getElementById("inventory")) {
+      const inventory = document.createElement("div");
+      inventory.id = "inventory";
+      inventory.className = "inventory";
       inventory.innerHTML = `
         <div class="inventory-header">
           <span class="font-aktiv">INVENTAIRE</span>
@@ -662,9 +667,9 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       document.body.appendChild(inventory);
 
       // Ajouter les gestionnaires d'événements pour la navigation
-      const menuItems = inventory.querySelectorAll('.menu-item');
-      menuItems.forEach(item => {
-        item.addEventListener('click', (e) => {
+      const menuItems = inventory.querySelectorAll(".menu-item");
+      menuItems.forEach((item) => {
+        item.addEventListener("click", (e) => {
           e.preventDefault();
           const atelierName = item.dataset.atelier;
           this.navigateToAtelier(atelierName);
@@ -672,42 +677,44 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       });
 
       // Ajouter le gestionnaire pour le bouton de fermeture
-      const closeButton = inventory.querySelector('.inventory-close');
+      const closeButton = inventory.querySelector(".inventory-close");
       if (closeButton) {
-        closeButton.addEventListener('click', () => this.toggleInventory());
+        closeButton.addEventListener("click", () => this.toggleInventory());
       }
     }
   }
 
   navigateToAtelier(atelierName) {
     // Masquer l'inventaire
-    const inventory = document.getElementById('inventory');
+    const inventory = document.getElementById("inventory");
     if (inventory) {
-      inventory.classList.remove('open');
+      inventory.classList.remove("open");
     }
-    
+
     // Simuler un clic sur le fragment correspondant
-    const fragment = this.fragments.find(f => f.mesh.userData.atelierName === atelierName);
+    const fragment = this.fragments.find(
+      (f) => f.mesh.userData.atelierName === atelierName
+    );
     if (fragment) {
       this.handleFragmentClick({
         clientX: window.innerWidth / 2,
         clientY: window.innerHeight / 2,
-        target: fragment.mesh
+        target: fragment.mesh,
       });
     }
   }
 
   toggleInventory() {
-    const inventory = document.getElementById('inventory');
+    const inventory = document.getElementById("inventory");
     if (inventory) {
-      const isOpening = !inventory.classList.contains('open');
-      inventory.classList.toggle('open');
+      const isOpening = !inventory.classList.contains("open");
+      inventory.classList.toggle("open");
 
       // Gérer la visibilité du bouton d'inventaire
-      const inventoryButton = document.querySelector('.inventory-button');
+      const inventoryButton = document.querySelector(".inventory-button");
       if (inventoryButton) {
-        inventoryButton.style.opacity = isOpening ? '0' : '1';
-        inventoryButton.style.pointerEvents = isOpening ? 'none' : 'auto';
+        inventoryButton.style.opacity = isOpening ? "0" : "1";
+        inventoryButton.style.pointerEvents = isOpening ? "none" : "auto";
       }
     }
   }
