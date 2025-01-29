@@ -499,7 +499,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
             lastTouchY = currentTouchY;
 
             const maxZ = 7;
-            const lastFragmentPosition = -445;  // Position du dernier fragment
+            const lastFragmentPosition = -223;  // Position du dernier fragment
             const minZ = lastFragmentPosition;
 
             let newZ = this.camera.position.z - delta;
@@ -508,7 +508,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
 
             // Calcul de la progression basé sur la position actuelle
             currentProgress = (maxZ - newZ) / (maxZ - minZ);
-            currentProgress = Math.max(0, Math.min(1, currentProgress));
+            currentProgress = Math.max(0, Math.min(1, currentProgress / 2));
 
             // Mise à jour de la barre de progression
             if (this.progressFill) {
