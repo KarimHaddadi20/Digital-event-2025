@@ -853,9 +853,6 @@ class FragmentManager {
   handleFragmentClick(event) {
     if (this.isAnimatingFragment) return;
 
-    this.lastActivityTime = Date.now();
-    this.userHasInteracted = true;
-
     const mouse = new THREE.Vector2();
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -863,16 +860,20 @@ class FragmentManager {
     this.raycaster.setFromCamera(mouse, this.app.camera);
     const intersects = this.raycaster.intersectObjects(this.fragments, true);
 
+    // Clic en dehors des fragments
     if (intersects.length === 0) {
       if (this.selectedFragment) {
         this.resetFragmentPosition(this.selectedFragment);
         this.selectedFragment = null;
         this.hideVoyagerButton();
         this.userHasInteracted = false;
+
         // Réinitialiser l'environnement au background initial
         if (this.initialEnvironment) {
           this.updateEnvironment("initial");
         }
+
+        // Réinitialiser les textes
         if (this.fragmentInstructions) {
           const titleElement = this.fragmentInstructions.querySelector(".instruction-title");
           const subtitleElement = this.fragmentInstructions.querySelector(".instruction-subtitle");
@@ -884,20 +885,21 @@ class FragmentManager {
             `;
           }
           
-          // Réinitialiser le sous-titre
           if (subtitleElement) {
             subtitleElement.textContent = "Découvrez les ateliers en détail";
           }
         }
-        setTimeout(() => {
-          if (!this.selectedFragment) {
-            this.selectRandomFragment();
-          }
-        }, 10000);
+
+        // Relancer l'autoSelect
+        if (this.autoSelectTimer) {
+          clearTimeout(this.autoSelectTimer);
+        }
+        this.startAutoSelectTimer();
       }
       return;
     }
 
+    // Clic sur un fragment
     if (intersects.length > 0) {
       let clickedFragment = intersects[0].object;
 
@@ -905,24 +907,26 @@ class FragmentManager {
         clickedFragment = clickedFragment.parent;
       }
 
-      if (
-        clickedFragment.userData &&
-        clickedFragment.userData.atelierName &&
-        clickedFragment.userData.isClickable !== false
-      ) {
+      if (clickedFragment.userData && 
+          clickedFragment.userData.atelierName && 
+          clickedFragment.userData.isClickable !== false) {
+        
+        // Désactiver complètement l'autoSelect car l'utilisateur a fait une sélection manuelle
         this.userHasInteracted = true;
+        if (this.autoSelectTimer) {
+          clearTimeout(this.autoSelectTimer);
+          this.autoSelectTimer = null;
+        }
 
         if (this.selectedFragment === clickedFragment) {
           return;
         }
 
-        if (
-          this.selectedFragment &&
-          this.selectedFragment !== clickedFragment
-        ) {
+        if (this.selectedFragment && this.selectedFragment !== clickedFragment) {
           this.resetFragmentPosition(this.selectedFragment);
         }
 
+        // Sélection du nouveau fragment
         this.fragmentSelectSound.currentTime = 0;
         this.fragmentSelectSound.volume = 0.3;
         this.fragmentSelectSound.play();
@@ -931,16 +935,10 @@ class FragmentManager {
         this.showVoyagerButton();
         this.updateEnvironment(clickedFragment.userData.atelierName);
 
-        // Garder la position actuelle de la caméra
-        const currentCameraPosition = this.app.camera.position.clone();
-        const currentCameraRotation = this.app.camera.rotation.clone();
-
+        // Mise à jour des textes
         if (this.fragmentInstructions) {
-          const titleElement =
-            this.fragmentInstructions.querySelector(".instruction-title");
-          const subtitleElement = this.fragmentInstructions.querySelector(
-            ".instruction-subtitle"
-          );
+          const titleElement = this.fragmentInstructions.querySelector(".instruction-title");
+          const subtitleElement = this.fragmentInstructions.querySelector(".instruction-subtitle");
 
           if (titleElement) {
             titleElement.innerHTML = `
@@ -949,21 +947,17 @@ class FragmentManager {
             `;
           }
 
-          // Mettre à jour le sous-titre avec la description de l'atelier
           if (subtitleElement) {
             fetch("/src/data/description.json")
               .then((response) => response.json())
               .then((data) => {
                 const atelierName = clickedFragment.userData.atelierName;
-                const description =
-                  data[atelierName]?.description ||
-                  "Découvrez les ateliers en détail";
+                const description = data[atelierName]?.description || "Découvrez les ateliers en détail";
                 subtitleElement.textContent = description;
               });
           }
         }
 
-        // Ajouter ces lignes
         this.hideLegalNotices();
         this.centerSoundIcon();
       }
@@ -997,34 +991,40 @@ class FragmentManager {
     }, 300);
   }
 
-  selectRandomFragment() {
-    // Si l'utilisateur a interagi, on arrête la sélection automatique
-    if (this.userHasInteracted) return;
+  startAutoSelectTimer() {
+    if (this.autoSelectTimer) {
+      clearTimeout(this.autoSelectTimer);
+    }
 
-    // Exclure le fragment actuellement sélectionné
-    const availableFragments = this.fragments.filter(
-      (f) => f !== this.selectedFragment
-    );
+    // Ne démarrer le timer que si aucun fragment n'est sélectionné et que l'utilisateur n'a pas interagi
+    if (!this.selectedFragment && !this.userHasInteracted) {
+      this.autoSelectTimer = setTimeout(() => {
+        this.selectRandomFragment();
+      }, 10000);
+    }
+  }
+
+  selectRandomFragment() {
+    // Ne pas sélectionner si l'utilisateur a interagi ou si un fragment est déjà sélectionné
+    if (this.userHasInteracted || this.selectedFragment) return;
+
+    const availableFragments = this.fragments.filter(f => f !== this.selectedFragment);
     if (availableFragments.length === 0) return;
 
-    // Sélectionner un fragment aléatoire
     const randomIndex = Math.floor(Math.random() * availableFragments.length);
     const randomFragment = availableFragments[randomIndex];
 
-    // Réinitialiser le fragment actuellement sélectionné
     if (this.selectedFragment) {
       this.resetFragmentPosition(this.selectedFragment);
     }
 
-    // Sélectionner le nouveau fragment
     this.selectedFragment = randomFragment;
     this.moveFragmentForward(randomFragment);
     this.showVoyagerButton();
     this.updateEnvironment(randomFragment.userData.atelierName);
 
     if (this.fragmentInstructions) {
-      const titleElement =
-        this.fragmentInstructions.querySelector(".instruction-title");
+      const titleElement = this.fragmentInstructions.querySelector(".instruction-title");
       if (titleElement) {
         titleElement.innerHTML = `
           <span class="font-aktiv">${randomFragment.userData.atelierName}</span>
@@ -1033,34 +1033,10 @@ class FragmentManager {
       }
     }
 
-    // Programmer la prochaine sélection automatique si l'utilisateur n'a pas interagi
+    // Continuer la sélection automatique uniquement si l'utilisateur n'a pas interagi
     if (!this.userHasInteracted) {
-      setTimeout(() => {
-        this.selectRandomFragment();
-      }, 10000);
+      this.startAutoSelectTimer();
     }
-  }
-
-  startAutoSelectTimer() {
-    if (this.autoSelectTimer) {
-      clearTimeout(this.autoSelectTimer);
-    }
-
-    const checkInactivity = () => {
-      const currentTime = Date.now();
-      const inactiveTime = currentTime - this.lastActivityTime;
-
-      if (inactiveTime >= this.inactivityTimeout) {
-        this.userHasInteracted = false;
-        if (!this.selectedFragment) {
-          this.selectRandomFragment();
-        }
-      }
-
-      this.autoSelectTimer = setTimeout(checkInactivity, 1000); // Vérifier toutes les secondes
-    };
-
-    this.autoSelectTimer = setTimeout(checkInactivity, 1000);
   }
 
   // Nouvelle méthode pour cacher les mentions légales
