@@ -28,8 +28,11 @@ class Loader {
             align-items: center;
         `;
         
-        // Créer 12 points
-        for (let i = 0; i < 12; i++) {
+        // Déterminer le nombre de points en fonction de la taille de l'écran
+        const numberOfDots = window.innerWidth <= 768 ? 8 : 12;
+        
+        // Créer les points
+        for (let i = 0; i < numberOfDots; i++) {
             const dot = document.createElement('div');
             dot.className = 'loading-dot';
             dot.style.cssText = `
@@ -61,7 +64,7 @@ class Loader {
 
             gsap.to(progress, {
                 value: 1,
-                duration: 1.3,
+                duration: 103,
                 onUpdate: () => {
                     const currentPercent = Math.round(progress.value * 100);
                     percentageElement.textContent = `${currentPercent}%`;
