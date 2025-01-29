@@ -65,6 +65,33 @@ document.addEventListener("DOMContentLoaded", () => {
             );
             elements.forEach((element) => element.remove());
 
+            // Masquer le bouton Voyager
+            const voyagerButton = document.querySelector('button');
+            if (voyagerButton && voyagerButton.textContent === 'Voyager') {
+              voyagerButton.style.display = 'none';
+              voyagerButton.style.opacity = '0';
+            }
+
+            // Masquer les instructions du miroir et des fragments
+            const mirrorInstructions = document.querySelector('.mirror-instructions');
+            const fragmentInstructions = document.querySelector('.fragment-instructions');
+
+            if (mirrorInstructions) {
+              mirrorInstructions.style.display = 'none';
+              const titleElement = mirrorInstructions.querySelector('.instruction-title');
+              const subtitleElement = mirrorInstructions.querySelector('.instruction-subtitle');
+              if (titleElement) titleElement.innerHTML = '';
+              if (subtitleElement) subtitleElement.textContent = '';
+            }
+
+            if (fragmentInstructions) {
+              fragmentInstructions.style.display = 'none';
+              const titleElement = fragmentInstructions.querySelector('.instruction-title');
+              const subtitleElement = fragmentInstructions.querySelector('.instruction-subtitle');
+              if (titleElement) titleElement.innerHTML = '';
+              if (subtitleElement) subtitleElement.textContent = '';
+            }
+
             // Fermer le menu
             sideMenu.classList.remove("open");
             document.body.classList.remove("menu-open");
