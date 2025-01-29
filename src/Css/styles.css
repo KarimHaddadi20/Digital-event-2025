@@ -221,7 +221,7 @@ body {
   top: 25vh;
   left: 50%;
   transform: translateX(-50%);
-  font-family: 'Helvetica', sans-serif;
+  font-family: "Helvetica", sans-serif;
   font-size: 24px;
   color: white;
   text-align: center;
@@ -1258,7 +1258,6 @@ body.popup-active {
   height: 50%; */
   object-fit: cover;
   width: -webkit-fill-available;
-
 }
 
 .inventory .menu-item::before {
@@ -1367,6 +1366,10 @@ body.popup-active {
 
   .inventory-content {
     padding: 0 24px 24px 24px;
+  }
+
+  .navbar {
+    margin-top: 16px;
   }
 }
 
