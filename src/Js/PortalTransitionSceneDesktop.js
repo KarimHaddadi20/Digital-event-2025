@@ -245,7 +245,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
 
   createMainMesh(texture) {
     return new THREE.Mesh(
-      new THREE.PlaneGeometry(8, 8, 50, 50),
+      new THREE.PlaneGeometry(12, 8, 50, 50),
       new THREE.MeshBasicMaterial({
         map: texture,
         transparent: true,
@@ -256,7 +256,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
   }
 
   createSecondaryMeshes(texture2, texture3) {
-    const geometry = new THREE.PlaneGeometry(3, 3, 1, 1);
+    const geometry = new THREE.PlaneGeometry(4.5, 3, 1, 1);
     const material2 = new THREE.MeshBasicMaterial({
       map: texture2,
       transparent: true,
@@ -269,6 +269,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       opacity: 0.9,
       side: THREE.DoubleSide,
     });
+
 
     return [
       new THREE.Mesh(geometry, material2),
