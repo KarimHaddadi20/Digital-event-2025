@@ -114,7 +114,7 @@ export class PortalTransitionSceneBase extends SceneSetup {
 
     setupDefaultBackground() {
         const textureLoader = new THREE.TextureLoader();
-        textureLoader.load('src/textures/homepage.webp', (texture) => {
+        textureLoader.load('src/textures/homepage3.webp', (texture) => {
             const aspectRatio = texture.image.width / texture.image.height;
             const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
             const bgMaterial = new THREE.MeshBasicMaterial({

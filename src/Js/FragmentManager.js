@@ -28,7 +28,7 @@ class FragmentManager {
 
     // Charger la texture initiale
     const textureLoader = new THREE.TextureLoader();
-    textureLoader.load("src/textures/homepage.webp", (texture) => {
+    textureLoader.load("src/textures/homepage3.webp", (texture) => {
       texture.colorSpace = THREE.SRGBColorSpace;
       texture.mapping = THREE.EquirectangularReflectionMapping;
       texture.generateMipmaps = true;
@@ -626,6 +626,81 @@ class FragmentManager {
   }
 
   updateEnvironment(atelierName) {
+    // Si on demande l'environnement initial
+    if (atelierName === "initial") {
+      if (this.initialEnvironment) {
+        // Créer une nouvelle sphère avec la texture initiale
+        const geometry = new THREE.SphereGeometry(500, 256, 256);
+        const material = new THREE.MeshBasicMaterial({
+          map: this.initialEnvironment,
+          side: THREE.BackSide,
+          transparent: true,
+          opacity: 0,
+        });
+
+        const newEnvMesh = new THREE.Mesh(geometry, material);
+        newEnvMesh.rotation.y = Math.PI / 2;
+        this.app.scene.add(newEnvMesh);
+
+        // Faire la transition
+        const duration = 1000;
+        const startTime = Date.now();
+
+        const animate = () => {
+          const currentTime = Date.now();
+          const progress = Math.min((currentTime - startTime) / duration, 1);
+
+          // Fade out old environment
+          if (this.envMesh) {
+            this.envMesh.material.opacity = 1 - progress;
+          }
+
+          // Fade in new environment
+          newEnvMesh.material.opacity = progress;
+
+          if (progress < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            // Remove old environment
+            if (this.envMesh) {
+              this.app.scene.remove(this.envMesh);
+              this.envMesh.material.dispose();
+              this.envMesh.geometry.dispose();
+            }
+            this.envMesh = newEnvMesh;
+          }
+        };
+
+        animate();
+
+        // Mettre à jour l'environnement de la scène
+        this.app.scene.environment = this.initialEnvironment;
+        this.activeEnvironment = this.initialEnvironment;
+
+        // Mettre à jour le matériau du miroir
+        if (this.app.mirror) {
+          this.app.mirror.traverse((child) => {
+            if (child.isMesh && child.material) {
+              child.material.envMap = this.initialEnvironment;
+              child.material.needsUpdate = true;
+            }
+          });
+        }
+
+        // Mettre à jour les matériaux des fragments
+        this.fragments.forEach((fragment) => {
+          fragment.traverse((child) => {
+            if (child.isMesh && child.material) {
+              child.material.envMap = this.initialEnvironment;
+              child.material.needsUpdate = true;
+            }
+          });
+        });
+
+        return;
+      }
+    }
+
     // Get texture path for selected atelier
     const texturePath = this.environmentTextures[atelierName];
     if (!texturePath) {
@@ -794,14 +869,24 @@ class FragmentManager {
         this.selectedFragment = null;
         this.hideVoyagerButton();
         this.userHasInteracted = false;
+        // Réinitialiser l'environnement au background initial
+        if (this.initialEnvironment) {
+          this.updateEnvironment("initial");
+        }
         if (this.fragmentInstructions) {
-          const titleElement =
-            this.fragmentInstructions.querySelector(".instruction-title");
+          const titleElement = this.fragmentInstructions.querySelector(".instruction-title");
+          const subtitleElement = this.fragmentInstructions.querySelector(".instruction-subtitle");
+          
           if (titleElement) {
             titleElement.innerHTML = `
               <span class="font-aktiv">Sélectionnez un</span>
               <span class="font-fraunces">fragment</span>
             `;
+          }
+          
+          // Réinitialiser le sous-titre
+          if (subtitleElement) {
+            subtitleElement.textContent = "Découvrez les ateliers en détail";
           }
         }
         setTimeout(() => {

@@ -679,77 +679,77 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
           <div class="menu-list">
             <a href="#" data-atelier="1" class="menu-item">
               <div class="container-menu-item-img">
-                <img src="src/textures/fragmentorga/fragment.Site Web.png" alt="Site Web" class="menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.interface.web.png" alt="Site Web" class="menu-item-img">
               </div>
               <span class="stroke-white"></span>
               <span class="menu-item-title">Site Web</span>
             </a>
             <a href="#" data-atelier="2" class="menu-item">
               <div class="container-menu-item-img">
-                <img src="src/textures/fragmentorga/fragment.Vidéo Mapping.png" alt="Vidéo Mapping" class="menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.videomapping.png" alt="Vidéo Mapping" class="menu-item-img">
               </div>
               <span class="stroke-white"></span>
               <span class="menu-item-title">Vidéo Mapping</span>
             </a>
             <a href="#" data-atelier="3" class="menu-item">
               <div class="container-menu-item-img">
-                <img src="src/textures/fragmentorga/fragment.Creative Coding.png" alt="Creative Coding" class="menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.creative.coding.png" alt="Creative Coding" class="menu-item-img">
               </div>
               <span class="stroke-white"></span>
               <span class="menu-item-title">Creative Coding</span>
             </a>
             <a href="#" data-atelier="4" class="menu-item">
               <div class="container-menu-item-img">
-                <img src="src/textures/fragmentorga/fragment.Gaming & Pop-corn.png" alt="Gaming & Pop-corn" class="menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.gaming.popcorn.png" alt="Gaming & Pop-corn" class="menu-item-img">
               </div>
               <span class="stroke-white"></span>
               <span class="menu-item-title">Gaming & Pop-corn</span>
             </a>
             <a href="#" data-atelier="5" class="menu-item">
               <div class="container-menu-item-img">
-                <img src="src/textures/fragmentorga/fragment.Vidéo.png" alt="Vidéo" class="menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.video.studio.png" alt="Vidéo" class="menu-item-img">
               </div>
               <span class="stroke-white"></span>
               <span class="menu-item-title">Vidéo</span>
             </a>
             <a href="#" data-atelier="6" class="menu-item">
               <div class="container-menu-item-img">
-                <img src="src/textures/fragmentorga/fragment.Escape Game.png" alt="Escape Game" class="menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.escape.game.png" alt="Escape Game" class="menu-item-img">
               </div>
               <span class="stroke-white"></span>
               <span class="menu-item-title">Escape Game</span>
             </a>
             <a href="#" data-atelier="7" class="menu-item">
               <div class="container-menu-item-img">
-                <img src="src/textures/fragmentorga/fragment.Podcast.png" alt="Podcast" class="menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.podcast.png" alt="Podcast" class="menu-item-img">
               </div>
               <span class="stroke-white"></span>
               <span class="menu-item-title">Podcast</span>
             </a>
             <a href="#" data-atelier="8" class="menu-item">
               <div class="container-menu-item-img">
-                <img src="src/textures/fragmentorga/fragment.Photo.png" alt="Photo" class="menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.photographie.png" alt="Photo" class="menu-item-img">
               </div>
               <span class="stroke-white"></span>
               <span class="menu-item-title">Photo</span>
             </a>
             <a href="#" data-atelier="9" class="menu-item">
               <div class="container-menu-item-img">
-                <img src="src/textures/fragmentorga/fragment.AI Driven Visual Stories.png" alt="AI Driven Visual Stories" class="menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.ai.driven.visual.stories.png" alt="AI Driven Visual" class="menu-item-img">
               </div>
               <span class="stroke-white"></span>
-              <span class="menu-item-title">AI Driven Visual Stories</span>
+              <span class="menu-item-title">AI Driven Visual</span>
             </a>
             <a href="#" data-atelier="10" class="menu-item">
               <div class="container-menu-item-img">
-                <img src="src/textures/fragmentorga/fragment.Game Design.png" alt="Game Design" class="menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.game.design.png" alt="Game Design" class="menu-item-img">
               </div>
               <span class="stroke-white"></span>
               <span class="menu-item-title">Game Design</span>
             </a>
             <a href="#" data-atelier="11" class="menu-item">
               <div class="container-menu-item-img">
-                <img src="src/textures/fragmentorga/fragment.Organisation.png" alt="Contenus RS/Com/Parcours visiteurs/Scéno" class="menu-item-img">
+                <img src="src/textures/fragmentorga/fragment.organisation.png" alt="Contenus RS/Com/Parcours visiteurs/Scénographie" class="menu-item-img">
               </div>
               <span class="stroke-white"></span>
               <span class="menu-item-title">Organisation</span>
