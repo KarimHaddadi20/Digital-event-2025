@@ -148,7 +148,7 @@ body {
 .mirror-instructions .instruction-title {
   justify-content: center;
   gap: 10px;
-} 
+}
 
 .fragments-container {
   position: absolute;
@@ -1266,7 +1266,7 @@ body.popup-active {
   text-decoration: none;
   color: white;
   padding: 16px;
-  aspect-ratio: 1;
+  /* aspect-ratio: 1; */
   border-radius: 4px;
   overflow: hidden;
   /* background: rgba(255, 255, 255, 0.05); */
