@@ -64,7 +64,7 @@ class Loader {
 
             gsap.to(progress, {
                 value: 1,
-                duration: 1.3,
+                duration: 1,
                 onUpdate: () => {
                     const currentPercent = Math.round(progress.value * 100);
                     percentageElement.textContent = `${currentPercent}%`;
