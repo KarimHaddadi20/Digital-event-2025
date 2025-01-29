@@ -612,49 +612,38 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
         </div>
         <div class="inventory-content">
           <div class="menu-list">
-            <a href="#" data-atelier="AI Driven visual stories" class="menu-item">
+            <a href="#" data-atelier="1" class="menu-item">
               <span class="menu-item-title">AI Driven visual stories</span>
-              <span class="menu-item-subtitle">Explorez nos créations IA</span>
             </a>
-            <a href="#" data-atelier="Organisation" class="menu-item">
+            <a href="#" data-atelier="2" class="menu-item">
               <span class="menu-item-title">Organisation</span>
-              <span class="menu-item-subtitle">En savoir plus sur l'organisation</span>
             </a>
-            <a href="#" data-atelier="Creative Coding" class="menu-item">
+            <a href="#" data-atelier="3" class="menu-item">
               <span class="menu-item-title">Creative Coding</span>
-              <span class="menu-item-subtitle">Découvrez la programmation créative</span>
             </a>
-            <a href="#" data-atelier="Gaming & Pop-corn" class="menu-item">
+            <a href="#" data-atelier="4" class="menu-item">
               <span class="menu-item-title">Gaming & Pop-corn</span>
-              <span class="menu-item-subtitle">Plongez dans l'univers du gaming</span>
             </a>
-            <a href="#" data-atelier="Video" class="menu-item">
+            <a href="#" data-atelier="5" class="menu-item">
               <span class="menu-item-title">Video</span>
-              <span class="menu-item-subtitle">Explorez nos créations vidéo</span>
             </a>
-            <a href="#" data-atelier="Escape game" class="menu-item">
+            <a href="#" data-atelier="6" class="menu-item">
               <span class="menu-item-title">Escape game</span>
-              <span class="menu-item-subtitle">Testez nos escape games</span>
             </a>
-            <a href="#" data-atelier="Podcast" class="menu-item">
+            <a href="#" data-atelier="7" class="menu-item">
               <span class="menu-item-title">Podcast</span>
-              <span class="menu-item-subtitle">Écoutez nos podcasts</span>
             </a>
-            <a href="#" data-atelier="Photo reportage" class="menu-item">
+            <a href="#" data-atelier="8" class="menu-item">
               <span class="menu-item-title">Photo reportage</span>
-              <span class="menu-item-subtitle">Découvrez nos reportages photo</span>
             </a>
-            <a href="#" data-atelier="Site web" class="menu-item">
+            <a href="#" data-atelier="9" class="menu-item">
               <span class="menu-item-title">Site web</span>
-              <span class="menu-item-subtitle">Découvrez les sites web créés par nos étudiants</span>
             </a>
-            <a href="#" data-atelier="Video Mapping" class="menu-item">
+            <a href="#" data-atelier="10" class="menu-item">
               <span class="menu-item-title">Video Mapping</span>
-              <span class="menu-item-subtitle">Explorez l'art du mapping vidéo</span>
             </a>
-            <a href="#" data-atelier="Game design" class="menu-item">
+            <a href="#" data-atelier="11" class="menu-item">
               <span class="menu-item-title">Game design</span>
-              <span class="menu-item-subtitle">Découvrez nos jeux</span>
             </a>
           </div>
         </div>
@@ -683,17 +672,31 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     // Masquer l'inventaire
     const inventory = document.getElementById('inventory');
     if (inventory) {
-      inventory.classList.remove('open');
+        inventory.classList.remove('open');
     }
     
-    // Simuler un clic sur le fragment correspondant
-    const fragment = this.fragments.find(f => f.mesh.userData.atelierName === atelierName);
-    if (fragment) {
-      this.handleFragmentClick({
-        clientX: window.innerWidth / 2,
-        clientY: window.innerHeight / 2,
-        target: fragment.mesh
-      });
+    // Nettoyer tous les éléments de la scène actuelle
+    const labels = document.querySelectorAll('.fragment-label, .mobile-section-label');
+    labels.forEach(label => label.remove());
+    
+    // Nettoyer les fragments
+    this.fragments.forEach(fragment => {
+        if (fragment.group) {
+            this.scene.remove(fragment.group);
+        }
+    });
+    this.fragments = [];
+    
+    // Récupérer l'index de la scène à partir du nom de l'atelier
+    const sceneIndex = parseInt(atelierName) - 1;
+
+    // Utiliser mirrorEffect pour la transition
+    if (window.mirrorEffect) {
+        try {
+            window.mirrorEffect.transitionToScene(sceneIndex);
+        } catch (error) {
+            console.error("Scene transition error:", error);
+        }
     }
   }
 
