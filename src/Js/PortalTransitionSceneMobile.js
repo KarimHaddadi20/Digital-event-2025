@@ -121,7 +121,8 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
                 position: fixed;
                 bottom: 80px;
                 left: 0;
-                width: 100%;
+                right: 0;
+                width: 100vw;
                 color: white;
                 text-align: center;
                 pointer-events: auto;
@@ -235,6 +236,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
                 position: fixed;
                 bottom: 60px;
                 left: 0;
+                right: 0;
                 width: 100vw;
                 color: white;
                 text-align: center;
@@ -250,7 +252,9 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
                 flex-direction: column;
                 align-items: center;
                 width: 100%;
-                padding: 0 16px;
+                padding: 0 24px;
+                margin: 0 auto;
+                max-width: 100vw;
             `;
 
             const title = labelDiv.querySelector('h2');
