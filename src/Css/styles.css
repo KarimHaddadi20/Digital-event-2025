@@ -213,6 +213,24 @@ body {
   align-items: center;
   background: #000;
   z-index: 9999;
+  gap: 0;
+}
+
+#loading-container h1 {
+  position: absolute;
+  top: 25vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Helvetica', sans-serif;
+  font-size: 24px;
+  color: white;
+  text-align: center;
+  line-height: 1.4;
+}
+
+#loading-container h1 span {
+  font-style: italic;
+  opacity: 0.8;
 }
 
 /* Style pour le footer du loader */
@@ -244,31 +262,22 @@ body {
 }
 
 .loading-title {
-  /* position: absolute;
-    top: 15%;
-    left: 50%; */
-  /* transform: translateX(-50%); */
+  position: absolute;
+  top: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
   color: white;
   font-family: Arial, sans-serif;
-  font-size: 36px;
-  font-weight: bold;
+  font-size: 24px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   margin-bottom: 30px;
-  background: linear-gradient(45deg, #ffffff, #a0a0a0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: titleGlow 2s ease-in-out infinite alternate;
+  z-index: 1;
 }
 
-@keyframes titleGlow {
-  from {
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  }
-  to {
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-  }
+.loading-title .font-aktiv,
+.loading-title .font-fraunces {
+  display: inline-block;
 }
 
 #percentage,
@@ -276,24 +285,24 @@ body {
   font-family: Arial, sans-serif;
   font-size: 72px;
   color: white;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  /* text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); */
 }
 
 #percentage {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 #mirror-percentage {
   transform: scaleY(-1);
   opacity: 0.5;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-  margin-top: 20px;
+  margin-top: 5px;
   order: 3;
 }
 
 #loading-container canvas {
-  height: 100px !important;
-  margin: 20px 0;
+  height: 40px !important;
+  margin: 0;
   order: 2;
 }
 
