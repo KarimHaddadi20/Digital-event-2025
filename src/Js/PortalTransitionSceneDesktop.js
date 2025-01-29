@@ -497,9 +497,15 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       document.body.appendChild(popup);
     }
 
+    // Désactiver le scroll de la scène
+    if (this._currentScrollHandler) {
+      window.removeEventListener("wheel", this._currentScrollHandler);
+    }
+
     document.body.classList.add("popup-active");
 
-    popup.innerHTML = `            <button class="popup-close" aria-label="Fermer" type="button">
+    popup.innerHTML = `
+            <button class="popup-close" aria-label="Fermer" type="button">
                 <svg viewBox="0 0 24 24">
                     <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                     <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -518,12 +524,9 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
                             (student) => `
                             <div class="student-row">
                                 <div class="student-nom">${student.nom}</div>
-                                <div class="student-prenom">${
-                                  student.prenom
-                                }</div>
+                                <div class="student-prenom">${student.prenom}</div>
                                 <div class="student-classe">
-                                    ${
-                                      student.classe.endsWith(".svg")
+                                    ${student.classe.endsWith(".svg")
                                         ? `<img src="${student.classe}" alt="Classe" class="classe-icon"/>`
                                         : student.classe
                                     }
@@ -541,6 +544,15 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     closeButton.addEventListener("click", () => {
       document.body.classList.remove("popup-active");
       popup.remove();
+      
+      // Réactiver le scroll de la scène
+      if (!this._scrollHandlerInitialized) {
+        this.setupScrollHandler();
+      } else {
+        window.addEventListener("wheel", this._currentScrollHandler, {
+          passive: false,
+        });
+      }
     });
 
     requestAnimationFrame(() => {
