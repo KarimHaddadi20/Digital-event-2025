@@ -85,7 +85,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
                     image: atelierData.sets[4].image1,
                     team: atelierData.sets[4].team,
                     students: atelierData.sets[4].students,
-                    zPosition: -240,  
+                    zPosition: -230,
                 },
             ];
 
@@ -108,8 +108,8 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
             // Section team avec image centrale et bouton
             const mainTexture = await this.loadTexture(textureLoader, section.image);
             mainMesh = this.createMainMesh(mainTexture);
-            mainMesh.position.set(0, 2, 0);
-            mainMesh.scale.set(1.5, 1.5, 1);
+            mainMesh.position.set(0, 1, 0);
+            mainMesh.scale.set(0.6, 1.2, 1);
             group.add(mainMesh);
 
             // Ajout du label team dans la même div que la dernière section
@@ -152,10 +152,19 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
             // On utilise le même teamLink pour le style et l'événement
             const teamLink = labelDiv.querySelector('.team-link');
             teamLink.style.cssText = `
+                color: #FFF;
+                font-family: "Aktiv Grotesk", sans-serif;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 140%;
+                text-decoration-line: underline;
+                text-decoration-style: solid;
+                text-decoration-skip-ink: auto;
+                text-decoration-thickness: auto;
+                text-underline-offset: auto;
+                text-underline-position: from-font;
                 margin: 0;
-                font-size: 18px;
-                font-weight: bold;
-                color: white;
             `;
             
             // Ajout de l'événement click sur le même teamLink
@@ -167,6 +176,80 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
                 label: labelDiv,
                 isTeamLabel: true  
             };
+        } else if (section.type === 'quote') {
+            const mainTexture = await this.loadTexture(textureLoader, section.mainImage);
+            mainMesh = this.createMainMesh(mainTexture);
+            
+            mainMesh.scale.set(0.4, 0.4, 1);
+            group.add(mainMesh);
+
+            let detail1, detail2;
+            if (section.secondaryImages) {
+                const [texture2, texture3] = await Promise.all([
+                    this.loadTexture(textureLoader, section.secondaryImages[0]),
+                    this.loadTexture(textureLoader, section.secondaryImages[1])
+                ]);
+
+                // Créer les images avec la même taille que les images secondaires
+                [detail1] = this.createSecondaryMeshes(texture2, texture3);
+                [detail2] = this.createSecondaryMeshes(texture3, texture2);
+
+                const quotesMeshes = this.createQuoteMeshes(section.quotes);
+
+                // Premier ensemble
+                quotesMeshes[0].position.set(0, 1, 0);
+                quotesMeshes[0].scale.set(0.8, 0.8, 1);
+                mainMesh.position.set(0, -1, 0);
+                mainMesh.userData = { direction: "down", initialY: -1, initialZ: 0 };
+                group.add(quotesMeshes[0]);
+
+                // Deuxième ensemble
+                detail1.position.set(0, -1, -10);  // Réduit de -15 à -10
+                detail1.scale.set(0.6, 0.6, 1);  
+                detail1.userData = { direction: "down", initialY: -1, initialZ: -10 };
+                quotesMeshes[1].position.set(0, 1, -10);  // Réduit de -15 à -10
+                quotesMeshes[1].scale.set(0.8, 0.8, 1);
+                group.add(detail1);
+                group.add(quotesMeshes[1]);
+
+                // Troisième ensemble
+                detail2.position.set(0, -1, -20);  // Réduit de -30 à -20
+                detail2.scale.set(0.6, 0.6, 1);  
+                detail2.userData = { direction: "down", initialY: -1, initialZ: -20 };
+                quotesMeshes[2].position.set(0, 1, -20);  // Réduit de -30 à -20
+                quotesMeshes[2].scale.set(0.8, 0.8, 1);
+                group.add(detail2);
+                group.add(quotesMeshes[2]);
+
+                // Animation de parallaxe pour la section quote
+                const updateQuotePositions = () => {
+                    const fragments = [
+                        { mesh: mainMesh, quote: quotesMeshes[0], z: 0 },
+                        { mesh: detail1, quote: quotesMeshes[1], z: -10 },
+                        { mesh: detail2, quote: quotesMeshes[2], z: -20 }
+                    ];
+
+                    fragments.forEach(fragment => {
+                        const startZ = group.position.z + fragment.z + 15;
+                        const endZ = group.position.z + fragment.z - 15;
+                        
+                        const progress = Math.max(0, Math.min(1, 
+                            (startZ - this.camera.position.z) / (startZ - endZ)
+                        ));
+
+                        // Quote monte en diagonale vers haut/droite
+                        fragment.quote.position.y = 1 + (progress * 6);
+                        fragment.quote.position.x = (progress * 4);
+
+                        // Image descend en diagonale vers bas/gauche
+                        fragment.mesh.position.y = -1 - (progress * 6);
+                        fragment.mesh.position.x = -(progress * 4);
+                    });
+                };
+
+                this.updateCallbacks = this.updateCallbacks || [];
+                this.updateCallbacks.push(updateQuotePositions);
+            }
         } else {
             // Pour toutes les autres sections (standard et quote)
             const mainTexture = await this.loadTexture(textureLoader, section.mainImage);
@@ -237,68 +320,6 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
 
                 this.updateCallbacks = this.updateCallbacks || [];
                 this.updateCallbacks.push(updatePositions);
-            }
-
-            // Si c'est une section quote, ajouter les citations après
-            if (section.type === 'quote') {
-                const quotesMeshes = this.createQuoteMeshes(section.quotes);
-                
-                // Première citation au-dessus de l'image principale
-                quotesMeshes[0].position.set(0, 3, 0);
-                quotesMeshes[0].scale.set(0.9, 0.9, 1);
-                group.add(quotesMeshes[0]);
-                
-                // Ajouter les autres citations sous les images secondaires
-                quotesMeshes[1].position.set(-2, -3, 0);
-                quotesMeshes[2].position.set(2, -3, 0);
-                group.add(quotesMeshes[1], quotesMeshes[2]);
-
-                // Mettre à jour l'effet de parallaxe pour inclure les quotes
-                const updateQuotePositions = () => {
-                    const startZ = group.position.z + 30;
-                    const endZ = group.position.z - 30;
-                    
-                    const progress = Math.max(0, Math.min(1, 
-                        (startZ - this.camera.position.z) / (startZ - endZ)
-                    ));
-                    
-                    // Image principale et première citation montent
-                    mainMesh.position.y = 1 + (progress * 6);
-                    mainMesh.position.x = (progress * 4);
-                    quotesMeshes[0].position.y = 3 + (progress * 6);
-                    quotesMeshes[0].position.x = (progress * 4);
-                    
-                    // Images secondaires et citations descendent
-                    if (detail1 && detail2) {
-                        const secondaryY = -1 - (progress * 6);
-                        const quoteY = -3 - (progress * 6);
-                        
-                        if (section.position === 'left') {
-                            detail1.position.y = secondaryY;
-                            detail1.position.x = -2 - (progress * 3);
-                            quotesMeshes[1].position.y = quoteY;
-                            quotesMeshes[1].position.x = -2 - (progress * 3);
-                            
-                            detail2.position.y = secondaryY;
-                            detail2.position.x = 2 - (progress * 3);
-                            quotesMeshes[2].position.y = quoteY;
-                            quotesMeshes[2].position.x = 2 - (progress * 3);
-                        } else {
-                            detail1.position.y = secondaryY;
-                            detail1.position.x = -2 + (progress * 3);
-                            quotesMeshes[1].position.y = quoteY;
-                            quotesMeshes[1].position.x = -2 + (progress * 3);
-                            
-                            detail2.position.y = secondaryY;
-                            detail2.position.x = 2 + (progress * 3);
-                            quotesMeshes[2].position.y = quoteY;
-                            quotesMeshes[2].position.x = 2 + (progress * 3);
-                        }
-                    }
-                };
-
-                this.updateCallbacks = this.updateCallbacks || [];
-                this.updateCallbacks.push(updateQuotePositions);
             }
         }
 
@@ -478,12 +499,23 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
             lastTouchY = currentTouchY;
 
             const maxZ = 7;
-            const minZ = -260 - 15;
+            const lastFragmentPosition = -250;
+            const minZ = lastFragmentPosition + 30;
+
             let newZ = this.camera.position.z - delta;
-            newZ = Math.max(minZ, Math.min(maxZ, newZ));
+
+            if (newZ > maxZ) {
+                newZ = maxZ;
+            } else if (newZ < minZ) {
+                newZ = minZ;
+            }
+
             this.camera.position.z = newZ;
 
-            const progress = Math.min(Math.abs(maxZ - this.camera.position.z) / Math.abs(maxZ - minZ), 1);
+            const progress = Math.min(
+                Math.abs(maxZ - this.camera.position.z) / Math.abs(maxZ - minZ),
+                1
+            );
             if (this.progressFill) {
                 this.progressFill.style.setProperty('--progress', progress);
             }
