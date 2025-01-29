@@ -193,11 +193,11 @@ class FragmentManager {
         this.voyagerButton.style.cssText = `
           position: fixed;
           left: 50%;
-          bottom: 8vh; 
+          bottom: 9vh; 
           transform: translateX(-50%);
           display: none;
           padding: 8px 16px;
-          font-size: 12px;
+          font-size: 18px;
           width: auto;
           min-width: 80px;
           max-width: 120px;
