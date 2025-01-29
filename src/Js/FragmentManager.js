@@ -93,6 +93,19 @@ class FragmentManager {
     this.soundIcon = document.querySelector(".footer-left");
     this.fragmentSelectSound = document.getElementById("fragment-select-sound");
     this.buttonPressSound = document.getElementById("button-press-sound");
+
+    // Ajouter un event listener pour le resize
+    window.addEventListener("resize", () => {
+        this.isMobile = window.innerWidth <= 768;
+        this.hideLegalNotices();
+        this.centerSoundIcon();
+    });
+    
+    // Appeler au chargement initial
+    if (this.isMobile) {
+        this.hideLegalNotices();
+        this.centerSoundIcon();
+    }
   }
 
   setupUI() {
@@ -1041,25 +1054,31 @@ class FragmentManager {
 
   // Nouvelle méthode pour cacher les mentions légales
   hideLegalNotices() {
+    // Masquer les mentions légales en responsive uniquement
     if (this.isMobile) {
-      this.footerElements.forEach((element) => {
-        element.style.transition = "opacity 0.3s ease";
-        element.style.opacity = "0";
-        setTimeout(() => {
-          element.style.display = "none";
-        }, 300);
-      });
+        this.footerElements.forEach((element) => {
+            element.style.display = "none";  // Masquer directement sans transition
+        });
     }
   }
 
   // Nouvelle méthode pour centrer l'icône son
   centerSoundIcon() {
-    if (window.innerWidth <= 768) {
-      this.soundIcon.style.position = "fixed";
-      this.soundIcon.style.left = "50%";
-      this.soundIcon.style.bottom = "10px";
-      this.soundIcon.style.transform = "translateX(-50%)";
-      this.soundIcon.style.transition = "all 0.3s ease";
+    if (this.isMobile) {
+        if (this.soundIcon) {
+            this.soundIcon.style.cssText = `
+                position: fixed;
+                left: 50%;
+                bottom: 16px;
+                transform: translateX(-50%);
+                z-index: 1000;
+            `;
+        }
+    } else {
+        if (this.soundIcon) {
+            // Réinitialiser le style pour desktop
+            this.soundIcon.style.cssText = '';
+        }
     }
   }
 }
