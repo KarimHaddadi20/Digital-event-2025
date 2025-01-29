@@ -405,38 +405,42 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
   }
 
   addTeamLabel(fragment, section) {
-    const labelDiv = document.createElement("div");
-    labelDiv.className = "fragment-label team-label";
-    labelDiv.style.pointerEvents = "auto";
+    const labelDiv = document.createElement('div');
+    labelDiv.className = 'fragment-label team-label';
+    labelDiv.style.pointerEvents = 'auto';
     labelDiv.innerHTML = `
-            <div class="label-content">
-                <p class="team-link">${section.team}</p>
-            </div>
-        `;
+        <div class="label-content">
+            <p class="team-link">${section.team}</p>
+        </div>
+    `;
 
     document.body.appendChild(labelDiv);
 
-    const teamLink = labelDiv.querySelector(".team-link");
-    teamLink.addEventListener("click", () => {
-      this.showTeamPopup(section.students);
+    const teamLink = labelDiv.querySelector('.team-link');
+    teamLink.addEventListener('click', () => {
+        this.showTeamPopup(section.students);
     });
 
-    fragment.userData = { label: labelDiv };
+    fragment.userData = { 
+        label: labelDiv,
+        isTeamLabel: true  // Marquer que c'est un label team
+    };
 
     labelDiv.style.cssText = `
-            position: fixed;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 15%;
-            color: white;
-            text-align: center;
-            pointer-events: auto;
-            transition: opacity 0.3s ease;
-            z-index: 1000;
-            font-size: 1.2em;
-            font-weight: bold;
-            opacity: 0.9;
-        `;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 15%;
+        color: white;
+        text-align: center;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+        font-size: 1.2em;
+        font-weight: bold;
+        opacity: 0;  /* Commencer avec opacité 0 */
+        visibility: hidden;  /* Cacher initialement */
+    `;
   }
 
   showTeamPopup(students) {
@@ -564,26 +568,29 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
         const label = fragment.group.userData.label;
         const cameraZ = this.camera.position.z;
 
-        if (fragment.group.position.z === -130 || index === 4) {
-          // Section team
-          label.style.opacity = opacity;
+        if (fragment.group.userData.isTeamLabel) {
+            // Pour la section team
+            const isNearEnd = cameraZ <= -180;
+            if (isNearEnd) {
+                label.style.visibility = 'visible';
+                label.style.opacity = opacity;
+            } else {
+                label.style.visibility = 'hidden';
+                label.style.opacity = 0;
+            }
         } else {
-          // Logique pour les sections normales
-          if (index === 0 && cameraZ > -30) {
-            // Première section
-            label.style.opacity = 1;
-          } else if (index === 1 && cameraZ <= -30 && cameraZ > -80) {
-            // Deuxième section
-            label.style.opacity = 1;
-          } else if (index === 2 && cameraZ <= -80 && cameraZ > -130) {
-            // Troisième section
-            label.style.opacity = 1;
-          } else if (index === 3 && cameraZ <= -130 && cameraZ > -180) {
-            // Quatrième section
-            label.style.opacity = 1;
-          } else {
-            label.style.opacity = 0;
-          }
+            // Pour les sections normales
+            if (index === 0 && cameraZ > -30) {
+                label.style.opacity = 1;
+            } else if (index === 1 && cameraZ <= -30 && cameraZ > -80) {
+                label.style.opacity = 1;
+            } else if (index === 2 && cameraZ <= -80 && cameraZ > -130) {
+                label.style.opacity = 1;
+            } else if (index === 3 && cameraZ <= -130 && cameraZ > -180) {
+                label.style.opacity = 1;
+            } else {
+                label.style.opacity = 0;
+            }
         }
       }
     });
