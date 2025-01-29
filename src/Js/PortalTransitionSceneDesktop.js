@@ -295,22 +295,21 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       canvas.height = 300;
       const ctx = canvas.getContext("2d");
 
-      const fontSize = 64; // Taille de la police en pixels
+      const fontSize = 16;
       const fontString = `italic 300 ${fontSize}px Fraunces`;
       ctx.font = fontString;
-      console.log("Current font used:", fontString);
-      const lineHeightPercent = 140; // Hauteur de ligne en pourcentage (ex : 140%)
-      const lineHeight = (fontSize * lineHeightPercent) / 100; // Convertir en pixels
+      const lineHeightPercent = 140;
+      const lineHeight = (fontSize * lineHeightPercent) / 100;
 
-      ctx.fillStyle = "rgba(255, 255, 255, 1)"; // Blanc opaque
+      // Text setup
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
-      // Diviser le texte pour une meilleure présentation
+      // Split text into lines
       const words = quote.split(" ");
       let line = "";
       let lines = [];
-      const maxWidth = 900; // Largeur maximale du texte
+      const maxWidth = 900;
 
       words.forEach((word) => {
         const testLine = line + word + " ";
@@ -323,10 +322,56 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       });
       lines.push(line);
 
-      // Centrer verticalement les lignes
       const yOffset = canvas.height / 2 - ((lines.length - 1) * lineHeight) / 2;
 
-      // Dessiner chaque ligne avec espacement calculé
+      // Calculate background dimensions
+      const padding = 20;
+      const totalTextHeight = lines.length * lineHeight;
+      const backgroundHeight = totalTextHeight + padding * 2;
+      const backgroundWidth = maxWidth + padding * 2;
+      const backgroundX = (canvas.width - backgroundWidth) / 2;
+      const backgroundY = yOffset - padding;
+
+      // Create gradient background
+      const gradient = ctx.createLinearGradient(
+        backgroundX,
+        backgroundY,
+        backgroundX + backgroundWidth,
+        backgroundY + backgroundHeight
+      );
+      gradient.addColorStop(0.03, "rgba(160, 160, 160, 0.05)");
+      gradient.addColorStop(0.13, "rgba(243, 243, 243, 0.05)");
+      gradient.addColorStop(0.23, "rgba(195, 195, 195, 0.05)");
+      gradient.addColorStop(0.5, "rgba(255, 255, 255, 0.05)");
+      gradient.addColorStop(0.75, "rgba(177, 177, 177, 0.05)");
+      gradient.addColorStop(0.86, "rgba(236, 236, 236, 0.05)");
+      gradient.addColorStop(0.97, "rgba(153, 153, 153, 0.05)");
+
+      // Apply blur
+      ctx.filter = "blur(25px)";
+
+      // Draw background with rounded corners
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.roundRect(
+        backgroundX,
+        backgroundY,
+        backgroundWidth,
+        backgroundHeight,
+        5
+      );
+      ctx.fill();
+
+      // Draw border
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.20)";
+      ctx.lineWidth = 0.625;
+      ctx.stroke();
+
+      // Reset blur for text
+      ctx.filter = "none";
+
+      // Draw text
+      ctx.fillStyle = "rgba(255, 255, 255, 1)";
       lines.forEach((line, i) => {
         ctx.fillText(line, canvas.width / 2, yOffset + i * lineHeight);
       });
@@ -376,10 +421,9 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     const labelContent = labelDiv.querySelector(".label-content");
     labelContent.style.cssText = `
             display: flex;
-            
             flex-direction: column;
             align-items: flex-start;
-            gap: 16px;
+            gap: 20px;
         `;
 
     // Suppression des marges par défaut
@@ -388,10 +432,17 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
 
     subtitle.style.cssText = `
     margin: 0;
+    font-size: 16px !important;
+    opacity: 0.6;
 `;
 
-    title.style.margin = "0";
-    title.style.fontStyle = "normal";
+    title.style.cssText = `
+    margin: 0;
+    font-style: normal;
+    font-size: 18px !important;
+    `;
+
+    title.style.fontSize = "18px";
   }
 
   addTeamLabel(fragment, section) {
