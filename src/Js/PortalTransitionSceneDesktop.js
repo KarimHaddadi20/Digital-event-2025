@@ -7,6 +7,8 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     console.log("Constructor PortalTransitionSceneDesktop - Initialisation");
     this._scrollHandlerInitialized = false;
     this.setupScrollHandler();
+    this.createInventoryButton();
+    this.createInventory();
   }
 
   setupScrollHandler() {
@@ -601,6 +603,136 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     if (this._currentScrollHandler) {
       window.removeEventListener("wheel", this._currentScrollHandler);
     }
+    // Supprimer le bouton d'inventaire lors du nettoyage
+    const inventoryButton = document.querySelector('.inventory-button');
+    if (inventoryButton) {
+      inventoryButton.remove();
+    }
     super.cleanup();
+  }
+
+  createInventoryButton() {
+    const button = document.createElement('button');
+    button.className = 'inventory-button';
+    button.textContent = 'Inventaire';
+    button.addEventListener('click', () => this.toggleInventory());
+    document.body.appendChild(button);
+  }
+
+  createInventory() {
+    if (!document.getElementById('inventory')) {
+      const inventory = document.createElement('div');
+      inventory.id = 'inventory';
+      inventory.className = 'inventory';
+      inventory.innerHTML = `
+        <div class="inventory-header">
+          <span class="font-aktiv">INVENTAIRE</span>
+          <button class="inventory-close" aria-label="Fermer">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="inventory-content">
+          <div class="menu-list">
+            <a href="#" data-atelier="AI Driven visual stories" class="menu-item">
+              <span class="menu-item-title">AI Driven visual stories</span>
+              <span class="menu-item-subtitle">Explorez nos créations IA</span>
+            </a>
+            <a href="#" data-atelier="Organisation" class="menu-item">
+              <span class="menu-item-title">Organisation</span>
+              <span class="menu-item-subtitle">En savoir plus sur l'organisation</span>
+            </a>
+            <a href="#" data-atelier="Creative Coding" class="menu-item">
+              <span class="menu-item-title">Creative Coding</span>
+              <span class="menu-item-subtitle">Découvrez la programmation créative</span>
+            </a>
+            <a href="#" data-atelier="Gaming & Pop-corn" class="menu-item">
+              <span class="menu-item-title">Gaming & Pop-corn</span>
+              <span class="menu-item-subtitle">Plongez dans l'univers du gaming</span>
+            </a>
+            <a href="#" data-atelier="Video" class="menu-item">
+              <span class="menu-item-title">Video</span>
+              <span class="menu-item-subtitle">Explorez nos créations vidéo</span>
+            </a>
+            <a href="#" data-atelier="Escape game" class="menu-item">
+              <span class="menu-item-title">Escape game</span>
+              <span class="menu-item-subtitle">Testez nos escape games</span>
+            </a>
+            <a href="#" data-atelier="Podcast" class="menu-item">
+              <span class="menu-item-title">Podcast</span>
+              <span class="menu-item-subtitle">Écoutez nos podcasts</span>
+            </a>
+            <a href="#" data-atelier="Photo reportage" class="menu-item">
+              <span class="menu-item-title">Photo reportage</span>
+              <span class="menu-item-subtitle">Découvrez nos reportages photo</span>
+            </a>
+            <a href="#" data-atelier="Site web" class="menu-item">
+              <span class="menu-item-title">Site web</span>
+              <span class="menu-item-subtitle">Découvrez les sites web créés par nos étudiants</span>
+            </a>
+            <a href="#" data-atelier="Video Mapping" class="menu-item">
+              <span class="menu-item-title">Video Mapping</span>
+              <span class="menu-item-subtitle">Explorez l'art du mapping vidéo</span>
+            </a>
+            <a href="#" data-atelier="Game design" class="menu-item">
+              <span class="menu-item-title">Game design</span>
+              <span class="menu-item-subtitle">Découvrez nos jeux</span>
+            </a>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(inventory);
+
+      // Ajouter les gestionnaires d'événements pour la navigation
+      const menuItems = inventory.querySelectorAll('.menu-item');
+      menuItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+          e.preventDefault();
+          const atelierName = item.dataset.atelier;
+          this.navigateToAtelier(atelierName);
+        });
+      });
+
+      // Ajouter le gestionnaire pour le bouton de fermeture
+      const closeButton = inventory.querySelector('.inventory-close');
+      if (closeButton) {
+        closeButton.addEventListener('click', () => this.toggleInventory());
+      }
+    }
+  }
+
+  navigateToAtelier(atelierName) {
+    // Masquer l'inventaire
+    const inventory = document.getElementById('inventory');
+    if (inventory) {
+      inventory.classList.remove('open');
+    }
+    
+    // Simuler un clic sur le fragment correspondant
+    const fragment = this.fragments.find(f => f.mesh.userData.atelierName === atelierName);
+    if (fragment) {
+      this.handleFragmentClick({
+        clientX: window.innerWidth / 2,
+        clientY: window.innerHeight / 2,
+        target: fragment.mesh
+      });
+    }
+  }
+
+  toggleInventory() {
+    const inventory = document.getElementById('inventory');
+    if (inventory) {
+      const isOpening = !inventory.classList.contains('open');
+      inventory.classList.toggle('open');
+
+      // Gérer la visibilité du bouton d'inventaire
+      const inventoryButton = document.querySelector('.inventory-button');
+      if (inventoryButton) {
+        inventoryButton.style.opacity = isOpening ? '0' : '1';
+        inventoryButton.style.pointerEvents = isOpening ? 'none' : 'auto';
+      }
+    }
   }
 }

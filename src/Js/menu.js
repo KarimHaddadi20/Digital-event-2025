@@ -28,12 +28,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const initializeMenu = () => {
     // Menu toggle functionality
-    burgerButton.addEventListener("click", () =>
-      sideMenu.classList.toggle("open")
-    );
-    closeButton.addEventListener("click", () =>
-      sideMenu.classList.remove("open")
-    );
+    burgerButton.addEventListener("click", () => {
+      const isOpening = !sideMenu.classList.contains('open');
+      sideMenu.classList.toggle("open");
+      
+      // Ajouter/retirer la classe sur le body pour gérer la visibilité des éléments
+      if (isOpening) {
+        document.body.classList.add('menu-open');
+      } else {
+        document.body.classList.remove('menu-open');
+      }
+    });
+
+    closeButton.addEventListener("click", () => {
+      sideMenu.classList.remove("open");
+      document.body.classList.remove('menu-open');
+    });
 
     // Navigation functionality with scene states
     menuLinks.forEach((link) => {
