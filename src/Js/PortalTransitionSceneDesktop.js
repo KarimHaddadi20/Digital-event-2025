@@ -184,6 +184,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
         const quotesMeshes = this.createQuoteMeshes(section.quotes);
 
         // Premier ensemble (image droite, quote gauche)
+        mainMesh.scale.set(0.6, 0.6, 1);
         mainMesh.position.set(5, 0, 0);
         mainMesh.userData = { direction: "right", initialX: 5, initialZ: 0 };
         mainMesh.rotation.y = -0.1;
@@ -550,28 +551,26 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     labelDiv.className = "fragment-label";
     labelDiv.style.pointerEvents = "auto";
     labelDiv.innerHTML = `
-            <div class="label-content">
-                <h2>${section.title}</h2>
-                <p class="subtitle">${section.subtitle}</p>
-            </div>
-        `;
+        <div class="label-content">
+            <h2>${section.title}</h2>
+            <p class="subtitle">${section.subtitle}</p>
+        </div>
+    `;
 
     document.body.appendChild(labelDiv);
-
     fragment.userData = { label: labelDiv };
 
     labelDiv.style.cssText = `
-            position: fixed;
-            left: ${section.position === "left" ? "40px" : "auto"};
-            right: ${section.position === "right" ? "40px" : "auto"};
-            bottom: 120px;
-            color: white;
-            text-align: ${section.position};
-            pointer-events: auto;
-            transition: opacity 0.1s linear;
-            z-index: 1000;
-            opacity: ${fragment.position.z === -10 ? 1 : 0};
-        `;
+        position: fixed;
+        left: 40px;
+        bottom: 120px;
+        color: white;
+        text-align: left;
+        pointer-events: auto;
+        transition: opacity 0.1s linear;
+        z-index: 1000;
+        opacity: ${fragment.position.z === -10 ? 1 : 0};
+    `;
 
     const labelContent = labelDiv.querySelector(".label-content");
     labelContent.style.cssText = `
@@ -605,34 +604,38 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     labelDiv.className = "fragment-label team-label";
     labelDiv.style.pointerEvents = "auto";
     labelDiv.innerHTML = `
-            <div class="label-content">
-                <p class="team-link">${section.team}</p>
-            </div>
-        `;
+        <div class="label-content">
+            <p class="team-link">${section.team}</p>
+        </div>
+    `;
 
     document.body.appendChild(labelDiv);
 
     const teamLink = labelDiv.querySelector(".team-link");
     teamLink.addEventListener("click", () => {
-      this.showTeamPopup(section.students);
+        this.showTeamPopup(section.students);
     });
 
-    fragment.userData = { label: labelDiv };
+    fragment.userData = { 
+        label: labelDiv,
+        isTeamLabel: true  // Ajout de cette propriété
+    };
 
     labelDiv.style.cssText = `
-            position: fixed;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 15%;
-            color: white;
-            text-align: center;
-            pointer-events: auto;
-            transition: opacity 0.3s ease;
-            z-index: 1000;
-            font-size: 1.2em;
-            font-weight: bold;
-            opacity: 0.9;
-        `;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 15%;
+        color: white;
+        text-align: center;
+        pointer-events: auto;
+        transition: opacity 0.3s ease;
+        z-index: 1000;
+        font-size: 1.2em;
+        font-weight: bold;
+        opacity: 0;
+        visibility: hidden;
+    `;
   }
 
   showTeamPopup(students) {
@@ -773,28 +776,19 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
       // Gestion de l'opacité des labels
       if (fragment.group.userData && fragment.group.userData.label) {
         const label = fragment.group.userData.label;
-        const cameraZ = this.camera.position.z;
-
-        if (fragment.group.position.z === -130 || index === 4) {
-          // Section team
-          label.style.opacity = opacity;
+        if (fragment.group.userData.isTeamLabel) {
+            // Pour le label team, ne l'afficher que près de la fin
+            const isNearEnd = this.camera.position.z <= -180;
+            if (isNearEnd) {
+                label.style.visibility = 'visible';
+                label.style.opacity = opacity;
+            } else {
+                label.style.visibility = 'hidden';
+                label.style.opacity = '0';
+            }
         } else {
-          // Logique pour les sections normales
-          if (index === 0 && cameraZ > -30) {
-            // Première section
-            label.style.opacity = 1;
-          } else if (index === 1 && cameraZ <= -30 && cameraZ > -80) {
-            // Deuxième section
-            label.style.opacity = 1;
-          } else if (index === 2 && cameraZ <= -80 && cameraZ > -130) {
-            // Troisième section
-            label.style.opacity = 1;
-          } else if (index === 3 && cameraZ <= -130 && cameraZ > -180) {
-            // Quatrième section
-            label.style.opacity = 1;
-          } else {
-            label.style.opacity = 0;
-          }
+            // Pour les autres labels
+            label.style.opacity = opacity;
         }
       }
     });
