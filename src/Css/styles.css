@@ -128,6 +128,18 @@ body {
   transform: translateZ(50px) rotateX(5deg) rotateY(5deg);
 }
 
+.instruction-title {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espace entre l'icône et le texte */
+}
+
+.click-icon {
+  width: 32px;
+  height: 32px;
+  color: white;
+} 
+
 .fragments-container {
   position: absolute;
   top: 0;
