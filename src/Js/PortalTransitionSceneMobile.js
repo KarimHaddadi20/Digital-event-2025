@@ -185,47 +185,48 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
 
                 [detail1, detail2] = this.createSecondaryMeshes(texture2, texture3);
                 
-                detail1.position.set(-2, -1, 0);
-                detail2.position.set(2, -1, 0);
+                // Positions initiales légèrement plus espacées
+                detail1.position.set(-1, -1, 0);
+                detail2.position.set(1, -1, 0);
                 
                 detail1.scale.set(0.6, 0.6, 1);
                 detail2.scale.set(0.6, 0.6, 1);
                 
                 group.add(detail1, detail2);
-            }
 
-            // Déplacer l'effet de parallaxe ici, en dehors des conditions
-            const updatePositions = () => {
-                const startZ = group.position.z + 30;
-                const endZ = group.position.z - 30;
-                
-                const progress = Math.max(0, Math.min(1, 
-                    (startZ - this.camera.position.z) / (startZ - endZ)
-                ));
-                
-                // Image principale : mouvement diagonal vers haut/droite
-                mainMesh.position.y = 1 + (progress * 8);
-                mainMesh.position.x = (progress * 6);
-                
-                // Images secondaires : mouvement diagonal vers bas/direction selon position
-                if (detail1 && detail2) {
-                    const secondaryY = -1 - (progress * 8);
-                    if (section.position === 'left') {
-                        detail1.position.y = secondaryY;
-                        detail1.position.x = -2 - (progress * 4);
-                        detail2.position.y = secondaryY;
-                        detail2.position.x = 2 - (progress * 4);
-                    } else {
-                        detail1.position.y = secondaryY;
-                        detail1.position.x = -2 + (progress * 4);
-                        detail2.position.y = secondaryY;
-                        detail2.position.x = 2 + (progress * 4);
+                // Déplacer l'effet de parallaxe ici, en dehors des conditions
+                const updatePositions = () => {
+                    const startZ = group.position.z + 30;
+                    const endZ = group.position.z - 30;
+                    
+                    const progress = Math.max(0, Math.min(1, 
+                        (startZ - this.camera.position.z) / (startZ - endZ)
+                    ));
+                    
+                    // Image principale : mouvement diagonal vers haut/droite
+                    mainMesh.position.y = 1 + (progress * 8);
+                    mainMesh.position.x = (progress * 6);
+                    
+                    // Images secondaires : mouvement diagonal vers bas/direction selon position
+                    if (detail1 && detail2) {
+                        const secondaryY = -1 - (progress * 8);
+                        if (section.position === 'left') {
+                            detail1.position.y = secondaryY;
+                            detail1.position.x = -1 - (progress * 4);
+                            detail2.position.y = secondaryY;
+                            detail2.position.x = 1 - (progress * 4);
+                        } else {
+                            detail1.position.y = secondaryY;
+                            detail1.position.x = -1 + (progress * 4);
+                            detail2.position.y = secondaryY;
+                            detail2.position.x = 1 + (progress * 4);
+                        }
                     }
-                }
-            };
+                };
 
-            this.updateCallbacks = this.updateCallbacks || [];
-            this.updateCallbacks.push(updatePositions);
+                this.updateCallbacks = this.updateCallbacks || [];
+                this.updateCallbacks.push(updatePositions);
+            }
 
             // Si c'est une section quote, ajouter les citations après
             if (section.type === 'quote') {
