@@ -185,9 +185,9 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
 
                 [detail1, detail2] = this.createSecondaryMeshes(texture2, texture3);
                 
-                // Positions initiales légèrement plus espacées
-                detail1.position.set(-1, -1, 0);
-                detail2.position.set(1, -1, 0);
+                // Positions initiales plus adaptées au mobile
+                detail1.position.set(-0.9, -1, 0);
+                detail2.position.set(0.9, -1, 0);
                 
                 detail1.scale.set(0.6, 0.6, 1);
                 detail2.scale.set(0.6, 0.6, 1);
@@ -204,22 +204,22 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
                     ));
                     
                     // Image principale : mouvement diagonal vers haut/droite
-                    mainMesh.position.y = 1 + (progress * 8);
-                    mainMesh.position.x = (progress * 6);
+                    mainMesh.position.y = 1 + (progress * 6);
+                    mainMesh.position.x = (progress * 4);
                     
                     // Images secondaires : mouvement diagonal vers bas/direction selon position
                     if (detail1 && detail2) {
-                        const secondaryY = -1 - (progress * 8);
+                        const secondaryY = -1 - (progress * 6);
                         if (section.position === 'left') {
                             detail1.position.y = secondaryY;
-                            detail1.position.x = -1 - (progress * 4);
+                            detail1.position.x = -0.9 - (progress * 3);
                             detail2.position.y = secondaryY;
-                            detail2.position.x = 1 - (progress * 4);
+                            detail2.position.x = 0.9 - (progress * 3);
                         } else {
                             detail1.position.y = secondaryY;
-                            detail1.position.x = -1 + (progress * 4);
+                            detail1.position.x = -0.9 + (progress * 3);
                             detail2.position.y = secondaryY;
-                            detail2.position.x = 1 + (progress * 4);
+                            detail2.position.x = 0.9 + (progress * 3);
                         }
                     }
                 };
@@ -252,36 +252,36 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
                     ));
                     
                     // Image principale et première citation montent
-                    mainMesh.position.y = 1 + (progress * 8);
-                    mainMesh.position.x = (progress * 6);
-                    quotesMeshes[0].position.y = 3 + (progress * 8);
-                    quotesMeshes[0].position.x = (progress * 6);
+                    mainMesh.position.y = 1 + (progress * 6);
+                    mainMesh.position.x = (progress * 4);
+                    quotesMeshes[0].position.y = 3 + (progress * 6);
+                    quotesMeshes[0].position.x = (progress * 4);
                     
                     // Images secondaires et citations descendent
                     if (detail1 && detail2) {
-                        const secondaryY = -1 - (progress * 8);
-                        const quoteY = -3 - (progress * 8);
+                        const secondaryY = -1 - (progress * 6);
+                        const quoteY = -3 - (progress * 6);
                         
                         if (section.position === 'left') {
                             detail1.position.y = secondaryY;
-                            detail1.position.x = -2 - (progress * 4);
+                            detail1.position.x = -2 - (progress * 3);
                             quotesMeshes[1].position.y = quoteY;
-                            quotesMeshes[1].position.x = -2 - (progress * 4);
+                            quotesMeshes[1].position.x = -2 - (progress * 3);
                             
                             detail2.position.y = secondaryY;
-                            detail2.position.x = 2 - (progress * 4);
+                            detail2.position.x = 2 - (progress * 3);
                             quotesMeshes[2].position.y = quoteY;
-                            quotesMeshes[2].position.x = 2 - (progress * 4);
+                            quotesMeshes[2].position.x = 2 - (progress * 3);
                         } else {
                             detail1.position.y = secondaryY;
-                            detail1.position.x = -2 + (progress * 4);
+                            detail1.position.x = -2 + (progress * 3);
                             quotesMeshes[1].position.y = quoteY;
-                            quotesMeshes[1].position.x = -2 + (progress * 4);
+                            quotesMeshes[1].position.x = -2 + (progress * 3);
                             
                             detail2.position.y = secondaryY;
-                            detail2.position.x = 2 + (progress * 4);
+                            detail2.position.x = 2 + (progress * 3);
                             quotesMeshes[2].position.y = quoteY;
-                            quotesMeshes[2].position.x = 2 + (progress * 4);
+                            quotesMeshes[2].position.x = 2 + (progress * 3);
                         }
                     }
                 };
@@ -364,7 +364,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
 
     createMainMesh(texture) {
         return new THREE.Mesh(
-            new THREE.PlaneGeometry(6, 6),
+            new THREE.PlaneGeometry(8, 6, 50, 50),
             new THREE.MeshBasicMaterial({
                 map: texture,
                 transparent: true,
@@ -375,7 +375,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
     }
 
     createSecondaryMeshes(texture2, texture3) {
-        const geometry = new THREE.PlaneGeometry(3, 3);
+        const geometry = new THREE.PlaneGeometry(3, 2, 1, 1);
         
         const detail1 = new THREE.Mesh(
             geometry,
@@ -408,7 +408,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
             const ctx = canvas.getContext('2d');
             
             ctx.fillStyle = 'white';
-            ctx.font = 'italic 32px Georgia'; // Police plus petite pour mobile
+            ctx.font = 'italic 32px Georgia'; 
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             
@@ -420,7 +420,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
             
             words.forEach(word => {
                 const testLine = line + word + ' ';
-                if (ctx.measureText(testLine).width > 800) { // Largeur réduite pour mobile
+                if (ctx.measureText(testLine).width > 800) { 
                     lines.push(line);
                     line = word + ' ';
                 } else {
@@ -437,7 +437,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
             const texture = new THREE.CanvasTexture(canvas);
             
             return new THREE.Mesh(
-                new THREE.PlaneGeometry(5, 1.5), // Dimensions réduites pour mobile
+                new THREE.PlaneGeometry(5, 1.5), 
                 new THREE.MeshBasicMaterial({
                     map: texture,
                     transparent: true,
