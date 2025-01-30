@@ -29,7 +29,7 @@ class FragmentManager {
 
     // Charger la texture initiale
     const textureLoader = new THREE.TextureLoader();
-    textureLoader.load("src/textures/homepage7.webp", (texture) => {
+    textureLoader.load("src/textures/homepage8.webp", (texture) => {
       texture.colorSpace = THREE.SRGBColorSpace;
       texture.mapping = THREE.EquirectangularReflectionMapping;
       texture.generateMipmaps = true;
