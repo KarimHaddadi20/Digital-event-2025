@@ -1417,7 +1417,8 @@ body.popup-active {
 body.menu-open .mobile-section-label,
 body.menu-open .fragment-label,
 body.menu-open .fragment-instructions,
-body.menu-open .scroll-progress-container {
+body.menu-open .scroll-progress-container,
+body.menu-open .navbar {
   opacity: 0 !important;
   pointer-events: none;
   transition: opacity 0.3s ease;
