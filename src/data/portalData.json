@@ -1,5 +1,6 @@
 {
     "atelier1": {
+        "atelier": "Site web",
         "backgroundImage": "src/textures/site.web.webp",
         "sets": [
             {
@@ -138,6 +139,7 @@
         ]
     },
     "atelier2": {
+        "atelier" : "Video mapping",
         "backgroundImage": "src/textures/video.mapping.webp",
         "sets": [
             {
@@ -330,6 +332,7 @@
         ]
     },
     "atelier3": {
+        "atelier" : "Creative coding",
         "backgroundImage": "src/textures/creative.coding.webp",
         "sets": [
             {
@@ -462,6 +465,7 @@
         ]
     },
     "atelier4": {
+        "atelier" : "Game design",
         "backgroundImage": "src/textures/gaming.popcorn.webp",
         "sets": [
             {
@@ -674,6 +678,7 @@
         ]
     },
     "atelier5": {
+        "atelier" : "Video",
         "backgroundImage": "src/textures/video.studio.webp",
         "sets": [
             {
@@ -901,6 +906,7 @@
         ]
     },
     "atelier6": {
+        "atelier" : "Escape game",
         "backgroundImage": "src/textures/escape.game.webp",
         "sets": [
             {
@@ -1158,11 +1164,12 @@
         ]
     },
     "atelier7": {
+        "atelier" : "Podcast",
         "backgroundImage": "src/textures/podcast.webp",
         "sets": [
             {
                 "title": "Captivant",
-                "subtitle": "Dans cet univers, chaque groupe traite le son à sa manière pour répondre au thème sous des formats différents : interviews, narration et talk-show. Chaque équipe s’approprie le sujet pour raconter des histoires uniques et captivantes.",
+                "subtitle": "Dans cet univers, chaque groupe traite le son à sa manière pour répondre au thème sous des formats différents : interviews, narration et talk-show. Chaque équipe s’approprie le sujet pour raconter des histoires uniques et captivantes. @https://linktr.ee/les.inxeplores ",
                 "image1": "src/photo/G/G1-01.jpg",
                 "image2": "src/photo/G/G1-02.jpg",
                 "image3": "src/photo/G/G1-03.jpg"
@@ -1305,6 +1312,7 @@
         ]
     },
     "atelier8": {
+        "atelier" : "Photo",
         "backgroundImage": "src/textures/photography.webp",
         "sets": [
             {
@@ -1500,6 +1508,7 @@
         ]
     },
     "atelier9": {
+        "atelier" : "Ai driven visual stories",
         "backgroundImage": "src/textures/ai.driven.visual.stories.webp",
         "sets": [
             {
@@ -1663,6 +1672,7 @@
         ]
     },
     "atelier10": {
+        "atelier" : "Game design",
         "backgroundImage": "src/textures/game.design.webp",
         "sets": [
             {
@@ -1827,6 +1837,7 @@
         ]
     },
     "atelier11": {
+        "atelier" : "Organisation",
         "backgroundImage": "src/textures/organisation.webp",
         "sets": [
             {
