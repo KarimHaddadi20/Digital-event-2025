@@ -173,7 +173,7 @@ class FragmentManager {
         this.voyagerButton.style.cssText = `
           position: fixed;
           left: 50%;
-          bottom: 9vh; 
+          bottom: 8vh; 
           transform: translateX(-50%);
           display: none;
           opacity: 0;
@@ -184,7 +184,7 @@ class FragmentManager {
           border-radius: 4px;
           color: white;
           font-family: "Aktiv Grotesk", sans-serif;
-          font-size: 18px;
+          font-size: 16px;
           cursor: pointer;
           transition: all 0.3s ease;
           z-index: 9998;

@@ -440,7 +440,7 @@ body {
 
 .footer-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin: 0 auto;
 }
@@ -450,7 +450,7 @@ body {
   gap: 24px;
 }
 
-.footer-content p {
+.footer-content a {
   color: rgba(255, 255, 255, 0.6);
   text-align: right;
   font-family: "Aktiv Grotesk", sans-serif;
@@ -464,7 +464,7 @@ body {
   transition: opacity 0.3s ease;
 }
 
-.footer-content p:hover {
+.footer-content a:hover {
   opacity: 1;
 }
 
