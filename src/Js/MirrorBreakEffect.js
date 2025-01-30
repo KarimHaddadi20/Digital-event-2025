@@ -40,7 +40,6 @@ class MirrorBreakEffect extends SceneSetup {
       document.body.appendChild(fragmentInstructions);
 
       if (this.startBroken) {
-        console.log("Cassure automatique du miroir...");
         // Cacher les instructions du miroir et afficher les instructions des fragments
         container.style.display = "none";
         fragmentInstructions.style.display = "block";
@@ -112,7 +111,6 @@ class MirrorBreakEffect extends SceneSetup {
       this.renderer.render(this.scene, this.camera);
     } else {
       this.isAnimating = false;
-      console.log("Animation stopped - missing required components");
     }
   }
 
@@ -185,7 +183,6 @@ class MirrorBreakEffect extends SceneSetup {
   }
 
   switchToGalleryScene(fragmentIndex) {
-    console.log("MirrorBreakEffect: Début de la transition");
 
     // Créer un plan noir pour le fade
     const fadeGeometry = new THREE.PlaneGeometry(100, 100);
@@ -206,7 +203,6 @@ class MirrorBreakEffect extends SceneSetup {
     const fadeOut = () => {
       if (fadeMaterial.opacity >= 1) {
         fadeOutComplete = true;
-        console.log("MirrorBreakEffect: Fade out terminé");
 
         // Arrêter l'animation de cette scène
         this.isAnimating = false;
@@ -227,7 +223,6 @@ class MirrorBreakEffect extends SceneSetup {
         );
 
         // Créer la scène de transition
-        console.log("MirrorBreakEffect: Création de la scène de transition");
         const transitionScene = new PortalTransitionScene(this, fragmentIndex);
 
         return;
@@ -239,14 +234,12 @@ class MirrorBreakEffect extends SceneSetup {
   }
 
   transitionToScene(sceneIndex) {
-    console.log("MirrorBreakEffect: Début de la transition");
     this.isAnimating = false; // Stop animation loop before cleanup
 
     this.clearScene();
     document.removeEventListener("click", this.handleClick);
     window.removeEventListener("mousemove", this.fragmentManager.onMouseMove);
 
-    console.log("MirrorBreakEffect: Création de la scène de transition");
     const transitionScene = new PortalTransitionScene(this, sceneIndex);
   }
 

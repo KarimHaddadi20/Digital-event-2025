@@ -1,30 +1,10 @@
 // Dans app.js ou un nouveau fichier menu.js
 document.addEventListener("DOMContentLoaded", () => {
-  // console.log("DOM Content Loaded");
 
   const burgerButton = document.getElementById("burger-menu");
   const sideMenu = document.getElementById("side-menu");
   const menuLinks = document.querySelectorAll(".menu-list a");
   const closeButton = document.getElementById("close-menu");
-
-  // // Debug DOM elements
-  // console.log({
-  //   burgerButton: !!burgerButton,
-  //   sideMenu: !!sideMenu,
-  //   menuLinksCount: menuLinks.length,
-  //   closeButton: !!closeButton,
-  // });
-
-  // // Debug menu links data
-  // menuLinks.forEach((link, index) => {
-  //   console.log(`Link ${index}:`, {
-  //     text: link.textContent,
-  //     dataset: link.dataset,
-  //     href: link.href,
-  //   });
-  // });
-
-  // console.log("Menu links found:", menuLinks.length);
 
   const initializeMenu = () => {
     // Menu toggle functionality
