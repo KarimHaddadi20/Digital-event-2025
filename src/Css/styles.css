@@ -1347,9 +1347,10 @@ body.popup-active {
   opacity: 1;
 }
 
-.inventory-button svg {
+.inventory-button img {
   width: 24px;
   height: 24px;
+  display: block;
 }
 
 @media (max-width: 1200px) {

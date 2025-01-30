@@ -849,9 +849,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     const button = document.createElement("button");
     button.className = "inventory-button";
     button.innerHTML = `
-      <svg width="24" height="24" viewBox="0 0 24 24">
-        <path d="M3 12h18M3 6h18M3 18h18" stroke="white" stroke-width="2" stroke-linecap="round"/>
-      </svg>
+      <img src="src/assets/icons/obsolete.svg" alt="Menu" width="40" height="40" />
     `;
     button.addEventListener("click", () => this.toggleInventory());
     document.body.appendChild(button);
