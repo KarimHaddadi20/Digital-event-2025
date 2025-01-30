@@ -525,7 +525,7 @@ body {
 .instruction-subtitle {
   font-family: "Aktiv Grotesk", sans-serif;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.9);
   text-transform: uppercase;
   letter-spacing: 2px;
   text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
@@ -1089,7 +1089,7 @@ body.popup-active {
   font-weight: 400;
   line-height: 140%;
   letter-spacing: -0.28px;
-  opacity: 0.6;
+  opacity: 0.9;
 }
 
 @media (max-width: 768px) {
@@ -1324,7 +1324,7 @@ body.popup-active {
 .inventory .menu-item-subtitle {
   font-family: "Aktiv Grotesk", sans-serif;
   font-size: 12px;
-  opacity: 0.6;
+  opacity: 0.9;
   position: relative;
   z-index: 2;
 }
