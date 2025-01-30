@@ -147,7 +147,7 @@ body {
 /* Ajuster spécifiquement pour le miroir */
 .mirror-instructions .instruction-title {
   justify-content: center;
-  gap: 10px;
+  gap: 5px;
 }
 
 .fragments-container {
@@ -519,13 +519,13 @@ body {
 
 .instruction-title {
   font-family: "Aktiv Grotesk", sans-serif;
-  font-size: 16px;
+  font-size: 8px;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.9);
   margin-bottom: 12px;
   text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
   animation: glow 2s ease-in-out infinite alternate;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   letter-spacing: 1px;
 }
 
@@ -533,7 +533,7 @@ body {
   font-family: "Aktiv Grotesk", sans-serif;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.9);
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   letter-spacing: 2px;
   text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
@@ -581,13 +581,13 @@ body {
 }
 
 .fragment-instructions .font-aktiv {
-  font-size: 14px;
-  text-transform: uppercase;
+  font-size: 21px;
+  /* text-transform: uppercase; */
   letter-spacing: 1px;
 }
 
 .fragment-instructions .font-fraunces {
-  font-size: 14px;
+  font-size: 21px;
   font-style: italic;
 }
 
