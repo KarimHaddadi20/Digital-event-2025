@@ -5,6 +5,45 @@ document.addEventListener("DOMContentLoaded", () => {
   const sideMenu = document.getElementById("side-menu");
   const menuLinks = document.querySelectorAll(".menu-list a");
   const closeButton = document.getElementById("close-menu");
+  const menuContent = document.querySelector(".menu-content");
+
+  // Fonction pour gérer le scroll du menu
+  const handleMenuScroll = () => {
+    if (window.innerHeight < 700) { // Pour les écrans de moins de 700px de hauteur
+      menuContent.style.height = '100%';
+      menuContent.style.overflowY = 'auto';
+      menuContent.style.overflowX = 'hidden';
+      
+      // Ajouter le style de la scrollbar
+      menuContent.style.cssText += `
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+      `;
+      
+      // Styles spécifiques pour WebKit (Chrome, Safari)
+      const styleSheet = document.createElement('style');
+      styleSheet.textContent = `
+        .menu-content::-webkit-scrollbar {
+          width: 4px;
+        }
+        .menu-content::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 2px;
+        }
+        .menu-content::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.3);
+          border-radius: 2px;
+        }
+        .menu-content::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.4);
+        }
+      `;
+      document.head.appendChild(styleSheet);
+    } else {
+      menuContent.style.height = '100%';
+      menuContent.style.overflowY = 'visible';
+    }
+  };
 
   const initializeMenu = () => {
     // Menu toggle functionality
@@ -15,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Ajouter/retirer la classe sur le body pour gérer la visibilité des éléments
       if (isOpening) {
         document.body.classList.add("menu-open");
+        handleMenuScroll(); // Appliquer le scroll si nécessaire
       } else {
         document.body.classList.remove("menu-open");
       }
@@ -24,6 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
       sideMenu.classList.remove("open");
       document.body.classList.remove("menu-open");
     });
+
+    // Gérer le redimensionnement de la fenêtre
+    window.addEventListener('resize', handleMenuScroll);
 
     // Navigation functionality with scene states
     menuLinks.forEach((link) => {
