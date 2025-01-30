@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
           try {
             // Nettoyer tous les éléments de la scène actuelle
             const elements = document.querySelectorAll(
-              ".mobile-section-label, .team-label, .quote-container, .subtitle-popup, .popup-content, .mobile-popup, .portal-text, .fragment-label"
+              ".mobile-section-label, .team-label, .quote-container, .subtitle-popup, .popup-content, .mobile-popup, .portal-text, .fragment-label, .atelier-label"
             );
             elements.forEach((element) => element.remove());
 
