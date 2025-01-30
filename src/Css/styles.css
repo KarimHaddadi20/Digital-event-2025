@@ -447,7 +447,8 @@ body {
 
 @media (max-width: 768px) {
   .footer-content {
-    justify-content: center;
+    opacity: 0;
+    display: none;
   }
 }
 
