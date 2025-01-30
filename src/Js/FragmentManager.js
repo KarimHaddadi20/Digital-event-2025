@@ -722,7 +722,7 @@ class FragmentManager {
       this.app.scene.add(newEnvMesh);
 
       // Fade out old environment and fade in new one
-      const duration = 1000; // 1 seconde pour la transition
+      const duration = 500; // 1 seconde pour la transition
       const startTime = Date.now();
 
       const animate = () => {

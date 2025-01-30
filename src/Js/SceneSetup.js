@@ -251,7 +251,7 @@ class SceneSetup {
     // Fonction pour le fade out
     const fadeOut = () => {
       if (!fadeOutComplete) {
-        fadeMaterial.opacity += 0.02;
+        fadeMaterial.opacity += 0.1;
 
         if (fadeMaterial.opacity >= 1) {
           fadeOutComplete = true;
@@ -283,7 +283,7 @@ class SceneSetup {
         return;
       }
 
-      fadeMaterial.opacity -= 0.02;
+      fadeMaterial.opacity -= 0.01;
       requestAnimationFrame(fadeIn);
     };
 
