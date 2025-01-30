@@ -776,6 +776,12 @@ class FragmentManager {
 
     this.lastActivityTime = Date.now();
     this.userHasInteracted = true;
+    
+    // Désactiver définitivement l'auto-sélection si l'utilisateur interagit
+    if (this.autoSelectTimer) {
+      clearTimeout(this.autoSelectTimer);
+      this.autoSelectTimer = null;
+    }
 
     this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -820,6 +826,13 @@ class FragmentManager {
 
   handleFragmentClick(event) {
     if (this.isAnimatingFragment) return;
+
+    // Désactiver définitivement l'auto-sélection dès qu'un clic est détecté
+    this.userHasInteracted = true;
+    if (this.autoSelectTimer) {
+      clearTimeout(this.autoSelectTimer);
+      this.autoSelectTimer = null;
+    }
 
     const mouse = new THREE.Vector2();
     mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
@@ -964,8 +977,8 @@ class FragmentManager {
       clearTimeout(this.autoSelectTimer);
     }
 
-    // Ne démarrer le timer que si aucun fragment n'est sélectionné et que l'utilisateur n'a pas interagi
-    if (!this.selectedFragment && !this.userHasInteracted) {
+    // Ne démarrer le timer que si l'utilisateur n'a jamais interagi
+    if (!this.userHasInteracted && !this.selectedFragment) {
       this.autoSelectTimer = setTimeout(() => {
         this.selectRandomFragment();
       }, 10000);
@@ -973,7 +986,7 @@ class FragmentManager {
   }
 
   selectRandomFragment() {
-    // Ne pas sélectionner si l'utilisateur a interagi ou si un fragment est déjà sélectionné
+    // Ne pas sélectionner si l'utilisateur a déjà interagi
     if (this.userHasInteracted || this.selectedFragment) return;
 
     const availableFragments = this.fragments.filter(f => f !== this.selectedFragment);
@@ -1001,7 +1014,7 @@ class FragmentManager {
       }
     }
 
-    // Continuer la sélection automatique uniquement si l'utilisateur n'a pas interagi
+    // Continuer la sélection automatique uniquement si l'utilisateur n'a jamais interagi
     if (!this.userHasInteracted) {
       this.startAutoSelectTimer();
     }
