@@ -1333,30 +1333,23 @@ body.popup-active {
   position: fixed;
   top: 62px;
   right: 48px;
-  padding: 12px 24px;
-  background: linear-gradient(
-    343.92deg,
-    rgba(21, 21, 27, 0.6) -1.4%,
-    rgba(79, 79, 86, 0.6) 104.72%
-  );
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  padding: 8px;
+  background: none;
+  border: none;
   color: white;
-  font-family: "Aktiv Grotesk", sans-serif;
-  font-size: 14px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease;
   z-index: 9998;
+  opacity: 0.6;
 }
 
 .inventory-button:hover {
-  background: linear-gradient(
-    343.92deg,
-    rgba(21, 21, 27, 0.8) -1.4%,
-    rgba(79, 79, 86, 0.8) 104.72%
-  );
-  border-color: rgba(255, 255, 255, 0.2);
+  opacity: 1;
+}
+
+.inventory-button svg {
+  width: 24px;
+  height: 24px;
 }
 
 @media (max-width: 1200px) {
