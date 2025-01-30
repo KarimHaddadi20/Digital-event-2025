@@ -685,22 +685,22 @@
                 "title": "Vision unique",
                 "subtitle": "Les membres de l’atelier sont répartis en 8 groupes composés de 4 à 5 personnes qui collaborent pour relever deux défis créatifs : concevoir une pastille visuelle (sans narration) autour d’un thème imposé et produire une bande-annonce ou une publicité en lien avec la thématique.",
                 "image1": "src/photo/E/E1-01.jpg",
-                "image2": "src/photo/E/E1-02.jpg",
-                "image3": "src/photo/E/E1-03.jpg"
+                "image2": "src/photo/E/E1-02.png",
+                "image3": "src/photo/E/E1-03.png"
             },
             {
                 "title": "Imagination",
                 "subtitle": "L’objectif de cet univers est de mettre en lumière au travers de la vidéo, la vision unique de chaque groupe sur le monde parallèle. Mais aussi, de plonger le spectateur dans un nouvel univers grâce à la vidéo.",
                 "image1": "src/photo/E/E2-01.jpg",
-                "image2": "src/photo/E/E2-02.jpg",
-                "image3": "src/photo/E/E2-03.jpg"
+                "image2": "src/photo/E/E2-02.png",
+                "image3": "src/photo/E/E2-03.png"
             },
             {
                 "title": "Production",
                 "subtitle": "Pour donner vie à leurs imaginations, ils·elles pourront utiliser divers logiciels tels que Premiere Pro, After Effects et DaVinci Resolve.",
                 "image1": "src/photo/E/E3-01.jpg",
-                "image2": "src/photo/E/E3-02.jpg",
-                "image3": "src/photo/E/E3-03.jpg"
+                "image2": "src/photo/E/E3-02.png",
+                "image3": "src/photo/E/E3-03.png"
             },
             {
                 "title": "Expression",
@@ -1169,7 +1169,7 @@
         "sets": [
             {
                 "title": "Captivant",
-                "subtitle": "Dans cet univers, chaque groupe traite le son à sa manière pour répondre au thème sous des formats différents : interviews, narration et talk-show. Chaque équipe s’approprie le sujet pour raconter des histoires uniques et captivantes. @https://linktr.ee/les.inxeplores ",
+                "subtitle": "Dans cet univers, chaque groupe traite le son à sa manière pour répondre au thème sous des formats différents : interviews, narration et talk-show. Chaque équipe s’approprie le sujet pour raconter des histoires uniques et captivantes.",
                 "image1": "src/photo/G/G1-01.jpg",
                 "image2": "src/photo/G/G1-02.jpg",
                 "image3": "src/photo/G/G1-03.jpg"

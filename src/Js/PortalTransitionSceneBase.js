@@ -39,6 +39,7 @@ export class PortalTransitionSceneBase extends SceneSetup {
             this.backButton.addEventListener('click', () => this.refreshPage());
         }
 
+        this.createAtelierLabel();
         this.initScene();
     }
 
@@ -278,6 +279,10 @@ export class PortalTransitionSceneBase extends SceneSetup {
         if (this.progressContainer) {
             this.progressContainer.style.opacity = '0';
         }
+        const atelierLabel = document.querySelector('.atelier-label');
+        if (atelierLabel) {
+            atelierLabel.remove();
+        }
     }
 
     // Méthodes à implémenter dans les classes enfants
@@ -307,5 +312,20 @@ export class PortalTransitionSceneBase extends SceneSetup {
 
         // Recharger la page
         window.location.reload();
+    }
+
+    createAtelierLabel() {
+        const atelierLabel = document.createElement('div');
+        atelierLabel.className = 'atelier-label';
+        
+        fetch("./src/data/portalData.json")
+            .then(response => response.json())
+            .then(data => {
+                const atelierData = data[`atelier${this.selectedFragmentIndex + 1}`];
+                if (atelierData && atelierData.atelier) {
+                    atelierLabel.textContent = atelierData.atelier;
+                    document.body.appendChild(atelierLabel);
+                }
+            });
     }
 } 

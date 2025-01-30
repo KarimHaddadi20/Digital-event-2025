@@ -1152,7 +1152,7 @@ body.popup-active {
 .scroll-progress-container {
   position: fixed;
   left: 50%;
-  bottom: 8px;
+  bottom: 40px;
   transform: translateX(-50%);
   width: 342px;
 }
@@ -1434,4 +1434,30 @@ body.menu-open .scroll-progress-container {
   #side-menu {
     display: none !important;
   }
+}
+
+.atelier-label {
+    position: fixed;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.90);
+    text-align: center;
+    font-family: "Aktiv Grotesk", sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: -0.24px;
+    text-transform: uppercase;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+/* Ajustement pour mobile */
+@media (max-width: 768px) {
+    .atelier-label {
+        bottom: 52px;
+        font-size: 12px;
+    }
 }
