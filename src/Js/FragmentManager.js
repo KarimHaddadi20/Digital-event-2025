@@ -127,7 +127,7 @@ class FragmentManager {
       border-radius: 4px;
       color: white;
       font-family: "Aktiv Grotesk", sans-serif;
-      font-size: 14px;
+      font-size: 16px;
       cursor: pointer;
       transition: all 0.3s ease;
       z-index: 9998;
@@ -176,17 +176,18 @@ class FragmentManager {
           bottom: 9vh; 
           transform: translateX(-50%);
           display: none;
-          padding: 8px 16px;
-          font-size: 18px;
-          width: auto;
-          min-width: 80px;
-          max-width: 120px;
-          border: 1px solid #FFF;
-          background: linear-gradient(344deg, rgba(21, 21, 27, 0.20) -1.4%, rgba(79, 79, 86, 0.20) 104.72%);
-          color: white;
+          opacity: 0;
+          padding: 12px 24px;
+          background: linear-gradient(343.92deg, rgba(21, 21, 27, 0.6) -1.4%, rgba(79, 79, 86, 0.6) 104.72%);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 4px;
-          z-index: 1000;
+          color: white;
+          font-family: "Aktiv Grotesk", sans-serif;
+          font-size: 18px;
           cursor: pointer;
+          transition: all 0.3s ease;
+          z-index: 9998;
         `;
       }
     };
