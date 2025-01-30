@@ -499,7 +499,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
             lastTouchY = currentTouchY;
 
             const maxZ = 7;
-            const lastFragmentPosition = -223;  // Position du dernier fragment
+            const lastFragmentPosition = -220;  // Position du dernier fragment
             const minZ = lastFragmentPosition;
 
             let newZ = this.camera.position.z - delta;
