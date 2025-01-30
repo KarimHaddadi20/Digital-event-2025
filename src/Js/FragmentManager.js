@@ -127,7 +127,7 @@ class FragmentManager {
       border-radius: 4px;
       color: white;
       font-family: "Aktiv Grotesk", sans-serif;
-      font-size: 14px;
+      font-size: 16px;
       cursor: pointer;
       transition: all 0.3s ease;
       z-index: 9998;
@@ -184,7 +184,7 @@ class FragmentManager {
           border-radius: 4px;
           color: white;
           font-family: "Aktiv Grotesk", sans-serif;
-          font-size: 14px;
+          font-size: 18px;
           cursor: pointer;
           transition: all 0.3s ease;
           z-index: 9998;
