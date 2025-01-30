@@ -972,7 +972,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
 
     // Nettoyer tous les éléments de la scène actuelle
     const labels = document.querySelectorAll(
-      ".fragment-label, .mobile-section-label"
+      ".fragment-label, .mobile-section-label, .atelier-label"
     );
     labels.forEach((label) => label.remove());
 

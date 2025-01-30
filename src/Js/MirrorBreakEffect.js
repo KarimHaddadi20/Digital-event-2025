@@ -227,7 +227,7 @@ class MirrorBreakEffect extends SceneSetup {
 
         return;
       }
-      fadeMaterial.opacity += 0.02;
+      fadeMaterial.opacity += 0.04; // Ralentir le fade
       requestAnimationFrame(fadeOut);
     };
     fadeOut();

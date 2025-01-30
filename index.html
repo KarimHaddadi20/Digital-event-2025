@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Digital Event 2025</title>
+    <link rel="icon" type="image/png" href="src/assets/icons/esd-logo-responsive-blanc.png">
     <link rel="stylesheet" href="src/Css/styles.css" />
   </head>
   <body>
@@ -198,6 +199,33 @@
         // Initialiser l'état du son comme désactivé au démarrage
         music.pause();
         soundIcon.src = "src/assets/icons/sound-off.svg";
+
+        // Gérer la visibilité de la page
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                // La page n'est pas visible (veille, changement d'app, etc.)
+                if (!music.paused) {
+                    music.pause();
+                    soundIcon.src = "src/assets/icons/sound-off.svg";
+                }
+            }
+        });
+
+        // Gérer la perte de focus de la fenêtre
+        window.addEventListener('blur', function() {
+            if (!music.paused) {
+                music.pause();
+                soundIcon.src = "src/assets/icons/sound-off.svg";
+            }
+        });
+
+        // Gérer la mise en veille sur mobile
+        window.addEventListener('pagehide', function() {
+            if (!music.paused) {
+                music.pause();
+                soundIcon.src = "src/assets/icons/sound-off.svg";
+            }
+        });
     });
     </script>
   </body>

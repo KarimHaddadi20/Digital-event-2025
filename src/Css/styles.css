@@ -446,7 +446,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  .footer-content {
+  .footer-right {
     opacity: 0;
     display: none;
   }
@@ -1338,7 +1338,7 @@ body.popup-active {
 
 .inventory .menu-item-title {
   font-family: "Fraunces", serif;
-  font-size: 20px;
+  font-size: 18px;
   margin-bottom: 4px;
   position: relative;
   z-index: 2;
@@ -1489,44 +1489,44 @@ body.menu-open .navbar {
 
 /* Style de base pour les labels mobiles */
 .mobile-section-label {
-    position: fixed;
-    bottom: 120px;  /* Position par défaut */
-    left: 0;
-    right: 0;
-    width: 100vw;
-    color: white;
-    text-align: center;
-    pointer-events: auto;
-    transition: opacity 0.3s ease;
-    z-index: 1000;
+  position: fixed;
+  bottom: 120px; /* Position par défaut */
+  left: 0;
+  right: 0;
+  width: 100vw;
+  color: white;
+  text-align: center;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
 }
 
 /* Ajustements pour mobile */
 @media (max-width: 768px) {
-    .mobile-section-label {
-        bottom: 21%;  /* Position plus haute sur mobile */
-    }
+  .mobile-section-label {
+    bottom: 21%; /* Position plus haute sur mobile */
+  }
 
-    .mobile-section-label .label-content {
-        padding: 0 24px;  /* Ajouter du padding sur les côtés */
-    }
+  .mobile-section-label .label-content {
+    padding: 0 24px; /* Ajouter du padding sur les côtés */
+  }
 
-    /* Ajuster la position du label d'équipe pour qu'il ne chevauche pas */
-    .team-label {
-        bottom: 140px;
-    }
+  /* Ajuster la position du label d'équipe pour qu'il ne chevauche pas */
+  .team-label {
+    bottom: 140px;
+  }
 }
 
 /* S'assurer que le texte est bien lisible */
 .mobile-section-label h2 {
-    margin-bottom: 8px;
-    font-size: 24px;
+  margin-bottom: 8px;
+  font-size: 24px;
 }
 
 .mobile-section-label .subtitle {
-    font-size: 16px;
-    line-height: 1.4;
-    opacity: 0.9;
+  font-size: 16px;
+  line-height: 1.4;
+  opacity: 0.9;
 }
 
 /* Style pour masquer la scrollbar tout en gardant le défilement */

@@ -360,6 +360,14 @@ class FragmentManager {
       fragment.userData.isClickable = false;
     });
 
+    // Démarrer la musique si elle n'est pas déjà en cours
+    const music = document.getElementById('background-music');
+    const soundIcon = document.querySelector('.footer-left img');
+    if (music && music.paused) {
+      music.play();
+      soundIcon.src = "src/assets/icons/sound-on.svg";
+    }
+
     // Ajouter les event listeners pour l'interaction
     this.onMouseMove = this.onMouseMove.bind(this);
     this.handleFragmentClick = this.handleFragmentClick.bind(this);
@@ -714,7 +722,7 @@ class FragmentManager {
       this.app.scene.add(newEnvMesh);
 
       // Fade out old environment and fade in new one
-      const duration = 1000; // 1 seconde pour la transition
+      const duration = 500; // 1 seconde pour la transition
       const startTime = Date.now();
 
       const animate = () => {
