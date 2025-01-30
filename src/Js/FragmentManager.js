@@ -360,6 +360,14 @@ class FragmentManager {
       fragment.userData.isClickable = false;
     });
 
+    // Démarrer la musique si elle n'est pas déjà en cours
+    const music = document.getElementById('background-music');
+    const soundIcon = document.querySelector('.footer-left img');
+    if (music && music.paused) {
+      music.play();
+      soundIcon.src = "src/assets/icons/sound-on.svg";
+    }
+
     // Ajouter les event listeners pour l'interaction
     this.onMouseMove = this.onMouseMove.bind(this);
     this.handleFragmentClick = this.handleFragmentClick.bind(this);

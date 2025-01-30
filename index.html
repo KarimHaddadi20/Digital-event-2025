@@ -198,6 +198,33 @@
         // Initialiser l'état du son comme désactivé au démarrage
         music.pause();
         soundIcon.src = "src/assets/icons/sound-off.svg";
+
+        // Gérer la visibilité de la page
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                // La page n'est pas visible (veille, changement d'app, etc.)
+                if (!music.paused) {
+                    music.pause();
+                    soundIcon.src = "src/assets/icons/sound-off.svg";
+                }
+            }
+        });
+
+        // Gérer la perte de focus de la fenêtre
+        window.addEventListener('blur', function() {
+            if (!music.paused) {
+                music.pause();
+                soundIcon.src = "src/assets/icons/sound-off.svg";
+            }
+        });
+
+        // Gérer la mise en veille sur mobile
+        window.addEventListener('pagehide', function() {
+            if (!music.paused) {
+                music.pause();
+                soundIcon.src = "src/assets/icons/sound-off.svg";
+            }
+        });
     });
     </script>
   </body>
