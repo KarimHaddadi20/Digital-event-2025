@@ -940,7 +940,7 @@ class FragmentManager {
           }
 
           if (subtitleElement) {
-            fetch("/src/data/description.json")
+            fetch("./src/data/description.json")
               .then((response) => response.json())
               .then((data) => {
                 const atelierName = clickedFragment.userData.atelierName;

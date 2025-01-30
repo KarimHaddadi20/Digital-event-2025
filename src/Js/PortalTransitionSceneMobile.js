@@ -530,39 +530,38 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
     let lastTouchY = 0;
     let currentProgress = 0;
 
-    const handleTouchStart = (event) => {
-      touchStartY = event.touches[0].clientY;
-      lastTouchY = touchStartY;
-    };
+        // Stocker les références aux gestionnaires
+        this._handleTouchStart = (event) => {
+            touchStartY = event.touches[0].clientY;
+            lastTouchY = touchStartY;
+        };
 
-    const handleTouchMove = (event) => {
-      event.preventDefault();
-      const currentTouchY = event.touches[0].clientY;
-      const delta = (lastTouchY - currentTouchY) * 0.3;
-      lastTouchY = currentTouchY;
+        this._handleTouchMove = (event) => {
+            event.preventDefault();
+            const currentTouchY = event.touches[0].clientY;
+            const delta = (lastTouchY - currentTouchY) * 0.3;
+            lastTouchY = currentTouchY;
 
-      const maxZ = 7;
-      const lastFragmentPosition = -221; // Position du dernier fragment
-      const minZ = lastFragmentPosition;
+            const maxZ = 7;
+            const lastFragmentPosition = -221;
+            const minZ = lastFragmentPosition;
 
       let newZ = this.camera.position.z - delta;
       newZ = Math.max(minZ, Math.min(maxZ, newZ));
       this.camera.position.z = newZ;
 
-      // Calcul de la progression basé sur la position actuelle
-      currentProgress = (maxZ - newZ) / (maxZ - minZ);
-      currentProgress = Math.max(0, Math.min(1, currentProgress / 2));
+            currentProgress = (maxZ - newZ) / (maxZ - minZ);
+            currentProgress = Math.max(0, Math.min(1, currentProgress / 2));
 
-      // Mise à jour de la barre de progression
-      if (this.progressFill) {
-        this.progressFill.style.setProperty("--progress", currentProgress);
-      }
-    };
+            if (this.progressFill) {
+                this.progressFill.style.setProperty('--progress', currentProgress);
+            }
+        };
 
-    window.addEventListener("touchstart", handleTouchStart, { passive: false });
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
-    document.body.style.overflow = "hidden";
-  }
+        window.addEventListener('touchstart', this._handleTouchStart, { passive: false });
+        window.addEventListener('touchmove', this._handleTouchMove, { passive: false });
+        document.body.style.overflow = 'hidden';
+    }
 
   updateFragments() {
     this.fragments.forEach((fragment, index) => {
@@ -620,13 +619,20 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
     }
   }
 
-  showTeamPopup(students) {
-    let popup = document.querySelector(".subtitle-popup");
-    if (!popup) {
-      popup = document.createElement("div");
-      popup.className = "subtitle-popup mobile-popup";
-      document.body.appendChild(popup);
-    }
+    showTeamPopup(students) {
+        // Désactiver le scroll en premier
+        if (this._touchHandlerInitialized && this._handleTouchStart && this._handleTouchMove) {
+            window.removeEventListener('touchstart', this._handleTouchStart);
+            window.removeEventListener('touchmove', this._handleTouchMove);
+            this._touchHandlerInitialized = false;
+        }
+
+        let popup = document.querySelector('.subtitle-popup');
+        if (!popup) {
+            popup = document.createElement('div');
+            popup.className = 'subtitle-popup mobile-popup';
+            document.body.appendChild(popup);
+        }
 
     document.body.classList.add("popup-active");
 
@@ -669,11 +675,14 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
             </div>
         `;
 
-    const closeButton = popup.querySelector(".popup-close");
-    closeButton.addEventListener("click", () => {
-      document.body.classList.remove("popup-active");
-      popup.remove();
-    });
+        const closeButton = popup.querySelector('.popup-close');
+        closeButton.addEventListener('click', () => {
+            document.body.classList.remove('popup-active');
+            popup.remove();
+            
+            // Réactiver le scroll
+            this.setupScrollHandler();
+        });
 
     // Ajout d'une animation d'entrée
     requestAnimationFrame(() => {
@@ -688,10 +697,12 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
     );
     elements.forEach((element) => element.remove());
 
-    if (this._touchHandlerInitialized) {
-      window.removeEventListener("touchstart", this._handleTouchStart);
-      window.removeEventListener("touchmove", this._handleTouchMove);
-    }
+        // Réinitialiser les flags et les événements
+        if (this._touchHandlerInitialized) {
+            window.removeEventListener('touchstart', this._handleTouchStart);
+            window.removeEventListener('touchmove', this._handleTouchMove);
+            this._touchHandlerInitialized = false;
+        }
 
     // Nettoyer les callbacks
     this.updateCallbacks = [];
