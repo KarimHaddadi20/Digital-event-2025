@@ -83,7 +83,7 @@ export class PortalTransitionSceneBase extends SceneSetup {
 
     async setupBackground() {
         try {
-            const response = await fetch('/src/data/portalData.json');
+            const response = await fetch('./src/data/portalData.json');
             const data = await response.json();
             
             const atelierIndex = this.selectedFragmentIndex + 1;
