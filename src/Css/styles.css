@@ -915,7 +915,7 @@ body.popup-active {
   gap: 16px;
   margin-top: 8px;
   padding: 14px 0;
-  position: sticky;
+  /* position: sticky; */
   top: 0;
   z-index: 2;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -1511,9 +1511,8 @@ body.menu-open .navbar {
     padding: 0 24px; /* Ajouter du padding sur les côtés */
   }
 
-  /* Ajuster la position du label d'équipe pour qu'il ne chevauche pas */
   .team-label {
-    bottom: 140px;
+    bottom: 139px;
   }
 }
 
