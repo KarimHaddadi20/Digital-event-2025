@@ -4,7 +4,7 @@ import { SceneSetup } from './SceneSetup.js';
 
 export class PortalTransitionSceneBase extends SceneSetup {
     constructor(app, selectedFragmentIndex) {
-        super(false);
+        super(false, false);
         
         this.app = app;
         this.selectedFragmentIndex = selectedFragmentIndex;
@@ -24,14 +24,6 @@ export class PortalTransitionSceneBase extends SceneSetup {
         this.scene = new THREE.Scene();
         this.scene.background = new THREE.Color(0x000000);
 
-        // Désactiver les contrôles
-        if (this.controls) {
-            this.controls.enabled = false;
-            this.controls.enableRotate = false;
-            this.controls.enablePan = false;
-            this.controls.enableZoom = false;
-        }
-
         // Initialisation du bouton back
         this.backButton = document.querySelector('#back-button');
         if (this.backButton) {
@@ -44,14 +36,11 @@ export class PortalTransitionSceneBase extends SceneSetup {
     }
 
     initScene() {
-        console.log('InitScene Base - Début');
         this.setupRenderers();
         this.setupCustomLights();
         this.setupBackground();
         this.setupFragments();
-        console.log('InitScene Base - Avant animate');
         this.animate();
-        console.log('InitScene Base - Fin');
     }
 
     setupRenderers() {
@@ -127,7 +116,8 @@ export class PortalTransitionSceneBase extends SceneSetup {
             this.background = new THREE.Mesh(bgGeometry, bgMaterial);
             this.background.position.z = -300;
             this.background.position.y = 0;
-            texture.encoding = THREE.sRGBEncoding;
+            // texture.encoding = THREE.sRGBEncoding;
+            texture.colorSpace = THREE.SRGBColorSpace;
 
             this.scene.add(this.background);
             this.scene.background = new THREE.Color(0x000000);
@@ -154,7 +144,8 @@ export class PortalTransitionSceneBase extends SceneSetup {
             this.background = new THREE.Mesh(bgGeometry, bgMaterial);
             this.background.position.z = -300;
             this.background.position.y = 0;
-            texture.encoding = THREE.sRGBEncoding;
+            // texture.encoding = THREE.sRGBEncoding;
+            texture.colorSpace = THREE.SRGBColorSpace;
 
             this.scene.add(this.background);
             this.scene.background = new THREE.Color(0x000000);

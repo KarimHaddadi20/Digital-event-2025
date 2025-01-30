@@ -21,7 +21,8 @@ class FragmentManager {
       antialias: true,
       powerPreference: "high-performance",
     });
-    this.renderer.outputEncoding = THREE.sRGBEncoding; // Pour un meilleur rendu des couleurs
+    // this.renderer.outputEncoding = THREE.sRGBEncoding; // Pour un meilleur rendu des couleurs
+    this.renderer.outputColorSpace = THREE.SRGBColorSpace;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping; // Tonemapping pour des couleurs réalistes
     this.renderer.setPixelRatio(window.devicePixelRatio); // Adapter au ratio de l'écran
     this.renderer.setSize(window.innerWidth, window.innerHeight);
@@ -120,14 +121,16 @@ class FragmentManager {
       display: none;
       opacity: 0;
       padding: 12px 24px;
-      font-size: 16px;
-      border: 1px solid #FFF;
-      background: linear-gradient(344deg, rgba(21, 21, 27, 0.20) -1.4%, rgba(79, 79, 86, 0.20) 104.72%);
-      color: white;
+      background: linear-gradient(343.92deg, rgba(21, 21, 27, 0.6) -1.4%, rgba(79, 79, 86, 0.6) 104.72%);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 4px;
-      z-index: 1000;
+      color: white;
+      font-family: "Aktiv Grotesk", sans-serif;
+      font-size: 14px;
       cursor: pointer;
-      transition: opacity 0.3s ease;
+      transition: all 0.3s ease;
+      z-index: 9998;
     `;
 
     // Ajouter l'événement click sur le bouton Voyager

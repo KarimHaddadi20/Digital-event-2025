@@ -4,7 +4,6 @@ import { PortalTransitionSceneBase } from "./PortalTransitionSceneBase.js";
 export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
   constructor(app, selectedFragmentIndex) {
     super(app, selectedFragmentIndex);
-    console.log("Constructor PortalTransitionSceneDesktop - Initialisation");
     this._scrollHandlerInitialized = false;
     this.setupScrollHandler();
     this.createInventoryButton();
@@ -12,16 +11,10 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
   }
 
   setupScrollHandler() {
-    console.log(
-      "Setup Scroll Handler appelé - État initialized:",
-      this._scrollHandlerInitialized
-    );
     if (this._scrollHandlerInitialized) {
-      console.log("Handler déjà initialisé - sortie");
       return;
     }
     this._scrollHandlerInitialized = true;
-    console.log("Initialisation du nouveau handler de scroll");
 
     const handleScroll = (event) => {
       event.preventDefault();
@@ -53,7 +46,6 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     };
 
     if (this._currentScrollHandler) {
-      console.log("Nettoyage de l'ancien handler");
       window.removeEventListener("wheel", this._currentScrollHandler);
     }
 
@@ -61,7 +53,6 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     window.addEventListener("wheel", this._currentScrollHandler, {
       passive: false,
     });
-    console.log("Nouveau handler installé");
     document.body.style.overflow = "hidden";
   }
 
@@ -833,7 +824,6 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
   }
 
   cleanup() {
-    console.log("Cleanup appelé - Suppression du handler");
     if (this._currentScrollHandler) {
       window.removeEventListener("wheel", this._currentScrollHandler);
     }
@@ -849,7 +839,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     const button = document.createElement("button");
     button.className = "inventory-button";
     button.innerHTML = `
-      <img src="src/assets/icons/obsolete.svg" alt="Menu" width="40" height="40" />
+      <img src="src/assets/icons/obsolete.svg" alt="Menu" />
     `;
     button.addEventListener("click", () => this.toggleInventory());
     document.body.appendChild(button);

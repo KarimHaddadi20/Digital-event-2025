@@ -18,7 +18,9 @@ class SceneSetup {
     // Configuration de base
     this.setupRenderer();
     this.setupCamera();
-    this.setupControls();
+    if (setupControls) {
+      this.setupControls();
+    }
 
     // Charger l'HDRI seulement si demandé
     // if (useHDRI) {
@@ -91,7 +93,7 @@ class SceneSetup {
 
     // Suivre le curseur sur desktop
     window.addEventListener("mousemove", (e) => {
-      if (!this.controls.enabled || this.isNavigating) return;
+      if (!this.controls || !this.controls.enabled || this.isNavigating) return;
 
       // Ne pas appliquer le suivi du curseur sur mobile
       if (isMobileDevice()) return;
@@ -135,11 +137,9 @@ class SceneSetup {
 
   setupBackground() {
     const textureLoader = new THREE.TextureLoader();
-    console.log("Loading initial background texture");
     textureLoader.load(
       "src/textures/escape.png",
       (texture) => {
-        console.log("Initial background texture loaded");
         const aspectRatio = texture.image.width / texture.image.height;
 
         const bgGeometry = new THREE.PlaneGeometry(600 * aspectRatio, 550);
@@ -152,7 +152,8 @@ class SceneSetup {
         const background = new THREE.Mesh(bgGeometry, bgMaterial);
         background.position.z = -300;
         background.position.y = 0;
-        texture.encoding = THREE.sRGBEncoding;
+        // texture.encoding = THREE.sRGBEncoding;
+        texture.outputColorSpace = THREE.SRGBColorSpace;
 
         this.scene.add(background);
         this.scene.background = new THREE.Color(0x000000);
@@ -172,8 +173,6 @@ class SceneSetup {
 
   // Méthode pour nettoyer la scène en préservant les éléments importants
   clearScene() {
-    console.log("Début du nettoyage de la scène");
-
     // Arrêter les animations en cours
     if (this.animationFrameId) {
       cancelAnimationFrame(this.animationFrameId);
@@ -227,17 +226,10 @@ class SceneSetup {
     if (this.scene) {
       this.scene = null;
     }
-
-    console.log("Fin du nettoyage de la scène");
-    console.log(
-      "Objets restants:",
-      this.scene ? this.scene.children.length : 0
-    );
   }
 
   // Méthode pour gérer la transition entre les scènes
   switchToGalleryScene(createNextScene, createTransitionScene = null) {
-    console.log("Début de la transition vers une nouvelle scène");
 
     // Créer le plan de transition
     const fadeGeometry = new THREE.PlaneGeometry(100, 100);
@@ -263,17 +255,14 @@ class SceneSetup {
 
         if (fadeMaterial.opacity >= 1) {
           fadeOutComplete = true;
-          console.log("Fade out terminé");
 
           // Nettoyer la scène seulement après que le fade out soit terminé
           this.clearScene([fadePlane]);
 
           if (createTransitionScene) {
-            console.log("Création de la scène de transition");
             transitionScene = createTransitionScene();
             fadeIn();
           } else {
-            console.log("Passage direct à la scène suivante");
             createNextScene();
             this.cleanupTransition(fadePlane);
           }
@@ -286,11 +275,8 @@ class SceneSetup {
     // Fonction pour le fade in
     const fadeIn = () => {
       if (fadeMaterial.opacity <= 0) {
-        console.log("Fade in terminé");
-
         // Attendre avant de passer à la scène suivante
         setTimeout(() => {
-          console.log("Passage à la scène suivante");
           createNextScene();
           this.cleanupTransition(fadePlane);
         }, 500);
