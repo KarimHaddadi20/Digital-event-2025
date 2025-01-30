@@ -487,37 +487,36 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
         let lastTouchY = 0;
         let currentProgress = 0;
 
-        const handleTouchStart = (event) => {
+        // Stocker les références aux gestionnaires
+        this._handleTouchStart = (event) => {
             touchStartY = event.touches[0].clientY;
             lastTouchY = touchStartY;
         };
 
-        const handleTouchMove = (event) => {
+        this._handleTouchMove = (event) => {
             event.preventDefault();
             const currentTouchY = event.touches[0].clientY;
             const delta = (lastTouchY - currentTouchY) * 0.3;
             lastTouchY = currentTouchY;
 
             const maxZ = 7;
-            const lastFragmentPosition = -221;  // Position du dernier fragment
+            const lastFragmentPosition = -221;
             const minZ = lastFragmentPosition;
 
             let newZ = this.camera.position.z - delta;
             newZ = Math.max(minZ, Math.min(maxZ, newZ));
             this.camera.position.z = newZ;
 
-            // Calcul de la progression basé sur la position actuelle
             currentProgress = (maxZ - newZ) / (maxZ - minZ);
             currentProgress = Math.max(0, Math.min(1, currentProgress / 2));
 
-            // Mise à jour de la barre de progression
             if (this.progressFill) {
                 this.progressFill.style.setProperty('--progress', currentProgress);
             }
         };
 
-        window.addEventListener('touchstart', handleTouchStart, { passive: false });
-        window.addEventListener('touchmove', handleTouchMove, { passive: false });
+        window.addEventListener('touchstart', this._handleTouchStart, { passive: false });
+        window.addEventListener('touchmove', this._handleTouchMove, { passive: false });
         document.body.style.overflow = 'hidden';
     }
 
@@ -572,6 +571,13 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
     }
 
     showTeamPopup(students) {
+        // Désactiver le scroll en premier
+        if (this._touchHandlerInitialized && this._handleTouchStart && this._handleTouchMove) {
+            window.removeEventListener('touchstart', this._handleTouchStart);
+            window.removeEventListener('touchmove', this._handleTouchMove);
+            this._touchHandlerInitialized = false;
+        }
+
         let popup = document.querySelector('.subtitle-popup');
         if (!popup) {
             popup = document.createElement('div');
@@ -616,6 +622,9 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
         closeButton.addEventListener('click', () => {
             document.body.classList.remove('popup-active');
             popup.remove();
+            
+            // Réactiver le scroll
+            this.setupScrollHandler();
         });
 
         // Ajout d'une animation d'entrée
@@ -631,9 +640,11 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
         );
         elements.forEach((element) => element.remove());
 
+        // Réinitialiser les flags et les événements
         if (this._touchHandlerInitialized) {
             window.removeEventListener('touchstart', this._handleTouchStart);
             window.removeEventListener('touchmove', this._handleTouchMove);
+            this._touchHandlerInitialized = false;
         }
 
         // Nettoyer les callbacks
