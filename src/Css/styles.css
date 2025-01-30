@@ -446,7 +446,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  .footer-content {
+  .footer-right {
     opacity: 0;
     display: none;
   }
