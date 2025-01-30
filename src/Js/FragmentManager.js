@@ -373,9 +373,9 @@ class FragmentManager {
       });
     }, 100);
 
-    // Sélection automatique du premier fragment après 10 secondes
+    // Sélection automatique du premier fragment après 10 secondes UNIQUEMENT si l'utilisateur n'a pas interagi
     setTimeout(() => {
-      if (this.fragments.length > 0) {
+      if (!this.userHasInteracted && this.fragments.length > 0) {
         const firstFragment = this.fragments[0];
         this.selectedFragment = firstFragment;
         this.moveFragmentForward(firstFragment);
@@ -393,8 +393,10 @@ class FragmentManager {
           }
         }
 
-        // Démarrer le timer pour la sélection aléatoire
-        this.startAutoSelectTimer();
+        // Démarrer le timer pour la sélection aléatoire uniquement si l'utilisateur n'a toujours pas interagi
+        if (!this.userHasInteracted) {
+          this.startAutoSelectTimer();
+        }
       }
     }, 10000);
   }
