@@ -339,7 +339,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
             // Styles pour le label mobile
             labelDiv.style.cssText = `
                 position: fixed;
-                bottom: 60px;
+                bottom: 13%;
                 left: 0;
                 right: 0;
                 width: 100vw;
@@ -365,7 +365,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
             const title = labelDiv.querySelector('h2');
             const subtitle = labelDiv.querySelector('.subtitle');
             title.style.cssText = `
-                margin: 0;
+                margin: 0 0 12px 0;
                 font-family: 'Fraunces', serif;
                 font-size: 24px;
                 font-style: italic;
@@ -378,7 +378,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
                 font-family: 'Aktiv Grotesk', sans-serif;
                 font-size: 14px;
                 line-height: 1.4;
-                opacity: 0.8;
+                opacity: 0.9;
                 max-width: 90%;
                 color: white;
             `;
