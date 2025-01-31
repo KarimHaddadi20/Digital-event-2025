@@ -8,6 +8,9 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     this.setupScrollHandler();
     this.createInventoryButton();
     this.createInventory();
+
+    // Initialiser la caméra à une position où le premier label est visible
+    this.camera.position.z = 7;
   }
 
   setupScrollHandler() {
@@ -73,6 +76,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
           ],
           title: atelierData.sets[0].title,
           subtitle: atelierData.sets[0].subtitle,
+          subtitleLink: atelierData.sets[0].subtitleLink,
           zPosition: -10,
         },
         {
@@ -85,6 +89,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
           ],
           title: atelierData.sets[1].title,
           subtitle: atelierData.sets[1].subtitle,
+          subtitleLink: atelierData.sets[1].subtitleLink,
           zPosition: -55,
         },
         {
@@ -97,6 +102,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
           ],
           title: atelierData.sets[2].title,
           subtitle: atelierData.sets[2].subtitle,
+          subtitleLink: atelierData.sets[2].subtitleLink,
           zPosition: -100,
         },
         {
@@ -114,6 +120,7 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
           ],
           title: atelierData.sets[3].title,
           subtitle: atelierData.sets[3].subtitle,
+          subtitleLink: atelierData.sets[3].subtitleLink,
           zPosition: -145,
         },
         {
@@ -238,7 +245,33 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
     if (section.type === "team") {
       this.addTeamLabel(group, section);
     } else {
-      this.addFragmentLabel(group, section);
+      const labelDiv = document.createElement("div");
+      labelDiv.className = "fragment-label";
+      labelDiv.innerHTML = `
+          <div class="label-content">
+              <h2>${section.title}</h2>
+              <p class="subtitle">${section.subtitle}</p>
+              ${section.subtitleLink && section.zPosition === -10 ? `
+                  <button class="discover-link">
+                      Découvrir le projet
+                  </button>
+              ` : ''}
+          </div>
+      `;
+
+      // Définir seulement l'opacité initiale, sans bloquer la visibilité
+      labelDiv.style.opacity = section.zPosition === -10 ? '1' : '0';
+      
+      document.body.appendChild(labelDiv);
+
+      if (section.subtitleLink && section.zPosition === -10) {
+          const discoverLink = labelDiv.querySelector(".discover-link");
+          discoverLink.addEventListener("click", () => {
+              window.open(section.subtitleLink, '_blank');
+          });
+      }
+
+      group.userData.label = labelDiv;
     }
   }
 
@@ -743,83 +776,46 @@ export class PortalTransitionSceneDesktop extends PortalTransitionSceneBase {
 
   updateFragments() {
     this.fragments.forEach((fragment, index) => {
-      if (!fragment.mesh || !fragment.group) return;
+        if (!fragment.group) return;
 
-      const distance = fragment.group.position.z - this.camera.position.z;
+        const distance = fragment.group.position.z - this.camera.position.z;
+        let opacity = 0.9;
+        const fadeDistance = 20;
+        const startFadeDistance = 15;
 
-      //   if (fragment.mesh.geometry.isBufferGeometry) {
-      //     this.updateWaveEffect(fragment.mesh);
-      //   }
-
-      let opacity = 0.9;
-      const fadeDistance = 20;
-      const startFadeDistance = 15;
-
-      if (distance > startFadeDistance) {
-        opacity = Math.max(
-          0,
-          0.9 * (1 - (distance - startFadeDistance) / fadeDistance)
-        );
-      } else if (distance < -startFadeDistance) {
-        opacity = Math.max(
-          0,
-          0.9 * (1 - (Math.abs(distance) - startFadeDistance) / fadeDistance)
-        );
-      }
-
-      // Appliquer l'opacité à tous les éléments du groupe
-      fragment.group.traverse((child) => {
-        if (child.material) {
-          if (child.userData.initialZ) {
-            // C'est une image secondaire, calculer son opacité en fonction de sa profondeur
-            const secondaryDistance =
-              child.userData.initialZ +
-              fragment.group.position.z -
-              this.camera.position.z;
-            let secondaryOpacity = 0.9;
-
-            if (secondaryDistance > startFadeDistance) {
-              secondaryOpacity = Math.max(
-                0,
-                0.9 *
-                  (1 - (secondaryDistance - startFadeDistance) / fadeDistance)
-              );
-            } else if (secondaryDistance < -startFadeDistance) {
-              secondaryOpacity = Math.max(
-                0,
-                0.9 *
-                  (1 -
-                    (Math.abs(secondaryDistance) - startFadeDistance) /
-                      fadeDistance)
-              );
-            }
-
-            child.material.opacity = secondaryOpacity;
-          } else {
-            // Image principale
-            child.material.opacity = opacity;
-          }
+        // Calculer l'opacité en fonction de la distance
+        if (distance > startFadeDistance) {
+            opacity = Math.max(0, 0.9 * (1 - (distance - startFadeDistance) / fadeDistance));
+        } else if (distance < -startFadeDistance) {
+            opacity = Math.max(0, 0.9 * (1 - (Math.abs(distance) - startFadeDistance) / fadeDistance));
         }
-      });
 
-      // Gestion de l'opacité des labels
-      if (fragment.group.userData && fragment.group.userData.label) {
-        const label = fragment.group.userData.label;
-        if (fragment.group.userData.isTeamLabel) {
-            // Pour le label team, ne l'afficher que près de la fin
-            const isNearEnd = this.camera.position.z <= -180;
-            if (isNearEnd) {
-                label.style.visibility = 'visible';
-                label.style.opacity = opacity;
+        // Appliquer l'opacité aux matériaux
+        fragment.group.traverse((child) => {
+            if (child.material) {
+                child.material.opacity = opacity;
+            }
+        });
+
+        // Gestion de l'opacité des labels
+        if (fragment.group.userData && fragment.group.userData.label) {
+            const label = fragment.group.userData.label;
+            
+            if (fragment.group.userData.isTeamLabel) {
+                // Pour le label team, ne l'afficher que près de la fin
+                const isNearEnd = this.camera.position.z <= -180;
+                if (isNearEnd) {
+                    label.style.visibility = 'visible';
+                    label.style.opacity = opacity;
+                } else {
+                    label.style.visibility = 'hidden';
+                    label.style.opacity = '0';
+                }
             } else {
-                label.style.visibility = 'hidden';
-                label.style.opacity = '0';
+                // Pour les autres labels
+                label.style.opacity = opacity;
             }
-        } else {
-            // Pour les autres labels
-            label.style.opacity = opacity;
         }
-      }
     });
   }
 

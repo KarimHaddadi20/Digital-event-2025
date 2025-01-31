@@ -465,12 +465,13 @@
         ]
     },
     "atelier4": {
-        "atelier" : "Game design",
+        "atelier" : "Gaming popcorn",
         "backgroundImage": "src/textures/gaming.popcorn.webp",
         "sets": [
             {
                 "title": "Coexistence",
                 "subtitle": "Organisés en groupes de cinq, ils·elles travaillent sur la création d’un jeu vidéo dont le but est de résoudre des énigmes. L’équipe a imaginé un monde parallèle en explorant la coexistence de deux univers distincts.",
+                "subtitleLink": "https://popcorn-esd.com",
                 "image1": "src/photo/D/D1-01.jpg",
                 "image2": "src/photo/D/D1-02.jpg",
                 "image3": "src/photo/D/D1-03.jpg"
@@ -1170,6 +1171,7 @@
             {
                 "title": "Captivant",
                 "subtitle": "Dans cet univers, chaque groupe traite le son à sa manière pour répondre au thème sous des formats différents : interviews, narration et talk-show. Chaque équipe s’approprie le sujet pour raconter des histoires uniques et captivantes.",
+                "subtitleLink": "https://linktr.ee/les.inxeplores",
                 "image1": "src/photo/G/G1-01.jpg",
                 "image2": "src/photo/G/G1-02.jpg",
                 "image3": "src/photo/G/G1-03.jpg"

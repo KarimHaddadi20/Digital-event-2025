@@ -37,6 +37,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
           ],
           title: atelierData.sets[0].title,
           subtitle: atelierData.sets[0].subtitle,
+          subtitleLink: atelierData.sets[0].subtitleLink,
           zPosition: -10,
         },
         {
@@ -49,6 +50,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
           ],
           title: atelierData.sets[1].title,
           subtitle: atelierData.sets[1].subtitle,
+          subtitleLink: atelierData.sets[1].subtitleLink,
           zPosition: -60,
         },
         {
@@ -61,6 +63,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
           ],
           title: atelierData.sets[2].title,
           subtitle: atelierData.sets[2].subtitle,
+          subtitleLink: atelierData.sets[2].subtitleLink,
           zPosition: -110,
         },
         {
@@ -78,6 +81,7 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
           ],
           title: atelierData.sets[3].title,
           subtitle: atelierData.sets[3].subtitle,
+          subtitleLink: atelierData.sets[3].subtitleLink,
           zPosition: -160,
         },
         {
@@ -339,8 +343,13 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
       labelDiv.className = "mobile-section-label";
       labelDiv.innerHTML = `
                 <div class="label-content">
-                    <h2>${section.title || ""}</h2>
-                    <p class="subtitle">${section.subtitle || ""}</p>
+                    <h2>${section.title}</h2>
+                    <p class="subtitle">${section.subtitle}</p>
+                    ${section.subtitleLink && section.zPosition === -10 ? `
+                        <button class="discover-link">
+                            Découvrir le projet
+                        </button>
+                    ` : ''}
                 </div>
             `;
 
@@ -392,6 +401,13 @@ export class PortalTransitionSceneMobile extends PortalTransitionSceneBase {
                 max-width: 90%;
                 color: white;
             `;
+
+      if (section.subtitleLink && section.zPosition === -10) {
+        const discoverLink = labelDiv.querySelector(".discover-link");
+        discoverLink.addEventListener("click", () => {
+          window.open(section.subtitleLink, '_blank');
+        });
+      }
 
       group.userData = { label: labelDiv };
     }

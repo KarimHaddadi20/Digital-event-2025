@@ -1176,7 +1176,7 @@ body.popup-active {
 .scroll-progress-container {
   position: fixed;
   left: 50%;
-  bottom: 40px;
+  bottom: 16px;
   transform: translateX(-50%);
   width: 342px;
 }
@@ -1333,7 +1333,7 @@ body.popup-active {
 
 .inventory .menu-item:nth-last-child(-n + 5) {
   grid-column-end: span 1;
-  transform: translateX(calc(50% * 1.2)); /* Décaler les 5 derniers éléments */
+  transform: translateX(calc(50% * 1.2)); 
 }
 
 .inventory .menu-item-title {
@@ -1490,29 +1490,29 @@ body.menu-open .navbar {
 /* Style de base pour les labels mobiles */
 .mobile-section-label {
   position: fixed;
-  bottom: 120px; /* Position par défaut */
+  bottom: 120px; 
   left: 0;
   right: 0;
   width: 100vw;
   color: white;
   text-align: center;
   pointer-events: auto;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease-out; 
   z-index: 1000;
 }
 
 /* Ajustements pour mobile */
 @media (max-width: 768px) {
   .mobile-section-label {
-    bottom: 21%; /* Position plus haute sur mobile */
+    bottom: 21%; 
   }
 
   .mobile-section-label .label-content {
-    padding: 0 24px; /* Ajouter du padding sur les côtés */
+    padding: 0 24px; 
   }
 
   .team-label {
-    bottom: 139px;
+    bottom: 136px;
   }
 }
 
@@ -1530,12 +1530,12 @@ body.menu-open .navbar {
 
 /* Style pour masquer la scrollbar tout en gardant le défilement */
 .students-list {
-    scrollbar-width: none;  /* Pour Firefox */
-    -ms-overflow-style: none;  /* Pour Internet Explorer et Edge */
+    scrollbar-width: none; 
+    -ms-overflow-style: none; 
 }
 
 .students-list::-webkit-scrollbar {
-    display: none;  /* Pour Chrome, Safari et Opera */
+    display: none;  
 }
 
 .students-rows {
@@ -1547,7 +1547,6 @@ body.menu-open .navbar {
     display: none;
 }
 
-/* S'assurer que le contenu de la popup reste scrollable */
 .popup-content {
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -1556,4 +1555,38 @@ body.menu-open .navbar {
 
 .popup-content::-webkit-scrollbar {
     display: none;
+}
+
+.discover-link {
+    position: fixed;
+    bottom: 74px;
+    left: 7.2%;
+    transform: translateX(-50%);
+    color: #FFF;
+    font-family: "Aktiv Grotesk", sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+    text-decoration-line: underline;
+    margin: 0;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s ease-out; 
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    z-index: 1001;
+    pointer-events: all !important;
+}
+
+.discover-link:hover {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .discover-link {
+        bottom: 64px;
+        left: 50.2%;
+    }
 }
