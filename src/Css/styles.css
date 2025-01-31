@@ -1076,7 +1076,7 @@ body.popup-active {
   }
 }
 
-/* Ajout du style pour le texte fixe */
+
 .fragment-label {
   position: fixed;
   bottom: 120px;
@@ -1588,5 +1588,37 @@ body.menu-open .navbar {
     .discover-link {
         bottom: 64px;
         left: 50.2%;
+    }
+}
+
+
+.team-link {
+    padding: 12px 24px;
+    background: linear-gradient(343.92deg, rgba(21, 21, 27, 0.6) -1.4%, rgba(79, 79, 86, 0.6) 104.72%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    color: white;
+    font-family: "Aktiv Grotesk", sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none !important;
+    display: inline-block;
+    margin: 0;
+    opacity: 0.9;
+}
+
+.team-link:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+    background: linear-gradient(343.92deg, rgba(31, 31, 37, 0.7) -1.4%, rgba(89, 89, 96, 0.7) 104.72%);
+}
+
+/* Ajustements spécifiques pour mobile */
+@media (max-width: 768px) {
+    .team-link {
+        font-size: 14px;
+        padding: 5px 10px;
     }
 }
